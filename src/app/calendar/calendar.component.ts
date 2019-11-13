@@ -33,8 +33,7 @@ export class CalendarComponent implements OnInit {
       (events) => {
         this.calendarEvents = events;
         this.calendarEvents.forEach(obj => {
-          this.idCount = obj.id;
-          console.log(this.idCount);
+          this.idCount = obj.id;          
         });
       });
   }
@@ -58,7 +57,7 @@ export class CalendarComponent implements OnInit {
     this.crId = arg.event.id;
     this.crTitle = arg.event.title;
     this.crDate = arg.event.date;
-    document.getElementById('deleteEvent').click();
+    document.getElementById('editEvent').click();
   }
 
   // Adds Event to the List
@@ -69,8 +68,18 @@ export class CalendarComponent implements OnInit {
       start: this.crDate
     });
     this.getService.saveEvent({"title":this.crTitle, "start": this.crDate});
-    console.log(this.calendarEvents);
     document.getElementById('closeModal').click();
+  }
+
+  // Update Event to the List
+  saveEvent() {
+    this.calendarEvents.forEach(obj => {
+      if (obj.id == this.crId) {
+        obj.title = this.crTitle;
+        this.getService.saveEvent({"id":obj.id, "title":this.crTitle, "start": obj.start});
+      }
+    });
+    document.getElementById('closeModalSave').click();
   }
 
   // Deletes Event from the List 
@@ -80,7 +89,6 @@ export class CalendarComponent implements OnInit {
         this.calendarEvents.splice(this.calendarEvents.indexOf(obj), 1);
         this.getService.deleteEvent(obj.id);
       }
-      console.log(this.calendarEvents);
     });
     document.getElementById('closeDelete').click();
   }
