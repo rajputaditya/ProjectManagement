@@ -72,7 +72,7 @@ export class ViewProjectsComponent implements OnInit {
   usname:string;
 
   userArray: Array<any> = [];
-  url: string = "https://jsonplaceholder.typicode.com/users";
+  url: string = "http://localhost:8080/project";
 
 
   constructor(private http: HttpClient, private service: ProjectService) {
