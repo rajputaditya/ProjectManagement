@@ -1,0 +1,369 @@
+@import url('https://fonts.googleapis.com/css?family=Abel');
+
+.card {
+ margin-top: 10%;
+ margin-left: 6%;
+  width: 450px;
+  height: 250px;
+  box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+
+.column {
+  float: left;
+  width: 50%;
+  padding: 0 10px;
+}
+
+.card h1 {
+  text-align: center;
+}
+
+.card .additional {
+  background: linear-gradient(#106466, #43b1b3);
+  position: relative;
+  width: 150px;
+  height: 100%;
+  transition: width 0.4s;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.card:hover .additional {
+  width: 100%;
+  border-radius: 0 5px 5px 0;
+}
+
+.card .additional .user-card {
+  width: 150px;
+  height: 100%;
+  position: relative;
+  float: left;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+}
+
+.card .additional .user-card .level,
+.card .additional .user-card .points {
+  top: 15%;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 0.75em;
+  font-weight: bold;
+  background: rgba(0,0,0,0.15);
+  padding: 0.125rem 0.75rem;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+.card .additional .user-card .points {
+  top: 85%;
+}
+
+.card .additional .more-info {
+  width: 300px;
+  position: absolute;
+  left: 150px;
+  height: 100%;
+}
+
+.card .additional .more-info h1 {
+  color: #fff;
+}
+
+.card .additional .more-info .info-head {
+  margin: 0 1rem;
+  color: #fff;
+}
+
+.card .additional .more-info .info-head span + span {
+  float: right;
+}
+
+.card .additional .stats {
+  font-size: 2rem;
+  display: flex;
+  position: absolute;
+  bottom: 0.5rem;
+  left: 1rem;
+  right: 1rem;
+  color: #fff;
+}
+
+.card .additional .stats > div {
+  flex: 1;
+  text-align: center;
+}
+
+.card .additional .stats div.title {
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.card .additional .stats div.value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  line-height: 1.5rem;
+}
+
+.card .additional .stats div.value.infinity {
+  font-size: 2rem;
+}
+
+.card .general {
+  width: 300px;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  z-index: 1;
+  padding: 1rem;
+}
+
+.card .general .more {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  font-size: 0.9em;
+}
+
+.btn {
+  border: none;
+  color: white;
+  padding: 12px 16px;
+
+  cursor: pointer;
+}
+
+#projectMenu{
+  width: 40px;
+}
+
+#projectModBtn{
+  width: 120px;
+  position: fixed;
+  font-size: 15px;
+  border-radius: 20px;
+  color: #106466;
+  height: 50px;
+  margin-left: 83%;
+  margin-top: 5%;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+#projectModBtn:hover{
+  background-color: #106466;
+  color:white;
+}
+
+#projectImg{
+  position: fixed;
+  width: 20%;
+  margin-top:300px;
+  margin-left: 77%;
+}
+
+#editProjectBtn{
+  background-color: #106466;
+  color: white;
+  font-size: 15px;
+  border-radius: 10px;
+  box-shadow: rgba(0,0,0,0.14) 0px 4px 20px 0px,#3c4858 0px 7px 10px -5px;
+  width: 100%;
+}
+
+#closeEditModal{
+  color: white;
+  border-radius: 50px;
+  font-size: 20px;
+  height: 50px;
+}
+#closeEditModal:hover{
+  background-color: red;
+  color:white;
+}
+
+#editProjectModalBody{
+  background-color: rgb(80, 79, 79);
+  border-color: rgb(80, 79, 79);
+  border-radius: 50px;
+}
+
+//Success Modal
+#successConfirmModal {		
+  color: #636363;
+  width: 325px;
+}
+#successConfirmModal .modal-content {
+  padding: 20px;
+  border-radius: 5px;
+  border: none;
+}
+#successConfirmModal .modal-header {
+  border-bottom: none;   
+      position: relative;
+}
+#successConfirmModal h4 {
+  text-align: center;
+  font-size: 26px;
+  margin: 30px 0 -15px;
+}
+#successConfirmModal .form-control, #successConfirmModal #successButton {
+  min-height: 40px;
+  border-radius: 3px; 
+}
+#successConfirmModal .close {
+      position: absolute;
+  top: -5px;
+  right: -5px;
+}	
+#successConfirmModal .modal-footer {
+  border: none;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 13px;
+}	
+#successConfirmModal #successIcon {
+  color: #fff;		
+  position: absolute;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  top: -70px;
+  width: 95px;
+  height: 95px;
+  border-radius: 50%;
+  z-index: 9;
+  background: #82ce34;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+}
+#successConfirmModal #successIcon i {
+  font-size: 58px;
+  position: relative;
+  top: 3px;
+}
+#successConfirmModal.modal-dialog {
+  margin-top: 80px;
+}
+  #successConfirmModal #successButton {
+      color: #fff;
+      border-radius: 4px;
+  background: #82ce34;
+  text-decoration: none;
+  transition: all 0.4s;
+      line-height: normal;
+      border: none;
+  }
+#successConfirmModal #successButton:hover, #successConfirmModal #successButton:focus {
+  background: #6fb32b;
+  outline: none;
+}
+
+//Delete Modal
+#deleteModal {		
+  color: #636363;
+  width: 400px;
+}
+#deleteModal #deleteModalContent {
+  padding: 20px;
+  border-radius: 5px;
+  border: none;
+      text-align: center;
+  font-size: 14px;
+}
+#deleteModal #deleteModalHeader {
+  border-bottom: none;   
+  position: relative;
+  margin-right: 20%;
+}
+#deleteModal h4 {
+  text-align: center;
+  font-size: 26px;
+  margin: 30px 0 -10px;
+}
+#deleteModal .close {
+      position: absolute;
+  top: -5px;
+  right: -2px;
+}
+#deleteModal .modal-body {
+  color: #999;
+}
+#deleteModal #deleteModalFooter {
+  border: none;
+  text-align: center;		
+  border-radius: 5px;
+  font-size: 13px;
+  padding: 10px 15px 25px;
+}
+#deleteModal #deleteModalFooter a {
+  color: #999;
+}		
+#deleteModal #deleteIcon {
+  width: 80px;
+  height: 80px;
+  margin: 0 0;
+  border-radius: 50%;
+  z-index: 9;
+  text-align: center;
+  border: 3px solid #f15e5e;
+}
+#deleteModal #deleteIcon i {
+  color: #f15e5e;
+  font-size: 46px;
+  display: inline-block;
+  margin-top: 13px;
+}
+  #deleteModal #deleteBtnInfo {
+      color: #fff;
+      border-radius: 4px;
+  background: #60c7c1;
+  text-decoration: none;
+  transition: all 0.4s;
+      line-height: normal;
+  min-width: 120px;
+      border: none;
+  min-height: 40px;
+  border-radius: 3px;
+  margin: 0 5px;
+  outline: none !important;
+  }
+#deleteModal #deleteBtnInfo {
+  background: #a8a8a8;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4);
+  }
+  #deleteModal #deleteBtnInfo:hover, #deleteModal #deleteBtnInfo:focus {
+      background: greenyellow;
+  }
+  #deleteModal #deleteBtnDanger {
+  border-radius: 10px;
+      background: #f15e5e;
+  }
+  #deleteModal #deleteBtnDanger:hover, #deleteModal #deleteBtnDanger:focus {
+      background: #ee3535;
+  }
+
+  #modalHeader{
+    background-color: #106466;
+    color: white;
+    align-self: center;
+    border-radius: 10px;
+    width: 90%;
+    margin-top: -3%;
+    box-shadow: rgba(0,0,0,0.14) 0px 4px 20px 0px,#3c4858 0px 7px 10px -5px;
+    }
+
+    
+
+
+

@@ -1,0 +1,73 @@
+<hr>
+<div class='app'>
+  <div class='app-calendar'>
+    <full-calendar #calendar defaultView="dayGridMonth" [header]="{
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+        }" [plugins]="calendarPlugins" [weekends]="calendarWeekends" [events]="calendarEvents"
+      (dateClick)="handleDateClick($event)" (eventClick)="handleEventClick($event)" deepChangeDetection="true">
+      <!-- themeSystem="bootstrap"> -->
+    </full-calendar>
+  </div>
+</div>
+
+<div class="tips">
+  <ul>
+    <li>
+      <h4>Tips</h4>
+    </li>
+    <ol>
+      <li>Click any date to <strong>Add a new Event</strong>.</li>
+      <li>Click any event to <strong>Delete the Event</strong>.</li>
+      <li>Change view type <strong>(Month, Week, Day)</strong> to specify time in the day for Event.</li>
+    </ol>
+  </ul>
+</div>
+
+<div class="hiddenElements">
+
+  <!-- Hidden Button to Open the Modal -->
+  <button type="button" id="addEvent" data-toggle="modal" data-target="#add" hidden></button>
+  <button type="button" id="deleteEvent" data-toggle="modal" data-target="#delete" hidden></button>
+
+  <!-- Enter Event Details Modal -->
+  <div class="modal fade" id="add">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Enter Event Details</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <h5>Event Time : {{ dispDate }}</h5><br>
+          <input type="text" class="form-control" [(ngModel)]='crTitle' placeholder="Enter Event Title">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeModal">Close</button>
+          <button type="button" class="btn btn-primary" (click)='addEvent()'>Add Event</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirm Deletion Modal -->
+  <div class="modal fade" id="delete">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Delete the event?</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <h5>Are you sure you want to delete the event titled : <strong>{{ crTitle }}</strong> ?</h5><br>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeDelete">Close</button>
+          <button type="button" class="btn btn-danger" (click)='deleteEvent()'>Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,578 @@
+<div class="row">
+  <div class="col-md-9">
+    <div class="column" *ngFor="let users of userArray">
+      <div class="card"  >
+          <div class="additional">
+            <a routerLink="/projectdetails">
+              <div class="user-card">
+                <div class="level center">
+                  {{Priority}}
+                </div>
+                <div class="points center">
+                  {{Progress}}
+                </div>
+              </div>
+              <div class="more-info">
+                <h1>{{users.name}}</h1>
+                <div class="info-head">
+                  <span>{{TeamName}}</span>
+                  <span>{{startedDate}}</span>
+                </div>
+                <div class="info-head">
+                  <span>{{Technology}}</span>
+                  <span>{{CityCountry}}</span>
+                </div>
+                <div class="stats">
+                  <div>
+                    <div class="title">HOURS</div>
+                    <i class="fa fa-clock-o"></i>
+                    <div class="value">{{Hours}}</div>
+                  </div>
+                  <div>
+                    <div class="title">Pals</div>
+                    <i class="fa fa-group"></i>
+                    <div class="value">{{Pals}}</div>
+                  </div>
+                  <div>
+                    <div class="title">Coffee</div>
+                    <i class="fa fa-coffee"></i>
+                    <div class="value infinity">∞</div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="general">
+            <h1>{{ProjectName}}</h1>
+            <p>
+              <I>{{Description}}</I>
+            </p>
+            <span class="more">Mouse over the card for more info</span>
+          </div>
+        </div>
+      </div>   
+  </div>  
+  <div class="col-md-3" style="position: absolute;z-index: 3;">
+
+    <div class="col">
+      <button class="btn btn-light btn-lg" id="projectModBtn" data-toggle="modal"
+        data-target="#createProject">Create</button>
+      <button class="btn btn-light btn-lg" id="projectModBtn" style="margin-top: 10%;" data-toggle="modal"
+        data-target="#updateProject">Edit</button>
+      <button class="btn btn-light btn-lg" id="projectModBtn" style="margin-top: 15%;" data-toggle="modal"
+        data-target="#deleteProject">Delete</button>
+    </div>
+    <div>
+      <img src="/assets/manager.png" alt="IMAGE" id="projectImg">
+    </div>
+  </div>
+</div>
+
+<!-- Edit Project Modal -->
+<div class="modal fade" id="editProject" tabindex="-1" role="dialog" aria-labelledby="editProjectLabel"
+  aria-hidden="true" style="margin-top: 250px;">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content" id="editProjectModalBody">
+      <div class="modal-body">
+        <!-- Search form -->
+        <form>
+          <div class="row">
+            <div class="col-md-10">
+              <input class="form-control form-control-lg" type="text" placeholder="Search Project by title"
+                aria-label="Search" style="width: 100%; border-color: black;
+                border-radius: 50px;">
+            </div>
+            <div class="col-md-2">
+              <button class="btn btn-outline-danger btn-sm" id="closeEditModal" data-dismiss="modal">Close</button>
+
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Project Modal -->
+<div class="modal fade" id="deleteProject" tabindex="-1" role="dialog" aria-labelledby="deleteProjectLabel"
+  aria-hidden="true" style="margin-top: 250px;">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content" id="editProjectModalBody">
+      <div class="modal-body">
+        <!-- Delete form -->
+        <form>
+          <div class="row">
+            <div class="col-md-10">
+              <input class="form-control form-control-lg" type="text" placeholder="Search Project by title"
+                aria-label="Search" style="width: 100%; border-color: black;
+                    border-radius: 50px;">
+            </div>
+            <div class="col-md-2">
+              <button class="btn btn-outline-danger btn-sm" id="closeEditModal" data-dismiss="modal" data-toggle="modal"
+                data-target="#deleteConfirmationModal">Close</button>
+
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Create Project Modal -->
+<div class="modal fade" id="createProject" tabindex="-1" role="dialog" aria-labelledby="createProjectLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header" id="modalHeader">
+        <h3>PROJECT DETAILS</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="text-center border p-5" [formGroup]="createProjectForm">
+
+
+          <div class="form-row mb-2">
+            <div class="col">
+              <!-- Client name -->
+              <input type="text" id="clientName" class="form-control" placeholder="Client name"
+                formControlName="clientNameValidator"
+                [class.is-invalid]="getClientName.invalid && getClientName.touched">
+              <small class="form-text text-muted mb-4">
+                Client Name
+              </small>
+              <div *ngIf="getClientName.invalid && (getClientName.touched || getClientName.dirty)">
+                <small *ngIf="getClientName.errors?.required" class="text-danger">
+                  Client name is required
+                </small>
+                <small *ngIf="getClientName.errors?.minlength" class="text-danger">
+                  Client name must consist atleast 4 characters
+                </small>
+              </div>
+            </div>
+
+            <div class="col">
+              <!-- Project name -->
+              <input type="text" id="projectName" class="form-control" placeholder="Project name"
+                formControlName="projectNameValidator"
+                [class.is-invalid]="getProjectName.invalid && getProjectName.touched">
+              <small class="form-text text-muted mb-4">
+                Project Name
+              </small>
+              <div *ngIf="getProjectName.invalid && (getProjectName.touched || getProjectName.dirtty)">
+                <small *ngIf="getProjectName.errors?.required" class="text-danger">
+                  Project name is required
+                </small>
+                <small *ngIf="getProjectName.errors?.minlength" class="text-danger">
+                  Project name must consist atleast 4 characters
+                </small>
+              </div>
+            </div>
+            <div class="col">
+
+              <!-- Technologies -->
+              <input type="text" id="projectTech" class="form-control mb-2" placeholder="Technologies"
+                formControlName="technologiesValidator"
+                [class.is-invalid]="getTechnologies.invalid && getTechnologies.touched">
+              <small class="form-text text-muted mb-4">
+                Technology
+              </small>
+              <div *ngIf="getTechnologies.invalid && (getTechnologies.touched || getTechnologies.dirtty)">
+                <small *ngIf="getTechnologies.errors?.required" class="text-danger">
+                  Technology is required
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row mb-2">
+            <div class="col">
+              <!-- Start Date -->
+              <input type="date" id="projectStartdate" class="form-control" placeholder="Start date"
+                formControlName="startDateValidator" [class.is-invalid]="getStartDate.invalid && getStartDate.touched">
+              <small class="form-text text-muted mb-4">
+                Start date
+              </small>
+              <div *ngIf="getStartDate.invalid && (getStartDate.touched || getStartDate.dirtty)">
+                <small *ngIf="getStartDate.errors?.required" class="text-danger">
+                  Start date is required
+                </small>
+              </div>
+            </div>
+            <div class="col">
+              <!-- End Date -->
+              <input type="date" id="projectEndDate" class="form-control" placeholder="End date"
+                formControlName="endDateValidator" [class.is-invalid]="getEndDate.invalid && getEndDate.touched"
+                (blur)=dateValidate()>
+              <small class="form-text text-muted mb-4">
+                End date
+              </small>
+              <div *ngIf="getEndDate.invalid && (getEndDate.touched || getEndDate.dirtty)">
+                <small *ngIf="getEndDate.errors?.required" class="text-danger">
+                  End date is required
+                </small>
+              </div>
+
+            </div>
+            <div class="col">
+              <!-- Priority level -->
+              <input type="text" id="projectPriorityLevel" class="form-control" placeholder="HIGH, Medium, low"
+                formControlName="priorityLevelValidator"
+                [class.is-invalid]="getPriorityLevel.invalid && getPriorityLevel.touched">
+              <small class="form-text text-muted mb-4">
+                Priority Level
+              </small>
+              <div *ngIf="getPriorityLevel.invalid && (getPriorityLevel.touched || getPriorityLevel.dirtty)">
+                <small *ngIf="getPriorityLevel.errors?.required" class="text-danger">
+                  Priority level is required
+                </small>
+                <small *ngIf="getPriorityLevel.errors?.minlength" class="text-danger">
+                  Client name must consist atleast 4 characters
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="form-row mb-2">
+            <div class="col">
+              <!-- City -->
+              <input type="text" id="projectCity" class="form-control" placeholder="City"
+                formControlName="cityValidator" [class.is-invalid]="getCity.invalid && getCity.touched">
+              <small class="form-text text-muted mb-4">
+                City
+              </small>
+              <div *ngIf="getCity.invalid && (getCity.touched || getCity.dirtty)">
+                <small *ngIf="getCity.errors?.required" class="text-danger">
+                  City is required
+                </small>
+                <small *ngIf="getCity.errors?.minlength" class="text-danger">
+                  City must consist of atleast 3 characters
+                </small>
+                <small *ngIf="getCity.errors?.pattern" class="text-danger">
+                  City name can not have numbers or any special characters
+                </small>
+              </div>
+            </div>
+            <div class="col">
+              <!-- Country -->
+              <input type="text" id="projectCountry" class="form-control" placeholder="Country"
+                formControlName="countryValidator" [class.is-invalid]="getCountry.invalid && getCountry.touched">
+              <small class="form-text text-muted mb-4">
+                Country
+              </small>
+              <div *ngIf="getCountry.invalid && (getCountry.touched || getCountry.dirtty)">
+                <small *ngIf="getCountry.errors?.required" class="text-danger">
+                  Country is required
+                </small>
+                <small *ngIf="getCountry.errors?.minlength" class="text-danger">
+                  Country must consist of atleast 4 characters
+                </small>
+                <small *ngIf="getCountry.errors?.pattern" class="text-danger">
+                  Country name can not have numbers or any special characters
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row mb-2">
+            <div class="col">
+              <!-- Manager -->
+              <input type="text" id="projectManager" class="form-control mb-2" placeholder="Project manager"
+                formControlName="managerValidator" [class.is-invalid]="getManager.invalid && getManager.touched">
+              <small class="form-text text-muted mb-4">
+                Assign Manager
+              </small>
+              <div *ngIf="getManager.invalid && (getManager.touched || getManager.dirtty)">
+                <small *ngIf="getManager.errors?.required" class="text-danger">
+                  Manager is required
+                </small>
+                <small *ngIf="getManager.errors?.minlength" class="text-danger">
+                  Manager name must consist of atleast 4 characters
+                </small>
+                <small *ngIf="getManager.errors?.pattern" class="text-danger">
+                  Manager name can not have numbers or any special characters
+                </small>
+              </div>
+            </div>
+            <div class="col">
+              <!-- Team -->
+              <input type="text" id="projectTeam" class="form-control mb-2" placeholder="Team Members"
+                formControlName="teamValidator" [class.is-invalid]="getTeam.invalid && getTeam.touched">
+              <small class="form-text text-muted mb-4">
+                Assign Team
+              </small>
+              <div *ngIf="getTeam.invalid && (getTeam.touched || getTeam.dirtty)">
+                <small *ngIf="getTeam.errors?.required" class="text-danger">
+                  Team is required
+                </small>
+                <small *ngIf="getTeam.errors?.minlength" class="text-danger">
+                  Atleast one team member is required
+                </small>
+                <small *ngIf="getTeam.errors?.pattern" class="text-danger">
+                  Member name can not have numbers or any special characters
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Create Project -->
+          <div class="alert alert-danger" role="alert" *ngIf="temp==1" style="width: 100%;">
+            End date cannot be same or less than Start date.
+          </div>
+          <button type="button" [disabled]="createProjectForm.invalid" class="btn btn-sm" id="editProjectBtn"
+            data-dismiss="modal" data-toggle="modal" data-target="#successModal">Create Project</button>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit and Update Project Modal -->
+<div class="modal fade" id="updateProject" tabindex="-1" role="dialog" aria-labelledby="updateProjectLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header" id="modalHeader">
+        <h3>PROJECT DETAILS</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="text-center border p-5" [formGroup]="editProjectForm">
+
+
+          <div class="form-row mb-2">
+            <div class="col">
+              <!-- Client name -->
+              <input type="text" id="clientName" class="form-control" placeholder="Cannot edit this field" disabled>
+              <small class="form-text text-muted mb-4">
+                Client Name
+              </small>
+            </div>
+            <div class="col">
+              <!-- Project name -->
+              <input type="text" id="projectName" class="form-control" placeholder="Project name"
+                formControlName="editProjectNameValidator"
+                [class.is-invalid]="editGetProjectName.invalid && editGetProjectName.touched">
+              <small class="form-text text-muted mb-2">
+                Project Name
+              </small>
+              <div *ngIf="editGetProjectName.invalid && (editGetProjectName.touched || editGetProjectName.dirtty)">
+                <small *ngIf="editGetProjectName.errors?.required" class="text-danger">
+                  Project name is required
+                </small>
+                <small *ngIf="editGetProjectName.errors?.minlength" class="text-danger">
+                  Project name must consist of atleast 4 characters
+                </small>
+              </div>
+            </div>
+            <div class="col">
+              <!-- Technologies -->
+              <input type="text" id="projectTech" class="form-control mb-2" placeholder="Technologies"
+                formControlName="editTechnologyValidator"
+                [class.is-invalid]="editGetTechnology.invalid && editGetTechnology.touched">
+              <small class="form-text text-muted mb-4">
+                Technology
+              </small>
+              <div *ngIf="editGetTechnology.invalid && (editGetTechnology.touched || editGetTechnology.dirtty)">
+                <small *ngIf="editGetTechnology.errors?.required" class="text-danger">
+                  Technology is required
+                </small>
+              </div>
+            </div>
+          </div>
+            <div class="form-row mb-2">
+              <div class="col">
+                <!-- Start Date -->
+                <input type="date" id="projectStartdate" class="form-control" placeholder="Cannot edit thid field"
+                  disabled>
+                <small class="form-text text-muted mb-2">
+                  Start date
+                </small>
+              </div>
+              <div class="col">
+                <!-- End Date -->
+                <input type="date" id="projectEndDate" class="form-control" placeholder="End date"
+                  formControlName="editEndDateValidator"
+                  [class.is-invalid]="editGetEndDate.invalid && editGetEndDate.touched">
+                <small class="form-text text-muted mb-2">
+                  End date
+                </small>
+                <div *ngIf="editGetEndDate.invalid && (editGetEndDate.touched || editGetEndDate.dirtty)">
+                  <small *ngIf="editGetEndDate.errors?.required" class="text-danger">
+                    End Date is required
+                  </small>
+                </div>
+              </div>
+              <div class="col">
+                <!-- Priority level -->
+                <input type="text" id="projectPriorityLevel" class="form-control" placeholder="HIGH, Medium, low"
+                  formControlName="editPriorityValidator"
+                  [class.is-invalid]="editGetPriority.invalid && editGetPriority.touched">
+                <small class="form-text text-muted mb-2">
+                  Priority Level
+                </small>
+                <div *ngIf="editGetPriority.invalid && (editGetPriority.touched || editGetPriority.dirtty)">
+                  <small *ngIf="editGetPriority.errors?.required" class="text-danger">
+                    Priority is required
+                  </small>
+                  <small *ngIf="editGetPriority.errors?.minlength" class="text-danger">
+                    Priority must consist of atleast 4 characters
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="form-row mb-2">
+              <div class="col">
+                <!-- City -->
+                <input type="text" id="projectCity" class="form-control" placeholder="City"
+                  formControlName="editCityValidator" [class.is-invalid]="editGetCity.invalid && editGetCity.touched">
+                <small class="form-text text-muted mb-2">
+                  City
+                </small>
+                <div *ngIf="editGetCity.invalid && (editGetCity.touched || editGetCity.dirtty)">
+                  <small *ngIf="editGetCity.errors?.required" class="text-danger">
+                    City is required
+                  </small>
+                  <small *ngIf="editGetCity.errors?.minlength" class="text-danger">
+                    City must consist of atleast 3 characters
+                  </small>
+                </div>
+              </div>
+              <div class="col">
+                <!-- Country -->
+                <input type="text" id="projectCountry" class="form-control" placeholder="Country"
+                  formControlName="editCountryValidator"
+                  [class.is-invalid]="editGetCountry.invalid && editGetCountry.touched">
+                <small class="form-text text-muted mb-2">
+                  Country
+                </small>
+                <div *ngIf="editGetCountry.invalid && (editGetCountry.touched || editGetCountry.dirtty)">
+                  <small *ngIf="editGetCountry.errors?.required" class="text-danger">
+                    Country is required
+                  </small>
+                  <small *ngIf="editGetCountry.errors?.minlength" class="text-danger">
+                    Country must consist of atleast 4 characters
+                  </small>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row mb-2">
+              <div class="col">
+                <!-- Manager -->
+                <input type="text" id="projectManager" class="form-control mb-2" placeholder="Project manager"
+                  formControlName="editManagerValidator"
+                  [class.is-invalid]="editGetManager.invalid && editGetManager.touched">
+                <small class="form-text text-muted mb-2">
+                  Assign Manager
+                </small>
+                <div *ngIf="editGetManager.invalid && (editGetManager.touched || editGetManager.dirtty)">
+                  <small *ngIf="editGetManager.errors?.required" class="text-danger">
+                    Manager is required
+                  </small>
+                  <small *ngIf="editGetManager.errors?.minlength" class="text-danger">
+                    Manager must consist of atleast 3 characters
+                  </small>
+                </div>
+              </div>
+              <div class="col">
+                <!-- Team -->
+                <input type="text" id="projectTeam" class="form-control mb-2" placeholder="Team Members"
+                  formControlName="editTeamValidator"
+                  [class.is-invalid]="editGetTeam.invalid && editGetTeam.touched">
+                <small class="form-text text-muted mb-2">
+                  Assign Team
+                </small>
+                <div *ngIf="editGetTeam.invalid && (editGetTeam.touched || editGetTeam.dirtty)">
+                    <small *ngIf="editGetTeam.errors?.required" class="text-danger">
+                      Team is required
+                    </small>
+                    <small *ngIf="editGetTeam.errors?.minlength" class="text-danger">
+                      Team must consist of atleast one member
+                    </small>
+                  </div>
+              </div>
+            </div>
+
+            <!-- update Project -->
+            <button type="button" class="btn btn-sm" [disabled]="editProjectForm.invalid" id="editProjectBtn" data-dismiss="modal" data-toggle="modal"
+              data-target="#successUpdateModal">Update Project</button>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Successfully created a project Modal -->
+<div id="successModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-confirm" id="successConfirmModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="icon-box" id="successIcon">
+          <i class="fa fa-check" aria-hidden="true"></i>
+        </div>
+        <h4 class="modal-title">Awesome!</h4>
+      </div>
+      <div class="modal-body">
+        <p class="text-center">Successfully created a new project.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success btn-block" id="successButton" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Successfully updated a project Modal -->
+<div id="successUpdateModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-confirm" id="successConfirmModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="icon-box" id="successIcon">
+          <i class="fa fa-check" aria-hidden="true"></i>
+        </div>
+        <h4 class="modal-title">Awesome!</h4>
+      </div>
+      <div class="modal-body">
+        <p class="text-center">Successfully updated a project.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success btn-block" id="successButton" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Modal -->
+<div id="deleteConfirmationModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-confirm" id="deleteModal">
+    <div class="modal-content" id="deleteModalContent">
+
+      <div class="modal-header" id="deleteModalHeader">
+        <div class="icon-box" id="deleteIcon">
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </div>
+        <div class="modal-title">
+          <h4>Are you sure?</h4>
+
+        </div>
+      </div>
+      <div class="modal-body">
+        <p>Do you really want to delete these records? This process cannot be undone.</p>
+      </div>
+      <div class="modal-footer" id="deleteModalFooter">
+        <button type="button" class="btn btn-info" data-dismiss="modal" id="deleteBtnInfo">Cancel</button>
+        <button type="button" class="btn btn-danger" id="deleteBtnDanger">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
