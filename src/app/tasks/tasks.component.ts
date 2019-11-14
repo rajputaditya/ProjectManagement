@@ -1,12 +1,43 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { TaskServiceService } from './task-service.service';
 
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.scss']
 })
+
+//My Class
+export class TaskClass{
+  projectTitle:string;
+  taskTitle:string;
+  taskOwner:string;
+  taskDescription;
+  endDateMyCLass;
+  startDateMyClass;
+
+  setProjectTitle(projectTitle){
+    this.projectTitle=projectTitle;
+  }
+  setTasktitle(taskTitle){
+    this.taskTitle=taskTitle;
+  }
+  setTaskOwner(taskOwner){
+    this.taskOwner=taskOwner;
+  }
+  setTaskDescription(taskDescription){
+    this.taskDescription=taskDescription;
+  }
+  setStartDate(startDate){
+    this.startDateMyClass=startDate;
+  }
+  setEndDate(endDate){
+    this.endDateMyCLass=endDate;
+  }
+}
+
 export class TasksComponent implements OnInit {
 
   firstnamebind: string;
@@ -14,13 +45,16 @@ export class TasksComponent implements OnInit {
   buttons = Array().fill(false);
   newTaskForm: FormGroup;
   editTaskForm: FormGroup;
-  
-  endDate;
-  startDate;
   temp;
   editendDate;
   editstartDate;
   endtemp;
+  endDate;
+  startDate;
+  taskClass:TaskClass;
+
+  
+
 
   get getProjectTitle() {
     return this.newTaskForm.get("projectTitleValidator");
@@ -71,7 +105,7 @@ export class TasksComponent implements OnInit {
   userArray: Array<any> = [];
   url: string = "https://jsonplaceholder.typicode.com/users";
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private service:TaskServiceService) {
     this.http.get(this.url).subscribe(data => {
       JSON.parse(JSON.stringify(data)).forEach(element => {
         this.userArray.push(element);
@@ -88,8 +122,6 @@ export class TasksComponent implements OnInit {
       editTaskOwnerValidator: new FormControl('', [Validators.required, Validators.minLength(3)]),
       editTaskDescriptionValidator: new FormControl('', [Validators.required, Validators.minLength(20), Validators.maxLength(100)]),
       editEndDateValidator:new FormControl('', [Validators.required])
-
-
     });
 
     this.newTaskForm = new FormGroup({
@@ -110,6 +142,20 @@ export class TasksComponent implements OnInit {
     console.log(this.userArray);
    this.curId =indx;
    console.log(this.curId);
+  }
+
+  //Adding New Task
+
+  addNewTask(){
+
+    this.taskClass=new TaskClass();
+    this.taskClass.setProjectTitle((<HTMLInputElement>document.getElementById("projectTitle")).value);
+    this.taskClass.setTasktitle((<HTMLInputElement>document.getElementById("taskTitle")).value);
+    this.taskClass.setTaskOwner((<HTMLInputElement>document.getElementById("taskOwner")).value);
+    this.taskClass.setTaskDescription((<HTMLInputElement>document.getElementById("taskDescription")).value);
+    this.taskClass.setStartDate((<HTMLInputElement>document.getElementById("projectStartdate")).value);
+    this.taskClass.setEndDate((<HTMLInputElement>document.getElementById("projectEnddate")).value);
+    this.service.saveTask(this.taskClass);
   }
 
 }

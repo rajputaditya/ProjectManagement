@@ -185,7 +185,7 @@
                       <input type="text" id="projectTitle" class="form-control" placeholder="Project name"
                         formControlName="projectTitleValidator"
                         [class.is-invalid]="getProjectTitle.invalid && getProjectTitle.touched">
-                      <small class="form-text text-muted ">
+                      <small class="form-text text-muted " >
                         Project Title
                       </small>
                       <div *ngIf="getProjectTitle.invalid && (getProjectTitle.touched || getProjectTitle.dirtty)">
@@ -238,7 +238,7 @@
     
     
                   <textarea class="form-control" style="margin-top: 10%;" rows="3" placeholder="Task Details"
-                    formControlName="taskDescriptionValidator"
+                    formControlName="taskDescriptionValidator" id="taskDescription">
                     [class.is-invalid]="getTaskDescription.invalid && getTaskDescription.touched"></textarea>
                   <small class="form-text text-muted mb-1 ">
                     Task Description
@@ -291,7 +291,7 @@
                   </div>
     
                   <button class="btn btn-warning btn-block" [disabled]="newTaskForm.invalid" type="submit"
-                    id="assignTaskBtn">Assign Task</button>
+                    (click)=addNewTask() id="assignTaskBtn">Assign Task</button>
                 </form>
     
               </div>
