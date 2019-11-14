@@ -1,13 +1,25 @@
+<div class="tips bg-warning">
+  <h2>Upcoming Event</h2>
+  <span id="notification"></span>
+</div>
 <hr>
 <div class='app'>
   <div class='app-calendar'>
-    <full-calendar #calendar defaultView="dayGridMonth" [header]="{
+    <full-calendar #calendar 
+    defaultView="dayGridMonth" 
+    [header]="{
           left: 'prev,next,today',
           center: 'title',
           right: 'dayGridMonth, timeGridWeek, timeGridDay, listWeek'
-        }" [plugins]="calendarPlugins" [weekends]="calendarWeekends" [events]="calendarEvents"
-      (dateClick)="handleDateClick($event)" (eventClick)="handleEventClick($event)" deepChangeDetection="true">
-      <!-- themeSystem="bootstrap" -->
+        }" 
+    [plugins]="calendarPlugins" 
+    [weekends]="calendarWeekends" 
+    [events]="calendarEvents"
+    (dateClick)="handleDateClick($event)" 
+    (eventClick)="handleEventClick($event)" 
+    deepChangeDetection="true"
+    timezone="India/Kolkata"
+    >
     </full-calendar>
   </div>
 </div>
