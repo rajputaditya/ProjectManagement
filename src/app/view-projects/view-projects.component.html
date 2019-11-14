@@ -58,7 +58,7 @@
       <button class="btn btn-light btn-lg" id="projectModBtn" data-toggle="modal"
         data-target="#createProject">Create</button>
       <button class="btn btn-light btn-lg" id="projectModBtn" style="margin-top: 10%;" data-toggle="modal"
-        data-target="#updateProject">Edit</button>
+        data-target="#editProject">Edit</button>
       <button class="btn btn-light btn-lg" id="projectModBtn" style="margin-top: 15%;" data-toggle="modal"
         data-target="#deleteProject">Delete</button>
     </div>
@@ -78,10 +78,13 @@
         <form>
           <div class="row">
             <div class="col-md-10">
-              <input class="form-control form-control-lg" type="text" placeholder="Search Project by title"
+              <input id="searchProject" class="form-control form-control-lg" type="text" placeholder="Search Project by title"
                 aria-label="Search" style="width: 100%; border-color: black;
-                border-radius: 50px;">
+                border-radius: 50px;" (input)=search()>
             </div>
+            <ul *ngFor="let search of searchdata">
+              <li>{{search}}</li>
+            </ul>
             <div class="col-md-2">
               <button class="btn btn-outline-danger btn-sm" id="closeEditModal" data-dismiss="modal">Close</button>
 
