@@ -6,21 +6,21 @@
             <a routerLink="/projectdetails">
               <div class="user-card">
                 <div class="level center">
-                  {{Priority}}
+                  {{users.priority}}
                 </div>
                 <div class="points center">
-                  {{Progress}}
+                  {{users.manager}}
                 </div>
               </div>
               <div class="more-info">
-                <h1>{{users.name}}</h1>
+                <h1>{{users.clientname}}</h1>
                 <div class="info-head">
-                  <span>{{TeamName}}</span>
-                  <span>{{startedDate}}</span>
+                  <span>{{users.startdate}}</span>
+                  <span>{{users.enddate}}</span>
                 </div>
                 <div class="info-head">
-                  <span>{{Technology}}</span>
-                  <span>{{CityCountry}}</span>
+                  <span>{{users.technologies}}</span>
+                  <span>{{users.city}} {{users.country}}</span>
                 </div>
                 <div class="stats">
                   <div>
@@ -43,7 +43,7 @@
             </a>
           </div>
           <div class="general">
-            <h1>{{ProjectName}}</h1>
+            <h1>{{users.projectname}}</h1>
             <p>
               <I>{{Description}}</I>
             </p>
@@ -323,7 +323,7 @@
             End date cannot be same or less than Start date.
           </div>
           <button type="button" [disabled]="createProjectForm.invalid" class="btn btn-sm" id="editProjectBtn"
-            data-dismiss="modal" data-toggle="modal" data-target="#successModal">Create Project</button>
+            data-dismiss="modal" (click)=addProject() data-toggle="modal" data-target="#successModal">Create Project</button>
 
         </form>
 
