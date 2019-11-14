@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-tasks',
-  templateUrl: './tasks.component.html',
-  styleUrls: ['./tasks.component.scss']
+  selector: 'app-project-details',
+  templateUrl: './project-details.component.html',
+  styleUrls: ['./project-details.component.scss']
 })
-export class TasksComponent implements OnInit {
+export class ProjectDetailsComponent implements OnInit {
 
   firstnamebind: string;
   taskbind: any="Manager";
@@ -111,5 +111,6 @@ export class TasksComponent implements OnInit {
    this.curId =indx;
    console.log(this.curId);
   }
+
 
 }

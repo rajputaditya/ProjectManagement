@@ -1,9 +1,10 @@
 <div class="row">
   <div class="col-md-9">
+    
     <div class="column" *ngFor="let users of userArray">
       <div class="card"  >
-          <div class="additional">
-            <a routerLink="/projectdetails">
+          <div class="additional" >
+            <a routerLink="/projectDetails">
               <div class="user-card">
                 <div class="level center">
                   {{users.priority}}
