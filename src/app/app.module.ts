@@ -21,6 +21,7 @@ import { MainService } from './reports/main.service';
 import { GrowthComponent } from './growth/growth.component';
 import { ProjectDetailsComponent } from './project-details/project-details.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +41,7 @@ import { ProjectDetailsComponent } from './project-details/project-details.compo
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    FullCalendarModule
+    FullCalendarModule,
   ],
   providers: [ServiceService, GetEventsService, MainService],
   bootstrap: [AppComponent]

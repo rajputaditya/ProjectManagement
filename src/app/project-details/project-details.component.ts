@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { CommonService } from '../common.service';
+
 
 @Component({
   selector: 'app-project-details',
@@ -10,17 +12,20 @@ import { HttpClient } from '@angular/common/http';
 export class ProjectDetailsComponent implements OnInit {
 
   firstnamebind: string;
-  taskbind: any="Manager";
+  taskbind: any = "Manager";
   buttons = Array().fill(false);
   newTaskForm: FormGroup;
   editTaskForm: FormGroup;
-  
+
   endDate;
   startDate;
   temp;
   editendDate;
   editstartDate;
   endtemp;
+  projectDetail;
+
+
 
   get getProjectTitle() {
     return this.newTaskForm.get("projectTitleValidator");
@@ -71,23 +76,27 @@ export class ProjectDetailsComponent implements OnInit {
   userArray: Array<any> = [];
   url: string = "https://jsonplaceholder.typicode.com/users";
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private comServ: CommonService) {
     this.http.get(this.url).subscribe(data => {
       JSON.parse(JSON.stringify(data)).forEach(element => {
         this.userArray.push(element);
-        
+
       });
     })
-    
+
   }
-  
-    
-  curId:string;
+
+
+  curId: string;
   ngOnInit() {
+    this.projectDetail = this.comServ.setObj();
+    console.log("view Project");
+    console.log(this.projectDetail);
+
     this.editTaskForm = new FormGroup({
       editTaskOwnerValidator: new FormControl('', [Validators.required, Validators.minLength(3)]),
       editTaskDescriptionValidator: new FormControl('', [Validators.required, Validators.minLength(20), Validators.maxLength(100)]),
-      editEndDateValidator:new FormControl('', [Validators.required])
+      editEndDateValidator: new FormControl('', [Validators.required])
 
 
     });
@@ -97,19 +106,21 @@ export class ProjectDetailsComponent implements OnInit {
       taskTitleValidator: new FormControl('', [Validators.required, Validators.minLength(4)]),
       taskOwnerValidator: new FormControl('', [Validators.required, Validators.minLength(3)]),
       taskDescriptionValidator: new FormControl('', [Validators.required, Validators.minLength(20), Validators.maxLength(100)]),
-      startDateValidator:new FormControl('', [Validators.required]),
-      endDateValidator:new FormControl('', [Validators.required]),
-      
+      startDateValidator: new FormControl('', [Validators.required]),
+      endDateValidator: new FormControl('', [Validators.required]),
+
     });
+
+
   }
   // sendname(event){
   //   this.firstnamebind=document.getElementById("namee");
   // }
 
-  sendId(indx:string){
+  sendId(indx: string) {
     console.log(this.userArray);
-   this.curId =indx;
-   console.log(this.curId);
+    this.curId = indx;
+    console.log(this.curId);
   }
 
 

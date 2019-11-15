@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ProjectService } from './project.service';
+import { CommonService } from '../common.service';
+
 export class Project {
-  clientName: string;
-  projectName: string;
+  clientname: string;
+  projectname: string;
   technologies: string;
-  startDate: string;
-  endDate: string;
+  startdate: string;
+  enddate: string;
   city: string;
   country: string;
   priority: string;
@@ -15,84 +17,51 @@ export class Project {
   teamMembers: string;
 
   setClientName(clientname) {
-    this.clientName = clientname;
+    this.clientname = clientname;
   }
 
-  getClientName() {
-    return this.clientName;
-  }
+
 
   setProjectName(projectname) {
-    this.projectName = projectname;
+    this.projectname = projectname;
   }
 
-  getProjectName() {
-    return this.projectName;
-  }
+
 
   setTechnologies(technologies) {
     this.technologies = technologies;
   }
 
-  getTechnologies() {
-    return this.technologies;
-  }
+
 
   setStartDate(startDate) {
-    this.startDate = startDate;
+    this.startdate = startDate;
   }
 
-  getStartDate() {
-    return this.startDate;
-  }
+
 
   setEndDate(enddate) {
-    this.endDate = enddate;
+    this.enddate = enddate;
   }
 
-  getEndDate() {
-    return this.endDate;
-  }
+
 
   setCity(city) {
     this.city = city;
   }
 
-  getCity() {
-    return this.city;
-  }
+
 
   setCountry(country) {
     this.country = country;
   }
 
-  getCountry() {
-    return this.country;
-  }
+
 
   setPriority(priority) {
     this.priority = priority;
   }
 
-  getPriority() {
-    return this.priority;
-  }
-
-  setManager(manager) {
-    this.manager = manager;
-  }
-
-  getManager() {
-    return this.manager;
-  }
-
-  setTeamMembers(teammembers) {
-    this.teamMembers = teammembers;
-  }
-
-  getTeamMembers() {
-    return this.teamMembers;
-  }
 }
 
 @Component({
@@ -115,13 +84,14 @@ export class ViewProjectsComponent implements OnInit {
   url: string = "http://localhost:8080/project";
 
 
-  constructor(private http: HttpClient, private service: ProjectService) {
+  constructor(private http: HttpClient, private service: ProjectService, private comServ: CommonService) {
     this.http.get(this.url).subscribe(data => {
       JSON.parse(JSON.stringify(data)).forEach(element => {
         this.userArray.push(element);
       });
     })
   }
+
 
   opnModal(uname: string) {
     this.usname = uname;
@@ -174,6 +144,10 @@ export class ViewProjectsComponent implements OnInit {
     return this.createProjectForm.get("teamValidator");
   }
 
+  get getProjectDescription() {
+    return this.createProjectForm.get("projectDescriptionValidator");
+  }
+
   get editGetProjectName() {
     return this.editProjectForm.get("editProjectNameValidator");
   }
@@ -206,6 +180,12 @@ export class ViewProjectsComponent implements OnInit {
     return this.editProjectForm.get("editTeamValidator");
   }
 
+  get getEditProjectDescription() {
+    return this.editProjectForm.get("editProjectDescriptionValidator");
+  }
+
+
+
   ngOnInit() {
 
     this.createProjectForm = new FormGroup({
@@ -217,8 +197,7 @@ export class ViewProjectsComponent implements OnInit {
       priorityLevelValidator: new FormControl('', [Validators.required, Validators.minLength(3)]),
       cityValidator: new FormControl('', [Validators.required, Validators.minLength(3), Validators.pattern(this.namePattern)]),
       countryValidator: new FormControl('', [Validators.required, Validators.minLength(4), Validators.pattern(this.namePattern)]),
-      managerValidator: new FormControl('', [Validators.required, Validators.minLength(4), Validators.pattern(this.namePattern)]),
-      teamValidator: new FormControl('', [Validators.required, Validators.minLength(4), Validators.pattern(this.namePattern)]),
+      projectDescriptionValidator: new FormControl('', [Validators.required, Validators.minLength(20)])
     });
 
     this.editProjectForm = new FormGroup({
@@ -228,14 +207,12 @@ export class ViewProjectsComponent implements OnInit {
       editPriorityValidator: new FormControl('', [Validators.required, Validators.minLength(3)]),
       editCityValidator: new FormControl('', [Validators.required, Validators.minLength(3), Validators.pattern(this.namePattern)]),
       editCountryValidator: new FormControl('', [Validators.required, Validators.minLength(4), Validators.pattern(this.namePattern)]),
-      editManagerValidator: new FormControl('', [Validators.required, Validators.minLength(4), Validators.pattern(this.namePattern)]),
-      editTeamValidator: new FormControl('', [Validators.required, Validators.minLength(4), Validators.pattern(this.namePattern)])
+      editProjectDescriptionValidator: new FormControl('', [Validators.required, Validators.minLength(20)])
 
     });
 
   }
   proj: Project;
-
   projects: Array<any> = [];
   addProject() {
     this.proj = new Project();
@@ -247,12 +224,14 @@ export class ViewProjectsComponent implements OnInit {
     this.proj.setCity((<HTMLInputElement>document.getElementById("projectCity")).value);
     this.proj.setCountry((<HTMLInputElement>document.getElementById("projectCountry")).value);
     this.proj.setPriority((<HTMLInputElement>document.getElementById("projectPriorityLevel")).value);
-    this.proj.setManager((<HTMLInputElement>document.getElementById("projectManager")).value);
-    this.proj.setTeamMembers((<HTMLInputElement>document.getElementById("projectTeam")).value);
     console.log(this.proj);
     this.service.addProject(this.proj).subscribe(proj => this.projects.push(proj));
   }
 
- 
+  sendProjectDetail(projectDetail: any) {
+    this.comServ.getObj(projectDetail);
+  }
+
+
 
 }
