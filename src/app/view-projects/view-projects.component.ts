@@ -207,9 +207,9 @@ export class ViewProjectsComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    
     this.createProjectForm = new FormGroup({
-      clientNameValidator: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      clientNameValidator: new FormControl('', [Validators.required, Validators.minLength(3)]),
       projectNameValidator: new FormControl('', [Validators.required, Validators.minLength(4)]),
       technologiesValidator: new FormControl('', Validators.required),
       startDateValidator: new FormControl('', Validators.required),
@@ -265,4 +265,43 @@ export class ViewProjectsComponent implements OnInit {
      });
    });
  }
-}
+ projectName:string;
+ projectData:Project=new Project();
+ data:Project;
+ editDetails(){
+   this.projectData=new Project();
+  this.projectName=(<HTMLInputElement>document.getElementById("projectButton")).value;
+   this.url='http://localhost:8080/project/'+this.projectName;
+   console.log(this.url);
+   this.http.get(this.url).subscribe(data=>{
+      // this.projectData.setClientName(data.clientName);
+      // this.projectData.setProjectName(data.projectName);
+      // this.projectData.setCountry(data.country);
+      // this.projectData.setEndDate(data.endDate);
+      // this.projectData.setCity(data.city);
+      // this.projectData.setManager(data.manager);
+      // this.projectData.setTeamMembers(data.teamMembers);
+      // this.projectData.setTechnologies(data.technologies);
+      // this.projectData.setStartDate(data.startDate);
+      // this.projectData.setPriority(data.priority);
+      this.service.editProject(this.url).subscribe(proj =>this.projectData=proj);
+     })
+   }
+
+   updateProject(){
+    this.proj = new Project();
+    this.proj.setClientName((<HTMLInputElement>document.getElementById("clientName1")).value);
+    this.proj.setProjectName((<HTMLInputElement>document.getElementById("projectName1")).value);
+    this.proj.setTechnologies((<HTMLInputElement>document.getElementById("projectTech1")).value);
+    this.proj.setStartDate((<HTMLInputElement>document.getElementById("projectStartdate1")).value);
+    this.proj.setEndDate((<HTMLInputElement>document.getElementById("projectEndDate1")).value);
+    this.proj.setCity((<HTMLInputElement>document.getElementById("projectCity1")).value);
+    this.proj.setCountry((<HTMLInputElement>document.getElementById("projectCountry1")).value);
+    this.proj.setPriority((<HTMLInputElement>document.getElementById("projectPriorityLevel1")).value);
+    this.proj.setManager((<HTMLInputElement>document.getElementById("projectManager1")).value);
+    this.proj.setTeamMembers((<HTMLInputElement>document.getElementById("projectTeam1")).value);
+    console.log(this.proj);
+    this.service.updateProject(this.proj).subscribe(proj => this.projects.push(proj));
+   }
+ }
+
