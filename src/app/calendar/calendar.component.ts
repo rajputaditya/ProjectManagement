@@ -21,7 +21,7 @@ export class CalendarComponent implements OnInit  {
 
   @ViewChild('calendar', { static: false }) calendarComponent: FullCalendarComponent;
   calendarPlugins = [dayGridPlugin, timeGridPlugin, interactionPlugin, bootstrapPlugin];
-  calendarWeekends = false;
+  calendarWeekends = true;
   calendarEvents: any = [];
   idCount: number;
   crId: any;
@@ -73,6 +73,7 @@ export class CalendarComponent implements OnInit  {
     this.getService.saveEvent({"title":this.crTitle, "start": this.crDate});
     document.getElementById('closeModal').click();
     this.getReminder(this.calendarEvents);
+    this.crTitle = "";
   }
 
   // Update Event to the List
@@ -85,6 +86,7 @@ export class CalendarComponent implements OnInit  {
     });
     document.getElementById('closeModalSave').click();
     this.getReminder(this.calendarEvents);
+    this.crTitle = "";
   }
 
   // Deletes Event from the List 
@@ -97,6 +99,7 @@ export class CalendarComponent implements OnInit  {
     });
     document.getElementById('closeDelete').click();
     this.getReminder(this.calendarEvents);
+    this.crTitle = "";
   }
 
   getReminder(myEvents){
