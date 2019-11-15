@@ -1,13 +1,25 @@
+<div class="tips bg-warning">
+  <h2>Upcoming Event</h2>
+  <span id="notification"></span>
+</div>
 <hr>
 <div class='app'>
   <div class='app-calendar'>
-    <full-calendar #calendar defaultView="dayGridMonth" [header]="{
-          left: 'prev,next today',
+    <full-calendar #calendar 
+    defaultView="dayGridMonth" 
+    [header]="{
+          left: 'prev,next,today',
           center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-        }" [plugins]="calendarPlugins" [weekends]="calendarWeekends" [events]="calendarEvents"
-      (dateClick)="handleDateClick($event)" (eventClick)="handleEventClick($event)" deepChangeDetection="true">
-      <!-- themeSystem="bootstrap"> -->
+          right: 'dayGridMonth, timeGridWeek, timeGridDay, listWeek'
+        }" 
+    [plugins]="calendarPlugins" 
+    [weekends]="calendarWeekends" 
+    [events]="calendarEvents"
+    (dateClick)="handleDateClick($event)" 
+    (eventClick)="handleEventClick($event)" 
+    deepChangeDetection="true"
+    timezone="India/Kolkata"
+    >
     </full-calendar>
   </div>
 </div>
@@ -29,7 +41,7 @@
 
   <!-- Hidden Button to Open the Modal -->
   <button type="button" id="addEvent" data-toggle="modal" data-target="#add" hidden></button>
-  <button type="button" id="deleteEvent" data-toggle="modal" data-target="#delete" hidden></button>
+  <button type="button" id="editEvent" data-toggle="modal" data-target="#edit" hidden></button>
 
   <!-- Enter Event Details Modal -->
   <div class="modal fade" id="add">
@@ -46,6 +58,27 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeModal">Close</button>
           <button type="button" class="btn btn-primary" (click)='addEvent()'>Add Event</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Event Details Modal -->
+  <div class="modal fade" id="edit">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Edit Event Title</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          
+          <input type="text" class="form-control" [(ngModel)]='crTitle' placeholder="Enter New Event Title">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeModalSave">Close</button>
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-dismiss="modal" data-target="#delete">Delete Event</button>
+          <button type="button" class="btn btn-primary" (click)='saveEvent()'>Save Event</button>
         </div>
       </div>
     </div>
