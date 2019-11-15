@@ -5,25 +5,26 @@ import { ProjectService } from './project.service';
 import { CommonService } from '../common.service';
 
 export class Project {
-  clientname: string;
-  projectname: string;
+  clientName: string;
+  projectName: string;
   technologies: string;
-  startdate: string;
-  enddate: string;
+  startDate: string;
+  endDate: string;
   city: string;
   country: string;
   priority: string;
   manager: string;
   teamMembers: string;
+  projectDescription: string;
 
-  setClientName(clientname) {
-    this.clientname = clientname;
+  setClientName(clientName) {
+    this.clientName = clientName;
   }
 
 
 
-  setProjectName(projectname) {
-    this.projectname = projectname;
+  setProjectName(projectName) {
+    this.projectName = projectName;
   }
 
 
@@ -35,13 +36,13 @@ export class Project {
 
 
   setStartDate(startDate) {
-    this.startdate = startDate;
+    this.startDate = startDate;
   }
 
 
 
-  setEndDate(enddate) {
-    this.enddate = enddate;
+  setEndDate(endDate) {
+    this.endDate = endDate;
   }
 
 
@@ -61,7 +62,9 @@ export class Project {
   setPriority(priority) {
     this.priority = priority;
   }
-
+  setProjectDescription(projectDescription){
+    this.projectDescription = projectDescription;
+  }
 }
 
 @Component({
@@ -224,6 +227,7 @@ export class ViewProjectsComponent implements OnInit {
     this.proj.setCity((<HTMLInputElement>document.getElementById("projectCity")).value);
     this.proj.setCountry((<HTMLInputElement>document.getElementById("projectCountry")).value);
     this.proj.setPriority((<HTMLInputElement>document.getElementById("projectPriorityLevel")).value);
+    this.proj.setProjectDescription((<HTMLInputElement>document.getElementById("projectDescription")).value);
     console.log(this.proj);
     this.service.addProject(this.proj).subscribe(proj => this.projects.push(proj));
   }
@@ -279,8 +283,7 @@ export class ViewProjectsComponent implements OnInit {
     this.proj.setCity((<HTMLInputElement>document.getElementById("projectCity1")).value);
     this.proj.setCountry((<HTMLInputElement>document.getElementById("projectCountry1")).value);
     this.proj.setPriority((<HTMLInputElement>document.getElementById("projectPriorityLevel1")).value);
-    this.proj.setManager((<HTMLInputElement>document.getElementById("projectManager1")).value);
-    this.proj.setTeamMembers((<HTMLInputElement>document.getElementById("projectTeam1")).value);
+    this.proj.setProjectDescription((<HTMLInputElement>document.getElementById("editProjectDescription")).value);
     console.log(this.proj);
     this.service.updateProject(this.proj).subscribe(proj => this.projects.push(proj));
    }

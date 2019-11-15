@@ -14,10 +14,10 @@
               </div>
             </div>
             <div class="more-info">
-              <h1 id="sendClientName">{{users.clientname}}</h1>
+              <h1 id="sendClientName">{{users.clientName}}</h1>
               <div class="info-head">
-                <span>{{users.startdate}}</span>
-                <span>{{users.enddate}}</span>
+                <span>{{users.startDate}}</span>
+                <span>{{users.endDate}}</span>
               </div>
               <div class="info-head">
                 <span>{{users.technologies}}</span>
@@ -439,7 +439,7 @@
             </div>
             <div class="col">
               <!-- Country -->
-              <input type="text" id="projectCountry" class="form-control" placeholder="Country"
+              <input type="text" id="projectCountry1" [value]=projectData.country class="form-control" placeholder="Country"
                 formControlName="editCountryValidator"
                 [class.is-invalid]="editGetCountry.invalid && editGetCountry.touched">
               <small class="form-text text-muted mb-2">
@@ -460,7 +460,7 @@
 
           <!-- Project Description -->
           <div class="col">
-            <textarea class="form-control mb-2" placeholder="Project description" id="editprojectDescription"
+            <textarea type="text" id="editProjectDescription" class="form-control mb-2"  [value]=projectData.projectDescription placeholder="Project description" 
               formControlName="editProjectDescriptionValidator"
               [class.is-invalid]="getEditProjectDescription.invalid && getEditProjectDescription.touched"></textarea>
             <small class="form-text text-muted mb-4 ">
@@ -478,8 +478,8 @@
           </div>
 
           <!-- update Project -->
-          <button type="button" class="btn btn-sm" [disabled]="editProjectForm.invalid" id="editProjectBtn"
-            data-dismiss="modal" data-toggle="modal" data-target="#successUpdateModal">Update Project</button>
+          <button type="button" class="btn btn-sm"  id="editProjectBtn"
+            data-dismiss="modal" (click)=updateProject() data-toggle="modal" data-target="#successUpdateModal">Update Project</button>
 
         </form>
 
