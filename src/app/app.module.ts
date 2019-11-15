@@ -7,7 +7,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { FooterComponent } from './footer/footer.component';
 import { ViewProjectsComponent } from './view-projects/view-projects.component';
 
-import { TasksComponent } from './tasks/tasks.component';
+
 import { ReportsComponent } from './reports/reports.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { LogINComponent } from './log-in/log-in.component';
@@ -19,6 +19,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { GetEventsService } from './calendar/get-events.service'
 import { MainService } from './reports/main.service';
 import { GrowthComponent } from './growth/growth.component';
+import { ProjectDetailsComponent } from './project-details/project-details.component';
 
 @NgModule({
   declarations: [
@@ -26,12 +27,12 @@ import { GrowthComponent } from './growth/growth.component';
     NavBarComponent,
     FooterComponent,
     ViewProjectsComponent,
-    TasksComponent,
     ReportsComponent,
     CalendarComponent,
     LogINComponent,
     EmployeesComponent,
-    GrowthComponent
+    GrowthComponent,
+    ProjectDetailsComponent
   ],
   imports: [
     BrowserModule,
