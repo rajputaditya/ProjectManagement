@@ -83,7 +83,7 @@
                 border-radius: 50px;" (input)=search()>
             </div>
             <ul *ngFor="let search of searchdata">
-              <li>{{search}}</li>
+              <a routerLink="#updateProject"><li>{{search}}</li></a>
             </ul>
             <div class="col-md-2">
               <button class="btn btn-outline-danger btn-sm" id="closeEditModal" data-dismiss="modal">Close</button>
