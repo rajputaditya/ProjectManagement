@@ -212,4 +212,16 @@ export class ViewProjectsComponent implements OnInit {
     this.service.addProject(this.proj).subscribe(proj => this.projects.push(proj));
   }
 
+  searchdata:Array<any>;
+  search(){
+    this.searchdata=[];
+   this.url='http://localhost:8080/search/'+(<HTMLInputElement>document.getElementById("searchProject")).value;
+   console.log(this.url);
+   this.http.get(this.url).subscribe(data => {
+     // Populating usersArray with names from API
+     JSON.parse(JSON.stringify(data)).forEach(element => {
+       this.searchdata.push(element);
+     });
+   });
+ }
 }
