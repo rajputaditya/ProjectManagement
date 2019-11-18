@@ -1,5 +1,5 @@
 <div class="tips bg-warning">
-  <h2>Upcoming Event</h2>
+  <h2>{{'calendar.h2-2' | translate}}</h2>
   <span id="notification"></span>
 </div>
 <hr>
@@ -27,12 +27,12 @@
 <div class="tips">
   <ul>
     <li>
-      <h4>Tips</h4>
+      <h4>{{ 'calendar.h4-18' | translate }}</h4>
     </li>
     <ol>
-      <li>Click any date to <strong>Add a new Event</strong>.</li>
-      <li>Click any event to <strong>Delete the Event</strong>.</li>
-      <li>Change view type <strong>(Month, Week, Day)</strong> to specify time in the day for Event.</li>
+      <li>{{ 'calendar.list21' | translate }} <strong>{{ 'calendar.strong21' | translate }}</strong>.</li>
+      <li>{{ 'calendar.list22' | translate }} <strong>{{ 'calendar.strong22' | translate }}</strong></li>
+      <li>{{ 'calendar.list23' | translate }} <strong>{{ 'calendar.strong23' | translate }}</strong>  {{ 'calendar.strong23-2' | translate }}</li>
     </ol>
   </ul>
 </div>
@@ -48,16 +48,16 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Enter Event Details</h4>
+          <h4 class="modal-title">{{ 'calendar.h4-39' | translate }}</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
-          <h5>Event Time : {{ dispDate }}</h5><br>
+          <h5>E{{ 'calendar.h5-43' | translate }}: {{ dispDate }}</h5><br>
           <input type="text" class="form-control" [(ngModel)]='crTitle' placeholder="Enter Event Title">
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeModal">Close</button>
-          <button type="button" class="btn btn-primary" (click)='addEvent()'>Add Event</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeModal">{{ 'calendar.button47' | translate }}</button>
+          <button type="button" class="btn btn-primary" (click)='addEvent()'>{{ 'calendar.button48' | translate }}</button>
         </div>
       </div>
     </div>
@@ -89,18 +89,20 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Delete the event?</h4>
+          <h4 class="modal-title">{{ 'calendar.h4-59' | translate }}</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
-          <h5>Are you sure you want to delete the event titled : <strong>{{ crTitle }}</strong> ?</h5><br>
+          <h5>{{ 'calendar.h5-63' | translate }} : <strong>{{ crTitle }}</strong> ?</h5><br>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeDelete">Close</button>
-          <button type="button" class="btn btn-danger" (click)='deleteEvent()'>Delete</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeDelete">{{ 'calendar.button66' | translate }}</button>
+          <button type="button" class="btn btn-danger" (click)='deleteEvent()'>{{ 'calendar.button67' | translate }}</button>
         </div>
       </div>
     </div>
   </div>
+
+
 
 </div>

@@ -10,7 +10,7 @@
         <p>{{user.email}}</p>
         <p>{{user.phonenumber}}
           <button class="btn btn-sm btn-dark" id="delEmpBtn" data-toggle="modal"
-            data-target="#deleteConfirmationModal">Delete</button>
+            data-target="#deleteConfirmationModal"> {{ 'employees.button_13'| translate}} </button>
           <button class="btn btn-sm btn-warning" id="editEmpBtn" data-toggle="modal"
             data-target="#editEmployee">Edit</button>
         </p>
@@ -39,7 +39,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header" id="modalHeader">
-        <h5 class="modal-title">EMPLOYEE DETAILS</h5>
+        <h5 class="modal-title">{{'employees.h5-42' | translate}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -52,40 +52,40 @@
             <div class="col">
 
               <!-- First name -->
-              <input type="text" id="FirstName" class="form-control" placeholder="First name"
+              <input type="text" id="FirstName" class="form-control" placeholder="{{'employees.placeholder_55' | translate}}"
                 formControlName="firstNameValidator" [class.is-invalid]="getFirstName.invalid && getFirstName.touched">
               <small class="form-text text-muted ">
-                First Name
+                {{'employees.small_58' | translate}}
               </small>
               <div *ngIf="getFirstName.invalid && (getFirstName.touched || getFirstName.dirty)">
                 <small *ngIf="getFirstName.errors?.required" class="text-danger">
-                  First name is required
+                  {{'employees.small_62' | translate}}
                 </small>
                 <small *ngIf="getFirstName.errors?.minlength" class="text-danger">
-                  First name must consist atleast 4 characters
+                  {{'employees.small_65' | translate}}
                 </small>
                 <small *ngIf="getFirstName.errors?.pattern" class="text-danger">
-                  First name cannot contain numbers
+                  {{'employees.small_68' | translate}}
                 </small>
 
               </div>
             </div>
             <div class="col">
               <!-- Last name -->
-              <input type="text" id="LastName" class="form-control" placeholder="Last name"
+              <input type="text" id="LastName" class="form-control" placeholder="{{'employees.placeholder_75' | translate}}"
                 formControlName="lastNameValidator" [class.is-invalid]="getLastName.invalid && getLastName.touched">
               <small class="form-text text-muted ">
-                Last Name
+                {{'employees.small_78' | translate}}
               </small>
               <div *ngIf="getLastName.invalid && (getLastName.touched || getLastName.dirty)">
                 <small *ngIf="getLastName.errors?.required" class="text-danger">
-                  Last name is required
+                  {{'employees.small_82' | translate}}
                 </small>
                 <small *ngIf="getLastName.errors?.minlength" class="text-danger">
-                  Last name must consist atleast 4 characters
+                  {{'employees.small_85' | translate}}
                 </small>
                 <small *ngIf="getLastName.errors?.pattern" class="text-danger">
-                  Last name cannot contain numbers
+                  {{'employees.small_88' | translate}}
                 </small>
 
               </div>
@@ -96,66 +96,65 @@
           <input type="email" id="Email" class="form-control " placeholder="E-mail" formControlName="emailValidator"
             [class.is-invalid]="getEmail.invalid && getEmail.touched">
           <small class="form-text text-muted mb-4">
-            E-mail
+            {{'employees.small_99'| translate}}
           </small>
           <div *ngIf="getEmail.invalid && (getEmail.touched || getEmail.dirty)">
             <small *ngIf="getEmail.errors?.required" class="text-danger">
-              Email is required
+              {{'employees.small_103' | translate}}
             </small>
             <small *ngIf="getEmail.errors?.pattern" class="text-danger">
-              Email must be of required pattern (abc0-9@xyz.com)
+              {{'employees.small_106' | translate}}
             </small>
 
           </div>
 
           <!-- ROLE -->
-          <input type="text" id="Designation" class="form-control " placeholder="Designation"
+          <input type="text" id="Designation" class="form-control " placeholder="{{'employees.placeholder_112' | translate}}"
             formControlName="designationValidator"
             [class.is-invalid]="getDesignation.invalid && getDesignation.touched">
           <small class="form-text text-muted mb-4">
-            Designation
+            {{'employees.small_116' | translate}}
           </small>
           <div *ngIf="getDesignation.invalid && (getDesignation.touched || getDesignation.dirty)">
             <small *ngIf="getDesignation.errors?.required" class="text-danger">
-              Designation is required
+            {{'employees.small_120' | translate}}
             </small>
             <small *ngIf="getDesignation.errors?.pattern" class="text-danger">
-              Designation must should be of required pattern
+              {{'employees.small_123' | translate}}
             </small>
 
           </div>
 
           <!-- Phone number -->
-          <input type="tel" id="PhoneNumber" class="form-control " placeholder="Phone number"
+          <input type="tel" id="PhoneNumber" class="form-control " placeholder="{{'employees.placeholder_129' | translate}}"
             aria-describedby="PhoneHelpBlock" formControlName="phoneNumberValidator"
             [class.is-invalid]="getPhoneNumber.invalid && getPhoneNumber.touched">
           <small class="form-text text-muted mb-4">
-            Phone Number
+            {{'employees.small_133' | translate}}
           </small>
           <div *ngIf="getPhoneNumber.invalid && (getPhoneNumber.touched || getPhoneNumber.dirty)">
             <small *ngIf="getPhoneNumber.errors?.required" class="text-danger">
-              Phone number is required
+            {{'employees.small_137' | translate}}
             </small>
             <small *ngIf="getPhoneNumber.errors?.minlength" class="text-danger">
-              Phone Number must be of atleast 10 characters
+              {{'employees.small_140' | translate}}
             </small>
             <small *ngIf="getPhoneNumber.errors?.pattern" class="text-danger">
-              Phone Number must consist only numbers
+              {{'employees.small_143' | translate}}
             </small>
 
           </div>
-
-
+ 
           <!-- Technologies -->
-          <input type="text" id="Technologies" class="form-control " placeholder="Technologies"
+          <input type="text" id="Technologies" class="form-control " placeholder="{{'employees.placeholder_150' | translate}}"
             aria-describedby="PhoneHelpBlock" formControlName="technologyValidator"
             [class.is-invalid]="getTechnology.invalid && getTechnology.touched">
           <small class="form-text text-muted mb-4">
-            Technologies Known
+            {{'employees.small_154' | translate}}
           </small>
           <div *ngIf="getTechnology.invalid && (getTechnology.touched || getTechnology.dirty)">
             <small *ngIf="getTechnology.errors?.required" class="text-danger">
-              Technology is required
+              {{'employees.small_158' | translate}}
             </small>
 
 
@@ -177,7 +176,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header" id="modalHeader">
-        <h5 class="modal-title">EMPLOYEE DETAILS</h5>
+        <h5 class="modal-title">{{'employees.h5-180' | translate}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -189,40 +188,40 @@
           <div class="form-row mb-4">
             <div class="col">
               <!-- First name -->
-              <input type="text" id="FirstName" class="form-control" placeholder="First name" 
+              <input type="text" id="FirstName" class="form-control" placeholder="{{'employees.placeholder_191'|translate}}" 
                 formControlName="editFirstNameValidator"
                 [class.is-invalid]="getEditFirstName.invalid && getEditFirstName.touched">
               <small class="form-text text-muted ">
-                First Name
+                {{'employees.small_196' | translate}}
               </small>
               <div *ngIf="getEditFirstName.invalid && (getEditFirstName.touched || getEditFirstName.dirty)">
                 <small *ngIf="getEditFirstName.errors?.required" class="text-danger">
-                  First name is required
+                  {{'employees.small_200' | translate}}
                 </small>
                 <small *ngIf="getEditFirstName.errors?.minlength" class="text-danger">
-                  First name must be of atleast 3 characters
+                  {{'employees.small_203' | translate}}
                 </small>
                 <small *ngIf="getEditFirstName.errors?.pattern" class="text-danger">
-                  First name cannot contain numbers
+                  {{'Employee.small_206' | translate}}
                 </small>
               </div>
             </div>
               <div class="col">
                 <!-- Last name -->
-                <input type="text" id="LastName" class="form-control" placeholder="Last name"
+                <input type="text" id="LastName" class="form-control" placeholder="{{'employees.placeholder_211'| translate}}"
                   formControlName="editLastNameValidator" [class.is-invalid]="getEditLastName.invalid && getEditLastName.touched">
                 <small class="form-text text-muted ">
-                  Last Name
+                 {{'employees.small_215' | translate}}
                 </small>
                 <div *ngIf="getEditLastName.invalid && (getEditLastName.touched || getEditLastName.dirty)">
                   <small *ngIf="getEditLastName.errors?.required" class="text-danger">
-                    Last name is required
+                  {{'employees.small_219' | translate}}
                   </small>
                   <small *ngIf="getEditLastName.errors?.minlength" class="text-danger">
-                    Last name must consist atleast 4 characters
+                    {{'employees.small_222' | translate}}
                   </small>
                   <small *ngIf="getEditLastName.errors?.pattern" class="text-danger">
-                    Last name cannot contain numbers
+                    {{'employees.small_225' | translate}}
                   </small>
   
                 </div>
@@ -235,14 +234,14 @@
             formControlName="editEmailValidator"
             [class.is-invalid]="getEditEmail.invalid && getEditEmail.touched">
             <small class="form-text text-muted mb-4">
-              E-mail
+              {{'employees.small_238' | translate}}
             </small>
             <div *ngIf="getEditEmail.invalid && (getEditEmail.touched || getEditEmail.dirty)">
               <small *ngIf="getEditEmail.errors?.required" class="text-danger">
-                Email is required
+                {{'employees.small_242' | translate}}
               </small>
               <small *ngIf="getEditEmail.errors?.pattern" class="text-danger">
-                Email must be of required pattern (abc0-9@xyz.com)
+                {{'employees.small_245' | translate}}
               </small>
   
             </div>
@@ -250,40 +249,40 @@
             <div class="form-row mb-4">
               <div class="col">
                 <!-- ROLE -->
-                <input type="text" id="Designation" class="form-control " placeholder="Designation" required
+                <input type="text" id="Designation" class="form-control " placeholder="{{'employees.placeholder_252'| translate}}" required
                 formControlName="editDesignationValidator"
                 [class.is-invalid]="getEditDesignation.invalid && getEditDesignation.touched">
                 <small class="form-text text-muted ">
-                  Designation
+                  {{'employees.small_257' | translate}}
                 </small>
                 <div *ngIf="getEditDesignation.invalid && (getEditDesignation.touched || getEditDesignation.dirty)">
                   <small *ngIf="getEditDesignation.errors?.required" class="text-danger">
-                    Designation is required
+                    {{'employees.small_261' | translate}}
                   </small>
                   <small *ngIf="getEditDesignation.errors?.pattern" class="text-danger">
-                    Designation cannot contain numbers or any special characters
+                   {{'employees.small_264' | translate}}
                   </small>
       
                 </div>
               </div>
               <div class="col">
                 <!-- Phone number -->
-                <input type="tel" id="PhoneNumber" class="form-control " placeholder="Phone number"
+                <input type="tel" id="PhoneNumber" class="form-control " placeholder="{{'employees.placeholder_270' | translate}}"
                   aria-describedby="PhoneHelpBlock" required
                   formControlName="editPhoneNumberValidator"
             [class.is-invalid]="getEditPhoneNumber.invalid && getEditPhoneNumber.touched">
                 <small class="form-text text-muted ">
-                  Phone Number
+                  {{'employees.small_276' | translate}}
                 </small>
                 <div *ngIf="getEditPhoneNumber.invalid && (getEditPhoneNumber.touched || getEditPhoneNumber.dirty)">
                   <small *ngIf="getEditPhoneNumber.errors?.required" class="text-danger">
-                    Phone number is required
+                    {{'employees.small_280' | translate}}
                   </small>
                   <small *ngIf="getEditPhoneNumber.errors?.minlength" class="text-danger">
-                    Phone Number must be of atleast 10 characters
+                    {{'employees.small_283' | translate}}
                   </small>
                   <small *ngIf="getEditPhoneNumber.errors?.pattern" class="text-danger">
-                    Phone Number must consist only numbers
+                    {{'employees.small_286' | translate}}
                   </small>
       
                 </div>
@@ -291,15 +290,15 @@
             </div>
 
             <!-- Technologies -->
-            <input type="text" id="Technologies" class="form-control " placeholder="Technologies"
+            <input type="text" id="Technologies" class="form-control " placeholder="{{'employees.placeholder_293' | translate}}"
               aria-describedby="PhoneHelpBlock" required formControlName="editTechnologyValidator"
               [class.is-invalid]="getEditTechnology.invalid && getEditTechnology.touched">
             <small class="form-text text-muted mb-4">
-              Technologies Known
+              {{'employees.small_298' | translate}}
             </small>
             <div *ngIf="getEditTechnology.invalid && (getEditTechnology.touched || getEditTechnology.dirty)">
               <small *ngIf="getEditTechnology.errors?.required" class="text-danger">
-                Technology is required
+                {{'employees.small_302' | translate}}
               </small>
   
   

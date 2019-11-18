@@ -1,11 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 
 import { ServiceService } from './service.service';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+
+import { TranslateService } from '@ngx-translate/core';
+
 export class Employee {
+
+  
 
   firstname: string;
   lastname: string;
@@ -51,6 +56,8 @@ export class Employee {
 
 export class EmployeesComponent implements OnInit {
 
+  
+
 
 
   userArray: Array<any> = [];
@@ -65,6 +72,7 @@ export class EmployeesComponent implements OnInit {
   emailPattern: string = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
   namePattern: string = "[a-zA-Z\\s]*$";
   phoneNumberpattern:string="/^[6-9]\d{9}$/";
+  service: any;
 
   //Add Employee validations
   get getFirstName() {
@@ -136,7 +144,8 @@ export class EmployeesComponent implements OnInit {
 
 
 
-  constructor(private http: HttpClient, private service: ServiceService) {
+  constructor(private http: HttpClient) {
+    
     this.addEmployeeForm = new FormGroup({
       firstNameValidator: new FormControl('', [Validators.required, Validators.minLength(4), Validators.pattern(this.namePattern)]),
       lastNameValidator: new FormControl('', [Validators.required, Validators.minLength(4), Validators.pattern(this.namePattern)]),
