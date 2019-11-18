@@ -1,5 +1,4 @@
-import { Component, OnInit, Inject} from '@angular/core';
-import {TranslateService} from '@ngx-translate/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +7,4 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class AppComponent {
   title = 'ProjectManagement';
-
-  
-  constructor(@Inject(TranslateService) public translate: TranslateService) {
-    translate.addLangs(['en', 'de'])
-    translate.setDefaultLang('en');
-    translate.use('en');
-  }
 }

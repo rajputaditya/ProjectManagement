@@ -1,8 +1,6 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { TranslateService } from '@ngx-translate/core';
-import { ServiceService } from '../employees/service.service';
 
 @Component({
   selector: 'app-project-details',
@@ -10,10 +8,6 @@ import { ServiceService } from '../employees/service.service';
   styleUrls: ['./project-details.component.scss']
 })
 export class ProjectDetailsComponent implements OnInit {
-
-
-
-  
 
   firstnamebind: string;
   taskbind: any="Manager";
@@ -77,10 +71,7 @@ export class ProjectDetailsComponent implements OnInit {
   userArray: Array<any> = [];
   url: string = "https://jsonplaceholder.typicode.com/users";
 
-  constructor(private http: HttpClient,private service: ServiceService,@Inject(TranslateService) public translate: TranslateService) {
-    translate.addLangs(['en', 'de'])
-    translate.setDefaultLang('en');
-    translate.use('en');
+  constructor(private http: HttpClient) {
     this.http.get(this.url).subscribe(data => {
       JSON.parse(JSON.stringify(data)).forEach(element => {
         this.userArray.push(element);
@@ -120,7 +111,6 @@ export class ProjectDetailsComponent implements OnInit {
    this.curId =indx;
    console.log(this.curId);
   }
-
 
 
 }

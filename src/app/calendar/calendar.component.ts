@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit,Inject } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -7,7 +7,6 @@ import bootstrapPlugin from '@fullcalendar/bootstrap';
 import { formatDate, createEventInstance } from '@fullcalendar/core';
 import { GetEventsService } from './get-events.service';
 import * as moment from 'moment'
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-calendar',
@@ -17,16 +16,8 @@ import { TranslateService } from '@ngx-translate/core';
 
 export class CalendarComponent implements OnInit  {
 
-  getService: any;
-
-  /* constructor(private getService: GetEventsService) {
-  } */
-
- /*  constructor(@Inject(TranslateService) public translate: TranslateService) {
-    translate.addLangs(['en', 'de'])
-    translate.setDefaultLang('en');
-    translate.use('en');
-  } */
+  constructor(private getService: GetEventsService) {
+  }
 
   @ViewChild('calendar', { static: false }) calendarComponent: FullCalendarComponent;
   calendarPlugins = [dayGridPlugin, timeGridPlugin, interactionPlugin, bootstrapPlugin];
