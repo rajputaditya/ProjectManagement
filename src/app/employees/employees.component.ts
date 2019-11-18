@@ -148,7 +148,7 @@ export class EmployeesComponent implements OnInit {
     this.service
       .editEmployee(this.emp)
       .subscribe(emp => this.employees.push(emp));
-
+    
   }
 
   set() {

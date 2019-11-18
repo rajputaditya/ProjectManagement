@@ -91,7 +91,7 @@
         </div>
         <ul *ngFor="let search of searchdata">
           <li><button (click)=editDetails() id="projectButton" value="{{search}}" class="btn btn-sm btn-dark"
-              data-toggle="modal" data-target="#updateProject" style=" background-color: rgb(80, 79, 79);
+              data-toggle="modal" data-target="#updateProject" data-dismiss="modal" style=" background-color: rgb(80, 79, 79);
               border-color: rgb(80, 79, 79);">{{search}}</button></li>
         </ul>
       </form>
@@ -121,7 +121,7 @@
         </div>
         <ul *ngFor="let search of searchdata">
           <li><button id="projectButton" value="{{search}}" class="btn btn-sm btn-dark"
-              data-toggle="modal" data-target="#updateProject" style=" background-color: rgb(80, 79, 79);
+              data-toggle="modal" data-target="#deleteConfirmationModal" data-dismiss="modal" style=" background-color: rgb(80, 79, 79);
             border-color: rgb(80, 79, 79);">{{search}}</button></li>
         </ul>
       </form>
@@ -547,7 +547,7 @@
       </div>
       <div class="modal-footer" id="deleteModalFooter">
         <button type="button" class="btn btn-info" data-dismiss="modal" id="deleteBtnInfo">Cancel</button>
-        <button type="button" class="btn btn-danger" id="deleteBtnDanger">Delete</button>
+        <button type="button" class="btn btn-danger" (click)=delProject() data-dismiss="modal" id="deleteBtnDanger">Delete</button>
       </div>
     </div>
   </div>
