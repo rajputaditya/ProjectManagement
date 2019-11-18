@@ -54,7 +54,7 @@
       </div>
     </div>
   </div>
-  <div class="col-md-3" style="position: absolute;z-index: 3;">
+  <div class="col-md-3" style="position: absolute;z-index: 1;">
 
     <div class="col">
       <button class="btn btn-light btn-lg" id="projectModBtn" data-toggle="modal"
@@ -74,59 +74,57 @@
 <div class="modal fade" id="editProject" tabindex="-1" role="dialog" aria-labelledby="editProjectLabel"
   aria-hidden="true" style="margin-top: 50px;">
   <div class="modal-dialog modal-lg" role="document">
-    
-      <div class="modal-content" id="editProjectModalBody">
-          <form>
+
+    <div class="modal-content" id="editProjectModalBody">
+      <form>
         <div class="modal-body">
           <!-- Search form -->
 
           <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-12">
               <input id="searchProject" class="form-control form-control-lg" type="text"
                 placeholder="Search Project by title" aria-label="Search" style="width: 100%; border-color: black;
-                border-radius: 50px;" (input)=search()>
-
-            </div>
-
-            <div class="col-md-2">
-              <button class="btn btn-outline-danger btn-sm" id="closeEditModal" data-dismiss="modal">Close</button>
+                border-radius: 50px;" (input)=searchEditProject()>
 
             </div>
           </div>
         </div>
         <ul *ngFor="let search of searchdata">
-            <li><button (click)=editDetails() id="projectButton" value="{{search}}" class="btn btn-sm btn-dark" data-toggle="modal" data-target="#updateProject" style=" background-color: rgb(80, 79, 79);
+          <li><button (click)=editDetails() id="projectButton" value="{{search}}" class="btn btn-sm btn-dark"
+              data-toggle="modal" data-target="#updateProject" style=" background-color: rgb(80, 79, 79);
               border-color: rgb(80, 79, 79);">{{search}}</button></li>
-          </ul>
-        </form>
-      </div>
-      
+        </ul>
+      </form>
+    </div>
+
   </div>
 </div>
 
 <!-- Delete Project Modal -->
 <div class="modal fade" id="deleteProject" tabindex="-1" role="dialog" aria-labelledby="deleteProjectLabel"
-  aria-hidden="true" style="margin-top: 250px;">
+  aria-hidden="true" style="margin-top: 50px;">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content" id="editProjectModalBody">
-      <div class="modal-body">
-        <!-- Delete form -->
-        <form>
-          <div class="row">
-            <div class="col-md-10">
-              <input class="form-control form-control-lg" type="text" placeholder="Search Project by title"
-                aria-label="Search" style="width: 100%; border-color: black;
-                    border-radius: 50px;">
-            </div>
-            <div class="col-md-2">
-              <button class="btn btn-outline-danger btn-sm" id="closeEditModal" data-dismiss="modal" data-toggle="modal"
-                data-target="#deleteConfirmationModal">Close</button>
+      <form>
+        <div class="modal-body">
+          <!-- Delete form -->
 
+          <div class="row">
+            <div class="col-md-12">
+              <input class="form-control form-control-lg" type="text"  id="searchDeleteProject" placeholder="Search Project by title"
+                aria-label="Search" style="width: 100%; border-color: black;
+                    border-radius: 50px;" (input)=searchDeleteProject()>
             </div>
           </div>
 
-        </form>
-      </div>
+
+        </div>
+        <ul *ngFor="let search of searchdata">
+          <li><button id="projectButton" value="{{search}}" class="btn btn-sm btn-dark"
+              data-toggle="modal" data-target="#updateProject" style=" background-color: rgb(80, 79, 79);
+            border-color: rgb(80, 79, 79);">{{search}}</button></li>
+        </ul>
+      </form>
     </div>
   </div>
 </div>
@@ -288,7 +286,7 @@
             </div>
           </div>
 
-         
+
           <!-- Project Description -->
           <div class="col">
             <textarea class="form-control mb-2" placeholder="Project description" id="projectDescription"
@@ -340,17 +338,18 @@
 
 
           <div class="form-row mb-2">
-            <div class="col"  >
+            <div class="col">
               <!-- Client name -->
-              <input type="text" id="clientName1" [value]=projectData.clientName class="form-control" placeholder="Cannot edit this field" disabled>
+              <input type="text" id="clientName1" [value]=projectData.clientName class="form-control"
+                placeholder="Cannot edit this field" disabled>
               <small class="form-text text-muted mb-4">
                 Client Name
               </small>
             </div>
             <div class="col">
               <!-- Project name -->
-              <input type="text" id="projectName1" [value]=projectData.projectName  class="form-control" placeholder="Project name"
-                formControlName="editProjectNameValidator"
+              <input type="text" id="projectName1" [value]=projectData.projectName class="form-control"
+                placeholder="Project name" formControlName="editProjectNameValidator"
                 [class.is-invalid]="editGetProjectName.invalid && editGetProjectName.touched">
               <small class="form-text text-muted mb-2">
                 Project Name
@@ -366,8 +365,8 @@
             </div>
             <div class="col">
               <!-- Technologies -->
-              <input type="text" id="projectTech1" [value]=projectData.technologies class="form-control mb-2" placeholder="Technologies"
-                formControlName="editTechnologyValidator"
+              <input type="text" id="projectTech1" [value]=projectData.technologies class="form-control mb-2"
+                placeholder="Technologies" formControlName="editTechnologyValidator"
                 [class.is-invalid]="editGetTechnology.invalid && editGetTechnology.touched">
               <small class="form-text text-muted mb-4">
                 Technology
@@ -382,16 +381,16 @@
           <div class="form-row mb-2">
             <div class="col">
               <!-- Start Date -->
-              <input type="date" id="projectStartdate1" [value]=projectData.startDate class="form-control" placeholder="Cannot edit thid field"
-                disabled>
+              <input type="date" id="projectStartdate1" [value]=projectData.startDate class="form-control"
+                placeholder="Cannot edit thid field" disabled>
               <small class="form-text text-muted mb-2">
                 Start date
               </small>
             </div>
             <div class="col">
               <!-- End Date -->
-              <input type="date" id="projectEndDate1" [value]=projectData.endDate class="form-control" placeholder="End date"
-                formControlName="editEndDateValidator"
+              <input type="date" id="projectEndDate1" [value]=projectData.endDate class="form-control"
+                placeholder="End date" formControlName="editEndDateValidator"
                 [class.is-invalid]="editGetEndDate.invalid && editGetEndDate.touched">
               <small class="form-text text-muted mb-2">
                 End date
@@ -404,8 +403,8 @@
             </div>
             <div class="col">
               <!-- Priority level -->
-              <input type="text" id="projectPriorityLevel1" [value]=projectData.priority class="form-control" placeholder="HIGH, Medium, low"
-                formControlName="editPriorityValidator"
+              <input type="text" id="projectPriorityLevel1" [value]=projectData.priority class="form-control"
+                placeholder="HIGH, Medium, low" formControlName="editPriorityValidator"
                 [class.is-invalid]="editGetPriority.invalid && editGetPriority.touched">
               <small class="form-text text-muted mb-2">
                 Priority Level
@@ -439,8 +438,8 @@
             </div>
             <div class="col">
               <!-- Country -->
-              <input type="text" id="projectCountry1" [value]=projectData.country class="form-control" placeholder="Country"
-                formControlName="editCountryValidator"
+              <input type="text" id="projectCountry1" [value]=projectData.country class="form-control"
+                placeholder="Country" formControlName="editCountryValidator"
                 [class.is-invalid]="editGetCountry.invalid && editGetCountry.touched">
               <small class="form-text text-muted mb-2">
                 Country
@@ -456,11 +455,12 @@
             </div>
           </div>
 
-          
+
 
           <!-- Project Description -->
           <div class="col">
-            <textarea type="text" id="editProjectDescription" class="form-control mb-2"  [value]=projectData.projectDescription placeholder="Project description" 
+            <textarea type="text" id="editProjectDescription" class="form-control mb-2"
+              [value]=projectData.projectDescription placeholder="Project description"
               formControlName="editProjectDescriptionValidator"
               [class.is-invalid]="getEditProjectDescription.invalid && getEditProjectDescription.touched"></textarea>
             <small class="form-text text-muted mb-4 ">
@@ -478,8 +478,8 @@
           </div>
 
           <!-- update Project -->
-          <button type="button" class="btn btn-sm"  id="editProjectBtn"
-            data-dismiss="modal" (click)=updateProject() data-toggle="modal" data-target="#successUpdateModal">Update Project</button>
+          <button type="button" class="btn btn-sm" id="editProjectBtn" data-dismiss="modal" (click)=updateProject()
+            data-toggle="modal" data-target="#successUpdateModal">Update Project</button>
 
         </form>
 

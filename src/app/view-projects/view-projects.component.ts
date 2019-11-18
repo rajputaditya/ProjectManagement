@@ -239,7 +239,7 @@ export class ViewProjectsComponent implements OnInit {
 
 
   searchdata:Array<any>;
-  search(){
+  searchEditProject(){
     this.searchdata=[];
    this.url='http://localhost:8080/search/'+(<HTMLInputElement>document.getElementById("searchProject")).value;
    console.log(this.url);
@@ -250,6 +250,20 @@ export class ViewProjectsComponent implements OnInit {
      });
    });
  }
+
+ 
+ searchDeleteProject(){
+    this.searchdata=[];
+    this.url='http://localhost:8080/search/'+(<HTMLInputElement>document.getElementById("searchDeleteProject")).value;
+    console.log(this.url);
+    this.http.get(this.url).subscribe(data=>{
+      JSON.parse(JSON.stringify(data)).forEach(element=>{
+        this.searchdata.push(element);
+      });
+    });   
+ }
+
+
  projectName:string;
  projectData:Project=new Project();
  data:Project;
