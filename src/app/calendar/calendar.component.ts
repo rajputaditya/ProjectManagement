@@ -6,7 +6,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import bootstrapPlugin from '@fullcalendar/bootstrap';
 import { formatDate, createEventInstance } from '@fullcalendar/core';
 import { GetEventsService } from './get-events.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+
 import * as moment from 'moment'
 
 @Component({
