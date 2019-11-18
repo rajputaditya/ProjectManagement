@@ -3,6 +3,7 @@
 .card {
  margin-top: 10%;
  margin-left: 6%;
+ margin-bottom: 5%;
   width: 450px;
   height: 250px;
   box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4);
@@ -86,6 +87,7 @@
 .card .additional .more-info .info-head span + span {
   float: right;
 }
+
 
 .card .additional .stats {
   font-size: 2rem;
@@ -195,6 +197,8 @@
   border-color: rgb(80, 79, 79);
   border-radius: 50px;
 }
+
+
 
 //Success Modal
 #successConfirmModal {		
@@ -362,8 +366,3 @@
     margin-top: -3%;
     box-shadow: rgba(0,0,0,0.14) 0px 4px 20px 0px,#3c4858 0px 7px 10px -5px;
     }
-
-    
-
-
-

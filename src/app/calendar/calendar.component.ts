@@ -4,8 +4,9 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import bootstrapPlugin from '@fullcalendar/bootstrap';
-import { formatDate } from '@fullcalendar/core';
+import { formatDate, createEventInstance } from '@fullcalendar/core';
 import { GetEventsService } from './get-events.service';
+import * as moment from 'moment'
 
 @Component({
   selector: 'app-calendar',
@@ -13,14 +14,14 @@ import { GetEventsService } from './get-events.service';
   styleUrls: ['./calendar.component.scss']
 })
 
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnInit  {
 
   constructor(private getService: GetEventsService) {
   }
 
   @ViewChild('calendar', { static: false }) calendarComponent: FullCalendarComponent;
   calendarPlugins = [dayGridPlugin, timeGridPlugin, interactionPlugin, bootstrapPlugin];
-  calendarWeekends = false;
+  calendarWeekends = true;
   calendarEvents: any = [];
   idCount: number;
   crId: any;
@@ -33,22 +34,23 @@ export class CalendarComponent implements OnInit {
       (events) => {
         this.calendarEvents = events;
         this.calendarEvents.forEach(obj => {
-          this.idCount = obj.id;
-          console.log(this.idCount);
+          this.idCount = obj.id;          
         });
+        console.log(this.calendarEvents)
+        this.getReminder(this.calendarEvents);
       });
   }
 
   // Add Click Handler
   handleDateClick(arg: any) {
     this.crDate = arg.date;
-    //this.dispDate = arg.date;
     this.dispDate = formatDate(arg.date, {
       month: 'long',
       year: 'numeric',
       day: 'numeric',
       hour: 'numeric',
-      minute: 'numeric'
+      minute: 'numeric',
+      timezone: 'IST'
     });
     document.getElementById('addEvent').click();
   }
@@ -58,7 +60,7 @@ export class CalendarComponent implements OnInit {
     this.crId = arg.event.id;
     this.crTitle = arg.event.title;
     this.crDate = arg.event.date;
-    document.getElementById('deleteEvent').click();
+    document.getElementById('editEvent').click();
   }
 
   // Adds Event to the List
@@ -69,8 +71,22 @@ export class CalendarComponent implements OnInit {
       start: this.crDate
     });
     this.getService.saveEvent({"title":this.crTitle, "start": this.crDate});
-    console.log(this.calendarEvents);
     document.getElementById('closeModal').click();
+    this.getReminder(this.calendarEvents);
+    this.crTitle = "";
+  }
+
+  // Update Event to the List
+  saveEvent() {
+    this.calendarEvents.forEach(obj => {
+      if (obj.id == this.crId) {
+        obj.title = this.crTitle;
+        this.getService.saveEvent({"id":obj.id, "title":this.crTitle, "start": obj.start});
+      }
+    });
+    document.getElementById('closeModalSave').click();
+    this.getReminder(this.calendarEvents);
+    this.crTitle = "";
   }
 
   // Deletes Event from the List 
@@ -80,9 +96,42 @@ export class CalendarComponent implements OnInit {
         this.calendarEvents.splice(this.calendarEvents.indexOf(obj), 1);
         this.getService.deleteEvent(obj.id);
       }
-      console.log(this.calendarEvents);
     });
     document.getElementById('closeDelete').click();
+    this.getReminder(this.calendarEvents);
+    this.crTitle = "";
+  }
+
+  getReminder(myEvents){
+    let crEvt = {title: '', start: moment().add(100, 'y').toISOString()};
+    let crTM = moment().toISOString();
+    let check = crEvt.start;
+    myEvents.forEach(event => {
+      if(moment(event.start, moment.ISO_8601).isValid()){
+        console.log("YES")
+      if((moment(event.start, moment.ISO_8601).isAfter(moment(crTM, moment.ISO_8601)))){
+        if(moment(event.start, moment.ISO_8601).isBefore(moment(crEvt.start, moment.ISO_8601))){
+          crEvt=event;
+        }
+      }
+      console.log(crTM + "||" + event.start);
+    }});
+    if(crEvt.start != check){
+      document.getElementById('notification').innerHTML = 
+      "<b>Title: </b>" 
+      + crEvt.title 
+      + "<br><b>Date: </b>" 
+      + formatDate(crEvt.start, {
+        month: 'long',
+        year: 'numeric',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        timezone: 'IST'
+      });
+    } else {
+      document.getElementById('notification').innerHTML = "<b>No Upcoming Event<b>"
+    }
   }
 
 }

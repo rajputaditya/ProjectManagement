@@ -19,6 +19,8 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { GetEventsService } from './calendar/get-events.service'
 import { MainService } from './reports/main.service';
 import { GrowthComponent } from './growth/growth.component';
+import { ProjectDetailsComponent } from './project-details/project-details.component';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { GrowthComponent } from './growth/growth.component';
     CalendarComponent,
     LogINComponent,
     EmployeesComponent,
-    GrowthComponent
+    GrowthComponent,
+    ProjectDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,7 @@ import { GrowthComponent } from './growth/growth.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    FullCalendarModule
+    FullCalendarModule,
   ],
   providers: [ServiceService, GetEventsService, MainService],
   bootstrap: [AppComponent]

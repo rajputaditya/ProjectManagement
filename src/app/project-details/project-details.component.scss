@@ -1,6 +1,52 @@
+#projectTemplate{
+    margin-left: 40px;
+    margin-top: 40px;
+}
 
+#projectMembersAndTasks{
+    margin-left: 40px;
+    margin-top: 40px;
+    margin-right: 40px;
+}
+
+#pills-tasks-tab    {
+    margin-left: 1rem;
+    text-align: center;
+    min-width: 100px ;
+    margin-top: 10px;
+    margin-bottom: 10px;
+   
+   
+}
+
+.nav-pills > li > a {
+    color: #106466;
+    box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4);
+}
+.nav-pills > li > a.active {
+    color: white;
+    background-color: #106466!important;
+    box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4);
+}
+
+
+
+#pills-members-tab{
   
-  .column {
+    text-align: center;
+    min-width: 100px ;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.well{
+    background-color:#F9F9F9;
+    border-radius: 10px;
+    width: 240px;
+  
+}
+
+.column {
     float: left;
     width: 33.3%;
     margin-bottom: 16px;
@@ -59,18 +105,14 @@ border-color: red;
 color: white;
   }
 
-  #addTaskBtn{
-    height: 287px;
-    width: 100%;
-  }
-
   #assignTaskBtn{
-    color: white;	box-shadow: rgba(0,0,0,0.14) 0px 4px 20px 0px,#3c4858 0px 7px 10px -5px;
+    color: white;
+  	box-shadow: rgba(0,0,0,0.14) 0px 4px 20px 0px,#3c4858 0px 7px 10px -5px;
   }
 
   #addTaskIcon{
-      color: #eec16e;
-    font-size: 100px;
+    color: #eec16e;
+    font-size: 46px;
   }
 
   #addTaskIcon:hover{
@@ -270,4 +312,4 @@ color: white;
     outline: none;
   }
 
-  
+
