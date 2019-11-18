@@ -2,13 +2,45 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { CommonService } from '../common.service';
+import { ProjectService } from '../view-projects/project.service';
+import { ProjectDetailsService } from './project-details.service';
 
+
+
+export class TaskClass {
+  projectName: string;
+  taskName: string;
+  taskOwner: string;
+  taskDetails;
+  endDate;
+  startDate;
+
+  setProjectTitle(projectTitle) {
+    this.projectName = projectTitle;
+  }
+  setTasktitle(taskTitle) {
+    this.taskName = taskTitle;
+  }
+  setTaskOwner(taskOwner) {
+    this.taskOwner = taskOwner;
+  }
+  setTaskDescription(taskDescription) {
+    this.taskDetails = taskDescription;
+  }
+  setStartDate(startDate) {
+    this.startDate = startDate;
+  }
+  setEndDate(endDate) {
+    this.endDate = endDate;
+  }
+}
 
 @Component({
   selector: 'app-project-details',
   templateUrl: './project-details.component.html',
   styleUrls: ['./project-details.component.scss']
 })
+
 export class ProjectDetailsComponent implements OnInit {
 
   firstnamebind: string;
@@ -16,7 +48,7 @@ export class ProjectDetailsComponent implements OnInit {
   buttons = Array().fill(false);
   newTaskForm: FormGroup;
   editTaskForm: FormGroup;
-
+  taskClass: TaskClass;
   endDate;
   startDate;
   temp;
@@ -24,7 +56,12 @@ export class ProjectDetailsComponent implements OnInit {
   editstartDate;
   endtemp;
   projectDetail;
+  projectNameFromViewProject;
 
+  taskArray: Array<any> = [];
+  url: string;
+
+  taskArrayByProjectName: Array<any> = [];
 
 
   get getProjectTitle() {
@@ -57,7 +94,7 @@ export class ProjectDetailsComponent implements OnInit {
 
   dateValidate() {
     this.endDate = (<HTMLInputElement>document.getElementById("projectEndDate")).value;
-    this.startDate = (<HTMLInputElement>document.getElementById("projectStartdate")).value;
+    this.startDate = (<HTMLInputElement>document.getElementById("projectStartDate")).value;
     if (new Date(this.endDate) <= new Date(this.startDate))
       this.temp = 1;
   }
@@ -70,28 +107,43 @@ export class ProjectDetailsComponent implements OnInit {
       this.endtemp = 1;
   }
 
-
-
-
-  userArray: Array<any> = [];
-  url: string = "https://jsonplaceholder.typicode.com/users";
-
-  constructor(private http: HttpClient, private comServ: CommonService) {
-    this.http.get(this.url).subscribe(data => {
+  taskList() {
+    this.projectNameFromViewProject = this.comServ.setObj().projectName;
+    this.proDetService.getTaskByProjectName(this.projectNameFromViewProject).subscribe(data => {
       JSON.parse(JSON.stringify(data)).forEach(element => {
-        this.userArray.push(element);
-
+        this.taskArray.push(element);
       });
     })
+    console.log("task list Array " + this.taskArray);
+  }
+  // taskListByProjectName() {
+  //   this.projectNameFromViewProject = this.comServ.setObj().projectName;
+  //   console.log("sadsadsadsa"+this.projectNameFromViewProject);
+  //   this.proDetService.getTaskByProjectName(this.projectNameFromViewProject).subscribe(data => {
+  //     JSON.parse(JSON.stringify(data)).forEach(element => {
+  //       this.taskArray.push(element);
+  //     });
+  //   })
+  //   console.log("task list Array " + this.projectNameFromViewProject);
+  // }
+
+
+
+  constructor(private http: HttpClient, private comServ: CommonService, private proDetService: ProjectDetailsService) {
+
+    this.taskList();
+
 
   }
+
+
+
 
 
   curId: string;
   ngOnInit() {
     this.projectDetail = this.comServ.setObj();
-    console.log("view Project");
-    console.log(this.projectDetail);
+
 
     this.editTaskForm = new FormGroup({
       editTaskOwnerValidator: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -112,15 +164,34 @@ export class ProjectDetailsComponent implements OnInit {
     });
 
 
+
   }
+
+
   // sendname(event){
   //   this.firstnamebind=document.getElementById("namee");
   // }
 
   sendId(indx: string) {
-    console.log(this.userArray);
+
     this.curId = indx;
-    console.log(this.curId);
+
+  }
+  exm;
+
+  addNewTask() {
+
+    this.taskClass = new TaskClass();
+
+
+
+    this.taskClass.setProjectTitle((<HTMLInputElement>document.getElementById("projectTitle")).value);
+    this.taskClass.setTasktitle((<HTMLInputElement>document.getElementById("taskTitle")).value);
+    this.taskClass.setTaskOwner((<HTMLInputElement>document.getElementById("taskOwner")).value);
+    this.taskClass.setTaskDescription((<HTMLInputElement>document.getElementById("taskDescription")).value);
+    this.taskClass.setStartDate((<HTMLInputElement>document.getElementById("projectStartDate")).value);
+    this.taskClass.setEndDate((<HTMLInputElement>document.getElementById("projectEndDate")).value);
+    this.proDetService.saveTask(this.taskClass);
   }
 
 

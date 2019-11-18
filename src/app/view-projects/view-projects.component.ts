@@ -86,6 +86,8 @@ export class ViewProjectsComponent implements OnInit {
   userArray: Array<any> = [];
   url: string = "http://localhost:8080/project";
 
+  
+
 
   constructor(private http: HttpClient, private service: ProjectService, private comServ: CommonService) {
     this.http.get(this.url).subscribe(data => {

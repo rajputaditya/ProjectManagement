@@ -40,12 +40,12 @@
                     <div class="container-fluid">
                         <div id="maindiv">
 
-                            <div class="column" *ngFor="let user of userArray; let i = index">
+                            <div class="column" *ngFor="let task of taskArray; let i = index">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-10">
-                                                <h4 id="namee">{{user.name}} </h4>
+                                                <h4 id="namee">Project :{{task.projectName}} </h4>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="custom-controls-stacked d-block my-3" title="Submit">
@@ -60,11 +60,11 @@
                                             </div>
                                         </div>
                                         <!-- <p id="userIddd">{{user.id}}</p> -->
-                                        <p class="title">{{user.username}}</p>
-                                        <p>Description : {{user.website}}</p>
-                                        <p>{{user.email}}</p>
-                                        <p>{{user.phone}}
-                                        </p>
+                                        <p class="title">Task :{{task.taskName}}</p>
+                                        <p>Task Owner : {{task.taskOwner}}</p>
+                                        <p>TaskDetails :{{task.taskDetails}}</p>
+                                        <p>StartDate:{{task.startDate}}  EndDate:{{task.endDate}}</p>
+                                        
 
                                         <small class="form-text text-muted mb-4 ">
                                             <i>**Click checkbox to submit task</i>
@@ -279,7 +279,7 @@
 
 
                                     <textarea class="form-control" style="margin-top: 10%;" rows="3"
-                                        placeholder="Task Details" formControlName="taskDescriptionValidator"
+                                        placeholder="Task Details" formControlName="taskDescriptionValidator" id="taskDescription"
                                         [class.is-invalid]="getTaskDescription.invalid && getTaskDescription.touched"></textarea>
                                     <small class="form-text text-muted mb-1 ">
                                         Task Description
@@ -299,7 +299,7 @@
                                     <div class="form-row mb-4">
 
                                         <div class="col-md-6">
-                                            <input type="date" class="form-control" id="projectStartdate"
+                                            <input type="date" class="form-control" id="projectStartDate"
                                                 style="margin-top: 10%;" placeholder="Start date"
                                                 formControlName="startDateValidator"
                                                 [class.is-invalid]="getStartDate.invalid && getStartDate.touched">
@@ -338,7 +338,7 @@
                                     </div>
 
                                     <button class="btn btn-warning btn-block" [disabled]="newTaskForm.invalid"
-                                        type="submit" id="assignTaskBtn">Assign Task</button>
+                                        type="submit" id="assignTaskBtn" (click)=addNewTask()>Assign Task</button>
                                 </form>
 
                             </div>
