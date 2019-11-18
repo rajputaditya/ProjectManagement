@@ -5,21 +5,13 @@
 <hr>
 <div class='app'>
   <div class='app-calendar'>
-    <full-calendar #calendar 
-    defaultView="dayGridMonth" 
-    [header]="{
+    <full-calendar #calendar defaultView="dayGridMonth" [header]="{
           left: 'prev,next,today',
           center: 'title',
           right: 'dayGridMonth, timeGridWeek, timeGridDay, listWeek'
-        }" 
-    [plugins]="calendarPlugins" 
-    [weekends]="calendarWeekends" 
-    [events]="calendarEvents"
-    (dateClick)="handleDateClick($event)" 
-    (eventClick)="handleEventClick($event)" 
-    deepChangeDetection="true"
-    timezone="India/Kolkata"
-    >
+        }" [plugins]="calendarPlugins" [weekends]="calendarWeekends" [events]="calendarEvents"
+      (dateClick)="handleDateClick($event)" (eventClick)="handleEventClick($event)" deepChangeDetection="true"
+      timezone="India/Kolkata">
     </full-calendar>
   </div>
 </div>
@@ -47,17 +39,21 @@
   <div class="modal fade" id="add">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Enter Event Details</h4>
+        <div class="modal-header" id="modalHeader">
+          <h4 class="modal-title">Event</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
-          <h5>Event Time : {{ dispDate }}</h5><br>
-          <input type="text" class="form-control" [(ngModel)]='crTitle' placeholder="Enter Event Title">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeModal">Close</button>
-          <button type="button" class="btn btn-primary" (click)='addEvent()'>Add Event</button>
+          <form class="text-center border p-5">
+            <h5>Event Time : {{ dispDate }}</h5><br>
+            <textarea type="text" rows="5" class="form-control" placeholder="Enter event details" #crTITLE></textarea>
+            <small class="form-text text-muted mb-4">
+              Event details
+            </small>
+            <button type="button" class="btn btn-primary form-control" id="modalBtn" (click)='addEvent(crTITLE.value)'
+              data-dismiss="modal">Add
+              Event</button>
+          </form>
         </div>
       </div>
     </div>
@@ -67,37 +63,52 @@
   <div class="modal fade" id="edit">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Edit Event Title</h4>
+        <div class="modal-header" id="modalHeader">
+          <h4 class="modal-title">EVENT</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
-          
-          <input type="text" class="form-control" [(ngModel)]='crTitle' placeholder="Enter New Event Title">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeModalSave">Close</button>
-          <button type="button" class="btn btn-danger" data-toggle="modal" data-dismiss="modal" data-target="#delete">Delete Event</button>
-          <button type="button" class="btn btn-primary" (click)='saveEvent()'>Save Event</button>
+          <form class="text-center border p-5">
+
+
+            <textarea type="text" rows="5" class="form-control mb-4" #crTITLE2 placeholder="Enter new event details"
+              [value]=crTitle></textarea>
+
+            <div class="form-row">
+              <div class="col">
+                <button type="button" class="btn btn-danger form-control " id="deleteBtn" data-toggle="modal"
+                  data-dismiss="modal" data-target="#delete">Delete Event</button>
+              </div>
+              <div class="col">
+                <button type="button" class="btn btn-warning form-control" id="saveBtn" data-dismiss="modal"
+                  (click)='saveEvent(crTITLE2.value)'>Save
+                  Event</button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   </div>
 
+
   <!-- Confirm Deletion Modal -->
-  <div class="modal fade" id="delete">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Delete the event?</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+  <div id="deleteConfirmationModal" class="modal fade" id="delete">
+    <div class="modal-dialog modal-confirm" id="deleteModal">
+      <div class="modal-content" id="deleteModalContent">
+        <div class="modal-header" id="deleteModalHeader">
+          <div class="icon-box" id="deleteIcon">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </div>
+          <h4 class="modal-title">Sure?</h4>
         </div>
         <div class="modal-body">
-          <h5>Are you sure you want to delete the event titled : <strong>{{ crTitle }}</strong> ?</h5><br>
+          <p>Do you really want to delete these records? This process cannot be undone.</p>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeDelete">Close</button>
-          <button type="button" class="btn btn-danger" (click)='deleteEvent()'>Delete</button>
+        <div class="modal-footer" id="deleteModalFooter">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="deleteBtnInfo">Close</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" (click)='deleteEvent()'
+            id="deleteBtnDanger">Delete</button>
         </div>
       </div>
     </div>

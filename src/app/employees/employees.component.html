@@ -23,14 +23,14 @@
     <div class="card">
 
       <div class="container">
-        <button class="btn" title="Add new task" data-toggle="modal" data-target="#addEmployee" id="addEmpBtn"><i
+        <button class="btn" title="Add new employee" data-toggle="modal" data-target="#addEmployee" id="addEmpBtn"><i
             class="fas fa-plus-circle" id="addEmp"></i></button>
 
       </div>
     </div>
   </div>
+  
 </div>
-
 
 
 <!-- Add Employee Modal -->
@@ -161,7 +161,7 @@
 
           </div>
 
-
+          <!-- Add Employee Button -->
           <button type="button" class="btn btn-warning" [disabled]="addEmployeeForm.invalid" id="modalBtn" (click)=addEmployee()
             data-dismiss="modal">ADD</button>
 
