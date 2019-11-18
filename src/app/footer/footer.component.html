@@ -1,53 +1,68 @@
 <style>
-  a{
+  a {
     color: orange;
   }
+
+  #lang {
+    position: absolute;
+    margin-left: 72rem;
+  }
+
+  .dropdown-menu {
+    width: 1px !important;
+  }
 </style>
-<footer class="page-footer font-small bg-light pt-4" >
-    <div class="container-fluid text-center text-md-left">
-      <div class="row">
-        <div class="col-md-6 mt-md-0 mt-3">
-          <h5 class="text-uppercase">{{'footer.h5-19' | translate}}</h5>
-          <p>{{'footer.p_11' | translate}}</p>
-          <p>- {{'footer.p_12' | translate}}</p>
-  
-        </div>
-  
-        <hr class="clearfix w-100 d-md-none pb-3">
-        <div class="col-md-3 mb-md-0 mb-3">
-          <h5 class="text-uppercase">{{'footer.h5-18' | translate}}</h5>
-  
-          <ul class="list-unstyled">
-            <li>
-              <a routerLink="/tasks">{{'footer.a_22' | translate}}</a>
-            </li>
-            <li>
-              <a routerLink="/reports"> {{'footer.a_25' | translate}}</a>
-            </li>
-          </ul>
-  
-        </div>
-        <div class="col-md-3 mb-md-0 mb-3">
-  
-          <h5 class="text-uppercase">{{'footer.h5-32' | translate}}</h5>
-  
-          <ul class="list-unstyled">
-            <li>
-              <a routerLink="/todo">{{'footer.a_36'| translate}}</a>
-            </li>
-            <li>
-              <a routerLink="/">{{'footer.a_39' | translate}}</a>
-            </li>
-          </ul>
-  
-        </div>
-  
+<footer class="page-footer font-small bg-light pt-4">
+  <div class="container-fluid text-center text-md-left">
+    <div class="row">
+      <div class="col-md-6 mt-md-0 mt-3">
+        <h5 class="text-uppercase">{{'footer.h5-19' | translate}}</h5>
+        <p>{{'footer.p_11' | translate}}</p>
+        <p>- {{'footer.p_12' | translate}}</p>
+
       </div>
-  
+
+      <hr class="clearfix w-100 d-md-none pb-3">
+      <div class="col-md-3 mb-md-0 mb-3">
+        <h5 class="text-uppercase">{{'footer.h5-18' | translate}}</h5>
+
+        <ul class="list-unstyled">
+          <li>
+            <a routerLink="/tasks">{{'footer.a_22' | translate}}</a>
+          </li>
+          <li>
+            <a routerLink="/reports"> {{'footer.a_25' | translate}}</a>
+          </li>
+        </ul>
+
+      </div>
+      <div class="col-md-3 mb-md-0 mb-3">
+
+        <h5 class="text-uppercase">{{'footer.h5-32' | translate}}</h5>
+
+        <ul class="list-unstyled">
+          <li>
+            <a routerLink="/todo">{{'footer.a_36'| translate}}</a>
+          </li>
+          <li>
+            <a routerLink="/">{{'footer.a_39' | translate}}</a>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div class="footer-copyright text-center py-3">
-      <span>{{'footer.span_49' | translate}}</span>
-    </div>
-    <button (click)="translate.use('en')">en</button>
-  <button (click)="translate.use('de')">de</button>
-  </footer>
+    <div class="dropup" id="lang">
+        <button class="btn btn-dark btn-sm dropdown-toggle" type="button" id="about-us" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Lang
+          <div class="dropdown-menu">
+            <a (click)="translate.use('en')" class="dropdown-item" href="#">en</a>
+            <a (click)="translate.use('de')" class="dropdown-item" href="#">de</a>
+            <a (click)="translate.use('fr')" class="dropdown-item" href="#">fr</a>
+          </div>
+        </button>
+      </div>
+  </div>
+  <div class="footer-copyright text-center py-3">
+    <span>{{'footer.span_49' | translate}}</span>
+  </div>
+</footer>

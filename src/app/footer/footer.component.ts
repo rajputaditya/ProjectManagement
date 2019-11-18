@@ -9,7 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class FooterComponent implements OnInit {
 
   constructor(@Inject(TranslateService) public translate: TranslateService) {
-    translate.addLangs(['en', 'de'])
+    translate.addLangs(['en', 'de', 'fr'])
     translate.setDefaultLang('en');
     translate.use('en');
   }
