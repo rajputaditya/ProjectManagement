@@ -39,7 +39,7 @@
                     <div class="container-fluid">
                         <div id="maindiv">
 
-                            <div class="column" *ngFor="let user of userArray; let i = index">
+                            <div class="column">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="row">
@@ -399,7 +399,7 @@
                     <p
                         style="font-size: 36px;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
                         Members
-                        <a class="btn" routerLink="/availableEmployees"><i class="fas fa-plus-circle"
+                        <a class="btn" routerLink="/availableEmployees" (click)=getDetails(projectDetails)><i class="fas fa-plus-circle"
                                 title="Add team members" id="addTaskIcon"></i></a></p>
 
                     <div class="employeeColumn" *ngFor="let user of userArray">
@@ -413,7 +413,7 @@
                                 <p>{{user.email}}</p>
                                 <p>{{user.phoneNumber}}
                                     <button class="btn btn-sm btn-dark" id="delEmpBtn"
-                                        (click)=delEmployee()>Delete</button>
+                                       (click)=unAssignProject(user)>Delete</button>
                                 </p>
 
                             </div>
