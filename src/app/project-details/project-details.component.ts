@@ -18,20 +18,48 @@ export class TaskClass {
   setProjectTitle(projectTitle) {
     this.projectName = projectTitle;
   }
+  getProjectTitle(){
+    return this.projectName;
+  }
+
+
   setTasktitle(taskTitle) {
     this.taskName = taskTitle;
   }
+  getTaskTitle(){
+    return this.taskName;
+  }
+
+
   setTaskOwner(taskOwner) {
     this.taskOwner = taskOwner;
   }
+  getTaskOwner(){
+    return this.taskOwner;
+  }
+
+
   setTaskDescription(taskDescription) {
     this.taskDetails = taskDescription;
   }
+  getTaskDescription(){
+    return this.taskDetails;
+  }
+
+
   setStartDate(startDate) {
     this.startDate = startDate;
   }
+  getStartDate(){
+    return this.startDate;
+  }
+  
+
   setEndDate(endDate) {
     this.endDate = endDate;
+  }
+  getEnddate(){
+    return this.endDate;
   }
 }
 
@@ -57,6 +85,8 @@ export class ProjectDetailsComponent implements OnInit {
   endtemp;
   projectDetail;
   projectNameFromViewProject;
+  taskOwnerFromViewProject;
+  taskOwnr;
 
   taskArray: Array<any> = [];
   url: string;
@@ -116,6 +146,46 @@ export class ProjectDetailsComponent implements OnInit {
     })
     console.log("task list Array " + this.taskArray);
   }
+
+  deleteTaskFunc() {
+
+
+    this.proDetService.deleteTaskWithTaskOwner(this.taskOwnr);
+
+  }
+  
+  setDetail(taskDetail) {
+    this.taskOwnr = taskDetail.taskOwner;
+    console.log(this.taskOwnr);
+
+  }
+
+
+  taskDetails:TaskClass=new TaskClass();
+  updateTaskObj(task){
+
+    this.taskDetails.setProjectTitle(task.projectName);
+    this.taskDetails.setTasktitle(task.taskName);
+    this.taskDetails.setTaskOwner(task.taskOwner);
+    this.taskDetails.setTaskDescription(task.taskDetails);
+    this.taskDetails.setStartDate(task.startDate);
+    this.taskDetails.setEndDate(task.endDate);
+    console.log(this.taskDetails);
+
+  }
+
+  updateTaskConfirm(){
+    this.taskOwnr=this.taskDetails.getTaskOwner();
+    this.taskDetails=new TaskClass();
+    this.taskDetails.setTasktitle((<HTMLInputElement>document.getElementById("editTaskTitle")).value);
+    this.taskDetails.setTaskDescription((<HTMLInputElement>document.getElementById("editTaskDescription")).value);
+    this.taskDetails.setStartDate((<HTMLInputElement>document.getElementById("editProjectStartdate")).value);
+    console.log(this.taskDetails);
+    this.proDetService.editTaskWIthProjectName(this.taskDetails,this.taskOwnr);
+   
+
+  }
+
   // taskListByProjectName() {
   //   this.projectNameFromViewProject = this.comServ.setObj().projectName;
   //   console.log("sadsadsadsa"+this.projectNameFromViewProject);
@@ -154,7 +224,7 @@ export class ProjectDetailsComponent implements OnInit {
     });
 
     this.newTaskForm = new FormGroup({
-      projectTitleValidator: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      projectTitleValidator: new FormControl('', [Validators.minLength(4)]),
       taskTitleValidator: new FormControl('', [Validators.required, Validators.minLength(4)]),
       taskOwnerValidator: new FormControl('', [Validators.required, Validators.minLength(3)]),
       taskDescriptionValidator: new FormControl('', [Validators.required, Validators.minLength(20), Validators.maxLength(100)]),
@@ -172,11 +242,7 @@ export class ProjectDetailsComponent implements OnInit {
   //   this.firstnamebind=document.getElementById("namee");
   // }
 
-  sendId(indx: string) {
-
-    this.curId = indx;
-
-  }
+  
   exm;
 
   addNewTask() {
@@ -193,6 +259,7 @@ export class ProjectDetailsComponent implements OnInit {
     this.taskClass.setEndDate((<HTMLInputElement>document.getElementById("projectEndDate")).value);
     this.proDetService.saveTask(this.taskClass);
   }
+
 
 
 }

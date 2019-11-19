@@ -8,8 +8,8 @@ export class ProjectDetailsService {
 
   constructor(private _http: HttpClient) { }
 
-  deleteTaskById(id){
-    this._http.delete("http://localhost:8086/taskDetails/tasks" + id).subscribe();
+  deleteTaskWithTaskOwner(taskOwner){
+    this._http.delete("http://localhost:8086/taskDetails/tasks/" +taskOwner).subscribe();
   }
 
   getTasks(){
@@ -22,6 +22,10 @@ export class ProjectDetailsService {
 
   saveTask(task:any){
     this._http.post("http://localhost:8086/taskDetails/tasks",task).subscribe();
+  }
+
+  editTaskWIthProjectName(task:any,taskOwner){
+    this._http.put("http://localhost:8086/taskDetails/tasks/" + taskOwner,task).subscribe();
     console.log(task);
   }
 }
