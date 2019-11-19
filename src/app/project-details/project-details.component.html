@@ -12,8 +12,6 @@
         <small>{{'project-details.small_12' | translate}} - </small>
        
     </div>
-    <button (click)="translate.use('en')">en</button>
-    <button (click)="translate.use('de')">de</button>
 
 </div>
 <div class="row" id="projectMembersAndTasks">
@@ -61,7 +59,7 @@
                                         </div>
                                         <!-- <p id="userIddd">{{user.id}}</p> -->
                                         <p class="title">{{user.username}}</p>
-                                        <p>Description : {{user.website}}</p>
+                                        <p>{{'project-details.small_5' | translate}} : {{user.website}}</p>
                                         <p>{{user.email}}</p>
                                         <p>{{user.phone}}
                                         </p>
@@ -421,8 +419,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        
-    </div>
-    
+        </div>       
+    </div>    
 </div>
