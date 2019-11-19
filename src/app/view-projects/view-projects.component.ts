@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ProjectService } from './project.service';
 import { CommonService } from '../common.service';
+import * as $ from "jquery";
 
 export class Project {
   clientName: string;
@@ -94,6 +95,12 @@ export class ViewProjectsComponent implements OnInit {
       });
     })
   }
+
+  
+ 
+
+  
+
 
 
   opnModal(uname: string) {
@@ -190,6 +197,7 @@ export class ViewProjectsComponent implements OnInit {
 
 
   ngOnInit() {
+
     
     this.createProjectForm = new FormGroup({
       clientNameValidator: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -214,6 +222,8 @@ export class ViewProjectsComponent implements OnInit {
 
     });
 
+   
+
   }
   proj: Project;
   projects: Array<any> = [];
@@ -230,6 +240,7 @@ export class ViewProjectsComponent implements OnInit {
     this.proj.setProjectDescription((<HTMLInputElement>document.getElementById("projectDescription")).value);
     console.log(this.proj);
     this.service.addProject(this.proj).subscribe(proj => this.projects.push(proj));
+    location.reload();
   }
 
   sendProjectDetail(projectDetail: any) {
@@ -288,6 +299,7 @@ export class ViewProjectsComponent implements OnInit {
     this.proj.setProjectDescription((<HTMLInputElement>document.getElementById("editProjectDescription")).value);
     console.log(this.proj);
     this.service.updateProject(this.proj).subscribe(proj => this.projects.push(proj));
+    location.reload();
    }
 
    delProject(){
@@ -296,6 +308,7 @@ export class ViewProjectsComponent implements OnInit {
      this.url='http://localhost:8080/project/'+this.projectName;
      console.log(this.url);
     this.service.delProject(this.url).subscribe(proj =>console.log(proj));
+    location.reload();
    }
  }
 

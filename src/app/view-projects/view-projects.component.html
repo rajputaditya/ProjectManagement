@@ -111,8 +111,8 @@
 
           <div class="row">
             <div class="col-md-12">
-              <input class="form-control form-control-lg" type="text"  id="searchDeleteProject" placeholder="Search Project by title"
-                aria-label="Search" style="width: 100%; border-color: black;
+              <input class="form-control form-control-lg" type="text" id="searchDeleteProject"
+                placeholder="Search Project by title" aria-label="Search" style="width: 100%; border-color: black;
                     border-radius: 50px;" (input)=searchDeleteProject()>
             </div>
           </div>
@@ -120,8 +120,8 @@
 
         </div>
         <ul *ngFor="let search of searchdata">
-          <li><button id="projectButton" value="{{search}}" class="btn btn-sm btn-dark"
-              data-toggle="modal" data-target="#deleteConfirmationModal" data-dismiss="modal" style=" background-color: rgb(80, 79, 79);
+          <li><button id="projectButton" value="{{search}}" class="btn btn-sm btn-dark" data-toggle="modal"
+              data-target="#deleteConfirmationModal" data-dismiss="modal" style=" background-color: rgb(80, 79, 79);
             border-color: rgb(80, 79, 79);">{{search}}</button></li>
         </ul>
       </form>
@@ -137,7 +137,7 @@
       <div class="modal-header" id="modalHeader">
         <h3>PROJECT DETAILS</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          <span aria-hidden="true" >&times;</span>
         </button>
       </div>
       <div class="modal-body">
@@ -547,7 +547,12 @@
       </div>
       <div class="modal-footer" id="deleteModalFooter">
         <button type="button" class="btn btn-info" data-dismiss="modal" id="deleteBtnInfo">Cancel</button>
+<<<<<<< HEAD
         <button type="button" class="btn btn-danger" (click)=delProject() data-dismiss="modal" id="deleteBtnDanger">Delete</button>
+=======
+        <button type="button" class="btn btn-danger" id="deleteBtnDanger" (click)=delProject()
+          data-dismiss="modal">Delete</button>
+>>>>>>> f80e64bdaf7be500e35106da8a561c59f03a7b85
       </div>
     </div>
   </div>
