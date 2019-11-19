@@ -67,9 +67,9 @@ export class EmployeesComponent implements OnInit {
 
   userArray: Array<any> = [];
   url: string;
-
-  emp: Employee;
   employees: Array<any> = [];
+  emp: Employee;
+ 
   addEmployeeForm: FormGroup;
   editEmployeeForm: FormGroup;
 
