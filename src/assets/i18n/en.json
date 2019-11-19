@@ -15,8 +15,11 @@
         "button48": "Add Event",
         "h4-59": "Delete the event?",
         "h5-63": "Are you sure you want to delete the event titled",
+        "h4-64": "Edit Event Title",
         "button66": "Close",
-        "button67": "Delete"
+        "button67": "Delete",
+        "button72": "Close",
+        "button74": "Delete Event"
     },      
     "employees":{
         "button_13": "Delete",
