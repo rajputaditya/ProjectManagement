@@ -25,17 +25,17 @@
                 </div>
                 <div class="stats">
                   <div>
-                    <div class="title">HOURS</div>
+                    <div class="title">{{'view-proj.div_28' |translate}}</div>
                     <i class="fa fa-clock-o"></i>
                     <div class="value">{{Hours}}</div>
                   </div>
                   <div>
-                    <div class="title">Pals</div>
+                    <div class="title">{{'view-proj.div_33' |translate}}</div>
                     <i class="fa fa-group"></i>
                     <div class="value">{{Pals}}</div>
                   </div>
                   <div>
-                    <div class="title">Coffee</div>
+                    <div class="title">{{'view-proj.div_38' |translate}}</div>
                     <i class="fa fa-coffee"></i>
                     <div class="value infinity">∞</div>
                   </div>
@@ -48,7 +48,7 @@
             <p>
               <I>{{Description}}</I>
             </p>
-            <span class="more">Mouse over the card for more info</span>
+            <span class="more">{{'view-proj.span_51' |translate}}</span>
           </div>
         </div>
       </div>   
@@ -57,11 +57,11 @@
 
     <div class="col">
       <button class="btn btn-light btn-lg" id="projectModBtn" data-toggle="modal"
-        data-target="#createProject">Create</button>
+        data-target="#createProject">{{'view-proj.button_60' |translate}}</button>
       <button class="btn btn-light btn-lg" id="projectModBtn" style="margin-top: 10%;" data-toggle="modal"
-        data-target="#editProject">Edit</button>
+        data-target="#editProject">{{'view-proj.button_62' |translate}}</button>
       <button class="btn btn-light btn-lg" id="projectModBtn" style="margin-top: 15%;" data-toggle="modal"
-        data-target="#deleteProject">Delete</button>
+        data-target="#deleteProject">{{'view-proj.button_64' |translate}}</button>
     </div>
     <div>
       <img src="/assets/manager.png" alt="IMAGE" id="projectImg">
@@ -79,7 +79,7 @@
         <form>
           <div class="row">
             <div class="col-md-10">
-              <input id="searchProject" class="form-control form-control-lg" type="text" placeholder="Search Project by title"
+              <input id="searchProject" class="form-control form-control-lg" type="text" placeholder="{{'view-proj.placeholder_82' |translate}}"
                 aria-label="Search" style="width: 100%; border-color: black;
                 border-radius: 50px;" (input)=search()>
             </div>
@@ -108,7 +108,7 @@
         <form>
           <div class="row">
             <div class="col-md-10">
-              <input class="form-control form-control-lg" type="text" placeholder="Search Project by title"
+              <input class="form-control form-control-lg" type="text" placeholder="{{'view-proj.placeholder' |translate}}"
                 aria-label="Search" style="width: 100%; border-color: black;
                     border-radius: 50px;">
             </div>
@@ -131,7 +131,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header" id="modalHeader">
-        <h3>PROJECT DETAILS</h3>
+        <h3>{{'view-proj.h3-134' |translate}}</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -143,51 +143,51 @@
           <div class="form-row mb-2">
             <div class="col">
               <!-- Client name -->
-              <input type="text" id="clientName" class="form-control" placeholder="Client name"
+              <input type="text" id="clientName" class="form-control" placeholder="{{'view-proj.placeholder_146' |translate}}"
                 formControlName="clientNameValidator"
                 [class.is-invalid]="getClientName.invalid && getClientName.touched">
               <small class="form-text text-muted mb-4">
-                Client Name
+                  {{'view-proj.small_150' | translate}}
               </small>
               <div *ngIf="getClientName.invalid && (getClientName.touched || getClientName.dirty)">
                 <small *ngIf="getClientName.errors?.required" class="text-danger">
-                  Client name is required
+                  {{'view-proj.small_154' | translate}}
                 </small>
                 <small *ngIf="getClientName.errors?.minlength" class="text-danger">
-                  Client name must consist atleast 4 characters
+                  {{'view-proj.small_157' | translate}}
                 </small>
               </div>
             </div>
 
             <div class="col">
               <!-- Project name -->
-              <input type="text" id="projectName" class="form-control" placeholder="Project name"
+              <input type="text" id="projectName" class="form-control" placeholder="{{'view-proj.placeholder_164' | translate}}"
                 formControlName="projectNameValidator"
                 [class.is-invalid]="getProjectName.invalid && getProjectName.touched">
               <small class="form-text text-muted mb-4">
-                Project Name
+                {{'view-proj.small_168' | translate}}
               </small>
               <div *ngIf="getProjectName.invalid && (getProjectName.touched || getProjectName.dirtty)">
                 <small *ngIf="getProjectName.errors?.required" class="text-danger">
-                  Project name is required
+                  {{'view-proj.small_172' | translate}}
                 </small>
                 <small *ngIf="getProjectName.errors?.minlength" class="text-danger">
-                  Project name must consist atleast 4 characters
+                  {{'view-proj.small_175' | translate}}
                 </small>
               </div>
             </div>
             <div class="col">
 
               <!-- Technologies -->
-              <input type="text" id="projectTech" class="form-control mb-2" placeholder="Technologies"
+              <input type="text" id="projectTech" class="form-control mb-2" placeholder="{{'view-proj.placeholder_182' | translate}}"
                 formControlName="technologiesValidator"
                 [class.is-invalid]="getTechnologies.invalid && getTechnologies.touched">
               <small class="form-text text-muted mb-4">
-                Technology
+                {{'view-proj.small_186' | translate}}
               </small>
               <div *ngIf="getTechnologies.invalid && (getTechnologies.touched || getTechnologies.dirtty)">
                 <small *ngIf="getTechnologies.errors?.required" class="text-danger">
-                  Technology is required
+                  {{'view-proj.small_190' | translate}}
                 </small>
               </div>
             </div>
@@ -196,28 +196,28 @@
           <div class="form-row mb-2">
             <div class="col">
               <!-- Start Date -->
-              <input type="date" id="projectStartdate" class="form-control" placeholder="Start date"
+              <input type="date" id="projectStartdate" class="form-control" placeholder="{{'view-proj.placeholder_199' | translate}}"
                 formControlName="startDateValidator" [class.is-invalid]="getStartDate.invalid && getStartDate.touched">
               <small class="form-text text-muted mb-4">
-                Start date
+                {{'view-proj.small_202' | translate}}
               </small>
               <div *ngIf="getStartDate.invalid && (getStartDate.touched || getStartDate.dirtty)">
                 <small *ngIf="getStartDate.errors?.required" class="text-danger">
-                  Start date is required
+                  {{'view-proj.small_206' | translate}}
                 </small>
               </div>
             </div>
             <div class="col">
               <!-- End Date -->
-              <input type="date" id="projectEndDate" class="form-control" placeholder="End date"
+              <input type="date" id="projectEndDate" class="form-control" placeholder="{{'view-proj.placeholder_212' | translate}}"
                 formControlName="endDateValidator" [class.is-invalid]="getEndDate.invalid && getEndDate.touched"
                 (blur)=dateValidate()>
               <small class="form-text text-muted mb-4">
-                End date
+                {{'view-proj.small_216' | translate}}
               </small>
               <div *ngIf="getEndDate.invalid && (getEndDate.touched || getEndDate.dirtty)">
                 <small *ngIf="getEndDate.errors?.required" class="text-danger">
-                  End date is required
+                  {{'view-proj.small_220' | translate}}
                 </small>
               </div>
 
@@ -228,14 +228,14 @@
                 formControlName="priorityLevelValidator"
                 [class.is-invalid]="getPriorityLevel.invalid && getPriorityLevel.touched">
               <small class="form-text text-muted mb-4">
-                Priority Level
+                {{'view-proj.small_231' | translate}}
               </small>
               <div *ngIf="getPriorityLevel.invalid && (getPriorityLevel.touched || getPriorityLevel.dirtty)">
                 <small *ngIf="getPriorityLevel.errors?.required" class="text-danger">
-                  Priority level is required
+                  {{'view-proj.small_235' | translate}}
                 </small>
                 <small *ngIf="getPriorityLevel.errors?.minlength" class="text-danger">
-                  Client name must consist atleast 4 characters
+                  {{'view-proj.small_238' | translate}}
                 </small>
               </div>
             </div>
@@ -243,39 +243,39 @@
           <div class="form-row mb-2">
             <div class="col">
               <!-- City -->
-              <input type="text" id="projectCity" class="form-control" placeholder="City"
+              <input type="text" id="projectCity" class="form-control" placeholder="{{'view-proj.placeholder_246' | translate}}"
                 formControlName="cityValidator" [class.is-invalid]="getCity.invalid && getCity.touched">
               <small class="form-text text-muted mb-4">
-                City
+                {{'view-proj.small_249' | translate}}
               </small>
               <div *ngIf="getCity.invalid && (getCity.touched || getCity.dirtty)">
                 <small *ngIf="getCity.errors?.required" class="text-danger">
-                  City is required
+                  {{'view-proj.small_253' | translate}}
                 </small>
                 <small *ngIf="getCity.errors?.minlength" class="text-danger">
-                  City must consist of atleast 3 characters
+                  {{'view-proj.small_256' | translate}}
                 </small>
                 <small *ngIf="getCity.errors?.pattern" class="text-danger">
-                  City name can not have numbers or any special characters
+                  {{'view-proj.small_259' | translate}}
                 </small>
               </div>
             </div>
             <div class="col">
               <!-- Country -->
-              <input type="text" id="projectCountry" class="form-control" placeholder="Country"
+              <input type="text" id="projectCountry" class="form-control" placeholder="{{'view-proj.placeholder_265'| translate}}"
                 formControlName="countryValidator" [class.is-invalid]="getCountry.invalid && getCountry.touched">
               <small class="form-text text-muted mb-4">
-                Country
+                {{'view-proj.small_268'| translate}}
               </small>
               <div *ngIf="getCountry.invalid && (getCountry.touched || getCountry.dirtty)">
                 <small *ngIf="getCountry.errors?.required" class="text-danger">
-                  Country is required
+                  {{'view-proj.small_272'| translate}}
                 </small>
                 <small *ngIf="getCountry.errors?.minlength" class="text-danger">
-                  Country must consist of atleast 4 characters
+                  {{'view-proj.small_275' | translate}}
                 </small>
                 <small *ngIf="getCountry.errors?.pattern" class="text-danger">
-                  Country name can not have numbers or any special characters
+                  {{'view-proj.small_278' | translate}}
                 </small>
               </div>
             </div>
@@ -284,39 +284,39 @@
           <div class="form-row mb-2">
             <div class="col">
               <!-- Manager -->
-              <input type="text" id="projectManager" class="form-control mb-2" placeholder="Project manager"
+              <input type="text" id="projectManager" class="form-control mb-2" placeholder="{{'view-proj.placeholder_287' | translate}}"
                 formControlName="managerValidator" [class.is-invalid]="getManager.invalid && getManager.touched">
               <small class="form-text text-muted mb-4">
-                Assign Manager
+                {{'view-proj.small_290' | translate}}
               </small>
               <div *ngIf="getManager.invalid && (getManager.touched || getManager.dirtty)">
                 <small *ngIf="getManager.errors?.required" class="text-danger">
-                  Manager is required
+                  {{'view-proj.small_294' | translate}}
                 </small>
                 <small *ngIf="getManager.errors?.minlength" class="text-danger">
-                  Manager name must consist of atleast 4 characters
+                  {{'view-proj.small_297' | translate}}
                 </small>
                 <small *ngIf="getManager.errors?.pattern" class="text-danger">
-                  Manager name can not have numbers or any special characters
+                  {{'view-proj.small_300' | translate}}
                 </small>
               </div>
             </div>
             <div class="col">
               <!-- Team -->
-              <input type="text" id="projectTeam" class="form-control mb-2" placeholder="Team Members"
+              <input type="text" id="projectTeam" class="form-control mb-2" placeholder="{{'view-proj.placeholder_306' | translate}}"
                 formControlName="teamValidator" [class.is-invalid]="getTeam.invalid && getTeam.touched">
               <small class="form-text text-muted mb-4">
-                Assign Team
+                {{'view-proj.small_309' | translate}}
               </small>
               <div *ngIf="getTeam.invalid && (getTeam.touched || getTeam.dirtty)">
                 <small *ngIf="getTeam.errors?.required" class="text-danger">
-                  Team is required
+                  {{'view-proj.small_313' | translate}}
                 </small>
                 <small *ngIf="getTeam.errors?.minlength" class="text-danger">
-                  Atleast one team member is required
+                  {{'view-proj.small_316' | translate}}
                 </small>
                 <small *ngIf="getTeam.errors?.pattern" class="text-danger">
-                  Member name can not have numbers or any special characters
+                  {{'view-proj.small_319' | translate}}
                 </small>
               </div>
             </div>
@@ -324,7 +324,7 @@
 
           <!-- Create Project -->
           <div class="alert alert-danger" role="alert" *ngIf="temp==1" style="width: 100%;">
-            End date cannot be same or less than Start date.
+            {{'view-proj.div_327' | translate}}
           </div>
           <button type="button" [disabled]="createProjectForm.invalid" class="btn btn-sm" id="editProjectBtn"
             data-dismiss="modal" (click)=addProject() data-toggle="modal" data-target="#successModal">Create Project</button>
@@ -342,7 +342,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header" id="modalHeader">
-        <h3>PROJECT DETAILS</h3>
+        <h3>{{'view-proj.h3-345' | translate}}</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -356,37 +356,37 @@
               <!-- Client name -->
               <input type="text" id="clientName" class="form-control" placeholder="Cannot edit this field" disabled>
               <small class="form-text text-muted mb-4">
-                Client Name
+                {{'view-proj.small_359' | translate}}
               </small>
             </div>
             <div class="col">
               <!-- Project name -->
-              <input type="text" id="projectName" class="form-control" placeholder="Project name"
+              <input type="text" id="projectName" class="form-control" placeholder="{{'view-proj.placeholder_364' | translate}}"
                 formControlName="editProjectNameValidator"
                 [class.is-invalid]="editGetProjectName.invalid && editGetProjectName.touched">
               <small class="form-text text-muted mb-2">
-                Project Name
+                {{'view-proj.small_368' | translate}}
               </small>
               <div *ngIf="editGetProjectName.invalid && (editGetProjectName.touched || editGetProjectName.dirtty)">
                 <small *ngIf="editGetProjectName.errors?.required" class="text-danger">
-                  Project name is required
+                  {{'view-proj.small_372' | translate}}
                 </small>
                 <small *ngIf="editGetProjectName.errors?.minlength" class="text-danger">
-                  Project name must consist of atleast 4 characters
+                  {{'view-proj.small_375' | translate}}
                 </small>
               </div>
             </div>
             <div class="col">
               <!-- Technologies -->
-              <input type="text" id="projectTech" class="form-control mb-2" placeholder="Technologies"
+              <input type="text" id="projectTech" class="form-control mb-2" placeholder="{{'view-proj.placeholder_381' | translate}}"
                 formControlName="editTechnologyValidator"
                 [class.is-invalid]="editGetTechnology.invalid && editGetTechnology.touched">
               <small class="form-text text-muted mb-4">
-                Technology
+                {{'view-proj.small_385' | translate}}
               </small>
               <div *ngIf="editGetTechnology.invalid && (editGetTechnology.touched || editGetTechnology.dirtty)">
                 <small *ngIf="editGetTechnology.errors?.required" class="text-danger">
-                  Technology is required
+                  {{'view-proj.' | translate}}
                 </small>
               </div>
             </div>
@@ -397,7 +397,7 @@
                 <input type="date" id="projectStartdate" class="form-control" placeholder="Cannot edit thid field"
                   disabled>
                 <small class="form-text text-muted mb-2">
-                  Start date
+                  {{'view-proj.small_400' | translate}}
                 </small>
               </div>
               <div class="col">
@@ -406,11 +406,11 @@
                   formControlName="editEndDateValidator"
                   [class.is-invalid]="editGetEndDate.invalid && editGetEndDate.touched">
                 <small class="form-text text-muted mb-2">
-                  End date
+                  {{'view-proj.small_409' | translate}}
                 </small>
                 <div *ngIf="editGetEndDate.invalid && (editGetEndDate.touched || editGetEndDate.dirtty)">
                   <small *ngIf="editGetEndDate.errors?.required" class="text-danger">
-                    End Date is required
+                    {{'view-proj.small_413' | translate}}
                   </small>
                 </div>
               </div>
@@ -420,14 +420,14 @@
                   formControlName="editPriorityValidator"
                   [class.is-invalid]="editGetPriority.invalid && editGetPriority.touched">
                 <small class="form-text text-muted mb-2">
-                  Priority Level
+                  {{'view-proj.small_423' | translate}}
                 </small>
                 <div *ngIf="editGetPriority.invalid && (editGetPriority.touched || editGetPriority.dirtty)">
                   <small *ngIf="editGetPriority.errors?.required" class="text-danger">
-                    Priority is required
+                    {{'view-proj.small_427' | translate}}
                   </small>
                   <small *ngIf="editGetPriority.errors?.minlength" class="text-danger">
-                    Priority must consist of atleast 4 characters
+                    {{'view-proj.small_430' | translate}}
                   </small>
                 </div>
               </div>
@@ -435,34 +435,34 @@
             <div class="form-row mb-2">
               <div class="col">
                 <!-- City -->
-                <input type="text" id="projectCity" class="form-control" placeholder="City"
+                <input type="text" id="projectCity" class="form-control" placeholder="{{'view-proj.placeholder_438' | translate}}"
                   formControlName="editCityValidator" [class.is-invalid]="editGetCity.invalid && editGetCity.touched">
                 <small class="form-text text-muted mb-2">
-                  City
+                  {{'view-proj.small_441' | translate}}
                 </small>
                 <div *ngIf="editGetCity.invalid && (editGetCity.touched || editGetCity.dirtty)">
                   <small *ngIf="editGetCity.errors?.required" class="text-danger">
-                    City is required
+                    {{'view-proj.small_445' | translate}}
                   </small>
                   <small *ngIf="editGetCity.errors?.minlength" class="text-danger">
-                    City must consist of atleast 3 characters
+                    {{'view-proj.small_448' | translate}}
                   </small>
                 </div>
               </div>
               <div class="col">
                 <!-- Country -->
-                <input type="text" id="projectCountry" class="form-control" placeholder="Country"
+                <input type="text" id="projectCountry" class="form-control" placeholder="{{'view-proj.placeholder_454' | translate}}"
                   formControlName="editCountryValidator"
                   [class.is-invalid]="editGetCountry.invalid && editGetCountry.touched">
                 <small class="form-text text-muted mb-2">
-                  Country
+                  {{'view-proj.small_458' | translate}}
                 </small>
                 <div *ngIf="editGetCountry.invalid && (editGetCountry.touched || editGetCountry.dirtty)">
                   <small *ngIf="editGetCountry.errors?.required" class="text-danger">
-                    Country is required
+                    {{'view-proj.small_462' | translate}}
                   </small>
                   <small *ngIf="editGetCountry.errors?.minlength" class="text-danger">
-                    Country must consist of atleast 4 characters
+                    {{'view-proj.small_465' | translate}}
                   </small>
                 </div>
               </div>
@@ -471,35 +471,35 @@
             <div class="form-row mb-2">
               <div class="col">
                 <!-- Manager -->
-                <input type="text" id="projectManager" class="form-control mb-2" placeholder="Project manager"
+                <input type="text" id="projectManager" class="form-control mb-2" placeholder="{{'view-proj.placeholder_474' | translate}}"
                   formControlName="editManagerValidator"
                   [class.is-invalid]="editGetManager.invalid && editGetManager.touched">
                 <small class="form-text text-muted mb-2">
-                  Assign Manager
+                  {{'view-proj.small_478' | translate}}
                 </small>
                 <div *ngIf="editGetManager.invalid && (editGetManager.touched || editGetManager.dirtty)">
                   <small *ngIf="editGetManager.errors?.required" class="text-danger">
-                    Manager is required
+                    {{'view-proj.small_482' | translate}}
                   </small>
                   <small *ngIf="editGetManager.errors?.minlength" class="text-danger">
-                    Manager must consist of atleast 3 characters
+                    {{'view-proj.small_485' |translate}}
                   </small>
                 </div>
               </div>
               <div class="col">
                 <!-- Team -->
-                <input type="text" id="projectTeam" class="form-control mb-2" placeholder="Team Members"
+                <input type="text" id="projectTeam" class="form-control mb-2" placeholder="  {{'view-proj.placeholder_491' |translate}}"
                   formControlName="editTeamValidator"
                   [class.is-invalid]="editGetTeam.invalid && editGetTeam.touched">
                 <small class="form-text text-muted mb-2">
-                  Assign Team
+                  {{'view-proj.small_495' |translate}}
                 </small>
                 <div *ngIf="editGetTeam.invalid && (editGetTeam.touched || editGetTeam.dirtty)">
                     <small *ngIf="editGetTeam.errors?.required" class="text-danger">
-                      Team is required
+                      {{'view-proj.small_499' |translate}}
                     </small>
                     <small *ngIf="editGetTeam.errors?.minlength" class="text-danger">
-                      Team must consist of atleast one member
+                      {{'view-proj.small_502' |translate}}
                     </small>
                   </div>
               </div>
@@ -507,7 +507,7 @@
 
             <!-- update Project -->
             <button type="button" class="btn btn-sm" [disabled]="editProjectForm.invalid" id="editProjectBtn" data-dismiss="modal" data-toggle="modal"
-              data-target="#successUpdateModal">Update Project</button>
+              data-target="#successUpdateModal">  {{'view-proj.button_510' |translate}}</button>
 
         </form>
 
@@ -524,10 +524,10 @@
         <div class="icon-box" id="successIcon">
           <i class="fa fa-check" aria-hidden="true"></i>
         </div>
-        <h4 class="modal-title">Awesome!</h4>
+        <h4 class="modal-title">  {{'view-proj.h4-527'|translate}}</h4>
       </div>
       <div class="modal-body">
-        <p class="text-center">Successfully created a new project.</p>
+        <p class="text-center">  {{'view-proj.p_530' |translate}}.</p>
       </div>
       <div class="modal-footer">
         <button class="btn btn-success btn-block" id="successButton" data-dismiss="modal">OK</button>
@@ -544,10 +544,10 @@
         <div class="icon-box" id="successIcon">
           <i class="fa fa-check" aria-hidden="true"></i>
         </div>
-        <h4 class="modal-title">Awesome!</h4>
+        <h4 class="modal-title">  {{'view-proj.h4-547' |translate}}</h4>
       </div>
       <div class="modal-body">
-        <p class="text-center">Successfully updated a project.</p>
+        <p class="text-center">  {{'view-proj.p_550' |translate}}.</p>
       </div>
       <div class="modal-footer">
         <button class="btn btn-success btn-block" id="successButton" data-dismiss="modal">OK</button>
@@ -566,16 +566,16 @@
           <i class="fa fa-times" aria-hidden="true"></i>
         </div>
         <div class="modal-title">
-          <h4>Are you sure?</h4>
+          <h4>  {{'view-proj.h4_569' |translate}}</h4>
 
         </div>
       </div>
       <div class="modal-body">
-        <p>Do you really want to delete these records? This process cannot be undone.</p>
-      </div>
+        <p>  {{'view-proj.p_574' |translate}}.</p>
+      </div>  
       <div class="modal-footer" id="deleteModalFooter">
-        <button type="button" class="btn btn-info" data-dismiss="modal" id="deleteBtnInfo">Cancel</button>
-        <button type="button" class="btn btn-danger" id="deleteBtnDanger">Delete</button>
+        <button type="button" class="btn btn-info" data-dismiss="modal" id="deleteBtnInfo">  {{'view-proj.button_577' |translate}}</button>
+        <button type="button" class="btn btn-danger" id="deleteBtnDanger">  {{'view-proj.button_578' |translate}}</button>
       </div>
     </div>
   </div>
