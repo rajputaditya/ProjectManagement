@@ -7,6 +7,7 @@ import { EmployeesComponent } from './employees/employees.component';
 import { GrowthComponent } from './growth/growth.component';
 import { ProjectDetailsComponent } from './project-details/project-details.component';
 import { AvailableEmployeesComponent } from './available-employees/available-employees.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 const routes: Routes = [
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: 'employees', component: EmployeesComponent },
   { path: 'projectGrowth', component: GrowthComponent},
   { path: 'projectDetails', component:ProjectDetailsComponent},
-  { path: 'availableEmployees', component:AvailableEmployeesComponent}
+  { path: 'availableEmployees', component:AvailableEmployeesComponent},
+  { path: '**', component:PageNotFoundComponent}
 ];
 
 @NgModule({
