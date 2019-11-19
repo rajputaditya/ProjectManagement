@@ -135,5 +135,6 @@ export class ProjectDetailsComponent implements OnInit {
     this.url='http://localhost:8080/employee/unassign/'+user.fullName;
     console.log(this.url);
     this.http.put(this.url,user).subscribe(data=>console.log(data));
+    location.reload();
   }
 }
