@@ -114,21 +114,18 @@
         <!-- Delete form -->
         <form>
           <div class="row">
-            <div class="col-md-12">
-              <input class="form-control form-control-lg" type="text" id="searchDeleteProject"
-                placeholder="Search Project by title" aria-label="Search" style="width: 100%; border-color: black;
-                    border-radius: 50px;" (input)=searchDeleteProject()>
+            <div class="col-md-10">
+              <input class="form-control form-control-lg" type="text" placeholder="Search Project by title"
+                aria-label="Search" style="width: 100%; border-color: black;
+                    border-radius: 50px;">
             </div>
             <div class="col-md-2">
               <button class="btn btn-outline-danger btn-sm" id="closeEditModal" data-dismiss="modal" data-toggle="modal"
                 data-target="#deleteConfirmationModal">Close</button>
+
             </div>
           </div>
-          <ul *ngFor="let search of searchdata">
-            <li><button id="projectButton" value="{{search}}" class="btn btn-sm btn-dark" data-toggle="modal"
-                data-target="#deleteConfirmationModal" data-dismiss="modal" style=" background-color: rgb(80, 79, 79);
-            border-color: rgb(80, 79, 79);">{{search}}</button></li>
-          </ul>
+
         </form>
       </div>
     </div>
@@ -539,30 +536,25 @@
 
 <!-- Delete Modal -->
 <div id="deleteConfirmationModal" class="modal fade" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-confirm" id="deleteModal">
-    <div class="modal-content" id="deleteModalContent">
-
-      <div class="modal-header" id="deleteModalHeader">
-        <div class="icon-box" id="deleteIcon">
-          <i class="fa fa-times" aria-hidden="true"></i>
+    <div class="modal-dialog modal-confirm" id="deleteModal">
+      <div class="modal-content" id="deleteModalContent">
+  
+        <div class="modal-header" id="deleteModalHeader">
+          <div class="icon-box" id="deleteIcon">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </div>
+          <div class="modal-title">
+            <h4>Are you sure?</h4>
+  
+          </div>
         </div>
-        <div class="modal-title">
-          <h4> {{'view-proj.h4_569' |translate}}</h4>
-
+        <div class="modal-body">
+          <p>Do you really want to delete these records? This process cannot be undone.</p>
         </div>
-      </div>
-      <div class="modal-body">
-        <p> {{'view-proj.p_574' |translate}}.</p>
-      </div>
-      <div class="modal-footer" id="deleteModalFooter">
-        <button type="button" class="btn btn-info" data-dismiss="modal" id="deleteBtnInfo">
-          {{'view-proj.button_577' |translate}}</button>
-        <button type="button" class="btn btn-danger" id="deleteBtnDanger">
-          {{'view-proj.button_578' |translate}}</button>
-        <button type="button" class="btn btn-info" data-dismiss="modal" id="deleteBtnInfo">Cancel</button>
-        <button type="button" class="btn btn-danger" id="deleteBtnDanger" (click)=delProject()
-          data-dismiss="modal">Delete</button>
+        <div class="modal-footer" id="deleteModalFooter">
+          <button type="button" class="btn btn-info" data-dismiss="modal" id="deleteBtnInfo">Cancel</button>
+          <button type="button" class="btn btn-danger" id="deleteBtnDanger">Delete</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
