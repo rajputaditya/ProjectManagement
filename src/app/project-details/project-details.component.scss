@@ -313,35 +313,3 @@ color: white;
   }
 
 
-//Employee 
-
-img{
-  width: 40%;
-  align-self: center;
-  margin-top: 15px;
-  border-radius: 50%;
-}
-
-.employeeColumn {
-  float: left;
-  width: 25%;
-  height: 50%;
-  margin-bottom: 16px;
-  padding: 0 8px;
-}
-
-#editEmpBtn{
-  float: right;
-  color: white;
-}
-
-#delEmpBtn{
-  float: right;
-  margin-left: 6px;
-}
-
-#delEmpBtn:hover{
-  background-color: red;
-  border-color: red;
-  color: white;
-}
