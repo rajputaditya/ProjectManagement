@@ -3,7 +3,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ProjectService } from './project.service';
 import { CommonService } from '../common.service';
-import * as $ from "jquery";
 
 export class Project {
   clientName: string;
@@ -95,12 +94,6 @@ export class ViewProjectsComponent implements OnInit {
       });
     })
   }
-
-  
- 
-
-  
-
 
 
   opnModal(uname: string) {
@@ -197,7 +190,6 @@ export class ViewProjectsComponent implements OnInit {
 
 
   ngOnInit() {
-
     
     this.createProjectForm = new FormGroup({
       clientNameValidator: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -222,8 +214,6 @@ export class ViewProjectsComponent implements OnInit {
 
     });
 
-   
-
   }
   proj: Project;
   projects: Array<any> = [];
@@ -240,7 +230,6 @@ export class ViewProjectsComponent implements OnInit {
     this.proj.setProjectDescription((<HTMLInputElement>document.getElementById("projectDescription")).value);
     console.log(this.proj);
     this.service.addProject(this.proj).subscribe(proj => this.projects.push(proj));
-    location.reload();
   }
 
   sendProjectDetail(projectDetail: any) {
@@ -269,19 +258,7 @@ export class ViewProjectsComponent implements OnInit {
   this.projectName=(<HTMLInputElement>document.getElementById("projectButton")).value;
    this.url='http://localhost:8080/project/'+this.projectName;
    console.log(this.url);
-   this.http.get(this.url).subscribe(data=>{
-      // this.projectData.setClientName(data.clientName);
-      // this.projectData.setProjectName(data.projectName);
-      // this.projectData.setCountry(data.country);
-      // this.projectData.setEndDate(data.endDate);
-      // this.projectData.setCity(data.city);
-      // this.projectData.setManager(data.manager);
-      // this.projectData.setTeamMembers(data.teamMembers);
-      // this.projectData.setTechnologies(data.technologies);
-      // this.projectData.setStartDate(data.startDate);
-      // this.projectData.setPriority(data.priority);
-      this.service.editProject(this.url).subscribe(proj =>this.projectData=proj);
-     })
+  this.service.editProject(this.url).subscribe(proj =>this.projectData=proj);
    }
 
    updateProject(){
@@ -297,7 +274,6 @@ export class ViewProjectsComponent implements OnInit {
     this.proj.setProjectDescription((<HTMLInputElement>document.getElementById("editProjectDescription")).value);
     console.log(this.proj);
     this.service.updateProject(this.proj).subscribe(proj => this.projects.push(proj));
-    location.reload();
    }
 
    delProject(){
@@ -306,7 +282,5 @@ export class ViewProjectsComponent implements OnInit {
      this.url='http://localhost:8080/project/'+this.projectName;
      console.log(this.url);
     this.service.delProject(this.url).subscribe(proj =>console.log(proj));
-    location.reload();
    }
  }
-
