@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ServiceService } from '../employees/service.service';
+import { CommonService } from '../common.service';
 export class Employee {
 
   firstName: string;
@@ -69,7 +70,7 @@ export class AvailableEmployeesComponent implements OnInit {
   phoneNumberpattern: string = "/^[6-9]\d{9}$/";
 
   set() {
-    this.url = "http://localhost:8080/employee";
+    this.url = "http://localhost:8080/availableEmployee";
     this.http.get(this.url).subscribe(data => {
       JSON.parse(JSON.stringify(data)).forEach(element => {
         this.userArray.push(element);
@@ -78,7 +79,7 @@ export class AvailableEmployeesComponent implements OnInit {
   }
 
 
-  constructor(private http: HttpClient, private service: ServiceService) {
+  constructor(private http: HttpClient, private service: ServiceService, private comServ: CommonService) {
     this.set();
   }
 
@@ -95,4 +96,9 @@ export class AvailableEmployeesComponent implements OnInit {
     console.log(this.empDetails);
   }
 
+
+  assignProject(user){
+    this.url="http://localhost:8080/availableEmployee/"+this.comServ.setObj().projectName;
+    this.http.put(this.url,user).subscribe(data=>console.log(data));
+  }
 }

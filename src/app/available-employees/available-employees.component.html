@@ -5,7 +5,7 @@
       <div class="container">
         <img src="/assets/avatar.png" alt="Jane">
         <label class="custom-control material-checkbox">
-          <input type="checkbox" class="material-control-input" title="Submit task">
+          <input type="checkbox" (click)=assignProject(user) class="material-control-input" title="Submit task">
           <span class="material-control-indicator"></span>
         </label>
         <h4>{{user.fullName}} </h4>
