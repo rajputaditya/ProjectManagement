@@ -2,62 +2,6 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { CommonService } from '../common.service';
-import { ProjectDetailsService } from './project-details.service';
-export class TaskClass {
-  projectName: string;
-  taskName: string;
-  taskOwner: string;
-  taskDetails;
-  endDate;
-  startDate;
-
-  setProjectTitle(projectTitle) {
-    this.projectName = projectTitle;
-  }
-  getProjectTitle(){
-    return this.projectName;
-  }
-
-
-  setTasktitle(taskTitle) {
-    this.taskName = taskTitle;
-  }
-  getTaskTitle(){
-    return this.taskName;
-  }
-
-
-  setTaskOwner(taskOwner) {
-    this.taskOwner = taskOwner;
-  }
-  getTaskOwner(){
-    return this.taskOwner;
-  }
-
-
-  setTaskDescription(taskDescription) {
-    this.taskDetails = taskDescription;
-  }
-  getTaskDescription(){
-    return this.taskDetails;
-  }
-
-
-  setStartDate(startDate) {
-    this.startDate = startDate;
-  }
-  getStartDate(){
-    return this.startDate;
-  }
-  
-
-  setEndDate(endDate) {
-    this.endDate = endDate;
-  }
-  getEnddate(){
-    return this.endDate;
-  }
-}
 
 import { TranslateService } from '@ngx-translate/core';
 import { ServiceService } from '../employees/service.service';
@@ -86,9 +30,6 @@ export class ProjectDetailsComponent implements OnInit {
   editstartDate;
   endtemp;
   projectDetail;
-  projectNameFromViewProject: any;
-  taskArray: any;
-  url: string;
 
 
 
@@ -135,79 +76,25 @@ export class ProjectDetailsComponent implements OnInit {
       this.endtemp = 1;
   }
 
-  taskList() {
-    this.projectNameFromViewProject = this.comServ.setObj().projectName;
-    this.proDetService.getTaskByProjectName(this.projectNameFromViewProject).subscribe(data => {
-      JSON.parse(JSON.stringify(data)).forEach(element => {
-        this.taskArray.push(element);
-      });
-    })
-    console.log("task list Array " + this.taskArray);
-  }
 
-
-  deleteTaskFunc(){
-
-    this.proDetService.deleteTaskWithTaskOwner(this.taskOwnr);
-
-  }
-  taskOwnr;
-  setDetail(taskDetail) {
-    this.taskOwnr = taskDetail.taskOwner;
-    console.log(this.taskOwnr);
-
-  }
-
-
-  taskDetails:TaskClass=new TaskClass();
-  updateTaskObj(task){
-
-    this.taskDetails.setProjectTitle(task.projectName);
-    this.taskDetails.setTasktitle(task.taskName);
-    this.taskDetails.setTaskOwner(task.taskOwner);
-    this.taskDetails.setTaskDescription(task.taskDetails);
-    this.taskDetails.setStartDate(task.startDate);
-    this.taskDetails.setEndDate(task.endDate);
-    console.log(this.taskDetails);
-
-  }
-
-  updateTaskConfirm(){
-    this.taskOwnr=this.taskDetails.getTaskOwner();
-    this.taskDetails=new TaskClass();
-    this.taskDetails.setTasktitle((<HTMLInputElement>document.getElementById("editTaskTitle")).value);
-    this.taskDetails.setTaskDescription((<HTMLInputElement>document.getElementById("editTaskDescription")).value);
-    this.taskDetails.setStartDate((<HTMLInputElement>document.getElementById("editProjectStartdate")).value);
-    console.log(this.taskDetails);
-    this.proDetService.editTaskWIthProjectName(this.taskDetails,this.taskOwnr);
-   
-
-  }
-
-  // taskListByProjectName() {
-  //   this.projectNameFromViewProject = this.comServ.setObj().projectName;
-  //   console.log("sadsadsadsa"+this.projectNameFromViewProject);
-  //   this.proDetService.getTaskByProjectName(this.projectNameFromViewProject).subscribe(data => {
-  //     JSON.parse(JSON.stringify(data)).forEach(element => {
-  //       this.taskArray.push(element);
-  //     });
-  //   })
-  //   console.log("task list Array " + this.projectNameFromViewProject);
-  // }
 
 
   userArray: Array<any> = [];
-  constructor(private http: HttpClient, private comServ: CommonService, private proDetService: ProjectDetailsService) {
+  url: string ;
 
-    this.taskList();
+  constructor(private http: HttpClient, private comServ: CommonService, private service: ServiceService,@Inject(TranslateService) public translate: TranslateService) {
+    translate.addLangs(['en', 'de'])
+    translate.setDefaultLang('en');
+    translate.use('en');
     this.url='http://localhost:8080/employee/'+comServ.setObj().projectName;
     this.http.get(this.url).subscribe(data => {
       JSON.parse(JSON.stringify(data)).forEach(element => {
         this.userArray.push(element);
 
-      
+      });
+    })
 
-  })})}
+  }
 
 
   curId: string;
