@@ -23,6 +23,7 @@ import { MainService } from './reports/main.service';
 import { GrowthComponent } from './growth/growth.component';
 import { ProjectDetailsComponent } from './project-details/project-details.component';
 import { AvailableEmployeesComponent } from './available-employees/available-employees.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -40,7 +41,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     EmployeesComponent,
     GrowthComponent,
     ProjectDetailsComponent,
-    AvailableEmployeesComponent
+    AvailableEmployeesComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
