@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MainService } from './main.service';
-import {Chart} from 'chart.js';
+import { Chart } from 'chart.js';
 
 @Component({
   selector: 'app-reports',
@@ -9,91 +9,74 @@ import {Chart} from 'chart.js';
 })
 export class ReportsComponent implements OnInit {
 
-  chart= [];
-  constructor(private _main:MainService) { }
+  chart = [];
+  constructor(private _main: MainService) { }
+
+  jsonArray: any = [];
+  percentagesCompleted: number[] = [];
+  employeeNames: any = [];
 
   ngOnInit() {
     this._main.emp()
-    .subscribe(res =>
-      {
-        console.log(res);
-        let temp_max = res['list'].map(res => res.main.temp_max);
-        let temp_min = res['list'].map(res => res.main.temp_min);
-        let alldates = res['list'].map(res => res.dt)
+      .subscribe(res => {
 
-        let weatherDates = []
-        alldates.forEach((res) => {
-          let jsdate = new Date(res * 1000)
-          weatherDates.push(jsdate.toLocaleTimeString('en', { year: 'numeric', month: 'short', day: 'numeric' }))
-        })
-        console.log(weatherDates);
-        this.chart = new Chart('canvas', {
-          type: 'line',
-          data: {
-            labels: weatherDates,
-            datasets: [
-              {
-                data: temp_max,
-                borderColor: "red",
-                borderWidth:1,
-                lineTension:0.2,
-                fill: true,
-                backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)'
-              ],
-                
-              },
-              {
-                data: temp_min,
-                borderColor: "blue",
-                borderWidth:1,
-                lineTension:0.2,
-                fill: true,
-                backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)'
-              ],
+        this.jsonArray = res;
+        console.log(this.jsonArray);
 
-              },
-            ]
-          },
-           options: {
-               legend: {
-                 display: true
-               },
-              scales: {
-                 xAxes: [{
-                  
-                   display: true,
-                   
- 
-                 }],
-                 yAxes: [{
-                   display: true
-                 }],
-               } 
-             }
+        this.jsonArray.forEach(employee => {
+          console.log(employee.employee_name);
+          this.percentagesCompleted.push(employee.project_part_progress);
+          this.employeeNames.push(employee.employee_name);
         });
+        
         this.chart = new Chart('barchart', {
           type: 'bar',
-          animationEnabled:true,
-          axisX:{
-            intervsl:10,
+          data: {
+            labels: this.employeeNames,
+            datasets: [
+              {
+                data: this.percentagesCompleted,
+                borderColor: "black",
+                borderWidth: 1,
+                lineTension: 0.2,
+                fill: true,
+                backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)'
+                ]
+              }
+            ]
+          },
+          options: {
+            legend: {
+              display: false
+            },
+            scales: {
+              xAxes: [{
+                display: true,
+              }],
+              yAxes: [
+                {
+                  "ticks": { "beginAtZero": true }
+                }],
+            }
+          }
+        });
+        this.chart = new Chart('canvas', {
+          type: 'bar',
+          animationEnabled: true,
+          axisX: {
+            intervsl: 10,
           },
           data: {
-            labels: weatherDates,
+            labels: [],
             datasets: [
-              { 
-                data: temp_max,
+              {
+                data: [],
                 backgroundColor: [
                   'rgba(255, 99, 132, 0.2)',
                   'rgba(54, 162, 235, 0.2)',
@@ -101,21 +84,21 @@ export class ReportsComponent implements OnInit {
                   'rgba(75, 192, 192, 0.2)',
                   'rgba(153, 102, 255, 0.2)',
                   'rgba(255, 159, 64, 0.2)'
-              ],
-              borderColor: [
+                ],
+                borderColor: [
                   'rgba(255,99,132,1)',
                   'rgba(54, 162, 235, 1)',
                   'rgba(255, 206, 86, 1)',
                   'rgba(75, 192, 192, 1)',
                   'rgba(153, 102, 255, 1)',
                   'rgba(255, 159, 64, 1)'
-              ],
-                
+                ],
+
                 fill: true
               },
-              { 
-                data: temp_min,
-                
+              {
+                data: [],
+
                 backgroundColor: [
                   'rgba(255, 99, 132, 0.2)',
                   'rgba(54, 162, 235, 0.2)',
@@ -123,15 +106,15 @@ export class ReportsComponent implements OnInit {
                   'rgba(75, 192, 192, 0.2)',
                   'rgba(153, 102, 255, 0.2)',
                   'rgba(255, 159, 64, 0.2)'
-              ],
-              borderColor: [
+                ],
+                borderColor: [
                   'rgba(255,99,132,1)',
                   'rgba(54, 162, 235, 1)',
                   'rgba(255, 206, 86, 1)',
                   'rgba(75, 192, 192, 1)',
                   'rgba(153, 102, 255, 1)',
                   'rgba(255, 159, 64, 1)'
-              ],
+                ],
                 fill: true
               },
             ]
@@ -140,28 +123,28 @@ export class ReportsComponent implements OnInit {
             legend: {
               display: true
             },
-           scales: {
+            scales: {
               xAxes: [{
-               
+
                 display: true
               }],
               yAxes: [{
                 display: true
               }],
-            } 
-          } 
+            }
+          }
         });
         this.chart = new Chart('piechart', {
           type: 'pie',
-          animationEnabled:true,
-          axisX:{
-            intervsl:10,
+          animationEnabled: true,
+          axisX: {
+            intervsl: 10,
           },
           data: {
-            labels: weatherDates,
+            labels: [],
             datasets: [
-              { 
-                data: temp_max,
+              {
+                data: [],
                 backgroundColor: [
                   'rgba(255, 99, 132, 0.2)',
                   'rgba(54, 162, 235, 0.2)',
@@ -169,21 +152,21 @@ export class ReportsComponent implements OnInit {
                   'rgba(75, 192, 192, 0.2)',
                   'rgba(153, 102, 255, 0.2)',
                   'rgba(255, 159, 64, 0.2)'
-              ],
-              borderColor: [
+                ],
+                borderColor: [
                   'rgba(255,99,132,1)',
                   'rgba(54, 162, 235, 1)',
                   'rgba(255, 206, 86, 1)',
                   'rgba(75, 192, 192, 1)',
                   'rgba(153, 102, 255, 1)',
                   'rgba(255, 159, 64, 1)'
-              ],
-                
+                ],
+
                 fill: true
               },
-              { 
-                data: temp_min,
-                
+              {
+                data: [],
+
                 backgroundColor: [
                   'rgba(255, 99, 132, 0.2)',
                   'rgba(54, 162, 235, 0.2)',
@@ -191,15 +174,15 @@ export class ReportsComponent implements OnInit {
                   'rgba(75, 192, 192, 0.2)',
                   'rgba(153, 102, 255, 0.2)',
                   'rgba(255, 159, 64, 0.2)'
-              ],
-              borderColor: [
+                ],
+                borderColor: [
                   'rgba(255,99,132,1)',
                   'rgba(54, 162, 235, 1)',
                   'rgba(255, 206, 86, 1)',
                   'rgba(75, 192, 192, 1)',
                   'rgba(153, 102, 255, 1)',
                   'rgba(255, 159, 64, 1)'
-              ],
+                ],
                 fill: true
               },
             ]
@@ -208,21 +191,21 @@ export class ReportsComponent implements OnInit {
             legend: {
               display: true
             },
-           scales: {
+            scales: {
               xAxes: [{
-               
+
                 display: true
               }],
               yAxes: [{
                 display: true
               }],
-            } 
-          } 
+            }
+          }
         });
-        
+
 
       })
-    
+
   }
 
 }
