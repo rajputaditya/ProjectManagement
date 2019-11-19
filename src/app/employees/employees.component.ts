@@ -10,40 +10,50 @@ import { TranslateService } from '@ngx-translate/core';
 
 export class Employee {
 
-  
-
-  firstname: string;
-  lastname: string;
+  firstName: string;
+  lastName: string;
   email: string;
-  phonenumber: string;
+  phoneNumber: string;
   designation: string;
   technologies: string;
 
 
 
-  setFirstname(firstname) {
-    this.firstname = firstname;
+  setFirstName(firstName) {
+    this.firstName = firstName;
   }
-
-  setLastname(lastname) {
-    this.lastname = lastname;
+  getFirstName(){
+    return this.firstName;
   }
-
-
+  setLastName(lastName) {
+    this.lastName = lastName;
+  }
+  getLastName(){
+    return this.lastName;
+  }
   setEmail(email) {
     this.email = email;
   }
-
+  getEmail(){
+    return this.email;
+  }
   setDesignation(designation) {
     this.designation = designation;
   }
-
-  setPhonenumber(phonenumber) {
-    this.phonenumber = phonenumber;
+  getDesignation(){
+    return this.designation;
   }
-
+  setPhoneNumber(phoneNumber) {
+    this.phoneNumber = phoneNumber;
+  }
+  getPhoneNumber(){
+    return this.phoneNumber;
+  }
   setTechnologies(technologies) {
     this.technologies = technologies;
+  }
+  getTechnologies(){
+    return this.technologies;
   }
 }
 
@@ -121,20 +131,34 @@ export class EmployeesComponent implements OnInit {
 
   addEmployee() {
     this.emp = new Employee();
-    this.emp.setFirstname((<HTMLInputElement>document.getElementById("FirstName")).value);
-    this.emp.setLastname((<HTMLInputElement>document.getElementById("LastName")).value);
-    this.emp.setEmail((<HTMLInputElement>document.getElementById("Email")).value);
-    this.emp.setDesignation((<HTMLInputElement>document.getElementById("Designation")).value);
-    this.emp.setPhonenumber((<HTMLInputElement>document.getElementById("PhoneNumber")).value);
-    this.emp.setTechnologies((<HTMLInputElement>document.getElementById("Technologies")).value);
+    this.emp.setFirstName((<HTMLInputElement>document.getElementById("firstName")).value);
+    this.emp.setLastName((<HTMLInputElement>document.getElementById("lastName")).value);
+    this.emp.setEmail((<HTMLInputElement>document.getElementById("email")).value);
+    this.emp.setDesignation((<HTMLInputElement>document.getElementById("designation")).value);
+    this.emp.setPhoneNumber((<HTMLInputElement>document.getElementById("phoneNumber")).value);
+    this.emp.setTechnologies((<HTMLInputElement>document.getElementById("technologies")).value);
     this.service
       .addEmployee(this.emp)
       .subscribe(emp => this.employees.push(emp));
 
   }
 
+  editEmployees() {
+    this.emp = new Employee();
+    this.emp.setFirstName((<HTMLInputElement>document.getElementById("editFirstName")).value);
+    this.emp.setLastName((<HTMLInputElement>document.getElementById("editLastName")).value);
+    this.emp.setEmail((<HTMLInputElement>document.getElementById("editEmail")).value);
+    this.emp.setDesignation((<HTMLInputElement>document.getElementById("editDesignation")).value);
+    this.emp.setPhoneNumber((<HTMLInputElement>document.getElementById("editPhoneNumber")).value);
+    this.emp.setTechnologies((<HTMLInputElement>document.getElementById("editTechnologies")).value);
+    this.service
+      .editEmployee(this.emp)
+      .subscribe(emp => this.employees.push(emp));
+
+  }
+
   set() {
-    this.url = "http://localhost:8086/restApi/employee";
+    this.url = "http://localhost:8080/employee";
     this.http.get(this.url).subscribe(data => {
       JSON.parse(JSON.stringify(data)).forEach(element => {
         this.userArray.push(element);
@@ -151,7 +175,7 @@ export class EmployeesComponent implements OnInit {
       lastNameValidator: new FormControl('', [Validators.required, Validators.minLength(4), Validators.pattern(this.namePattern)]),
       emailValidator: new FormControl('', [Validators.required, Validators.pattern(this.emailPattern)]),
       designationValidator: new FormControl('', [Validators.required, Validators.pattern(this.namePattern)]),
-      phoneNumberValidator: new FormControl('', [Validators.required, Validators.minLength(10), Validators.pattern(this.phoneNumberpattern)]),
+      phoneNumberValidator: new FormControl('', [Validators.required, Validators.minLength(10) ]),
       technologyValidator: new FormControl('', [Validators.required])
     });
 
@@ -170,8 +194,20 @@ export class EmployeesComponent implements OnInit {
 
   ngOnInit() {
   }
+  empDetails:Employee=new Employee();
+  setDetailsForModal(user){
+    this.empDetails.setFirstName(user.firstName);
+    this.empDetails.setLastName(user.lastName);
+    this.empDetails.setEmail(user.email);
+    this.empDetails.setDesignation(user.designation);
+    this.empDetails.setPhoneNumber(user.phoneNumber);
+    this.empDetails.setTechnologies(user.technologies);
+    console.log(this.empDetails);
+  }
 
-
+  delEmployee(){
+    this.service.delEmployee(this.empDetails).subscribe(data=>console.log(data));
+  }
 
 }
 

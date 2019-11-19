@@ -1,20 +1,16 @@
 <div class="row" id="projectTemplate">
     <div class="col-md-8">
-        <h2>{{'project-details.h2-3' | translate}} <span class="badge badge-warning">{{'project-details.span_3' | translate}}</span> </h2>
-        <h5>{{'project-details.h5-4' | translate}} <small>, {{'project-details.small_4' | translate}}</small></h5>
-        <small>{{'project-details.small_5' | translate}} - </small>
-        <h5>{{'project-details.h5-6' | translate}} - </h5>
+        <h2>{{projectDetail.projectName}} <span class="badge badge-warning">{{projectDetail.priority}}</span> </h2>
+        <h5>{{projectDetail.clientName}} <small>, {{projectDetail.city}}, {{projectDetail.country}}</small></h5>
+        <small><strong>Description</strong>- {{projectDetail.projectDescription}}</small>
     </div>
     <div class="col-md-4">
         <br><br>
-        <h5>{{'project-details.' | translate}}</h5>
-        <small> {{'project-details.small_11' | translate}}- </small><br>
-        <small>{{'project-details.small_12' | translate}} - </small>
-       
-    </div>
-    <button (click)="translate.use('en')">en</button>
-    <button (click)="translate.use('de')">de</button>
+        <h5>{{projectDetail.technologies}}</h5>
+        <small><strong> {{'project-details.small_11' | translate}}</strong> - {{projectDetail.startDate}}</small><br>
+        <small><strong> {{'project-details.small_12' | translate}}</strong> - {{projectDetail.endDate}}</small>
 
+    </div>
 </div>
 <div class="row" id="projectMembersAndTasks">
     <div class="col-md-12">
@@ -402,7 +398,26 @@
                         Members
                         <a class="btn" routerLink="/employees"><i class="fas fa-plus-circle" title="Add team members" id="addTaskIcon"></i></a></p>
 
-                    <h1>{{'project-details.h1-398' | translate}}</h1>
+                        <div class="employeeColumn" *ngFor="let user of userArray">
+                                <div class="card">
+                            
+                                  <img src="/assets/avatar.png" alt="Jane">
+                                  <div class="container">
+                                    <h4>{{user.fullname}} </h4>
+                                    <p class="title">{{user.designation}}</p>
+                                    <p>Expertise : {{user.technologies}}</p>
+                                    <p>{{user.email}}</p>
+                                    <p>{{user.phonenumber}}
+                                      <button class="btn btn-sm btn-dark" id="delEmpBtn" data-toggle="modal"
+                                        data-target="#deleteConfirmationModal">Delete</button>
+                                      <button class="btn btn-sm btn-warning" id="editEmpBtn" data-toggle="modal"
+                                        data-target="#editEmployee">Edit</button>
+                                    </p>
+                            
+                                  </div>
+                                </div>
+                        </div>
+
                 </div>
             </div>
         </div>

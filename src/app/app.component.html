@@ -1,12 +1,12 @@
 <app-nav-bar></app-nav-bar>
-<div id="mySidenav" class="sidenav " style="z-index: 4; position: absolute; margin-top: 80px;">
+<div id="mySidenav" class="sidenav " style="z-index: 3; position: absolute; margin-top: 80px;">
     <a routerLink="/viewProjects" id="projects">Projects</a>
     <a routerLink="/employees" id="employees">Employee</a>
     <a routerLink="/reports" id="reports">Reports</a>
     <a routerLink="/calendar" id="to-do">TO-DO</a>
   </div>
 
-<div class="container" style="position: absolute;left: 0;min-width: 100%;margin-top: 70px;">
+<div class="container" style="position: absolute;left: 0;min-width: 100%;margin-top: 70px;z-index: 2;">
     <router-outlet></router-outlet>
     <app-footer></app-footer>
 </div>
