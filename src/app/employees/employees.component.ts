@@ -130,6 +130,22 @@ export class EmployeesComponent implements OnInit {
     this.service
       .addEmployee(this.emp)
       .subscribe(emp => this.employees.push(emp));
+      location.reload();
+
+  }
+
+  editEmployees() {
+    this.emp = new Employee();
+    this.emp.setFirstName((<HTMLInputElement>document.getElementById("editFirstName")).value);
+    this.emp.setLastName((<HTMLInputElement>document.getElementById("editLastName")).value);
+    this.emp.setEmail((<HTMLInputElement>document.getElementById("editEmail")).value);
+    this.emp.setDesignation((<HTMLInputElement>document.getElementById("editDesignation")).value);
+    this.emp.setPhoneNumber((<HTMLInputElement>document.getElementById("editPhoneNumber")).value);
+    this.emp.setTechnologies((<HTMLInputElement>document.getElementById("editTechnologies")).value);
+    this.service
+      .editEmployee(this.emp)
+      .subscribe(emp => this.employees.push(emp));
+      location.reload();
 
   }
 
@@ -171,7 +187,10 @@ export class EmployeesComponent implements OnInit {
   ngOnInit() {
   }
 
-
+  delEmployee(){
+    this.service.delEmployee(this.empDetails).subscribe(data=>console.log(data));
+    location.reload();
+  }
 
 }
 
