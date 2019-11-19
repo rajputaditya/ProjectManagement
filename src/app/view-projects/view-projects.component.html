@@ -549,5 +549,14 @@
           <button type="button" class="btn btn-danger" id="deleteBtnDanger">{{'view-proj.button_578-549'}}</button>
         </div>
       </div>
+      <div class="modal-body">
+        <p>Do you really want to delete these records? This process cannot be undone.</p>
+      </div>
+      <div class="modal-footer" id="deleteModalFooter">
+        <button type="button" class="btn btn-info" data-dismiss="modal" id="deleteBtnInfo">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)=delProject() data-dismiss="modal" id="deleteBtnDanger">Delete</button>
+        <button type="button" class="btn btn-danger" id="deleteBtnDanger" (click)=delProject()
+          data-dismiss="modal">Delete</button>
+      </div>
     </div>
   </div>
