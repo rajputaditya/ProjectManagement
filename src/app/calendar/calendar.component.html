@@ -1,104 +1,102 @@
 <div class="alert alert-warning">
   <h2>{{'calendar.h2-2' | translate}}</h2>
-  <hr>
-  <div class='app'>
-    <div class='app-calendar'>
-      <full-calendar #calendar defaultView="dayGridMonth" [header]="{
+</div>
+<hr>
+<div class='app'>
+  <div class='app-calendar'>
+    <full-calendar #calendar defaultView="dayGridMonth" [header]="{
           left: 'prev,next,today',
           center: 'title',
           right: 'dayGridMonth, timeGridWeek, timeGridDay, listWeek'
         }" [plugins]="calendarPlugins" [weekends]="calendarWeekends" [events]="calendarEvents"
-        (dateClick)="handleDateClick($event)" (eventClick)="handleEventClick($event)" deepChangeDetection="true"
-        timezone="India/Kolkata">
-      </full-calendar>
+      (dateClick)="handleDateClick($event)" (eventClick)="handleEventClick($event)" deepChangeDetection="true"
+      timezone="India/Kolkata">
+    </full-calendar>
+  </div>
+</div>
+
+<div class="tips">
+  <ul>
+    <li>
+      <h4>{{ 'calendar.h4-18' | translate }}</h4>
+    </li>
+    <ol>
+      <li>{{ 'calendar.list21' | translate }} <strong>{{ 'calendar.strong21' | translate }}</strong>.</li>
+      <li>{{ 'calendar.list22' | translate }} <strong>{{ 'calendar.strong22' | translate }}</strong></li>
+      <li>{{ 'calendar.list23' | translate }} <strong>{{ 'calendar.strong23' | translate }}</strong>
+        {{ 'calendar.strong23-2' | translate }}</li>
+    </ol>
+  </ul>
+</div>
+
+<div class="hiddenElements">
+
+  <!-- Hidden Button to Open the Modal -->
+  <button type="button" id="addEvent" data-toggle="modal" data-target="#add" hidden></button>
+  <button type="button" id="editEvent" data-toggle="modal" data-target="#edit" hidden></button>
+
+  <!-- Enter Event Details Modal -->
+  <div class="modal fade" id="add">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">{{ 'calendar.h4-39' | translate }}</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <h5>{{ 'calendar.h5-43' | translate }}: {{ dispDate }}</h5><br>
+          <input type="text" class="form-control" [(ngModel)]='crTitle' placeholder="Enter Event Title">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"
+            id="closeModal">{{ 'calendar.button47' | translate }}</button>
+          <button type="button" class="btn btn-primary"
+            (click)='addEvent()'>{{ 'calendar.button48' | translate }}</button>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="tips">
-    <ul>
-      <li>
-        <h4>{{ 'calendar.h4-18' | translate }}</h4>
-      </li>
-      <ol>
-        <li>{{ 'calendar.list21' | translate }} <strong>{{ 'calendar.strong21' | translate }}</strong>.</li>
-        <li>{{ 'calendar.list22' | translate }} <strong>{{ 'calendar.strong22' | translate }}</strong></li>
-        <li>{{ 'calendar.list23' | translate }} <strong>{{ 'calendar.strong23' | translate }}</strong>
-          {{ 'calendar.strong23-2' | translate }}</li>
-      </ol>
-    </ul>
+  <!-- Edit Event Details Modal -->
+  <div class="modal fade" id="edit">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">{{ 'calendar.h4-64' | translate }}</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+
+          <input type="text" class="form-control" [(ngModel)]='crTitle' placeholder="Enter New Event Title">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"
+            id="closeModalSave">{{ 'calendar.button72' | translate }}</button>
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-dismiss="modal"
+            data-target="#delete">{{ 'calendar.button74' | translate }}</button>
+          <button type="button" class="btn btn-primary" (click)='saveEvent()'>Save Event</button>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="hiddenElements">
-
-    <!-- Hidden Button to Open the Modal -->
-    <button type="button" id="addEvent" data-toggle="modal" data-target="#add" hidden></button>
-    <button type="button" id="editEvent" data-toggle="modal" data-target="#edit" hidden></button>
-
-    <!-- Enter Event Details Modal -->
-    <div class="modal fade" id="add">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">{{ 'calendar.h4-39' | translate }}</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-          </div>
-          <div class="modal-body">
-            <h5>{{ 'calendar.h5-43' | translate }}: {{ dispDate }}</h5><br>
-            <input type="text" class="form-control" [(ngModel)]='crTitle' placeholder="Enter Event Title">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal"
-              id="closeModal">{{ 'calendar.button47' | translate }}</button>
-            <button type="button" class="btn btn-primary"
-              (click)='addEvent()'>{{ 'calendar.button48' | translate }}</button>
-          </div>
+  <!-- Confirm Deletion Modal -->
+  <div class="modal fade" id="delete">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">{{ 'calendar.h4-59' | translate }}</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <h5>{{ 'calendar.h5-63' | translate }} : <strong>{{ crTitle }}</strong> ?</h5><br>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"
+            id="closeDelete">{{ 'calendar.button66' | translate }}</button>
+          <button type="button" class="btn btn-danger"
+            (click)='deleteEvent()'>{{ 'calendar.button67' | translate }}</button>
         </div>
       </div>
     </div>
-
-    <!-- Edit Event Details Modal -->
-    <div class="modal fade" id="edit">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">{{ 'calendar.h4-64' | translate }}</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-          </div>
-          <div class="modal-body">
-
-            <input type="text" class="form-control" [(ngModel)]='crTitle' placeholder="Enter New Event Title">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeModalSave">{{ 'calendar.button72' | translate }}</button>
-            <button type="button" class="btn btn-danger" data-toggle="modal" data-dismiss="modal"
-              data-target="#delete">{{ 'calendar.button74' | translate }}</button>
-            <button type="button" class="btn btn-primary" (click)='saveEvent()'>Save Event</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Confirm Deletion Modal -->
-    <div class="modal fade" id="delete">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">{{ 'calendar.h4-59' | translate }}</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-          </div>
-          <div class="modal-body">
-            <h5>{{ 'calendar.h5-63' | translate }} : <strong>{{ crTitle }}</strong> ?</h5><br>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal"
-              id="closeDelete">{{ 'calendar.button66' | translate }}</button>
-            <button type="button" class="btn btn-danger"
-              (click)='deleteEvent()'>{{ 'calendar.button67' | translate }}</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-
   </div>
