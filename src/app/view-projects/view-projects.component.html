@@ -222,20 +222,19 @@
             </div>
             <div class="col">
               <!-- Priority level -->
-              <input type="text" id="projectPriorityLevel" class="form-control"
-                placeholder="{{'view_proj.placeholder_228'| translate}}" formControlName="priorityLevelValidator"
-                [class.is-invalid]="getPriorityLevel.invalid && getPriorityLevel.touched">
+              <!-- <input type="text" id="projectPriorityLevel" class="form-control" placeholder="HIGH, Medium, low"
+                formControlName="priorityLevelValidator"
+                [class.is-invalid]="getPriorityLevel.invalid && getPriorityLevel.touched"> -->
+              <select class="browser-default custom-select" id="projectPriorityLevel">
+                <option selected>SELECT</option>
+                <option value="HIGH">HIGH</option>
+                <option value="MEDIUM">MEDIUM</option>
+                <option value="LOW">LOW</option>
+              </select>
               <small class="form-text text-muted mb-4">
                 {{'view-proj.small_231' | translate}}
               </small>
-              <div *ngIf="getPriorityLevel.invalid && (getPriorityLevel.touched || getPriorityLevel.dirtty)">
-                <small *ngIf="getPriorityLevel.errors?.required" class="text-danger">
-                  {{'view-proj.small_235' | translate}}
-                </small>
-                <small *ngIf="getPriorityLevel.errors?.minlength" class="text-danger">
-                  {{'view-proj.small_238' | translate}}
-                </small>
-              </div>
+
             </div>
           </div>
 
@@ -399,20 +398,18 @@
             </div>
             <div class="col">
               <!-- Priority level -->
-              <input type="text" id="projectPriorityLevel1" [value]=projectData.priority class="form-control"
-                placeholder="{{'view-proj.placeholder_406-1' | translate}}" formControlName="editPriorityValidator"
-                [class.is-invalid]="editGetPriority.invalid && editGetPriority.touched">
+              <!-- <input type="text" id="projectPriorityLevel1" [value]=projectData.priority class="form-control"
+                placeholder="HIGH, Medium, low" formControlName="editPriorityValidator"
+                [class.is-invalid]="editGetPriority.invalid && editGetPriority.touched"> -->
+              <select class="browser-default custom-select" id="projectPriorityLevel1" [value]="projectData.priority">
+                <option selected>SELECT</option>
+                <option value="HIGH">HIGH</option>
+                <option value="MEDIUM">MEDIUM</option>
+                <option value="LOW">LOW</option>
+              </select>
               <small class="form-text text-muted mb-2">
                 {{'view_proj.small_423-409' | translate}}
               </small>
-              <div *ngIf="editGetPriority.invalid && (editGetPriority.touched || editGetPriority.dirtty)">
-                <small *ngIf="editGetPriority.errors?.required" class="text-danger">
-                  {{'view-proj.small_427-413' | translate}}
-                </small>
-                <small *ngIf="editGetPriority.errors?.minlength" class="text-danger">
-                  {{'view-proj.small_430-416' | translate}}
-                </small>
-              </div>
             </div>
           </div>
           <div class="form-row mb-2">
