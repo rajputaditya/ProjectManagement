@@ -216,9 +216,6 @@ export class ProjectDetailsComponent implements OnInit {
     this.http.get(this.url).subscribe(data => {
       JSON.parse(JSON.stringify(data)).forEach(element => {
         this.userArray.push(element);
-
-
-
       })
     })
   }
