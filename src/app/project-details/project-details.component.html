@@ -43,7 +43,7 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-10">
-                                                <h4 id="namee">{{user.name}} </h4>
+                                                <h4 id="namee">{{task.projectName}} </h4>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="custom-controls-stacked d-block my-3" title="Submit">
@@ -57,21 +57,20 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- <p id="userIddd">{{user.id}}</p> -->
-                                        <p class="title">{{user.username}}</p>
-                                        <p>{{'project-details.small_5' | translate}} : {{user.website}}</p>
-                                        <p>{{user.email}}</p>
-                                        <p>{{user.phone}}
+                                        <p id="proDetTaskOwner">{{task.taskOwner}}</p> 
+                                        <p class="title">{{task.taskName}}</p>
+                                        <p>{{'project-details.small_5' | translate}} : {{task.taskDetails}}</p>
+                                        <p>{{task.startDate}} {{task.endDate}}
                                         </p>
 
                                         <small class="form-text text-muted mb-4 ">
                                             <i>**{{'project-details.i_68' | translate}}</i>
                                             <button class="btn btn-dark btn-sm pull-right" id="taskDeleteBtn"
                                                 data-toggle="modal"
-                                                data-target="#deleteConfirmationModal">{{'project-details.button_71' | translate}}</button>
+                                                data-target="#deleteConfirmationModal" (click)=setDetail(task)>{{'project-details.button_71' | translate}}</button>
                                             <button class="btn btn-warning btn-sm pull-right" [disabled]="buttons[i]"
                                                 id="taskEditbtn" style="margin-right: 10px;" data-toggle="modal"
-                                                data-target="#editModal" (click)=sendId(user.name)>{{'project-details.button_74' | translate}}</button>
+                                                data-target="#editModal" (click)=updateTaskObj(task)>{{'project-details.button_74' | translate}}</button>
                                         </small>
 
                                     </div>
@@ -103,13 +102,13 @@
                                         <div class="row mb-4">
                                             <div class="col">
                                                 <input type="text" class="form-control" placeholder="{{'project-details.placeholder_105' | translate}}"
-                                                    disabled>
+                                                    disabled  [value]=taskDetails.getProjectTitle()>
                                                 <small class="form-text text-muted ">
                                                         {{'project-details.small_108' | translate}}
                                                 </small>
                                             </div>
                                             <div class="col">
-                                                <input type="text" class="form-control" placeholder="{{'project-details.placeholder_112' | translate}}"
+                                                <input type="text" class="form-control" placeholder="{{'project-details.placeholder_112' | translate}}" [value]=taskDetails.getTaskTitle()
                                                     disabled>
                                                 <small class="form-text text-muted ">
                                                         {{'project-details.small_115' | translate}}
@@ -119,7 +118,7 @@
 
 
                                         <input type="text" id="editTaskOwner" class="form-control"
-                                            placeholder="{{'project-details.placeholder_122' | translate}}" formControlName="editTaskOwnerValidator"
+                                            placeholder="{{'project-details.placeholder_122' | translate}}" [value]=taskDetails.getTaskOwner() formControlName="editTaskOwnerValidator"
                                             [class.is-invalid]="editGetTaskOwner.invalid && editGetTaskOwner.touched">
                                         <small class="form-text text-muted mb-1">
                                                 {{'project-details.small_125' | translate}}
@@ -138,7 +137,7 @@
                                         </div>
 
                                         <textarea class="form-control" style="margin-top: 10%;" rows="3"
-                                            placeholder="{{'project-details.placeholder_141' | translate}}" formControlName="editTaskDescriptionValidator"
+                                            placeholder="{{'project-details.placeholder_141' | translate}}" [value]=taskDetails.getTaskDescription() formControlName="editTaskDescriptionValidator"
                                             [class.is-invalid]="editGetTaskDescription.invalid && editGetTaskDescription.touched"></textarea>
                                         <small class="form-text text-muted mb-1 ">
                                                 {{'project-details.small_144' | translate}}
@@ -159,14 +158,14 @@
 
                                             <div class="col-md-6" style="margin-top: 10%;">
                                                 <input type="date" class="form-control" id="editProjectStartdate"
-                                                    placeholder="{{'project-details.placeholder_162' | translate}}" disabled>
+                                                    placeholder="{{'project-details.placeholder_162' | translate}}"  [value]=taskDetails.getStartDate() disabled>
                                                 <small class="form-text text-muted ">
                                                         {{'project-details.small_164' | translate}}
                                                 </small>
                                             </div>
                                             <div class="col-md-6" style="margin-top: 10%;">
                                                 <input type="date" class="form-control" id="editProjectEndDate"
-                                                    (blur)=editDateValidator() formControlName="editEndDateValidator"
+                                                    (blur)=editDateValidator()  [value]=taskDetails.getEnddate() formControlName="editEndDateValidator"
                                                     [class.is-invalid]="getEditEndDate.invalid && getEditEndDate.touched">
                                                 <small class="form-text text-muted ">
                                                         {{'project-details.small_172' | translate}}
@@ -187,9 +186,8 @@
                                         </div>
 
                                         <button class="btn btn-warning btn-block" type="submit" data-dismiss="modal"
-                                            id="assignTaskBtn" [disabled]="editTaskForm.invalid" data-toggle="modal"
-                                            data-target="#successUpdateModal">{{'project-details.button_191' | translate}}
-                                            </button>
+                                            id="assignTaskBtn" (click)=updateTaskConfirm() [disabled]="editTaskForm.invalid" data-toggle="modal"
+                                            data-target="#successUpdateModal">{{'project-details.button_191' | translate}}</button>
                                     </form>
 
                                 </div>
@@ -219,7 +217,7 @@
 
                                         <div class="col">
                                             <input type="text" id="projectTitle" class="form-control"
-                                                placeholder="{{'project-details.placeholder_222' | translate}}" formControlName="projectTitleValidator"
+                                                placeholder="{{'project-details.placeholder_222' | translate}}" formControlName="projectTitleValidator" value="{{projectNameFromViewProject}}"
                                                 [class.is-invalid]="getProjectTitle.invalid && getProjectTitle.touched">
                                             <small class="form-text text-muted ">
                                                     {{'project-details.small_225' | translate}}
@@ -276,7 +274,7 @@
                                     </div>
 
 
-                                    <textarea class="form-control" style="margin-top: 10%;" rows="3"
+                                    <textarea class="form-control" style="margin-top: 10%;" rows="3" id="taskDescription"
                                         placeholder="Task Details" formControlName="taskDescriptionValidator"
                                         [class.is-invalid]="getTaskDescription.invalid && getTaskDescription.touched"></textarea>
                                     <small class="form-text text-muted mb-1 ">
@@ -336,7 +334,7 @@
                                     </div>
 
                                     <button class="btn btn-warning btn-block" [disabled]="newTaskForm.invalid"
-                                        type="submit" id="assignTaskBtn">{{'project-details.button_339' | translate}}</button>
+                                        type="submit" data-dismiss="modal" (click)=addNewTask() id="assignTaskBtn">{{'project-details.button_339' | translate}}</button>
                                 </form>
 
                             </div>
