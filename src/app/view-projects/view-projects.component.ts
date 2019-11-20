@@ -205,7 +205,6 @@ export class ViewProjectsComponent implements OnInit {
       technologiesValidator: new FormControl('', Validators.required),
       startDateValidator: new FormControl('', Validators.required),
       endDateValidator: new FormControl('', Validators.required),
-      priorityLevelValidator: new FormControl('', [Validators.required, Validators.minLength(3)]),
       cityValidator: new FormControl('', [Validators.required, Validators.minLength(3), Validators.pattern(this.namePattern)]),
       countryValidator: new FormControl('', [Validators.required, Validators.minLength(4), Validators.pattern(this.namePattern)]),
       projectDescriptionValidator: new FormControl('', [Validators.required, Validators.minLength(20)])
@@ -215,7 +214,6 @@ export class ViewProjectsComponent implements OnInit {
       editProjectNameValidator: new FormControl('', [Validators.required, Validators.minLength(4)]),
       editTechnologyValidator: new FormControl('', [Validators.required, Validators.minLength(4)]),
       editEndDateValidator: new FormControl('', Validators.required),
-      editPriorityValidator: new FormControl('', [Validators.required, Validators.minLength(3)]),
       editCityValidator: new FormControl('', [Validators.required, Validators.minLength(3), Validators.pattern(this.namePattern)]),
       editCountryValidator: new FormControl('', [Validators.required, Validators.minLength(4), Validators.pattern(this.namePattern)]),
       editProjectDescriptionValidator: new FormControl('', [Validators.required, Validators.minLength(20)])
