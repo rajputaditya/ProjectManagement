@@ -179,7 +179,7 @@ export class ProjectDetailsComponent implements OnInit {
     this.taskDetails=new TaskClass();
     this.taskDetails.setTasktitle((<HTMLInputElement>document.getElementById("editTaskTitle")).value);
     this.taskDetails.setTaskDescription((<HTMLInputElement>document.getElementById("editTaskDescription")).value);
-    this.taskDetails.setStartDate((<HTMLInputElement>document.getElementById("editProjectStartdate")).value);
+    this.taskDetails.setEndDate((<HTMLInputElement>document.getElementById("editProjectEndDate")).value);
     console.log(this.taskDetails);
     this.proDetService.editTaskWIthProjectName(this.taskDetails,this.taskOwnr);
    
