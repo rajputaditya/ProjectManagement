@@ -1,8 +1,10 @@
 <div class="row" id="projectTemplate">
     <div class="col-md-8">
-        <h2>{{'project-details.h2-3' | translate}} <span
-                class="badge badge-warning">{{'project-details.span_3' | translate}}</span> </h2>
-        <h5>{{'project-details.h5-4' | translate}} <small>, {{'project-details.small_4' | translate}}</small></h5>
+        <h2>{{'project-details.h2-3' | translate}}
+            <span class="badge badge-warning">{{'project-details.span_3' | translate}}</span>
+        </h2>
+        <h5>{{'project-details.h5-4' | translate}} <small>, {{'project-details.small_4' | translate}}</small>
+        </h5>
         <small>{{'project-details.small_5' | translate}} - </small>
         <h5>{{'project-details.h5-6' | translate}} - </h5>
     </div>
@@ -33,12 +35,12 @@
                     style="font-size: 36px;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
                     {{'project-details.p_33' | translate}}
                     <button class="btn" data-toggle="modal" data-target="#newtaskModal">
-                        <i class="fas fa-plus-circle" title="Add a new task" id="addTaskIcon"></i></button></p>
+                        <i class="fas fa-plus-circle" title="Add a new task" id="addTaskIcon"></i>
+                    </button>
+                </p>
                 <div class="row">
-
                     <div class="container-fluid">
                         <div id="maindiv">
-
                             <div class="column" *ngFor="let task of taskArray; let i = index">
                                 <div class="card" *ngIf="task.status=='Complete'">
                                     <div class="card-body">
@@ -53,7 +55,6 @@
                                                             class="material-control-input" (change)="buttons[i]=true"
                                                             (click)="statusChange(task)" title="Submit task">
                                                         <span class="material-control-indicator"></span>
-
                                                     </label>
                                                 </div>
                                             </div>
@@ -90,7 +91,6 @@
                                                             class="material-control-input" (change)="buttons[i]=true"
                                                             (click)="statusChange(task)" title="Submit task">
                                                         <span class="material-control-indicator"></span>
-
                                                     </label>
                                                 </div>
                                             </div>
@@ -102,7 +102,6 @@
                                         </small>
                                         <small class="form-text text-muted ">End - {{task.endDate}}
                                         </small>
-
                                         <small class="form-text text-muted mb-4 ">
                                             <i>**{{'project-details.i_68' | translate}}</i>
                                             <button class="btn btn-dark btn-sm pull-right" id="taskDeleteBtn"
@@ -114,7 +113,6 @@
                                                 data-target="#editModal"
                                                 (click)=updateTaskObj(task)>{{'project-details.button_74' | translate}}</button>
                                         </small>
-
                                     </div>
                                 </div>
                             </div>
@@ -122,23 +120,15 @@
                     </div>
                 </div>
 
-
                 <!-- Edit task modal -->
                 <div class="modal fade" id="editModal" tabindex="-1" role="dialog">
-
                     <div>
                         <div class="modal-dialog">
                             <div class="modal-content">
-
                                 <div class="modal-header" id="modalHeader">
                                     <h4 class="modal-title">{{'project-details.h4-93' | translate}}</h4>
-
-
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
-
-
-
                                 <div class="modal-body">
                                     <form class="text-center border  p-5" [formGroup]="editTaskForm">
                                         <div class="row mb-4">
@@ -160,11 +150,11 @@
                                             </div>
                                         </div>
 
-
                                         <!-- <input type="text" id="editTaskOwner" class="form-control"
                                             placeholder="Task Owner" [value]=taskDetails.getTaskOwner()
                                             formControlName="editTaskOwnerValidator"
                                             [class.is-invalid]="editGetTaskOwner.invalid && editGetTaskOwner.touched"> -->
+
                                         <div>
                                             <select class="browser-default custom-select" id="taskOwner">
                                                 <option [value]="taskDetails.getTaskOwner()" selected>
@@ -206,11 +196,7 @@
                                                 Task Desc Must be Between 20 and 100 Characters
                                             </small>
                                         </div>
-
-
-
                                         <div class="form-row mb-4">
-
                                             <div class="col-md-6" style="margin-top: 10%;">
                                                 <input type="date" class="form-control" id="editProjectStartdate"
                                                     placeholder="{{'project-details.placeholder_162' | translate}}"
@@ -234,7 +220,6 @@
                                                     </small>
                                                 </div>
 
-
                                                 <div class="alert alert-danger" role="alert" *ngIf="temp==1"
                                                     style="width: 100%;">
                                                     {{'project-details.div_184' | translate}}
@@ -246,32 +231,23 @@
                                             id="assignTaskBtn" (click)=updateTaskConfirm() data-toggle="modal"
                                             data-target="#successUpdateModal">{{'project-details.button_191' | translate}}</button>
                                     </form>
-
                                 </div>
                             </div>
-
                         </div>
                     </div>
-
                 </div>
-
 
                 <!-- New task modal -->
                 <div class="modal fade" id="newtaskModal" tabindex="-1" role="dialog">
                     <div class="modal-dialog">
                         <div class="modal-content">
-
-
                             <div class="modal-header" id="modalHeader">
                                 <h4 class="modal-title">{{'project-details.h4_211' | translate}}</h4>
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
-
                             <div class="modal-body">
                                 <form class="text-center border  p-5" [formGroup]="newTaskForm">
                                     <div class="row mb-4">
-
-
                                         <div class="col">
                                             <input type="text" id="projectTitle" class="form-control"
                                                 placeholder="{{'project-details.placeholder_222' | translate}}"
@@ -280,8 +256,6 @@
                                                 {{'project-details.small_225' | translate}}
                                             </small>
                                         </div>
-
-
                                         <div class="col">
                                             <input type="text" id="taskTitle" class="form-control"
                                                 placeholder="Task name" formControlName="taskTitleValidator"
@@ -301,11 +275,10 @@
                                         </div>
                                     </div>
 
-
-
                                     <!-- <input type="text" id="taskOwner" class="form-control" placeholder="Task Owner"
                                         formControlName="taskOwnerValidator"
                                         [class.is-invalid]="getTaskOwner.invalid && getTaskOwner.touched"> -->
+
                                     <div>
                                         <select class="browser-default custom-select" id="taskOwner">
                                             <option selected>SELECT</option>
@@ -316,7 +289,6 @@
                                     <small class="form-text text-muted mb-1">
                                         {{'project-details.small_264' | translate}}
                                     </small>
-
 
                                     <textarea class="form-control" style="margin-top: 10%;" rows="3"
                                         id="taskDescription" placeholder="Task Details"
@@ -334,11 +306,7 @@
                                             {{'project-details.small_291' | translate}}
                                         </small>
                                     </div>
-
-
-
                                     <div class="form-row mb-4">
-
                                         <div class="col-md-6">
                                             <input type="date" class="form-control" id="projectStartDate"
                                                 style="margin-top: 10%;" placeholder="Start date"
@@ -354,8 +322,6 @@
                                                 </small>
                                             </div>
                                         </div>
-
-
                                         <div class="col-md-6">
                                             <input type="date" class="form-control" id="projectEndDate"
                                                 (blur)=dateValidate() style="margin-top: 10%;"
@@ -370,95 +336,91 @@
                                                     {{'project-details.small_327' | translate}}
                                                 </small>
                                             </div>
-
                                         </div>
                                         <div class="alert alert-danger" role="alert" *ngIf="temp==1"
                                             style="width: 100%;">
                                             End date cannot be same or less than Start date.
                                         </div>
                                     </div>
+
+                                    <button class="btn btn-warning btn-block" [disabled]="newTaskForm.invalid"
+                                        type="submit" data-dismiss="modal" (click)=addNewTask() id="assignTaskBtn">
+                                        Assign Task
+                                    </button>
+                                </form>
                             </div>
-
-                            <button class="btn btn-warning btn-block" [disabled]="newTaskForm.invalid" type="submit"
-                                data-dismiss="modal" (click)=addNewTask() id="assignTaskBtn">Assign Task</button>
-                            </form>
-
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- Delete Confirmation Modal -->
-            <div id="deleteConfirmationModal" class="modal fade" tabindex="-1" role="dialog">
-                <div class="modal-dialog modal-confirm" id="deleteModal">
-                    <div class="modal-content" id="deleteModalContent">
-
-                        <div class="modal-header" id="deleteModalHeader">
-                            <div class="icon-box" id="deleteIcon">
-                                <i class="fa fa-times" aria-hidden="true"></i>
-                            </div>
-                            <div class="modal-title">
-                                <h4>{{'project-details.h4-359' | translate}}</h4>
-
-                            </div>
-                        </div>
-                        <div class="modal-body">
-                            <p>Do you really want to delete these records? This process cannot be undone.</p>
-                        </div>
-                        <div class="modal-footer" id="deleteModalFooter">
-                            <button type="button" class="btn btn-info" data-dismiss="modal"
-                                id="deleteBtnInfo">Cancel</button>
-                            <button type="button" class="btn btn-danger" data-dismiss="modal" id="deleteBtnDanger"
-                                (click)=deleteTaskFunc()>Delete</button>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Successfully updated a project Modal -->
-            <div id="successUpdateModal" class="modal fade" tabindex="-1" role="dialog">
-                <div class="modal-dialog modal-confirm" id="successConfirmModal">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <div class="icon-box" id="successIcon">
-                                <i class="fa fa-check" aria-hidden="true"></i>
+                <!-- Delete Confirmation Modal -->
+                <div id="deleteConfirmationModal" class="modal fade" tabindex="-1" role="dialog">
+                    <div class="modal-dialog modal-confirm" id="deleteModal">
+                        <div class="modal-content" id="deleteModalContent">
+                            <div class="modal-header" id="deleteModalHeader">
+                                <div class="icon-box" id="deleteIcon">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </div>
+                                <div class="modal-title">
+                                    <h4>{{'project-details.h4-359' | translate}}</h4>
+                                </div>
                             </div>
-                            <h4 class="modal-title">Awesome!</h4>
+                            <div class="modal-body">
+                                <p>Do you really want to delete these records? This process cannot be undone.</p>
+                            </div>
+                            <div class="modal-footer" id="deleteModalFooter">
+                                <button type="button" class="btn btn-info" data-dismiss="modal"
+                                    id="deleteBtnInfo">Cancel</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal" id="deleteBtnDanger"
+                                    (click)=deleteTaskFunc()>Delete</button>
+                            </div>
                         </div>
-                        <div class="modal-body">
-                            <p class="text-center">Successfully updated employee's detils.</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-success btn-block" id="successButton"
-                                data-dismiss="modal">OK</button>
+                    </div>
+                </div>
+
+                <!-- Successfully updated a project Modal -->
+                <div id="successUpdateModal" class="modal fade" tabindex="-1" role="dialog">
+                    <div class="modal-dialog modal-confirm" id="successConfirmModal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="icon-box" id="successIcon">
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                </div>
+                                <h4 class="modal-title">Awesome!</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p class="text-center">Successfully updated employee's detils.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-success btn-block" id="successButton"
+                                    data-dismiss="modal">OK
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="tab-pane fade" id="pills-members" role="tabpanel" aria-labelledby="pills-profile-tab">
-            <div>
-                <p
-                    style="font-size: 36px;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
-                    Members
-                    <a class="btn" routerLink="/availableEmployees" (click)=getDetails(projectDetails)><i
-                            class="fas fa-plus-circle" title="Add team members" id="addTaskIcon"></i></a></p>
-
-                <div class="employeeColumn" *ngFor="let user of userArray">
-                    <div class="card">
-
-                        <img src="/assets/avatar.png" alt="Jane">
-                        <div class="container">
-                            <h4>{{user.fullName}} </h4>
-                            <p class="title">{{user.designation}}</p>
-                            <p>Expertise : {{user.technologies}}</p>
-                            <p>{{user.email}}</p>
-                            <p>{{user.phoneNumber}}
-                                <button class="btn btn-sm btn-dark" id="delEmpBtn"
-                                    (click)=unAssignProject(user)>Delete</button>
-                            </p>
+            <div class="tab-pane fade" id="pills-members" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <div>
+                    <p style="font-size: 36px;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                        Members
+                        <a class="btn" routerLink="/availableEmployees" (click)=getDetails(projectDetails)><i
+                                class="fas fa-plus-circle" title="Add team members" id="addTaskIcon"></i>
+                        </a>
+                    </p>
+                    <div class="employeeColumn" *ngFor="let user of userArray">
+                        <div class="card">
+                            <img src="/assets/avatar.png" alt="Jane">
+                            <div class="container">
+                                <h4>{{user.fullName}} </h4>
+                                <p class="title">{{user.designation}}</p>
+                                <p>Expertise : {{user.technologies}}</p>
+                                <p>{{user.email}}</p>
+                                <p>{{user.phoneNumber}}
+                                    <button class="btn btn-sm btn-dark" id="delEmpBtn"
+                                        (click)=unAssignProject(user)>Delete</button>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
