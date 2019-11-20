@@ -50,7 +50,7 @@
                                                 <div class="custom-controls-stacked d-block my-3" title="Submit">
                                                     <label class="custom-control material-checkbox">
                                                         <input type="checkbox" [disabled]="buttons[i]"
-                                                            class="material-control-input" (click)="buttons[i]=true"
+                                                            class="material-control-input" (change)="buttons[i]=true" (click)="statusChange(task)"
                                                             title="Submit task">
                                                         <span class="material-control-indicator"></span>
 

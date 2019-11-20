@@ -264,4 +264,9 @@ export class ProjectDetailsComponent implements OnInit {
     this.http.put(this.url, user).subscribe(data => console.log(data));
     location.reload();
   }
+
+  statusChange(task){
+    this.proDetService.statusChange(task).subscribe(data=>console.log(data));
+
+  }
 }
