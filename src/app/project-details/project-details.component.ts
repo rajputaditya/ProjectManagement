@@ -172,7 +172,7 @@ export class ProjectDetailsComponent implements OnInit {
     this.taskOwnr = this.taskDetails.getTaskOwner();
     this.taskDetails = new TaskClass();
     this.taskDetails.setTasktitle((<HTMLInputElement>document.getElementById("editTaskTitle")).value);
-    // this.taskDetails.setTaskOwner((<HTMLInputElement>document.getElementById("editTaskOwner")).value);
+    this.taskDetails.setTaskOwner((<HTMLInputElement>document.getElementById("editTaskOwner")).value);
     this.taskDetails.setTaskDescription((<HTMLInputElement>document.getElementById("editTaskDescription")).value);
     this.taskDetails.setEndDate((<HTMLInputElement>document.getElementById("editProjectEndDate")).value);
     console.log(this.taskDetails);
@@ -216,9 +216,6 @@ export class ProjectDetailsComponent implements OnInit {
     this.http.get(this.url).subscribe(data => {
       JSON.parse(JSON.stringify(data)).forEach(element => {
         this.userArray.push(element);
-
-
-
       })
     })
   }
@@ -241,7 +238,7 @@ export class ProjectDetailsComponent implements OnInit {
     this.newTaskForm = new FormGroup({
       projectTitleValidator: new FormControl('', Validators.minLength(4)),
       taskTitleValidator: new FormControl('', [Validators.required, Validators.minLength(4)]),
-      taskOwnerValidator: new FormControl('', [Validators.required, Validators.minLength(3)]),
+     
       taskDescriptionValidator: new FormControl('', [Validators.required, Validators.minLength(20), Validators.maxLength(100)]),
       startDateValidator: new FormControl('', [Validators.required]),
       endDateValidator: new FormControl('', [Validators.required]),
@@ -264,4 +261,11 @@ export class ProjectDetailsComponent implements OnInit {
     this.http.put(this.url, user).subscribe(data => console.log(data));
     location.reload();
   }
+
+  statusChange(task){
+    this.proDetService.statusChange(task).subscribe(data=>console.log(data));
+
+  }
+
+  employeeDetailsOfProject:Array<string>=this.comServ.getEmployeeDetails();
 }

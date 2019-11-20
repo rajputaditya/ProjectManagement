@@ -1,6 +1,7 @@
 <div class="row" id="projectTemplate">
     <div class="col-md-8">
-        <h2>{{'project-details.h2-3' | translate}} <span class="badge badge-warning">{{'project-details.span_3' | translate}}</span> </h2>
+        <h2>{{'project-details.h2-3' | translate}} <span
+                class="badge badge-warning">{{'project-details.span_3' | translate}}</span> </h2>
         <h5>{{'project-details.h5-4' | translate}} <small>, {{'project-details.small_4' | translate}}</small></h5>
         <small>{{'project-details.small_5' | translate}} - </small>
         <h5>{{'project-details.h5-6' | translate}} - </h5>
@@ -10,9 +11,7 @@
         <h5>{{'project-details.' | translate}}</h5>
         <small> {{'project-details.small_11' | translate}}- </small><br>
         <small>{{'project-details.small_12' | translate}} - </small>
-       
     </div>
-
 </div>
 <div class="row" id="projectMembersAndTasks">
     <div class="col-md-12">
@@ -30,16 +29,55 @@
         </div>
         <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-tasks" role="tabpanel" aria-labelledby="pills-home-tab">
-                <p style="font-size: 36px;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">{{'project-details.p_33' | translate}}
-                <button class="btn" data-toggle="modal" data-target="#newtaskModal">
-                    <i class="fas fa-plus-circle" title="Add a new task" id="addTaskIcon"></i></button></p>
+                <p
+                    style="font-size: 36px;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                    {{'project-details.p_33' | translate}}
+                    <button class="btn" data-toggle="modal" data-target="#newtaskModal">
+                        <i class="fas fa-plus-circle" title="Add a new task" id="addTaskIcon"></i></button></p>
                 <div class="row">
 
                     <div class="container-fluid">
                         <div id="maindiv">
 
-                            <div class="column">
-                                <div class="card">
+                            <div class="column" *ngFor="let task of taskArray; let i = index">
+                                <div class="card" *ngIf="task.status=='Complete'">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-10">
+                                                <h4 id="namee">{{task.projectName}} </h4>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="custom-controls-stacked d-block my-3" title="Submit">
+                                                    <label class="custom-control material-checkbox">
+                                                        <input type="checkbox" checked="checked" disabled
+                                                            class="material-control-input" (change)="buttons[i]=true"
+                                                            (click)="statusChange(task)" title="Submit task">
+                                                        <span class="material-control-indicator"></span>
+
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p id="proDetTaskOwner"><strong>Task Owner - </strong>{{task.taskOwner}}</p>
+                                        <p class="title"><span class="badge badge-warning">{{task.taskName}}</span></p>
+                                        <p>{{task.taskDetails}}</p>
+                                        <small class="form-text text-muted ">Start - {{task.startDate}}
+                                        </small>
+                                        <small class="form-text text-muted ">End - {{task.endDate}}
+                                        </small>
+
+                                        <small class="form-text text-muted mb-4 ">
+                                            <i>**Click checkbox to submit task</i>
+                                            <button class="btn btn-dark btn-sm pull-right" id="taskDeleteBtn"
+                                                data-toggle="modal" data-target="#deleteConfirmationModal"
+                                                disabled>Delete</button>
+                                            <button class="btn btn-warning btn-sm pull-right" disabled id="taskEditbtn"
+                                                style="margin-right: 10px;" data-toggle="modal"
+                                                data-target="#editModal">Edit</button>
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="card" *ngIf="task.status=='';">
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-10">
@@ -49,8 +87,8 @@
                                                 <div class="custom-controls-stacked d-block my-3" title="Submit">
                                                     <label class="custom-control material-checkbox">
                                                         <input type="checkbox" [disabled]="buttons[i]"
-                                                            class="material-control-input" (click)="buttons[i]=true"
-                                                            title="Submit task">
+                                                            class="material-control-input" (change)="buttons[i]=true"
+                                                            (click)="statusChange(task)" title="Submit task">
                                                         <span class="material-control-indicator"></span>
 
                                                     </label>
@@ -68,11 +106,13 @@
                                         <small class="form-text text-muted mb-4 ">
                                             <i>**{{'project-details.i_68' | translate}}</i>
                                             <button class="btn btn-dark btn-sm pull-right" id="taskDeleteBtn"
-                                                data-toggle="modal" data-target="#deleteConfirmationModal" [disabled]="buttons[i]"
+                                                data-toggle="modal" data-target="#deleteConfirmationModal"
+                                                [disabled]="buttons[i]"
                                                 (click)=setDetail(task)>{{'project-details.button_71' | translate}}</button>
                                             <button class="btn btn-warning btn-sm pull-right" [disabled]="buttons[i]"
                                                 id="taskEditbtn" style="margin-right: 10px;" data-toggle="modal"
-                                                data-target="#editModal" (click)=updateTaskObj(task)>{{'project-details.button_74' | translate}}</button>
+                                                data-target="#editModal"
+                                                (click)=updateTaskObj(task)>{{'project-details.button_74' | translate}}</button>
                                         </small>
 
                                     </div>
@@ -82,6 +122,7 @@
                     </div>
                 </div>
 
+
                 <!-- Edit task modal -->
                 <div class="modal fade" id="editModal" tabindex="-1" role="dialog">
 
@@ -89,13 +130,12 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
 
-
                                 <div class="modal-header" id="modalHeader">
                                     <h4 class="modal-title">{{'project-details.h4-93' | translate}}</h4>
 
+
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
-
 
 
 
@@ -103,17 +143,19 @@
                                     <form class="text-center border  p-5" [formGroup]="editTaskForm">
                                         <div class="row mb-4">
                                             <div class="col">
-                                                <input type="text" class="form-control" placeholder="{{'project-details.placeholder_105' | translate}}"
-                                                    disabled  [value]=taskDetails.getProjectTitle()>
+                                                <input type="text" class="form-control"
+                                                    placeholder="{{'project-details.placeholder_105' | translate}}"
+                                                    disabled [value]=taskDetails.getProjectTitle()>
                                                 <small class="form-text text-muted ">
-                                                        {{'project-details.small_108' | translate}}
+                                                    {{'project-details.small_108' | translate}}
                                                 </small>
                                             </div>
                                             <div class="col">
-                                                <input type="text" class="form-control" placeholder="{{'project-details.placeholder_112' | translate}}"
+                                                <input type="text" class="form-control"
+                                                    placeholder="{{'project-details.placeholder_112' | translate}}"
                                                     [value]=taskDetails.getTaskTitle() id="editTaskTitle">
                                                 <small class="form-text text-muted ">
-                                                        {{'project-details.small_115' | translate}}
+                                                    {{'project-details.small_115' | translate}}
                                                 </small>
                                             </div>
                                         </div>
@@ -123,42 +165,45 @@
                                             placeholder="Task Owner" [value]=taskDetails.getTaskOwner()
                                             formControlName="editTaskOwnerValidator"
                                             [class.is-invalid]="editGetTaskOwner.invalid && editGetTaskOwner.touched"> -->
-                                            <select class="browser-default custom-select" id="editTaskOwner"[value]="taskDetail.taskDetails.getTaskOwner()" >
-                                                <option selected>SELECT</option>
-                                                <option value="HIGH">HIGH</option>
-                                                <option value="MEDIUM">MEDIUM</option>
-                                                <option value="LOW">LOW</option>
-                                              </select>
+                                        <div>
+                                            <select class="browser-default custom-select" id="taskOwner">
+                                                <option [value]="taskDetails.getTaskOwner()" selected>
+                                                    {{taskDetails.getTaskOwner()}}</option>
+                                                <option *ngFor="let employee of employeeDetailsOfProject"
+                                                    [value]=employee>{{employee}}</option>
+                                            </select>
+                                        </div>
                                         <small class="form-text text-muted mb-1">
-                                                {{'project-details.small_125' | translate}}
+                                            {{'project-details.small_125' | translate}}
                                         </small>
                                         <div
                                             *ngIf="editGetTaskOwner.invalid && (editGetTaskOwner.touched || editGetTaskOwner.dirtty)">
                                             <small *ngIf="editGetTaskOwner.errors?.required" class="text-danger">
-                                                    {{'project-details.small_130' | translate}}
+                                                {{'project-details.small_130' | translate}}
                                             </small>
                                             <small *ngIf="editGetTaskOwner.errors?.pattern" class="text-danger">
-                                                    {{'project-details.small_133' | translate}}
+                                                {{'project-details.small_133' | translate}}
                                             </small>
                                             <small *ngIf="editGetTaskOwner.errors?.minlength" class="text-danger">
-                                                    {{'project-details.small_136' | translate}}
+                                                {{'project-details.small_136' | translate}}
                                             </small>
                                         </div>
 
                                         <textarea class="form-control" style="margin-top: 10%;" rows="3"
-                                            placeholder="{{'project-details.placeholder_141' | translate}}" [value]=taskDetails.getTaskDescription()
+                                            placeholder="{{'project-details.placeholder_141' | translate}}"
+                                            [value]=taskDetails.getTaskDescription()
                                             formControlName="editTaskDescriptionValidator" id="editTaskDescription"
                                             [class.is-invalid]="editGetTaskDescription.invalid && editGetTaskDescription.touched"></textarea>
                                         <small class="form-text text-muted mb-1 ">
-                                                {{'project-details.small_144' | translate}}
+                                            {{'project-details.small_144' | translate}}
                                         </small>
                                         <div
                                             *ngIf="editGetTaskDescription.invalid && (editGetTaskDescription.touched || editGetTaskDescription.dirtty)">
                                             <small *ngIf="editGetTaskDescription.errors?.required" class="text-danger">
-                                                {{'project-details.small_149' | translate}}
+                                                Task Description Is Required
                                             </small>
                                             <small *ngIf="editGetTaskDescription.errors?.minlength" class="text-danger">
-                                                    {{'project-details.small_152' | translate}}
+                                                Task Desc Must be Between 20 and 100 Characters
                                             </small>
                                         </div>
 
@@ -168,9 +213,10 @@
 
                                             <div class="col-md-6" style="margin-top: 10%;">
                                                 <input type="date" class="form-control" id="editProjectStartdate"
-                                                    placeholder="{{'project-details.placeholder_162' | translate}}"  [value]=taskDetails.getStartDate() disabled>
+                                                    placeholder="{{'project-details.placeholder_162' | translate}}"
+                                                    [value]=taskDetails.getStartDate() disabled>
                                                 <small class="form-text text-muted ">
-                                                        {{'project-details.small_164' | translate}}
+                                                    {{'project-details.small_164' | translate}}
                                                 </small>
                                             </div>
                                             <div class="col-md-6" style="margin-top: 10%;">
@@ -179,12 +225,12 @@
                                                     formControlName="editEndDateValidator"
                                                     [class.is-invalid]="getEditEndDate.invalid && getEditEndDate.touched">
                                                 <small class="form-text text-muted ">
-                                                        {{'project-details.small_172' | translate}}
+                                                    {{'project-details.small_172' | translate}}
                                                 </small>
                                                 <div
                                                     *ngIf="getEditEndDate.invalid && (getEditEndDate.touched || getEditEndDate.dirtty)">
                                                     <small *ngIf="getEditEndDate.errors?.required" class="text-danger">
-                                                            {{'project-details.small_177' | translate}}
+                                                        {{'project-details.small_177' | translate}}
                                                     </small>
                                                 </div>
 
@@ -228,37 +274,28 @@
 
                                         <div class="col">
                                             <input type="text" id="projectTitle" class="form-control"
-                                                placeholder="{{'project-details.placeholder_222' | translate}}" value="{{projectNameFromViewProject}}"
-                                                disabled>
+                                                placeholder="{{'project-details.placeholder_222' | translate}}"
+                                                value="{{projectNameFromViewProject}}" disabled>
                                             <small class="form-text text-muted ">
-                                                    {{'project-details.small_225' | translate}}
+                                                {{'project-details.small_225' | translate}}
                                             </small>
-                                            <div
-                                                *ngIf="getProjectTitle.invalid && (getProjectTitle.touched || getProjectTitle.dirtty)">
-                                                <small *ngIf="getProjectTitle.errors?.required" class="text-danger">
-                                                        {{'project-details.small_230' | translate}}
-                                                </small>
-                                                <small *ngIf="getProjectTitle.errors?.minlength" class="text-danger">
-                                                        {{'project-details.small_233' | translate}}
-                                                </small>
-                                            </div>
                                         </div>
 
 
                                         <div class="col">
                                             <input type="text" id="taskTitle" class="form-control"
-                                                placeholder="{{'project-details.placeholder_241' | translate}}" formControlName="taskTitleValidator"
+                                                placeholder="Task name" formControlName="taskTitleValidator"
                                                 [class.is-invalid]="getTaskTitle.invalid && getTaskTitle.touched">
                                             <small class="form-text text-muted ">
-                                                    {{'project-details.small_244' | translate}}
+                                                {{'project-details.small_244' | translate}}
                                             </small>
                                             <div
                                                 *ngIf="getTaskTitle.invalid && (getTaskTitle.touched || getTaskTitle.dirtty)">
                                                 <small *ngIf="getTaskTitle.errors?.required" class="text-danger">
-                                                        {{'project-details.small_249' | translate}}
+                                                    {{'project-details.small_249' | translate}}
                                                 </small>
                                                 <small *ngIf="getTaskTitle.errors?.minlength" class="text-danger">
-                                                        {{'project-details.small_251' | translate}}
+                                                    {{'project-details.small_251' | translate}}
                                                 </small>
                                             </div>
                                         </div>
@@ -269,14 +306,15 @@
                                     <!-- <input type="text" id="taskOwner" class="form-control" placeholder="Task Owner"
                                         formControlName="taskOwnerValidator"
                                         [class.is-invalid]="getTaskOwner.invalid && getTaskOwner.touched"> -->
+                                    <div>
                                         <select class="browser-default custom-select" id="taskOwner">
                                             <option selected>SELECT</option>
-                                            <option value="HIGH">HIGH</option>
-                                            <option value="MEDIUM">MEDIUM</option>
-                                            <option value="LOW">LOW</option>
-                                          </select>
+                                            <option *ngFor="let employee of employeeDetailsOfProject" [value]=employee>
+                                                {{employee}}</option>
+                                        </select>
+                                    </div>
                                     <small class="form-text text-muted mb-1">
-                                            {{'project-details.small_264' | translate}}
+                                        {{'project-details.small_264' | translate}}
                                     </small>
 
 
@@ -285,15 +323,15 @@
                                         formControlName="taskDescriptionValidator"
                                         [class.is-invalid]="getTaskDescription.invalid && getTaskDescription.touched"></textarea>
                                     <small class="form-text text-muted mb-1 ">
-                                        T{{'project-details.small_283' | translate}}
+                                        {{'project-details.small_283' | translate}}
                                     </small>
                                     <div
                                         *ngIf="getTaskDescription.invalid && (getTaskDescription.touched || getTaskDescription.dirtty)">
                                         <small *ngIf="getTaskDescription.errors?.required" class="text-danger">
-                                                {{'project-details.small_288' | translate}}
+                                            {{'project-details.small_288' | translate}}
                                         </small>
                                         <small *ngIf="getTaskDescription.errors?.minlength" class="text-danger">
-                                                {{'project-details.small_291' | translate}}
+                                            {{'project-details.small_291' | translate}}
                                         </small>
                                     </div>
 
@@ -302,17 +340,17 @@
                                     <div class="form-row mb-4">
 
                                         <div class="col-md-6">
-                                            <input type="date" class="form-control" id="projectStartdate"
-                                                style="margin-top: 10%;" placeholder="{{'project-details.placeholder_301' | translate}}"
+                                            <input type="date" class="form-control" id="projectStartDate"
+                                                style="margin-top: 10%;" placeholder="Start date"
                                                 formControlName="startDateValidator"
                                                 [class.is-invalid]="getStartDate.invalid && getStartDate.touched">
                                             <small class="form-text text-muted ">
-                                                    {{'project-details.small_305' | translate}}
+                                                {{'project-details.small_305' | translate}}
                                             </small>
                                             <div
                                                 *ngIf="getStartDate.invalid && (getStartDate.touched || getStartDate.dirtty)">
                                                 <small *ngIf="getStartDate.errors?.required" class="text-danger">
-                                                        {{'project-details.small_310' | translate}}
+                                                    {{'project-details.small_310' | translate}}
                                                 </small>
                                             </div>
                                         </div>
@@ -324,106 +362,107 @@
                                                 formControlName="endDateValidator"
                                                 [class.is-invalid]="getEndDate.invalid && getEndDate.touched">
                                             <small class="form-text text-muted ">
-                                                    {{'project-details.small_322' | translate}}
+                                                {{'project-details.small_322' | translate}}
                                             </small>
                                             <div
                                                 *ngIf="getEndDate.invalid && (getEndDate.touched || getEndDate.dirtty)">
                                                 <small *ngIf="getEndDate.errors?.required" class="text-danger">
-                                                        {{'project-details.small_327' | translate}}
+                                                    {{'project-details.small_327' | translate}}
                                                 </small>
                                             </div>
 
                                         </div>
                                         <div class="alert alert-danger" role="alert" *ngIf="temp==1"
                                             style="width: 100%;">
-                                            {{'project-details.div_334' | translate}}.
+                                            End date cannot be same or less than Start date.
                                         </div>
                                     </div>
-
-                                    <button class="btn btn-warning btn-block" [disabled]="newTaskForm.invalid"
-                                        type="submit" data-dismiss="modal" (click)=addNewTask() id="assignTaskBtn">{{'project-details.button_339' | translate}}</button>
-                                </form>
-
                             </div>
+
+                            <button class="btn btn-warning btn-block" [disabled]="newTaskForm.invalid" type="submit"
+                                data-dismiss="modal" (click)=addNewTask() id="assignTaskBtn">Assign Task</button>
+                            </form>
 
                         </div>
 
                     </div>
+
                 </div>
+            </div>
 
-                <!-- Delete Confirmation Modal -->
-                <div id="deleteConfirmationModal" class="modal fade" tabindex="-1" role="dialog">
-                    <div class="modal-dialog modal-confirm" id="deleteModal">
-                        <div class="modal-content" id="deleteModalContent">
+            <!-- Delete Confirmation Modal -->
+            <div id="deleteConfirmationModal" class="modal fade" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-confirm" id="deleteModal">
+                    <div class="modal-content" id="deleteModalContent">
 
-                            <div class="modal-header" id="deleteModalHeader">
-                                <div class="icon-box" id="deleteIcon">
-                                    <i class="fa fa-times" aria-hidden="true"></i>
-                                </div>
-                                <div class="modal-title">
-                                    <h4>{{'project-details.h4-359' | translate}}</h4>
-
-                                </div>
+                        <div class="modal-header" id="deleteModalHeader">
+                            <div class="icon-box" id="deleteIcon">
+                                <i class="fa fa-times" aria-hidden="true"></i>
                             </div>
-                            <div class="modal-body">
-                                <p>{{'project-details.p_364' | translate}}.</p>
-                            </div>
-                            <div class="modal-footer" id="deleteModalFooter">
-                                <button type="button" class="btn btn-info" data-dismiss="modal"
-                                    id="deleteBtnInfo">{{'project-details.button_368' | translate}}</button>
-                                <button type="button" class="btn btn-danger" id="deleteBtnDanger" data-dismiss="modal" (click)=deleteTaskFunc()>{{'project-details.button_369' | translate}}</button>
+                            <div class="modal-title">
+                                <h4>{{'project-details.h4-359' | translate}}</h4>
+
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Successfully updated a project Modal -->
-                <div id="successUpdateModal" class="modal fade" tabindex="-1" role="dialog">
-                    <div class="modal-dialog modal-confirm" id="successConfirmModal">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <div class="icon-box" id="successIcon">
-                                    <i class="fa fa-check" aria-hidden="true"></i>
-                                </div>
-                                <h4 class="modal-title">{{'project-details.h4_383' | translate}}</h4>
-                            </div>
-                            <div class="modal-body">
-                                <p class="text-center">{{'project-detailsp_386.' | translate}}.</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-success btn-block" id="successButton"
-                                    data-dismiss="modal">OK</button>
-                            </div>
+                        <div class="modal-body">
+                            <p>Do you really want to delete these records? This process cannot be undone.</p>
+                        </div>
+                        <div class="modal-footer" id="deleteModalFooter">
+                            <button type="button" class="btn btn-info" data-dismiss="modal"
+                                id="deleteBtnInfo">Cancel</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal" id="deleteBtnDanger"
+                                (click)=deleteTaskFunc()>Delete</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade" id="pills-members" role="tabpanel" aria-labelledby="pills-profile-tab">
-                <div>
-                    <p
-                        style="font-size: 36px;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
-                        Members
-                        <a class="btn" routerLink="/availableEmployees" (click)=getDetails(projectDetails)><i
-                                class="fas fa-plus-circle" title="Add team members" id="addTaskIcon"></i></a></p>
 
-                    <div class="employeeColumn" *ngFor="let user of userArray">
-                        <div class="card">
-
-                            <img src="/assets/avatar.png" alt="Jane">
-                            <div class="container">
-                                <h4>{{user.fullName}} </h4>
-                                <p class="title">{{user.designation}}</p>
-                                <p>Expertise : {{user.technologies}}</p>
-                                <p>{{user.email}}</p>
-                                <p>{{user.phoneNumber}}
-                                    <button class="btn btn-sm btn-dark" id="delEmpBtn"
-                                        (click)=unAssignProject(user)>Delete</button>
-                                </p>
+            <!-- Successfully updated a project Modal -->
+            <div id="successUpdateModal" class="modal fade" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-confirm" id="successConfirmModal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="icon-box" id="successIcon">
+                                <i class="fa fa-check" aria-hidden="true"></i>
                             </div>
+                            <h4 class="modal-title">Awesome!</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p class="text-center">Successfully updated employee's detils.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-success btn-block" id="successButton"
+                                data-dismiss="modal">OK</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>       
-    </div>    
+        </div>
+        <div class="tab-pane fade" id="pills-members" role="tabpanel" aria-labelledby="pills-profile-tab">
+            <div>
+                <p
+                    style="font-size: 36px;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                    Members
+                    <a class="btn" routerLink="/availableEmployees" (click)=getDetails(projectDetails)><i
+                            class="fas fa-plus-circle" title="Add team members" id="addTaskIcon"></i></a></p>
+
+                <div class="employeeColumn" *ngFor="let user of userArray">
+                    <div class="card">
+
+                        <img src="/assets/avatar.png" alt="Jane">
+                        <div class="container">
+                            <h4>{{user.fullName}} </h4>
+                            <p class="title">{{user.designation}}</p>
+                            <p>Expertise : {{user.technologies}}</p>
+                            <p>{{user.email}}</p>
+                            <p>{{user.phoneNumber}}
+                                <button class="btn btn-sm btn-dark" id="delEmpBtn"
+                                    (click)=unAssignProject(user)>Delete</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
