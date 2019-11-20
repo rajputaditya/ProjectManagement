@@ -81,7 +81,7 @@ export class ProjectDetailsComponent implements OnInit {
   endtemp;
   projectDetail;
   projectNameFromViewProject: any;
-  taskArray: any;
+  taskArray: Array<any>=[];
   url: string;
   taskClass: TaskClass;
 
@@ -150,7 +150,7 @@ export class ProjectDetailsComponent implements OnInit {
   taskOwnr;
   setDetail(taskDetail) {
     this.taskOwnr = taskDetail.taskOwner;
-    console.log(this.taskOwnr);
+    console.log("ankushsadsadsasa "+this.taskOwnr);
 
   }
 
@@ -172,8 +172,9 @@ export class ProjectDetailsComponent implements OnInit {
     this.taskOwnr = this.taskDetails.getTaskOwner();
     this.taskDetails = new TaskClass();
     this.taskDetails.setTasktitle((<HTMLInputElement>document.getElementById("editTaskTitle")).value);
+    // this.taskDetails.setTaskOwner((<HTMLInputElement>document.getElementById("editTaskOwner")).value);
     this.taskDetails.setTaskDescription((<HTMLInputElement>document.getElementById("editTaskDescription")).value);
-    this.taskDetails.setEndDate((<HTMLInputElement>document.getElementById("editProjectEnddate")).value);
+    this.taskDetails.setEndDate((<HTMLInputElement>document.getElementById("editProjectEndDate")).value);
     console.log(this.taskDetails);
     this.proDetService.editTaskWIthProjectName(this.taskDetails, this.taskOwnr);
 
@@ -208,7 +209,7 @@ export class ProjectDetailsComponent implements OnInit {
 
 
   userArray: Array<any> = [];
-  url: string = "https://jsonplaceholder.typicode.com/users";
+  constructor(private http: HttpClient, private comServ: CommonService, private proDetService: ProjectDetailsService) {
 
     this.taskList();
     this.url = 'http://localhost:8080/employee/' + comServ.setObj().projectName;
@@ -238,7 +239,7 @@ export class ProjectDetailsComponent implements OnInit {
     });
 
     this.newTaskForm = new FormGroup({
-      projectTitleValidator: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      projectTitleValidator: new FormControl('', Validators.minLength(4)),
       taskTitleValidator: new FormControl('', [Validators.required, Validators.minLength(4)]),
       taskOwnerValidator: new FormControl('', [Validators.required, Validators.minLength(3)]),
       taskDescriptionValidator: new FormControl('', [Validators.required, Validators.minLength(20), Validators.maxLength(100)]),
