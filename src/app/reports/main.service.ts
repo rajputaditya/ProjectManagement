@@ -7,8 +7,16 @@ import { HttpClient } from '@angular/common/http';
 export class MainService {
 
   constructor( private _http: HttpClient) { }
-  emp()
+  getLastMonthProgressOfEmployees(month: any)
   {
-    return this._http.get("/api");
+    return this._http.get("http://localhost:8787/employees/lastmonth/" + month);
+  }
+
+  getNameByEmpId(empId: any){
+    return this._http.get("http://localhost:8080/employee/employeename/" + empId);
+  }
+
+  getMonthlyProgressOfEmployees(month: any){
+    return this._http.get("http://localhost:8787/employees/" + month);
   }
 }

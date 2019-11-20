@@ -17,18 +17,21 @@ export class ReportsComponent implements OnInit {
   employeeNames: any = [];
 
   ngOnInit() {
-    this._main.emp()
+
+    // BARCHART for employee last month progress
+    this._main.getLastMonthProgressOfEmployees(new Date().getMonth())
       .subscribe(res => {
-
         this.jsonArray = res;
-        console.log(this.jsonArray);
 
-        this.jsonArray.forEach(employee => {
-          console.log(employee.employee_name);
-          this.percentagesCompleted.push(employee.project_part_progress);
-          this.employeeNames.push(employee.employee_name);
-        });
-        
+        // Gets all the employees for the last month
+        this.jsonArray.forEach(employee => this.percentagesCompleted.push(employee.project_part_progress));
+        this.jsonArray.forEach(employee => this.employeeNames.push(employee.emp_name));
+
+        // DEBUG LOG
+        console.log(this.percentagesCompleted);
+        console.log(this.employeeNames);
+
+        // Rendering data into Last month progress chart
         this.chart = new Chart('barchart', {
           type: 'bar',
           data: {
@@ -56,9 +59,6 @@ export class ReportsComponent implements OnInit {
               display: false
             },
             scales: {
-              xAxes: [{
-                display: true,
-              }],
               yAxes: [
                 {
                   "ticks": { "beginAtZero": true }
@@ -66,9 +66,29 @@ export class ReportsComponent implements OnInit {
             }
           }
         });
-        let smDTS = [{
-          label: "Akhil",
-          data: [1,3,76,23,76,21,87],
+
+      });
+
+    this._main.getMonthlyProgressOfEmployees(new Date().getMonth() + 1).subscribe(res => {
+
+      let dataset: any = [];
+      let months: any = [];
+      let month = new Date().getMonth();
+      for (let index = 1; index <= 6; index++) {
+        months.push(month--);
+      }
+
+      let emps: any = res;
+      emps.forEach(element => {
+        let emp: any = element;
+        emp.forEach(employee => this.employeeNames.push(employee.emp_name));
+        dataset.push({
+          label: empName,
+          data: data,
+          borderColor: "black",
+          borderWidth: 1,
+          lineTension: 0.2,
+          fill: true,
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
             'rgba(54, 162, 235, 0.2)',
@@ -76,137 +96,34 @@ export class ReportsComponent implements OnInit {
             'rgba(75, 192, 192, 0.2)',
             'rgba(153, 102, 255, 0.2)',
             'rgba(255, 159, 64, 0.2)'
-          ],
-          borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
-          ],
+          ]
+        });
 
-          fill: true
+      });
+      this.chart = new Chart('canvas', {
+        type: 'line',
+        data: {
+          labels: months,
+          datasets: dataset,
         },
-        {
-          data: [32,76,45,98,34,1,55],
-
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-          ],
-          borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
-          ],
-          fill: true
-        }];
-        this.chart = new Chart('canvas', {
-          type: 'line',
-          animationEnabled: true,
-          axisX: {
-            intervsl: 10,
+        options: {
+          legend: {
+            display: true
           },
-          data: {
-            labels: ["Janaury","Febuary","March","April","May","June","July","August","September","October","November","December"],
-            datasets: smDTS
-          },
-          options: {
-            legend: {
-              display: true
-            },
-            scales: {
-              xAxes: [{
-
-                display: true
-              }],
-              yAxes: [
-                {
-                  "ticks": { "beginAtZero": true }
-                }],
-            }
-          }
-        });
-        this.chart = new Chart('piechart', {
-          type: 'pie',
-          animationEnabled: true,
-          axisX: {
-            intervsl: 10,
-          },
-          data: {
-            labels: [],
-            datasets: [
+          scales: {
+            xAxes: [
               {
-                data: [],
-                backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                  'rgba(255,99,132,1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)'
-                ],
-
-                fill: true
-              },
+                display: true,
+              }
+            ],
+            yAxes: [
               {
-                data: [],
-
-                backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                  'rgba(255,99,132,1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)'
-                ],
-                fill: true
-              },
-            ]
-          },
-          options: {
-            legend: {
-              display: true
-            },
-            scales: {
-              xAxes: [{
-
-                display: true
+                "ticks": { "beginAtZero": true }
               }],
-              yAxes: [{
-                display: true
-              }],
-            }
           }
-        });
-
-
-      })
-
+        }
+      });
+    });
   }
 
 }
