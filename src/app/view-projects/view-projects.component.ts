@@ -244,8 +244,18 @@ export class ViewProjectsComponent implements OnInit {
     this.service.addProject(this.proj).subscribe(proj => this.projects.push(proj));
     location.reload();
   }
+
+  projectEmployees:Array<string>=[];
   sendProjectDetail(projectDetail: any) {
     this.comServ.getObj(projectDetail);
+    this.url='http://localhost:8080/projectEmployees/'+projectDetail.projectName;
+    console.log(this.url);
+    this.http.get(this.url).subscribe(data=>{
+      JSON.parse(JSON.stringify(data)).forEach(element=>
+        this.projectEmployees.push(element));
+        console.log("spldpewfdwe"+this.projectEmployees);
+    });
+    this.comServ.sendEmployeeDetails(this.projectEmployees);
   }
 
 

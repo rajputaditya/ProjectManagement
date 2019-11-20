@@ -8,6 +8,7 @@ export class CommonService {
 
   constructor() { }
   arr:any;
+  employeeDetails:Array<string>=[];
   getObj(arr:any){
     this.arr=arr;
   }
@@ -15,4 +16,11 @@ export class CommonService {
     return this.arr;
   }
 
+  sendEmployeeDetails(employeeDetails){
+    this.employeeDetails=employeeDetails;
+  }
+
+  getEmployeeDetails(){
+    return this.employeeDetails;
+  }
 }

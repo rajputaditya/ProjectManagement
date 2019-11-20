@@ -238,7 +238,7 @@ export class ProjectDetailsComponent implements OnInit {
     this.newTaskForm = new FormGroup({
       projectTitleValidator: new FormControl('', Validators.minLength(4)),
       taskTitleValidator: new FormControl('', [Validators.required, Validators.minLength(4)]),
-      taskOwnerValidator: new FormControl('', [Validators.required, Validators.minLength(3)]),
+     
       taskDescriptionValidator: new FormControl('', [Validators.required, Validators.minLength(20), Validators.maxLength(100)]),
       startDateValidator: new FormControl('', [Validators.required]),
       endDateValidator: new FormControl('', [Validators.required]),
@@ -261,4 +261,11 @@ export class ProjectDetailsComponent implements OnInit {
     this.http.put(this.url, user).subscribe(data => console.log(data));
     location.reload();
   }
+
+  statusChange(task){
+    this.proDetService.statusChange(task).subscribe(data=>console.log(data));
+
+  }
+
+  employeeDetailsOfProject:Array<string>=this.comServ.getEmployeeDetails();
 }

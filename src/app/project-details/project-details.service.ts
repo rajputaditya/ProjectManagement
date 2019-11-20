@@ -28,4 +28,10 @@ export class ProjectDetailsService {
     this._http.put("http://localhost:8086/taskDetails/tasks/" + taskOwner,task).subscribe();
     console.log(task);
   }
+
+  statusChange(task:any){
+
+    return this._http.put("http://localhost:8086/taskDetails/tasks/status/"+task.taskOwner,task);
+
+  }
 }
