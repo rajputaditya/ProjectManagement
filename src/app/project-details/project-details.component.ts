@@ -150,7 +150,7 @@ export class ProjectDetailsComponent implements OnInit {
   taskOwnr;
   setDetail(taskDetail) {
     this.taskOwnr = taskDetail.taskOwner;
-    console.log(this.taskOwnr);
+    console.log("ankushsadsadsasa "+this.taskOwnr);
 
   }
 
@@ -172,6 +172,7 @@ export class ProjectDetailsComponent implements OnInit {
     this.taskOwnr = this.taskDetails.getTaskOwner();
     this.taskDetails = new TaskClass();
     this.taskDetails.setTasktitle((<HTMLInputElement>document.getElementById("editTaskTitle")).value);
+    // this.taskDetails.setTaskOwner((<HTMLInputElement>document.getElementById("editTaskOwner")).value);
     this.taskDetails.setTaskDescription((<HTMLInputElement>document.getElementById("editTaskDescription")).value);
     this.taskDetails.setEndDate((<HTMLInputElement>document.getElementById("editProjectEndDate")).value);
     console.log(this.taskDetails);
