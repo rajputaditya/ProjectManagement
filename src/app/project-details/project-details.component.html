@@ -58,7 +58,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <p id="proDetTaskOwner">{{task.taskOwner}}</p> 
+                                        <p id="proDetTaskOwner">{{task.taskOwner}}</p>
                                         <p class="title">{{task.taskName}}</p>
                                         <p>Description : {{task.taskDetails}}</p>
                                         <p>{{task.startDate}} {{task.endDate}}
@@ -67,8 +67,8 @@
                                         <small class="form-text text-muted mb-4 ">
                                             <i>**Click checkbox to submit task</i>
                                             <button class="btn btn-dark btn-sm pull-right" id="taskDeleteBtn"
-                                                data-toggle="modal"
-                                                data-target="#deleteConfirmationModal" (click)=setDetail(task)>Delete</button>
+                                                data-toggle="modal" data-target="#deleteConfirmationModal"
+                                                (click)=setDetail(task)>Delete</button>
                                             <button class="btn btn-warning btn-sm pull-right" [disabled]="buttons[i]"
                                                 id="taskEditbtn" style="margin-right: 10px;" data-toggle="modal"
                                                 data-target="#editModal" (click)=updateTaskObj(task)>Edit</button>
@@ -103,14 +103,14 @@
                                         <div class="row mb-4">
                                             <div class="col">
                                                 <input type="text" class="form-control" placeholder="Project title"
-                                                    disabled  [value]=taskDetails.getProjectTitle()>
+                                                    disabled [value]=taskDetails.getProjectTitle()>
                                                 <small class="form-text text-muted ">
                                                     Project Title
                                                 </small>
                                             </div>
                                             <div class="col">
-                                                <input type="text" class="form-control" placeholder="Task title" [value]=taskDetails.getTaskTitle()
-                                                    disabled>
+                                                <input type="text" class="form-control" placeholder="Task title"
+                                                    [value]=taskDetails.getTaskTitle() disabled>
                                                 <small class="form-text text-muted ">
                                                     Task Title
                                                 </small>
@@ -119,7 +119,8 @@
 
 
                                         <input type="text" id="editTaskOwner" class="form-control"
-                                            placeholder="Task Owner" [value]=taskDetails.getTaskOwner() formControlName="editTaskOwnerValidator"
+                                            placeholder="Task Owner" [value]=taskDetails.getTaskOwner()
+                                            formControlName="editTaskOwnerValidator"
                                             [class.is-invalid]="editGetTaskOwner.invalid && editGetTaskOwner.touched">
                                         <small class="form-text text-muted mb-1">
                                             Task Owners
@@ -138,7 +139,8 @@
                                         </div>
 
                                         <textarea class="form-control" style="margin-top: 10%;" rows="3"
-                                            placeholder="Task Details" [value]=taskDetails.getTaskDescription() formControlName="editTaskDescriptionValidator"
+                                            placeholder="Task Details" [value]=taskDetails.getTaskDescription()
+                                            formControlName="editTaskDescriptionValidator"
                                             [class.is-invalid]="editGetTaskDescription.invalid && editGetTaskDescription.touched"></textarea>
                                         <small class="form-text text-muted mb-1 ">
                                             Task Description
@@ -159,14 +161,16 @@
 
                                             <div class="col-md-6" style="margin-top: 10%;">
                                                 <input type="date" class="form-control" id="editProjectStartdate"
-                                                    placeholder="Start date"  [value]=taskDetails.getStartDate() disabled>
+                                                    placeholder="Start date" [value]=taskDetails.getStartDate()
+                                                    disabled>
                                                 <small class="form-text text-muted ">
                                                     Start Date
                                                 </small>
                                             </div>
                                             <div class="col-md-6" style="margin-top: 10%;">
                                                 <input type="date" class="form-control" id="editProjectEndDate"
-                                                    (blur)=editDateValidator()  [value]=taskDetails.getEnddate() formControlName="editEndDateValidator"
+                                                    (blur)=editDateValidator() [value]=taskDetails.getEnddate()
+                                                    formControlName="editEndDateValidator"
                                                     [class.is-invalid]="getEditEndDate.invalid && getEditEndDate.touched">
                                                 <small class="form-text text-muted ">
                                                     End Date
@@ -187,7 +191,7 @@
                                         </div>
 
                                         <button class="btn btn-warning btn-block" type="submit" data-dismiss="modal"
-                                            id="assignTaskBtn" (click)=updateTaskConfirm() [disabled]="editTaskForm.invalid" data-toggle="modal"
+                                            id="assignTaskBtn" (click)=updateTaskConfirm() data-toggle="modal"
                                             data-target="#successUpdateModal">Update
                                             Task</button>
                                     </form>
@@ -219,20 +223,11 @@
 
                                         <div class="col">
                                             <input type="text" id="projectTitle" class="form-control"
-                                                placeholder="Project name" formControlName="projectTitleValidator" value="{{projectNameFromViewProject}}"
-                                                [class.is-invalid]="getProjectTitle.invalid && getProjectTitle.touched">
+                                                placeholder="Project name" value="{{projectNameFromViewProject}}"
+                                                disabled>
                                             <small class="form-text text-muted ">
                                                 Project Title
                                             </small>
-                                            <div
-                                                *ngIf="getProjectTitle.invalid && (getProjectTitle.touched || getProjectTitle.dirtty)">
-                                                <small *ngIf="getProjectTitle.errors?.required" class="text-danger">
-                                                    Project Title Is Required
-                                                </small>
-                                                <small *ngIf="getProjectTitle.errors?.minlength" class="text-danger">
-                                                    Project Title Must be Min length of 4 Characters
-                                                </small>
-                                            </div>
                                         </div>
 
 
@@ -276,8 +271,9 @@
                                     </div>
 
 
-                                    <textarea class="form-control" style="margin-top: 10%;" rows="3" id="taskDescription"
-                                        placeholder="Task Details" formControlName="taskDescriptionValidator"
+                                    <textarea class="form-control" style="margin-top: 10%;" rows="3"
+                                        id="taskDescription" placeholder="Task Details"
+                                        formControlName="taskDescriptionValidator"
                                         [class.is-invalid]="getTaskDescription.invalid && getTaskDescription.touched"></textarea>
                                     <small class="form-text text-muted mb-1 ">
                                         Task Description
@@ -336,7 +332,8 @@
                                     </div>
 
                                     <button class="btn btn-warning btn-block" [disabled]="newTaskForm.invalid"
-                                        type="submit" data-dismiss="modal" (click)=addNewTask() id="assignTaskBtn">Assign Task</button>
+                                        type="submit" data-dismiss="modal" (click)=addNewTask()
+                                        id="assignTaskBtn">Assign Task</button>
                                 </form>
 
                             </div>
