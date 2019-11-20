@@ -14,7 +14,7 @@ export class TaskClass {
   setProjectTitle(projectTitle) {
     this.projectName = projectTitle;
   }
-  getProjectTitle(){
+  getProjectTitle() {
     return this.projectName;
   }
 
@@ -22,7 +22,7 @@ export class TaskClass {
   setTasktitle(taskTitle) {
     this.taskName = taskTitle;
   }
-  getTaskTitle(){
+  getTaskTitle() {
     return this.taskName;
   }
 
@@ -30,7 +30,7 @@ export class TaskClass {
   setTaskOwner(taskOwner) {
     this.taskOwner = taskOwner;
   }
-  getTaskOwner(){
+  getTaskOwner() {
     return this.taskOwner;
   }
 
@@ -38,7 +38,7 @@ export class TaskClass {
   setTaskDescription(taskDescription) {
     this.taskDetails = taskDescription;
   }
-  getTaskDescription(){
+  getTaskDescription() {
     return this.taskDetails;
   }
 
@@ -46,15 +46,15 @@ export class TaskClass {
   setStartDate(startDate) {
     this.startDate = startDate;
   }
-  getStartDate(){
+  getStartDate() {
     return this.startDate;
   }
-  
+
 
   setEndDate(endDate) {
     this.endDate = endDate;
   }
-  getEnddate(){
+  getEnddate() {
     return this.endDate;
   }
 }
@@ -83,6 +83,7 @@ export class ProjectDetailsComponent implements OnInit {
   projectNameFromViewProject: any;
   taskArray: any;
   url: string;
+  taskClass: TaskClass;
 
 
 
@@ -130,6 +131,7 @@ export class ProjectDetailsComponent implements OnInit {
   }
 
   taskList() {
+    console.log("hjhreklwel"+this.comServ.setObj().projectName);
     this.projectNameFromViewProject = this.comServ.setObj().projectName;
     this.proDetService.getTaskByProjectName(this.projectNameFromViewProject).subscribe(data => {
       JSON.parse(JSON.stringify(data)).forEach(element => {
@@ -140,7 +142,7 @@ export class ProjectDetailsComponent implements OnInit {
   }
 
 
-  deleteTaskFunc(){
+  deleteTaskFunc() {
 
     this.proDetService.deleteTaskWithTaskOwner(this.taskOwnr);
 
@@ -153,8 +155,8 @@ export class ProjectDetailsComponent implements OnInit {
   }
 
 
-  taskDetails:TaskClass=new TaskClass();
-  updateTaskObj(task){
+  taskDetails: TaskClass = new TaskClass();
+  updateTaskObj(task) {
 
     this.taskDetails.setProjectTitle(task.projectName);
     this.taskDetails.setTasktitle(task.taskName);
@@ -166,16 +168,31 @@ export class ProjectDetailsComponent implements OnInit {
 
   }
 
-  updateTaskConfirm(){
-    this.taskOwnr=this.taskDetails.getTaskOwner();
-    this.taskDetails=new TaskClass();
+  updateTaskConfirm() {
+    this.taskOwnr = this.taskDetails.getTaskOwner();
+    this.taskDetails = new TaskClass();
     this.taskDetails.setTasktitle((<HTMLInputElement>document.getElementById("editTaskTitle")).value);
     this.taskDetails.setTaskDescription((<HTMLInputElement>document.getElementById("editTaskDescription")).value);
-    this.taskDetails.setStartDate((<HTMLInputElement>document.getElementById("editProjectStartdate")).value);
+    this.taskDetails.setEndDate((<HTMLInputElement>document.getElementById("editProjectEnddate")).value);
     console.log(this.taskDetails);
-    this.proDetService.editTaskWIthProjectName(this.taskDetails,this.taskOwnr);
-   
+    this.proDetService.editTaskWIthProjectName(this.taskDetails, this.taskOwnr);
 
+
+  }
+
+  addNewTask() {
+
+    this.taskClass = new TaskClass();
+
+
+
+    this.taskClass.setProjectTitle((<HTMLInputElement>document.getElementById("projectTitle")).value);
+    this.taskClass.setTasktitle((<HTMLInputElement>document.getElementById("taskTitle")).value);
+    this.taskClass.setTaskOwner((<HTMLInputElement>document.getElementById("taskOwner")).value);
+    this.taskClass.setTaskDescription((<HTMLInputElement>document.getElementById("taskDescription")).value);
+    this.taskClass.setStartDate((<HTMLInputElement>document.getElementById("projectStartDate")).value);
+    this.taskClass.setEndDate((<HTMLInputElement>document.getElementById("projectEndDate")).value);
+    this.proDetService.saveTask(this.taskClass);
   }
 
   // taskListByProjectName() {
@@ -194,14 +211,16 @@ export class ProjectDetailsComponent implements OnInit {
   constructor(private http: HttpClient, private comServ: CommonService, private proDetService: ProjectDetailsService) {
 
     this.taskList();
-    this.url='http://localhost:8080/employee/'+comServ.setObj().projectName;
+    this.url = 'http://localhost:8080/employee/' + comServ.setObj().projectName;
     this.http.get(this.url).subscribe(data => {
       JSON.parse(JSON.stringify(data)).forEach(element => {
         this.userArray.push(element);
 
-      
 
-  })})}
+
+      })
+    })
+  }
 
 
   curId: string;
@@ -230,26 +249,18 @@ export class ProjectDetailsComponent implements OnInit {
 
 
   }
-  // sendname(event){
-  //   this.firstnamebind=document.getElementById("namee");
-  // }
+  
 
-  sendId(indx: string) {
-    console.log(this.userArray);
-    this.curId = indx;
-    console.log(this.curId);
-  }
-
-  projectNameForEmployees:string;
-  getDetails(){
-    this.projectNameForEmployees=this.comServ.setObj().projectName;
+  projectNameForEmployees: string;
+  getDetails() {
+    this.projectNameForEmployees = this.comServ.setObj().projectName;
     console.log(this.projectNameForEmployees);
   }
 
-  unAssignProject(user){
-    this.url='http://localhost:8080/employee/unassign/'+user.fullName;
+  unAssignProject(user) {
+    this.url = 'http://localhost:8080/employee/unassign/' + user.fullName;
     console.log(this.url);
-    this.http.put(this.url,user).subscribe(data=>console.log(data));
+    this.http.put(this.url, user).subscribe(data => console.log(data));
     location.reload();
   }
 }
