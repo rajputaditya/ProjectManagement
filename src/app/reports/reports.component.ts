@@ -7,6 +7,7 @@ import { Chart } from 'chart.js';
   templateUrl: './reports.component.html',
   styleUrls: ['./reports.component.scss']
 })
+
 export class ReportsComponent implements OnInit {
 
   chart = [];
@@ -71,20 +72,37 @@ export class ReportsComponent implements OnInit {
 
     this._main.getMonthlyProgressOfEmployees(new Date().getMonth() + 1).subscribe(res => {
 
-      let dataset: any = [];
       let months: any = [];
       let month = new Date().getMonth();
       for (let index = 1; index <= 6; index++) {
         months.push(month--);
       }
 
+      let datasets: any;
+      let sets = new Map();
       let emps: any = res;
       emps.forEach(element => {
         let emp: any = element;
-        emp.forEach(employee => this.employeeNames.push(employee.emp_name));
-        dataset.push({
-          label: empName,
-          data: data,
+        if (!sets.has(emp.fullName)) {
+          sets.set(emp.fullName, [emp.project_part_progress]);
+        } else {
+          let progresses = [];
+          let data = sets.get(emp.fullName);
+          if(data instanceof Array){
+            data.forEach(element => {
+              progresses.push(element);
+            });
+          } else progresses.push(data);
+          
+          console.log(progresses);
+          sets.set(emp.fullName, progresses);
+        }
+      });
+
+      for(let key of sets.keys()) {
+        datasets.push({
+          label: key,
+          data: sets.get(key),
           borderColor: "black",
           borderWidth: 1,
           lineTension: 0.2,
@@ -98,13 +116,18 @@ export class ReportsComponent implements OnInit {
             'rgba(255, 159, 64, 0.2)'
           ]
         });
+     }
 
+      sets.forEach(element => {
+        let set: any= element;
+        
       });
+
       this.chart = new Chart('canvas', {
         type: 'line',
         data: {
           labels: months,
-          datasets: dataset,
+          datasets: datasets,
         },
         options: {
           legend: {
@@ -127,3 +150,23 @@ export class ReportsComponent implements OnInit {
   }
 
 }
+
+
+
+
+// datasets.push({
+//   label: empName,
+//   data: data,
+//   borderColor: "black",
+//   borderWidth: 1,
+//   lineTension: 0.2,
+//   fill: true,
+//   backgroundColor: [
+//     'rgba(255, 99, 132, 0.2)',
+//     'rgba(54, 162, 235, 0.2)',
+//     'rgba(255, 206, 86, 0.2)',
+//     'rgba(75, 192, 192, 0.2)',
+//     'rgba(153, 102, 255, 0.2)',
+//     'rgba(255, 159, 64, 0.2)'
+//   ]
+// });
