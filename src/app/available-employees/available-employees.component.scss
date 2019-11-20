@@ -1,0 +1,101 @@
+//CheckBox Styling
+.custom-control{
+    &.material-checkbox{
+      float: right;
+     
+      --color: #0ef0d9;
+  
+      .material-control-input{
+        display: none;
+        
+        &:checked~.material-control-indicator{
+          border-color: var(--color);
+          block-size: 40px;
+          transform: rotateZ(45deg) translate(1px, -5px);
+          width: 10px;
+          border-top: 0px solid #fff;
+          border-left: 0px solid #fff;
+        }
+      }
+      .material-control-indicator{
+        display: inline-block;
+        size: 30px;
+		position: absolute;
+        top: 4px;
+        left: 0;
+        width: 16px;
+        margin-top: 8px;
+        height: 16px;
+        border: 2px solid #aaa;
+        transition: .3s;
+      }
+    }
+  }
+
+  .column {
+    float: left;
+    width: 25%;
+    height: 50%;
+    margin-bottom: 16px;
+    padding: 0 8px;
+  }
+  
+  /* Display the columns below each other instead of side by side on small screens */
+  @media screen and (max-width: 650px) {
+    .column {
+      width: 100%;
+      display: block;
+    }
+  }
+
+  img{
+      width: 40%;
+      align-self: center;
+      margin-top: 15px;
+      border-radius: 50%;
+      margin-left: 30%;
+  }
+
+  h4{
+    margin-top: 8px;
+  }
+
+  
+  /* Add some shadows to create a card effect */
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  
+  /* Some left and right padding inside the container */
+  .container {
+    padding: 0 16px;
+  }
+  
+  /* Clear floats */
+  .container::after, .row::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  .title {
+    color: grey;
+  }
+
+  #assignEmployees{
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+    color: white;
+    background-color: #2BBBAD;
+    border-color: #2BBBAD;
+    border-radius: 50%;
+    z-index: 5;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .fa{
+    font-size: 18px;
+  }
+  

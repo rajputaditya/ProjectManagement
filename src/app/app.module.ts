@@ -20,7 +20,8 @@ import { GetEventsService } from './calendar/get-events.service'
 import { MainService } from './reports/main.service';
 import { GrowthComponent } from './growth/growth.component';
 import { ProjectDetailsComponent } from './project-details/project-details.component';
-
+import { AvailableEmployeesComponent } from './available-employees/available-employees.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 @NgModule({
@@ -34,7 +35,9 @@ import { ProjectDetailsComponent } from './project-details/project-details.compo
     LogINComponent,
     EmployeesComponent,
     GrowthComponent,
-    ProjectDetailsComponent
+    ProjectDetailsComponent,
+    AvailableEmployeesComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

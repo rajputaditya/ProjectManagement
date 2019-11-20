@@ -2,14 +2,13 @@
     <div class="col-md-8">
         <h2>{{projectDetail.projectName}} <span class="badge badge-warning">{{projectDetail.priority}}</span> </h2>
         <h5>{{projectDetail.clientName}} <small>, {{projectDetail.city}}, {{projectDetail.country}}</small></h5>
-        <small>Description - {{projectDetail.projectDescription}}</small>
-        <h5>Manager - {{projectDetail.manager}}</h5>
+        <small><strong>Description</strong>- {{projectDetail.projectDescription}}</small>
     </div>
     <div class="col-md-4">
         <br><br>
         <h5>{{projectDetail.technologies}}</h5>
-        <small>Start Date - {{projectDetail.startDate}}</small><br>
-        <small>End Date - {{projectDetail.endDate}}</small>
+        <small><strong> Start Date</strong> - {{projectDetail.startDate}}</small><br>
+        <small><strong> End Date</strong> - {{projectDetail.endDate}}</small>
 
     </div>
 
@@ -45,7 +44,7 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-10">
-                                                <h4 id="namee">Project :{{task.projectName}} </h4>
+                                                <h4 id="namee">{{user.name}} </h4>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="custom-controls-stacked d-block my-3" title="Submit">
@@ -60,20 +59,20 @@
                                             </div>
                                         </div>
                                         <!-- <p id="userIddd">{{user.id}}</p> -->
-                                        <p class="title">Task :{{task.taskName}}</p>
-                                        <p id="proDetTaskOwner">Task Owner : {{task.taskOwner}}</p>
-                                        <p>TaskDetails :{{task.taskDetails}}</p>
-                                        <p>StartDate:{{task.startDate}} EndDate:{{task.endDate}}</p>
-
+                                        <p class="title">{{user.username}}</p>
+                                        <p>Description : {{user.website}}</p>
+                                        <p>{{user.email}}</p>
+                                        <p>{{user.phone}}
+                                        </p>
 
                                         <small class="form-text text-muted mb-4 ">
                                             <i>**Click checkbox to submit task</i>
                                             <button class="btn btn-dark btn-sm pull-right" id="taskDeleteBtn"
-                                                data-toggle="modal" data-target="#deleteConfirmationModal" [disabled]="buttons[i]"
-                                                (click)=setDetail(task)>Delete</button>
+                                                data-toggle="modal"
+                                                data-target="#deleteConfirmationModal">Delete</button>
                                             <button class="btn btn-warning btn-sm pull-right" [disabled]="buttons[i]"
                                                 id="taskEditbtn" style="margin-right: 10px;" data-toggle="modal"
-                                                data-target="#editModal" (click)=updateTaskObj(task)>Edit</button>
+                                                data-target="#editModal" (click)=sendId(user.name)>Edit</button>
                                         </small>
 
                                     </div>
@@ -105,14 +104,14 @@
                                         <div class="row mb-4">
                                             <div class="col">
                                                 <input type="text" class="form-control" placeholder="Project title"
-                                                    [value]=taskDetails.getProjectTitle() disabled>
+                                                    disabled>
                                                 <small class="form-text text-muted ">
                                                     Project Title
                                                 </small>
                                             </div>
                                             <div class="col">
                                                 <input type="text" class="form-control" placeholder="Task title"
-                                                    id="editTaskTitle" [value]=taskDetails.getTaskTitle()>
+                                                    disabled>
                                                 <small class="form-text text-muted ">
                                                     Task Title
                                                 </small>
@@ -122,7 +121,6 @@
 
                                         <input type="text" id="editTaskOwner" class="form-control"
                                             placeholder="Task Owner" formControlName="editTaskOwnerValidator"
-                                            [value]=taskDetails.getTaskOwner() disabled
                                             [class.is-invalid]="editGetTaskOwner.invalid && editGetTaskOwner.touched">
                                         <small class="form-text text-muted mb-1">
                                             Task Owners
@@ -141,7 +139,6 @@
                                         </div>
 
                                         <textarea class="form-control" style="margin-top: 10%;" rows="3"
-                                            [value]=taskDetails.getTaskDescription() id="editTaskDescription"
                                             placeholder="Task Details" formControlName="editTaskDescriptionValidator"
                                             [class.is-invalid]="editGetTaskDescription.invalid && editGetTaskDescription.touched"></textarea>
                                         <small class="form-text text-muted mb-1 ">
@@ -162,8 +159,7 @@
                                         <div class="form-row mb-4">
 
                                             <div class="col-md-6" style="margin-top: 10%;">
-                                                <input type="date" class="form-control"
-                                                    [value]=taskDetails.getStartDate() id="editProjectStartdate"
+                                                <input type="date" class="form-control" id="editProjectStartdate"
                                                     placeholder="Start date" disabled>
                                                 <small class="form-text text-muted ">
                                                     Start Date
@@ -172,7 +168,6 @@
                                             <div class="col-md-6" style="margin-top: 10%;">
                                                 <input type="date" class="form-control" id="editProjectEndDate"
                                                     (blur)=editDateValidator() formControlName="editEndDateValidator"
-                                                    [value]=taskDetails.getEnddate()
                                                     [class.is-invalid]="getEditEndDate.invalid && getEditEndDate.touched">
                                                 <small class="form-text text-muted ">
                                                     End Date
@@ -193,8 +188,8 @@
                                         </div>
 
                                         <button class="btn btn-warning btn-block" type="submit" data-dismiss="modal"
-                                            id="assignTaskBtn" data-toggle="modal" data-target="#successUpdateModal"
-                                            (click)=updateTaskConfirm()>Update
+                                            id="assignTaskBtn" [disabled]="editTaskForm.invalid" data-toggle="modal"
+                                            data-target="#successUpdateModal">Update
                                             Task</button>
                                     </form>
 
@@ -225,13 +220,16 @@
 
                                         <div class="col">
                                             <input type="text" id="projectTitle" class="form-control"
-                                                value="{{projectNameFromViewProject}}" placeholder="Project name"
-                                                formControlName="projectTitleValidator" disabled
+                                                placeholder="Project name" formControlName="projectTitleValidator"
                                                 [class.is-invalid]="getProjectTitle.invalid && getProjectTitle.touched">
                                             <small class="form-text text-muted ">
                                                 Project Title
                                             </small>
-                                            <div *ngIf="getProjectTitle.invalid">
+                                            <div
+                                                *ngIf="getProjectTitle.invalid && (getProjectTitle.touched || getProjectTitle.dirtty)">
+                                                <small *ngIf="getProjectTitle.errors?.required" class="text-danger">
+                                                    Project Title Is Required
+                                                </small>
                                                 <small *ngIf="getProjectTitle.errors?.minlength" class="text-danger">
                                                     Project Title Must be Min length of 4 Characters
                                                 </small>
@@ -281,7 +279,6 @@
 
                                     <textarea class="form-control" style="margin-top: 10%;" rows="3"
                                         placeholder="Task Details" formControlName="taskDescriptionValidator"
-                                        id="taskDescription"
                                         [class.is-invalid]="getTaskDescription.invalid && getTaskDescription.touched"></textarea>
                                     <small class="form-text text-muted mb-1 ">
                                         Task Description
@@ -301,7 +298,7 @@
                                     <div class="form-row mb-4">
 
                                         <div class="col-md-6">
-                                            <input type="date" class="form-control" id="projectStartDate"
+                                            <input type="date" class="form-control" id="projectStartdate"
                                                 style="margin-top: 10%;" placeholder="Start date"
                                                 formControlName="startDateValidator"
                                                 [class.is-invalid]="getStartDate.invalid && getStartDate.touched">
@@ -340,8 +337,7 @@
                                     </div>
 
                                     <button class="btn btn-warning btn-block" [disabled]="newTaskForm.invalid"
-                                        type="submit" id="assignTaskBtn" (click)=addNewTask()
-                                        data-dismiss="modal">Assign Task</button>
+                                        type="submit" data-dismiss="modal" id="assignTaskBtn">Assign Task</button>
                                 </form>
 
                             </div>
@@ -371,8 +367,7 @@
                             <div class="modal-footer" id="deleteModalFooter">
                                 <button type="button" class="btn btn-info" data-dismiss="modal"
                                     id="deleteBtnInfo">Cancel</button>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal"
-                                    (click)=deleteTaskFunc() id="deleteBtnDanger">Delete</button>
+                                <button type="button" class="btn btn-danger" id="deleteBtnDanger">Delete</button>
                             </div>
                         </div>
                     </div>
@@ -404,9 +399,26 @@
                     <p
                         style="font-size: 36px;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
                         Members
-                        <a class="btn" routerLink="/employees"><i class="fas fa-plus-circle" title="Add team members"
-                                id="addTaskIcon"></i></a></p>
+                        <a class="btn" routerLink="/availableEmployees" (click)=getDetails(projectDetails)><i
+                                class="fas fa-plus-circle" title="Add team members" id="addTaskIcon"></i></a></p>
 
+                    <div class="employeeColumn" *ngFor="let user of userArray">
+                        <div class="card">
+
+                            <img src="/assets/avatar.png" alt="Jane">
+                            <div class="container">
+                                <h4>{{user.fullName}} </h4>
+                                <p class="title">{{user.designation}}</p>
+                                <p>Expertise : {{user.technologies}}</p>
+                                <p>{{user.email}}</p>
+                                <p>{{user.phoneNumber}}
+                                    <button class="btn btn-sm btn-dark" id="delEmpBtn"
+                                        (click)=unAssignProject(user)>Delete</button>
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

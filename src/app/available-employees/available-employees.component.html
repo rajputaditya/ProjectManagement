@@ -1,0 +1,25 @@
+
+<div class="row" style="margin-top: 40px;margin-left: 15px;margin-right: 15px;">
+ 
+  <div class="column" *ngFor="let user of userArray">
+    <div class="card">
+
+      <div class="container">
+        <img src="/assets/avatar.png" alt="Jane">
+        <label class="custom-control material-checkbox">
+          <input type="checkbox" (click)=assignProject(user) class="material-control-input" title="Submit task">
+          <span class="material-control-indicator"></span>
+        </label>
+        <h4>{{user.fullName}} </h4>
+        <p class="title">{{user.designation}}</p>
+        <p>Expertise : {{user.technologies}}</p>
+        <p>{{user.email}}</p>
+        <p>{{user.phoneNumber}}
+        </p>
+
+      </div>
+
+    </div>
+  </div>
+  <button class="btn btn-lg " id="assignEmployees" routerLink="/projectDetails"><i class="fa fa-check" aria-hidden="true"></i></button>
+</div>

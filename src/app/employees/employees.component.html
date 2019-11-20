@@ -1,21 +1,22 @@
 <div class="row" style="margin-top: 40px;margin-left: 40px;">
   <div class="column" *ngFor="let user of userArray">
     <div class="card">
-
       <img src="/assets/avatar.png" alt="Jane">
       <div class="container">
-        <h4>{{user.fullname}} </h4>
+        <h4>{{user.fullName}} </h4>
         <p class="title">{{user.designation}}</p>
+        <small><strong>Project - </strong><span class="badge badge-warning">{{user.projectAssigned}}</span></small>
         <p>Expertise : {{user.technologies}}</p>
         <p>{{user.email}}</p>
-        <p>{{user.phonenumber}}
-          <button class="btn btn-sm btn-dark" id="delEmpBtn" data-toggle="modal"
-            data-target="#deleteConfirmationModal">Delete</button>
-          <button class="btn btn-sm btn-warning" id="editEmpBtn" data-toggle="modal"
-            data-target="#editEmployee">Edit</button>
+        <p>{{user.phoneNumber}}
+          <button class="btn btn-sm btn-dark" id="delEmpBtn" data-toggle="modal" data-target="#deleteConfirmationModal"
+            (click)=setDetailsForModal(user)>Delete</button>
+          <button class="btn btn-sm btn-warning" id="editEmpBtn" data-toggle="modal" data-target="#editEmployee"
+            (click)=setDetailsForModal(user)>Edit</button>
         </p>
 
       </div>
+
     </div>
   </div>
 
@@ -23,14 +24,14 @@
     <div class="card">
 
       <div class="container">
-        <button class="btn" title="Add new task" data-toggle="modal" data-target="#addEmployee" id="addEmpBtn"><i
+        <button class="btn" title="Add new employee" data-toggle="modal" data-target="#addEmployee" id="addEmpBtn"><i
             class="fas fa-plus-circle" id="addEmp"></i></button>
 
       </div>
     </div>
   </div>
-</div>
 
+</div>
 
 
 <!-- Add Employee Modal -->
@@ -52,7 +53,7 @@
             <div class="col">
 
               <!-- First name -->
-              <input type="text" id="FirstName" class="form-control" placeholder="First name"
+              <input type="text" id="firstName" class="form-control" placeholder="First name"
                 formControlName="firstNameValidator" [class.is-invalid]="getFirstName.invalid && getFirstName.touched">
               <small class="form-text text-muted ">
                 First Name
@@ -72,7 +73,7 @@
             </div>
             <div class="col">
               <!-- Last name -->
-              <input type="text" id="LastName" class="form-control" placeholder="Last name"
+              <input type="text" id="lastName" class="form-control" placeholder="Last name"
                 formControlName="lastNameValidator" [class.is-invalid]="getLastName.invalid && getLastName.touched">
               <small class="form-text text-muted ">
                 Last Name
@@ -93,7 +94,7 @@
           </div>
 
           <!-- E-mail -->
-          <input type="email" id="Email" class="form-control " placeholder="E-mail" formControlName="emailValidator"
+          <input type="email" id="email" class="form-control " placeholder="E-mail" formControlName="emailValidator"
             [class.is-invalid]="getEmail.invalid && getEmail.touched">
           <small class="form-text text-muted mb-4">
             E-mail
@@ -109,7 +110,7 @@
           </div>
 
           <!-- ROLE -->
-          <input type="text" id="Designation" class="form-control " placeholder="Designation"
+          <input type="text" id="designation" class="form-control " placeholder="Designation"
             formControlName="designationValidator"
             [class.is-invalid]="getDesignation.invalid && getDesignation.touched">
           <small class="form-text text-muted mb-4">
@@ -126,8 +127,8 @@
           </div>
 
           <!-- Phone number -->
-          <input type="tel" id="PhoneNumber" class="form-control " placeholder="Phone number"
-            aria-describedby="PhoneHelpBlock" formControlName="phoneNumberValidator"
+          <input type="tel" id="phoneNumber" class="form-control " placeholder="Phone number"
+            aria-describedby="PhoneHelpBlock" maxlength="10" formControlName="phoneNumberValidator"
             [class.is-invalid]="getPhoneNumber.invalid && getPhoneNumber.touched">
           <small class="form-text text-muted mb-4">
             Phone Number
@@ -147,7 +148,7 @@
 
 
           <!-- Technologies -->
-          <input type="text" id="Technologies" class="form-control " placeholder="Technologies"
+          <input type="text" id="technologies" class="form-control " placeholder="Technologies"
             aria-describedby="PhoneHelpBlock" formControlName="technologyValidator"
             [class.is-invalid]="getTechnology.invalid && getTechnology.touched">
           <small class="form-text text-muted mb-4">
@@ -161,9 +162,9 @@
 
           </div>
 
-
-          <button type="button" class="btn btn-warning" [disabled]="addEmployeeForm.invalid" id="modalBtn" (click)=addEmployee()
-            data-dismiss="modal">ADD</button>
+          <!-- Add Employee Button -->
+          <button type="button" class="btn btn-warning" [disabled]="addEmployeeForm.invalid" id="modalBtn"
+            (click)=addEmployee() data-dismiss="modal">ADD</button>
 
         </form>
       </div>
@@ -189,8 +190,8 @@
           <div class="form-row mb-4">
             <div class="col">
               <!-- First name -->
-              <input type="text" id="FirstName" class="form-control" placeholder="First name" 
-                formControlName="editFirstNameValidator"
+              <input type="text" id="editFirstName" [value]=empDetails.getFirstName() disabled="disabled"
+                class="form-control" placeholder="First name" formControlName="editFirstNameValidator"
                 [class.is-invalid]="getEditFirstName.invalid && getEditFirstName.touched">
               <small class="form-text text-muted ">
                 First Name
@@ -207,108 +208,110 @@
                 </small>
               </div>
             </div>
-              <div class="col">
-                <!-- Last name -->
-                <input type="text" id="LastName" class="form-control" placeholder="Last name"
-                  formControlName="editLastNameValidator" [class.is-invalid]="getEditLastName.invalid && getEditLastName.touched">
-                <small class="form-text text-muted ">
-                  Last Name
+            <div class="col">
+              <!-- Last name -->
+              <input type="text" id="editLastName" [value]=empDetails.getLastName() disabled="disabled"
+                class="form-control" placeholder="Last name" formControlName="editLastNameValidator"
+                [class.is-invalid]="getEditLastName.invalid && getEditLastName.touched">
+              <small class="form-text text-muted ">
+                Last Name
+              </small>
+              <div *ngIf="getEditLastName.invalid && (getEditLastName.touched || getEditLastName.dirty)">
+                <small *ngIf="getEditLastName.errors?.required" class="text-danger">
+                  Last name is required
                 </small>
-                <div *ngIf="getEditLastName.invalid && (getEditLastName.touched || getEditLastName.dirty)">
-                  <small *ngIf="getEditLastName.errors?.required" class="text-danger">
-                    Last name is required
-                  </small>
-                  <small *ngIf="getEditLastName.errors?.minlength" class="text-danger">
-                    Last name must consist atleast 4 characters
-                  </small>
-                  <small *ngIf="getEditLastName.errors?.pattern" class="text-danger">
-                    Last name cannot contain numbers
-                  </small>
-  
-                </div>
+                <small *ngIf="getEditLastName.errors?.minlength" class="text-danger">
+                  Last name must consist atleast 4 characters
+                </small>
+                <small *ngIf="getEditLastName.errors?.pattern" class="text-danger">
+                  Last name cannot contain numbers
+                </small>
+
               </div>
-           
             </div>
 
-            <!-- E-mail -->
-            <input type="email" id="Email" class="form-control " placeholder="E-mail" required
-            formControlName="editEmailValidator"
+          </div>
+
+          <!-- E-mail -->
+          <input type="email" id="editEmail" [value]=empDetails.getEmail() class="form-control " placeholder="E-mail"
+            required formControlName="editEmailValidator"
             [class.is-invalid]="getEditEmail.invalid && getEditEmail.touched">
-            <small class="form-text text-muted mb-4">
-              E-mail
+          <small class="form-text text-muted mb-4">
+            E-mail
+          </small>
+          <div *ngIf="getEditEmail.invalid && (getEditEmail.touched || getEditEmail.dirty)">
+            <small *ngIf="getEditEmail.errors?.required" class="text-danger">
+              Email is required
             </small>
-            <div *ngIf="getEditEmail.invalid && (getEditEmail.touched || getEditEmail.dirty)">
-              <small *ngIf="getEditEmail.errors?.required" class="text-danger">
-                Email is required
-              </small>
-              <small *ngIf="getEditEmail.errors?.pattern" class="text-danger">
-                Email must be of required pattern (abc0-9@xyz.com)
-              </small>
-  
-            </div>
+            <small *ngIf="getEditEmail.errors?.pattern" class="text-danger">
+              Email must be of required pattern (abc0-9@xyz.com)
+            </small>
 
-            <div class="form-row mb-4">
-              <div class="col">
-                <!-- ROLE -->
-                <input type="text" id="Designation" class="form-control " placeholder="Designation" required
-                formControlName="editDesignationValidator"
+          </div>
+
+          <div class="form-row mb-4">
+            <div class="col">
+              <!-- ROLE -->
+              <input type="text" id="editDesignation" [value]=empDetails.getDesignation() class="form-control "
+                placeholder="Designation" required formControlName="editDesignationValidator"
                 [class.is-invalid]="getEditDesignation.invalid && getEditDesignation.touched">
-                <small class="form-text text-muted ">
-                  Designation
-                </small>
-                <div *ngIf="getEditDesignation.invalid && (getEditDesignation.touched || getEditDesignation.dirty)">
-                  <small *ngIf="getEditDesignation.errors?.required" class="text-danger">
-                    Designation is required
-                  </small>
-                  <small *ngIf="getEditDesignation.errors?.pattern" class="text-danger">
-                    Designation cannot contain numbers or any special characters
-                  </small>
-      
-                </div>
-              </div>
-              <div class="col">
-                <!-- Phone number -->
-                <input type="tel" id="PhoneNumber" class="form-control " placeholder="Phone number"
-                  aria-describedby="PhoneHelpBlock" required
-                  formControlName="editPhoneNumberValidator"
-            [class.is-invalid]="getEditPhoneNumber.invalid && getEditPhoneNumber.touched">
-                <small class="form-text text-muted ">
-                  Phone Number
-                </small>
-                <div *ngIf="getEditPhoneNumber.invalid && (getEditPhoneNumber.touched || getEditPhoneNumber.dirty)">
-                  <small *ngIf="getEditPhoneNumber.errors?.required" class="text-danger">
-                    Phone number is required
-                  </small>
-                  <small *ngIf="getEditPhoneNumber.errors?.minlength" class="text-danger">
-                    Phone Number must be of atleast 10 characters
-                  </small>
-                  <small *ngIf="getEditPhoneNumber.errors?.pattern" class="text-danger">
-                    Phone Number must consist only numbers
-                  </small>
-      
-                </div>
-              </div>
-            </div>
-
-            <!-- Technologies -->
-            <input type="text" id="Technologies" class="form-control " placeholder="Technologies"
-              aria-describedby="PhoneHelpBlock" required formControlName="editTechnologyValidator"
-              [class.is-invalid]="getEditTechnology.invalid && getEditTechnology.touched">
-            <small class="form-text text-muted mb-4">
-              Technologies Known
-            </small>
-            <div *ngIf="getEditTechnology.invalid && (getEditTechnology.touched || getEditTechnology.dirty)">
-              <small *ngIf="getEditTechnology.errors?.required" class="text-danger">
-                Technology is required
+              <small class="form-text text-muted ">
+                Designation
               </small>
-  
-  
+              <div *ngIf="getEditDesignation.invalid && (getEditDesignation.touched || getEditDesignation.dirty)">
+                <small *ngIf="getEditDesignation.errors?.required" class="text-danger">
+                  Designation is required
+                </small>
+                <small *ngIf="getEditDesignation.errors?.pattern" class="text-danger">
+                  Designation cannot contain numbers or any special characters
+                </small>
+
+              </div>
             </div>
-  
+            <div class="col">
+              <!-- Phone number -->
+              <input type="tel" id="editPhoneNumber" maxlength="10" [value]=empDetails.getPhoneNumber()
+                class="form-control " placeholder="Phone number" aria-describedby="PhoneHelpBlock" required
+                formControlName="editPhoneNumberValidator"
+                [class.is-invalid]="getEditPhoneNumber.invalid && getEditPhoneNumber.touched">
+              <small class="form-text text-muted ">
+                Phone Number
+              </small>
+              <div *ngIf="getEditPhoneNumber.invalid && (getEditPhoneNumber.touched || getEditPhoneNumber.dirty)">
+                <small *ngIf="getEditPhoneNumber.errors?.required" class="text-danger">
+                  Phone number is required
+                </small>
+                <small *ngIf="getEditPhoneNumber.errors?.minlength" class="text-danger">
+                  Phone Number must be of atleast 10 characters
+                </small>
+                <small *ngIf="getEditPhoneNumber.errors?.pattern" class="text-danger">
+                  Phone Number must consist only numbers
+                </small>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Technologies -->
+          <input type="text" id="editTechnologies" [value]=empDetails.getTechnologies() class="form-control "
+            placeholder="Technologies" aria-describedby="PhoneHelpBlock" required
+            formControlName="editTechnologyValidator"
+            [class.is-invalid]="getEditTechnology.invalid && getEditTechnology.touched">
+          <small class="form-text text-muted mb-4">
+            Technologies Known
+          </small>
+          <div *ngIf="getEditTechnology.invalid && (getEditTechnology.touched || getEditTechnology.dirty)">
+            <small *ngIf="getEditTechnology.errors?.required" class="text-danger">
+              Technology is required
+            </small>
 
 
-            <button type="button" class="btn btn-warning" id="modalBtn" [disabled]="editEmployeeForm.invalid" (click)="editEmployees()" data-dismiss="modal"
-              data-toggle="modal" data-target="#successModal">UPDATE</button>
+          </div>
+
+
+
+          <button type="button" class="btn btn-warning" id="modalBtn" (click)="editEmployees()" data-dismiss="modal"
+            data-toggle="modal" data-target="#updateModal">UPDATE</button>
 
         </form>
 
@@ -338,7 +341,7 @@
 </div>
 
 <!-- Success Updated Employee Modal -->
-<div id="successModal" class="modal fade" tabindex="-1" role="dialog">
+<div id="updateModal" class="modal fade" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-confirm" id="successConfirmModal">
     <div class="modal-content">
       <div class="modal-header">
@@ -376,7 +379,8 @@
       </div>
       <div class="modal-footer" id="deleteModalFooter">
         <button type="button" class="btn btn-info" data-dismiss="modal" id="deleteBtnInfo">Cancel</button>
-        <button type="button" class="btn btn-danger" id="deleteBtnDanger">Delete</button>
+        <button type="button" class="btn btn-danger" id="deleteBtnDanger" data-dismiss="modal"
+          (click)=delEmployee()>Delete</button>
       </div>
     </div>
   </div>

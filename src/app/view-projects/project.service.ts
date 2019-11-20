@@ -23,4 +23,8 @@ export class ProjectService {
     console.log(this.url);
     return this.http.put<Project>(this.url,proj)
   }
+
+  delProject(url:string):Observable<Project>{
+    return this.http.delete<Project>(url);
+  }
 }
