@@ -124,7 +124,7 @@
                                             placeholder="Task Owner" [value]=taskDetails.getTaskOwner()
                                             formControlName="editTaskOwnerValidator"
                                             [class.is-invalid]="editGetTaskOwner.invalid && editGetTaskOwner.touched"> -->
-                                            <select class="browser-default custom-select" id="editTaskOwner"[value]="taskDetail.taskDetails.getTaskOwner()" >
+                                            <select class="browser-default custom-select" id="editTaskOwner"[value]="taskDetails.getTaskOwner()" >
                                                 <option selected>SELECT</option>
                                                 <option value="HIGH">HIGH</option>
                                                 <option value="MEDIUM">MEDIUM</option>
