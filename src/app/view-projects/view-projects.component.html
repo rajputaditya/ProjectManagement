@@ -71,19 +71,17 @@
 <div class="modal fade" id="editProject" tabindex="-1" role="dialog" aria-labelledby="editProjectLabel"
   aria-hidden="true" style="margin-top: 50px;">
   <div class="modal-dialog modal-lg" role="document">
-
     <div class="modal-content" id="editProjectModalBody">
       <form>
         <div class="modal-body">
-          <!-- Search form -->
 
+          <!-- Search form -->
           <div class="row">
             <div class="col-md-10">
               <input id="searchProject" class="form-control form-control-lg" type="text"
                 placeholder="{{'view-proj.placeholder_82-86' | translate}}" aria-label="Search" style="width: 100%; border-color: black;
                 border-radius: 50px;" (input)=search()>
             </div>
-
             <div class="col-md-2">
               <button class="btn btn-outline-danger btn-sm" id="closeEditModal" data-dismiss="modal">Close</button>
             </div>
@@ -105,6 +103,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content" id="editProjectModalBody">
       <div class="modal-body">
+
         <!-- Delete form -->
         <form>
           <div class="row">
@@ -140,6 +139,7 @@
         <form class="text-center border p-5" [formGroup]="createProjectForm">
           <div class="form-row mb-2">
             <div class="col">
+ 
               <!-- Client name -->
               <input type="text" id="clientName" class="form-control"
                 placeholder="{{'view-proj.placeholder_146' |translate}}" formControlName="clientNameValidator"
@@ -206,6 +206,7 @@
                 </small>
               </div>
             </div>
+ 
             <div class="col">
               <!-- End Date -->
               <input type="date" id="projectEndDate" class="form-control"
@@ -220,11 +221,14 @@
                 </small>
               </div>
             </div>
+
             <div class="col">
               <!-- Priority level -->
+
               <!-- <input type="text" id="projectPriorityLevel" class="form-control" placeholder="HIGH, Medium, low"
                 formControlName="priorityLevelValidator"
                 [class.is-invalid]="getPriorityLevel.invalid && getPriorityLevel.touched"> -->
+
               <select class="browser-default custom-select" id="projectPriorityLevel">
                 <option selected>SELECT</option>
                 <option value="HIGH">HIGH</option>
@@ -234,7 +238,6 @@
               <small class="form-text text-muted mb-4">
                 {{'view-proj.small_231' | translate}}
               </small>
-
             </div>
           </div>
 
@@ -259,6 +262,7 @@
                 </small>
               </div>
             </div>
+
             <div class="col">
               <!-- Country -->
               <input type="text" id="projectCountry" class="form-control"
@@ -281,7 +285,6 @@
             </div>
           </div>
 
-
           <!-- Project Description -->
           <div class="col">
             <textarea class="form-control mb-2" placeholder="{{'view-proj.placeholder_291-1'| translate}}"
@@ -301,7 +304,6 @@
             </div>
           </div>
 
-
           <!-- Create Project -->
           <div class="alert alert-danger" role="alert" *ngIf="temp==1" style="width: 100%;">
             {{'view-proj.div_327' | translate}}
@@ -311,7 +313,6 @@
             Project</button>
 
         </form>
-
       </div>
     </div>
   </div>
@@ -341,6 +342,7 @@
                 {{'view-proj.small_359' | translate}}
               </small>
             </div>
+
             <div class="col">
               <!-- Project name -->
               <input type="text" id="projectName1" [value]=projectData.projectName class="form-control"
@@ -358,6 +360,7 @@
                 </small>
               </div>
             </div>
+ 
             <div class="col">
               <!-- Technologies -->
               <input type="text" id="projectTech1" [value]=projectData.technologies class="form-control mb-2"
@@ -373,6 +376,7 @@
               </div>
             </div>
           </div>
+
           <div class="form-row mb-2">
             <div class="col">
               <!-- Start Date -->
@@ -382,6 +386,7 @@
                 {{'view-proj.small_400-386' | translate}}
               </small>
             </div>
+
             <div class="col">
               <!-- End Date -->
               <input type="date" id="projectEndDate1" [value]=projectData.endDate class="form-control"
@@ -396,11 +401,14 @@
                 </small>
               </div>
             </div>
+
             <div class="col">
               <!-- Priority level -->
+
               <!-- <input type="text" id="projectPriorityLevel1" [value]=projectData.priority class="form-control"
                 placeholder="HIGH, Medium, low" formControlName="editPriorityValidator"
                 [class.is-invalid]="editGetPriority.invalid && editGetPriority.touched"> -->
+
               <select class="browser-default custom-select" id="projectPriorityLevel1" [value]="projectData.priority">
                 <option selected>SELECT</option>
                 <option value="HIGH">HIGH</option>
@@ -412,6 +420,7 @@
               </small>
             </div>
           </div>
+
           <div class="form-row mb-2">
             <div class="col">
               <!-- City -->
@@ -430,6 +439,7 @@
                 </small>
               </div>
             </div>
+
             <div class="col">
               <!-- Country -->
               <input type="text" id="projectCountry1" [value]=projectData.country class="form-control"
@@ -448,8 +458,6 @@
               </div>
             </div>
           </div>
-
-
 
           <!-- Project Description -->
           <div class="col">
@@ -476,7 +484,6 @@
             data-toggle="modal" data-target="#successUpdateModal">{{'view-proj.button_481-1'}}</button>
 
         </form>
-
       </div>
     </div>
   </div>
@@ -526,14 +533,12 @@
 <div id="deleteConfirmationModal" class="modal fade" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-confirm" id="deleteModal">
     <div class="modal-content" id="deleteModalContent">
-
       <div class="modal-header" id="deleteModalHeader">
         <div class="icon-box" id="deleteIcon">
           <i class="fa fa-times" aria-hidden="true"></i>
         </div>
         <div class="modal-title">
           <h4>{{'view-proj.h4-569-540'| translate}}</h4>
-
         </div>
       </div>
       <div class="modal-body">
