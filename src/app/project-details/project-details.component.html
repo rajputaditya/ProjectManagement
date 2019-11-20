@@ -58,16 +58,18 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <p id="proDetTaskOwner">{{task.taskOwner}}</p>
-                                        <p class="title">{{task.taskName}}</p>
-                                        <p>Description : {{task.taskDetails}}</p>
-                                        <p>{{task.startDate}} {{task.endDate}}
-                                        </p>
+                                        <p id="proDetTaskOwner"><strong>Task Owner - </strong>{{task.taskOwner}}</p>
+                                        <p class="title"><span class="badge badge-warning">{{task.taskName}}</span></p>
+                                        <p>{{task.taskDetails}}</p>
+                                        <small class="form-text text-muted ">Start - {{task.startDate}}
+                                        </small>
+                                        <small class="form-text text-muted ">End - {{task.endDate}}
+                                        </small>
 
                                         <small class="form-text text-muted mb-4 ">
                                             <i>**Click checkbox to submit task</i>
                                             <button class="btn btn-dark btn-sm pull-right" id="taskDeleteBtn"
-                                                data-toggle="modal" data-target="#deleteConfirmationModal"
+                                                data-toggle="modal" data-target="#deleteConfirmationModal" [disabled]="buttons[i]"
                                                 (click)=setDetail(task)>Delete</button>
                                             <button class="btn btn-warning btn-sm pull-right" [disabled]="buttons[i]"
                                                 id="taskEditbtn" style="margin-right: 10px;" data-toggle="modal"
@@ -110,7 +112,7 @@
                                             </div>
                                             <div class="col">
                                                 <input type="text" class="form-control" placeholder="Task title"
-                                                    [value]=taskDetails.getTaskTitle() disabled>
+                                                    [value]=taskDetails.getTaskTitle() id="editTaskTitle">
                                                 <small class="form-text text-muted ">
                                                     Task Title
                                                 </small>
@@ -140,7 +142,7 @@
 
                                         <textarea class="form-control" style="margin-top: 10%;" rows="3"
                                             placeholder="Task Details" [value]=taskDetails.getTaskDescription()
-                                            formControlName="editTaskDescriptionValidator"
+                                            formControlName="editTaskDescriptionValidator" id="editTaskDescription"
                                             [class.is-invalid]="editGetTaskDescription.invalid && editGetTaskDescription.touched"></textarea>
                                         <small class="form-text text-muted mb-1 ">
                                             Task Description
@@ -363,7 +365,7 @@
                             <div class="modal-footer" id="deleteModalFooter">
                                 <button type="button" class="btn btn-info" data-dismiss="modal"
                                     id="deleteBtnInfo">Cancel</button>
-                                <button type="button" class="btn btn-danger" id="deleteBtnDanger">Delete</button>
+                                <button type="button" class="btn btn-danger" id="deleteBtnDanger" data-dismiss="modal" (click)=deleteTaskFunc()>Delete</button>
                             </div>
                         </div>
                     </div>
