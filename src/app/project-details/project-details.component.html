@@ -120,10 +120,16 @@
                                         </div>
 
 
-                                        <input type="text" id="editTaskOwner" class="form-control"
+                                        <!-- <input type="text" id="editTaskOwner" class="form-control"
                                             placeholder="Task Owner" [value]=taskDetails.getTaskOwner()
                                             formControlName="editTaskOwnerValidator"
-                                            [class.is-invalid]="editGetTaskOwner.invalid && editGetTaskOwner.touched">
+                                            [class.is-invalid]="editGetTaskOwner.invalid && editGetTaskOwner.touched"> -->
+                                            <select class="browser-default custom-select" id="editTaskOwner"[value]="taskDetail.taskDetails.getTaskOwner()" >
+                                                <option selected>SELECT</option>
+                                                <option value="HIGH">HIGH</option>
+                                                <option value="MEDIUM">MEDIUM</option>
+                                                <option value="LOW">LOW</option>
+                                              </select>
                                         <small class="form-text text-muted mb-1">
                                             Task Owners
                                         </small>
@@ -254,23 +260,18 @@
 
 
 
-                                    <input type="text" id="taskOwner" class="form-control" placeholder="Task Owner"
+                                    <!-- <input type="text" id="taskOwner" class="form-control" placeholder="Task Owner"
                                         formControlName="taskOwnerValidator"
-                                        [class.is-invalid]="getTaskOwner.invalid && getTaskOwner.touched">
+                                        [class.is-invalid]="getTaskOwner.invalid && getTaskOwner.touched"> -->
+                                        <select class="browser-default custom-select" id="taskOwner">
+                                            <option selected>SELECT</option>
+                                            <option value="HIGH">HIGH</option>
+                                            <option value="MEDIUM">MEDIUM</option>
+                                            <option value="LOW">LOW</option>
+                                          </select>
                                     <small class="form-text text-muted mb-1">
                                         Task Owners
                                     </small>
-                                    <div *ngIf="getTaskOwner.invalid && (getTaskOwner.touched || getTaskOwner.dirtty)">
-                                        <small *ngIf="getTaskOwner.errors?.required" class="text-danger">
-                                            Task Owner Is Required
-                                        </small>
-                                        <small *ngIf="getTaskOwner.errors?.pattern" class="text-danger">
-                                            Cant Contain Number
-                                        </small>
-                                        <small *ngIf="getTaskOwner.errors?.minlength" class="text-danger">
-                                            Task Owner Must be Min length of 3 Characters
-                                        </small>
-                                    </div>
 
 
                                     <textarea class="form-control" style="margin-top: 10%;" rows="3"
