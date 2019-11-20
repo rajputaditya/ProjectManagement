@@ -4,8 +4,8 @@
  margin-top: 10%;
  margin-left: 6%;
  margin-bottom: 5%;
-  width: 450px;
-  height: 250px;
+ width: 28rem;
+ height: 16em;
   box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4);
   border-radius: 6px;
   overflow: hidden;
@@ -23,9 +23,9 @@
 }
 
 .card .additional {
-  background: linear-gradient(#106466, #43b1b3);
+  background: linear-gradient(#106466, #106466);
   position: relative;
-  width: 150px;
+  width: 8rem;
   height: 100%;
   transition: width 0.4s;
   overflow: hidden;
@@ -38,7 +38,7 @@
 }
 
 .card .additional .user-card {
-  width: 150px;
+  width: 8rem;
   height: 100%;
   position: relative;
   float: left;
