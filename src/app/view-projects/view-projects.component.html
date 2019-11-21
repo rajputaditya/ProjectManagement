@@ -80,10 +80,7 @@
             <div class="col-md-10">
               <input id="searchProject" class="form-control form-control-lg" type="text"
                 placeholder="{{'view-proj.placeholder_82-86' | translate}}" aria-label="Search" style="width: 100%; border-color: black;
-                border-radius: 50px;" (input)=search()>
-            </div>
-            <div class="col-md-2">
-              <button class="btn btn-outline-danger btn-sm" id="closeEditModal" data-dismiss="modal">Close</button>
+                border-radius: 50px;" (input)=searchEditProject() (blur)=clear()>
             </div>
           </div>
         </div>
@@ -107,10 +104,10 @@
         <!-- Delete form -->
         <form>
           <div class="row">
-            <div class="col-md-10">
-              <input class="form-control form-control-lg" type="text"
+            <div class="col-md-12">
+              <input class="form-control form-control-lg" type="text" id="searchDeleteProject"
                 placeholder="{{'view-proj.placeholder_111'| translate}}" aria-label="Search" style="width: 100%; border-color: black;
-                    border-radius: 50px;">
+                    border-radius: 50px;" (input)=searchDeleteProject() (blur)=clear()>
             </div>
             <div class="col-md-2">
               <button class="btn btn-outline-danger btn-sm" id="closeEditModal" data-dismiss="modal" data-toggle="modal"
@@ -125,14 +122,14 @@
 </div>
 
 <!-- Create Project Modal -->
-<div class="modal fade" id="createProject" tabindex="-1" role="dialog" aria-labelledby="createProjectLabel"
+<div class="modal fade" (blur)=clear() id="createProject" tabindex="-1" role="dialog" aria-labelledby="createProjectLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
+    <div class="modal-content"  >
       <div class="modal-header" id="modalHeader">
         <h3>{{'view-proj.h3-134' |translate}}</h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)=clear()>
+          <span aria-hidden="true" >&times;</span>
         </button>
       </div>
       <div class="modal-body">
