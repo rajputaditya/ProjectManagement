@@ -321,5 +321,9 @@ export class ViewProjectsComponent implements OnInit {
     this.service.delProject(this.url).subscribe(proj => console.log(proj));
     location.reload();
   }
+
+  clear() {
+    $(':input').val("");
+  }
 }
 

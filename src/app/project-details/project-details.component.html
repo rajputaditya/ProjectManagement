@@ -150,7 +150,7 @@
                                                 </div>
                                                 <div class="col">
                                                     <input type="text" class="form-control" placeholder="Task title"
-                                                        [value]=taskDetails.getTaskTitle() id="editTaskTitle">
+                                                        disabled [value]=taskDetails.getTaskTitle() id="editTaskTitle">
                                                     <small class="form-text text-muted ">
                                                         Task Title
                                                     </small>
@@ -163,9 +163,9 @@
                                             formControlName="editTaskOwnerValidator"
                                             [class.is-invalid]="editGetTaskOwner.invalid && editGetTaskOwner.touched"> -->
                                              <div>
-                                        <select class="browser-default custom-select" id="taskOwner" >
+                                        <select class="browser-default custom-select" id="editTaskOwner" >
                                             <option [value]="taskDetails.getTaskOwner()" selected>{{taskDetails.getTaskOwner()}}</option>
-                                            <option *ngFor="let employee of employeeDetailsOfProject" [value]=employee>{{employee}}</option>
+                                            <option *ngFor="let employee of employeeDetailsOfProject" value="{{employee}}">{{employee}}</option>
                                         </select>
                                         </div>
                                             <small class="form-text text-muted mb-1">
@@ -255,17 +255,17 @@
 
 
                     <!-- New task modal -->
-                    <div class="modal fade" id="newtaskModal" tabindex="-1" role="dialog">
+                    <div class="modal fade" (blur)=clear(projectNameFromViewProject) id="newtaskModal" tabindex="-1" role="dialog">
                         <div class="modal-dialog">
                             <div class="modal-content">
 
 
                                 <div class="modal-header" id="modalHeader">
                                     <h4 class="modal-title">TASK DETAILS</h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <button type="button" class="close" data-dismiss="modal" (click)=clear(projectNameFromViewProject)>&times;</button>
                                 </div>
 
-                                <div class="modal-body">
+                                <div class="modal-body" >
                                     <form class="text-center border  p-5" [formGroup]="newTaskForm">
                                         <div class="row mb-4">
 
@@ -307,7 +307,7 @@
                                         <div>
                                         <select class="browser-default custom-select" id="taskOwner">
                                             <option selected>SELECT</option>
-                                            <option *ngFor="let employee of employeeDetailsOfProject" [value]=employee>{{employee}}</option>
+                                            <option *ngFor="let employee of employeeDetailsOfProject" value="{{employee}}">{{employee}}</option>
                                         </select>
                                         </div>
                                         <small class="form-text text-muted mb-1">

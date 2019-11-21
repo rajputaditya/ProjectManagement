@@ -144,13 +144,12 @@ export class ProjectDetailsComponent implements OnInit {
 
   deleteTaskFunc() {
 
-    this.proDetService.deleteTaskWithTaskOwner(this.taskOwnr);
+    this.proDetService.deleteTaskWithTaskOwner(this.taskTitle);
 
   }
-  taskOwnr;
+  
   setDetail(taskDetail) {
-    this.taskOwnr = taskDetail.taskOwner;
-    console.log("ankushsadsadsasa "+this.taskOwnr);
+    this.taskTitle = taskDetail.taskName;
 
   }
 
@@ -164,19 +163,19 @@ export class ProjectDetailsComponent implements OnInit {
     this.taskDetails.setTaskDescription(task.taskDetails);
     this.taskDetails.setStartDate(task.startDate);
     this.taskDetails.setEndDate(task.endDate);
-    console.log(this.taskDetails);
 
   }
 
+  taskTitle:string;
   updateTaskConfirm() {
-    this.taskOwnr = this.taskDetails.getTaskOwner();
+    this.taskTitle = this.taskDetails.getTaskTitle();
     this.taskDetails = new TaskClass();
     this.taskDetails.setTasktitle((<HTMLInputElement>document.getElementById("editTaskTitle")).value);
     this.taskDetails.setTaskOwner((<HTMLInputElement>document.getElementById("editTaskOwner")).value);
     this.taskDetails.setTaskDescription((<HTMLInputElement>document.getElementById("editTaskDescription")).value);
     this.taskDetails.setEndDate((<HTMLInputElement>document.getElementById("editProjectEndDate")).value);
     console.log(this.taskDetails);
-    this.proDetService.editTaskWIthProjectName(this.taskDetails, this.taskOwnr);
+    this.proDetService.editTaskWIthProjectName(this.taskDetails, this.taskTitle);
 
 
   }
@@ -211,6 +210,7 @@ export class ProjectDetailsComponent implements OnInit {
   userArray: Array<any> = [];
   constructor(private http: HttpClient, private comServ: CommonService, private proDetService: ProjectDetailsService) {
 
+
     this.taskList();
     this.url = 'http://localhost:8080/employee/' + comServ.setObj().projectName;
     this.http.get(this.url).subscribe(data => {
@@ -223,6 +223,8 @@ export class ProjectDetailsComponent implements OnInit {
 
   curId: string;
   ngOnInit() {
+
+   
     this.projectDetail = this.comServ.setObj();
     console.log("view Project");
     console.log(this.projectDetail);
@@ -268,4 +270,12 @@ export class ProjectDetailsComponent implements OnInit {
   }
 
   employeeDetailsOfProject:Array<string>=this.comServ.getEmployeeDetails();
+
+  
+  clear(value) {
+      $(':input').val("");
+      $('#projectTitle').val(value);
+     
+  }
+  
 }
