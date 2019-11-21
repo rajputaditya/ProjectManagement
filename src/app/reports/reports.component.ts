@@ -39,7 +39,14 @@ export class ReportsComponent implements OnInit {
             datasets: [
               {
                 data: this.percentagesCompleted,
-                borderColor: "black",
+                borderColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)'
+                ],
                 borderWidth: 1,
                 lineTension: 0.2,
                 fill: true,
@@ -104,14 +111,15 @@ export class ReportsComponent implements OnInit {
           'rgba(153, 102, 255, 0.2)',
           'rgba(255, 159, 64, 0.2)'
         ];
+        let color = colors[Math.floor(Math.random() * 6)];
         datasets.push({
           label: key,
           data: sets.get(key),
-          borderColor: "black",
+          borderColor: color,
           borderWidth: 1,
           lineTension: 0.2,
           fill: true,
-          backgroundColor: colors[Math.floor(Math.random() * 6)]
+          backgroundColor: color
         });
       }
 
