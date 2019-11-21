@@ -30,9 +30,6 @@ export class ReportsComponent implements OnInit {
         this.jsonArray.forEach(employee => this.percentagesCompleted.push(employee.project_part_progress));
         this.jsonArray.forEach(employee => this.employeeNames.push(employee.emp_name));
 
-        // DEBUG LOG
-        console.log(this.percentagesCompleted);
-        console.log(this.employeeNames);
 
         // Rendering data into Last month progress chart
         this.chart = new Chart('barchart', {
@@ -83,7 +80,6 @@ export class ReportsComponent implements OnInit {
       let datasets: any = [];
       let sets = new Map();
       let emps: any = res;
-      console.log(res);
       emps.forEach(element => {
         let emp: any = element;
         if (!sets.has(emp.emp_name)) {
@@ -91,19 +87,23 @@ export class ReportsComponent implements OnInit {
         } else {
           let progresses = [];
           let data = sets.get(emp.emp_name);
-          console.log("Data" + data);
           data.forEach(element => {
             progresses.push(element);
           });
           progresses.push(emp.project_part_progress);
-          console.log(progresses);
           sets.set(emp.emp_name, progresses);
         }
       });
 
-      console.log(sets);
       for (let key of sets.keys()) {
-        console.log("KEY:" + key);
+        let colors = [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ];
         datasets.push({
           label: key,
           data: sets.get(key),
@@ -111,21 +111,9 @@ export class ReportsComponent implements OnInit {
           borderWidth: 1,
           lineTension: 0.2,
           fill: true,
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-          ]
+          backgroundColor: colors[Math.floor(Math.random() * 6)]
         });
       }
-
-      sets.forEach(element => {
-        let set: any = element;
-
-      });
 
       this.chart = new Chart('canvas', {
         type: 'line',
@@ -154,23 +142,3 @@ export class ReportsComponent implements OnInit {
   }
 
 }
-
-
-
-
-// datasets.push({
-//   label: empName,
-//   data: data,
-//   borderColor: "black",
-//   borderWidth: 1,
-//   lineTension: 0.2,
-//   fill: true,
-//   backgroundColor: [
-//     'rgba(255, 99, 132, 0.2)',
-//     'rgba(54, 162, 235, 0.2)',
-//     'rgba(255, 206, 86, 0.2)',
-//     'rgba(75, 192, 192, 0.2)',
-//     'rgba(153, 102, 255, 0.2)',
-//     'rgba(255, 159, 64, 0.2)'
-//   ]
-// });

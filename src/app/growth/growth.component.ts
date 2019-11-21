@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MainService } from '../reports/main.service';
-import {Chart} from 'chart.js'
+import { Chart } from 'chart.js'
 
 @Component({
   selector: 'app-growth',
@@ -9,219 +9,162 @@ import {Chart} from 'chart.js'
 })
 export class GrowthComponent implements OnInit {
 
-  Chart= [];
+  chart = [];
+  project_name: any = "AT&T";
 
-  constructor( private _main: MainService) { }
+  constructor(private _main: MainService) { }
 
   ngOnInit() {
-    //this._main.getLastMonthProgressOfEmployees(new Date().getMonth())
-    //.subscribe(res =>
-      //{
-        //console.log(res);
-       
-      //   let temp_max = res['list'].map(res => res.main.temp_max);
-      //   let temp_min = res['list'].map(res => res.main.temp_min);
-      //   let alldates = res['list'].map(res => res.dt)
+    this._main.getMonthlyProgressOfProject(new Date().getMonth()+1, new Date().getFullYear(), this.project_name)
+      .subscribe(res => {
+        let jsonArray: any = res;
+        let completed_tasks = [];
+        let total_assigned_tasks = [];
+        jsonArray.forEach(element => {
+          completed_tasks.push(element.completed_tasks);
+          total_assigned_tasks.push(element.total_assigned_tasks);
+        });
 
-      //   let weatherDates = []
-      //   alldates.forEach((res) => {
-      //     let jsdate = new Date(res * 1000)
-      //     weatherDates.push(jsdate.toLocaleTimeString('en', { year: 'numeric', month: 'short', day: 'numeric' }))
-      //   })
-      //   console.log(weatherDates);
-      //   this.Chart = new Chart('canvas', {
-      //     type: 'bar',
-      //     data: {
-      //       labels: weatherDates,
-      //       datasets: [
-      //         {
-      //           data: temp_max,
-      //           borderColor: "red",
-      //           borderWidth:1,
-      //           lineTension:0.2,
-      //           fill: true,
-      //           backgroundColor: [
-      //             'rgba(255, 99, 132, 0.2)',
-      //             'rgba(54, 162, 235, 0.2)',
-      //             'rgba(255, 206, 86, 0.2)',
-      //             'rgba(75, 192, 192, 0.2)',
-      //             'rgba(153, 102, 255, 0.2)',
-      //             'rgba(255, 159, 64, 0.2)'
-      //         ],
-                
-      //         },
-      //         {
-      //           data: temp_min,
-      //           borderColor: "blue",
-      //           borderWidth:1,
-      //           lineTension:0.2,
-      //           fill: true,
-      //           backgroundColor: [
-      //             'rgba(255, 99, 132, 0.2)',
-      //             'rgba(54, 162, 235, 0.2)',
-      //             'rgba(255, 206, 86, 0.2)',
-      //             'rgba(75, 192, 192, 0.2)',
-      //             'rgba(153, 102, 255, 0.2)',
-      //             'rgba(255, 159, 64, 0.2)'
-      //         ],
+        let months: any = [];
+        let month = new Date().getMonth();
+        for (let index = 1; index <= 6; index++) {
+          months.push(month--);
+        }
 
-      //         },
-      //       ]
-      //     },
-      //      options: {
-      //          legend: {
-      //            display: true
-      //          },
-      //         scales: {
-      //            xAxes: [{
-                  
-      //              display: true,
-                   
- 
-      //            }],
-      //            yAxes: [{
-      //              display: true
-      //            }],
-      //          } 
-      //        }
-      //   })
-      //   this.Chart = new Chart('barchart', {
-      //     type: 'line',
-      //     animationEnabled:true,
-      //     axisX:{
-      //       intervsl:10,
-      //     },
-      //     data: {
-      //       labels: weatherDates,
-      //       datasets: [
-      //         { 
-      //           data: temp_max,
-      //           backgroundColor: [
-      //             'rgba(255, 99, 132, 0.2)',
-      //             'rgba(54, 162, 235, 0.2)',
-      //             'rgba(255, 206, 86, 0.2)',
-      //             'rgba(75, 192, 192, 0.2)',
-      //             'rgba(153, 102, 255, 0.2)',
-      //             'rgba(255, 159, 64, 0.2)'
-      //         ],
-      //         borderColor: [
-      //             'rgba(255,99,132,1)',
-      //             'rgba(54, 162, 235, 1)',
-      //             'rgba(255, 206, 86, 1)',
-      //             'rgba(75, 192, 192, 1)',
-      //             'rgba(153, 102, 255, 1)',
-      //             'rgba(255, 159, 64, 1)'
-      //         ],
-                
-      //           fill: false
-      //         },
-      //         { 
-      //           data: temp_min,
-                
-      //           backgroundColor: [
-      //             'rgba(255, 99, 132, 0.2)',
-      //             'rgba(54, 162, 235, 0.2)',
-      //             'rgba(255, 206, 86, 0.2)',
-      //             'rgba(75, 192, 192, 0.2)',
-      //             'rgba(153, 102, 255, 0.2)',
-      //             'rgba(255, 159, 64, 0.2)'
-      //         ],
-      //         borderColor: [
-      //             'rgba(255,99,132,1)',
-      //             'rgba(54, 162, 235, 1)',
-      //             'rgba(255, 206, 86, 1)',
-      //             'rgba(75, 192, 192, 1)',
-      //             'rgba(153, 102, 255, 1)',
-      //             'rgba(255, 159, 64, 1)'
-      //         ],
-      //           fill: false
-      //         },
-      //       ]
-      //     },
-      //     options: {
-      //       legend: {
-      //         display: true
-      //       },
-      //      scales: {
-      //         xAxes: [{
-               
-      //           display: true
-      //         }],
-      //         yAxes: [{
-      //           display: true
-      //         }],
-      //       } 
-      //     } 
-      //   });
-      //   this.Chart = new Chart('piechart', {
-      //     type: 'pie',
-      //     animationEnabled:true,
-      //     axisX:{
-      //       intervsl:10,
-      //     },
-      //     data: {
-      //       labels: weatherDates,
-      //       datasets: [
-      //         { 
-      //           data: temp_max,
-      //           backgroundColor: [
-      //             'rgba(255, 99, 132, 0.2)',
-      //             'rgba(54, 162, 235, 0.2)',
-      //             'rgba(255, 206, 86, 0.2)',
-      //             'rgba(75, 192, 192, 0.2)',
-      //             'rgba(153, 102, 255, 0.2)',
-      //             'rgba(255, 159, 64, 0.2)'
-      //         ],
-      //         borderColor: [
-      //             'rgba(255,99,132,1)',
-      //             'rgba(54, 162, 235, 1)',
-      //             'rgba(255, 206, 86, 1)',
-      //             'rgba(75, 192, 192, 1)',
-      //             'rgba(153, 102, 255, 1)',
-      //             'rgba(255, 159, 64, 1)'
-      //         ],
-                
-      //           fill: true
-      //         },
-      //         { 
-      //           data: temp_min,
-                
-      //           backgroundColor: [
-      //             'rgba(255, 99, 132, 0.2)',
-      //             'rgba(54, 162, 235, 0.2)',
-      //             'rgba(255, 206, 86, 0.2)',
-      //             'rgba(75, 192, 192, 0.2)',
-      //             'rgba(153, 102, 255, 0.2)',
-      //             'rgba(255, 159, 64, 0.2)'
-      //         ],
-      //         borderColor: [
-      //             'rgba(255,99,132,1)',
-      //             'rgba(54, 162, 235, 1)',
-      //             'rgba(255, 206, 86, 1)',
-      //             'rgba(75, 192, 192, 1)',
-      //             'rgba(153, 102, 255, 1)',
-      //             'rgba(255, 159, 64, 1)'
-      //         ],
-      //           fill: true
-      //         },
-      //       ]
-      //     },
-      //     options: {
-      //       legend: {
-      //         display: true
-      //       },
-      //      scales: {
-      //         xAxes: [{
-               
-      //           display: true
-      //         }],
-      //         yAxes: [{
-      //           display: true
-      //         }],
-      //       } 
-      //     } 
-      //   });
-       //})
+        // Rendering data into Last month progress chart
+        this.chart = new Chart('canvas', {
+          type: 'bar',
+          data: {
+            labels: months,
+            datasets: [
+              {
+                label: 'Completed Tasks',
+                data: completed_tasks,
+                borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1,
+                lineTension: 0.2,
+                fill: true,
+                backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)'
+                ]
+              },
+              {
+                label: 'Total Tasks',
+                data: total_assigned_tasks,
+                borderColor: [
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)',
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)'
+                ],
+                borderWidth: 1,
+                lineTension: 0.2,
+                fill: true,
+                backgroundColor: [
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)',
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)'
+                ]
+              }
+            ]
+          },
+          options: {
+            legend: {
+              display: false
+            },
+            scales: {
+              yAxes: [
+                {
+                  "ticks": { "beginAtZero": true }
+                }],
+            }
+          }
+        });
+
+        // Rendering data into Last month progress chart
+        this.chart = new Chart('piechart', {
+          type: 'line',
+          data: {
+            labels: months,
+            datasets: [
+              {
+                label: 'Completed Tasks',
+                data: completed_tasks,
+                borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1,
+                lineTension: 0.2,
+                fill: true,
+                backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)'
+                ]
+              },
+              {
+                label: 'Total Tasks',
+                data: total_assigned_tasks,
+                borderColor: [
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)',
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)'
+                ],
+                borderWidth: 1,
+                lineTension: 0.2,
+                fill: true,
+                backgroundColor: [
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)',
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)'
+                ]
+              }
+            ]
+          },
+          options: {
+            legend: {
+              display: false
+            },
+            scales: {
+              yAxes: [
+                {
+                  "ticks": { "beginAtZero": true }
+                }],
+            }
+          }
+        });
+      })
   }
 
 }
