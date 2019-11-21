@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ProjectService } from './project.service';
 import { CommonService } from '../common.service';
+import * as $ from "jquery";
 
 export class Project {
   clientName: string;
@@ -62,7 +63,7 @@ export class Project {
   setPriority(priority) {
     this.priority = priority;
   }
-  setProjectDescription(projectDescription){
+  setProjectDescription(projectDescription) {
     this.projectDescription = projectDescription;
   }
 }
@@ -94,6 +95,12 @@ export class ViewProjectsComponent implements OnInit {
       });
     })
   }
+
+
+
+
+
+
 
 
   opnModal(uname: string) {
@@ -187,17 +194,20 @@ export class ViewProjectsComponent implements OnInit {
     return this.editProjectForm.get("editProjectDescriptionValidator");
   }
 
-
+  beginDate;
+  finishDate;
+  totalDays;
+  totalProjectDays: number;
 
   ngOnInit() {
-    
+
+
     this.createProjectForm = new FormGroup({
       clientNameValidator: new FormControl('', [Validators.required, Validators.minLength(3)]),
       projectNameValidator: new FormControl('', [Validators.required, Validators.minLength(4)]),
       technologiesValidator: new FormControl('', Validators.required),
       startDateValidator: new FormControl('', Validators.required),
       endDateValidator: new FormControl('', Validators.required),
-      priorityLevelValidator: new FormControl('', [Validators.required, Validators.minLength(3)]),
       cityValidator: new FormControl('', [Validators.required, Validators.minLength(3), Validators.pattern(this.namePattern)]),
       countryValidator: new FormControl('', [Validators.required, Validators.minLength(4), Validators.pattern(this.namePattern)]),
       projectDescriptionValidator: new FormControl('', [Validators.required, Validators.minLength(20)])
@@ -207,13 +217,11 @@ export class ViewProjectsComponent implements OnInit {
       editProjectNameValidator: new FormControl('', [Validators.required, Validators.minLength(4)]),
       editTechnologyValidator: new FormControl('', [Validators.required, Validators.minLength(4)]),
       editEndDateValidator: new FormControl('', Validators.required),
-      editPriorityValidator: new FormControl('', [Validators.required, Validators.minLength(3)]),
       editCityValidator: new FormControl('', [Validators.required, Validators.minLength(3), Validators.pattern(this.namePattern)]),
       editCountryValidator: new FormControl('', [Validators.required, Validators.minLength(4), Validators.pattern(this.namePattern)]),
       editProjectDescriptionValidator: new FormControl('', [Validators.required, Validators.minLength(20)])
 
     });
-
   }
   proj: Project;
   projects: Array<any> = [];
@@ -228,40 +236,68 @@ export class ViewProjectsComponent implements OnInit {
     this.proj.setCountry((<HTMLInputElement>document.getElementById("projectCountry")).value);
     this.proj.setPriority((<HTMLInputElement>document.getElementById("projectPriorityLevel")).value);
     this.proj.setProjectDescription((<HTMLInputElement>document.getElementById("projectDescription")).value);
+    // this.beginDate = new Date(((<HTMLInputElement>document.getElementById("projectStartdate")).value));
+    // this.finishDate = new Date(((<HTMLInputElement>document.getElementById("projectEndDate")).value));
+    // this.totalDays = this.finishDate.getTime() - this.beginDate.getTime();
+    // this.totalProjectDays = this.totalDays / (1000 * 3600 * 24);
     console.log(this.proj);
     this.service.addProject(this.proj).subscribe(proj => this.projects.push(proj));
+    location.reload();
   }
 
+  projectEmployees: Array<string> = [];
   sendProjectDetail(projectDetail: any) {
     this.comServ.getObj(projectDetail);
+    this.url = 'http://localhost:8080/projectEmployees/' + projectDetail.projectName;
+    console.log(this.url);
+    this.http.get(this.url).subscribe(data => {
+      JSON.parse(JSON.stringify(data)).forEach(element =>
+        this.projectEmployees.push(element));
+      console.log("spldpewfdwe" + this.projectEmployees);
+    });
+    this.comServ.sendEmployeeDetails(this.projectEmployees);
   }
 
 
 
-  searchdata:Array<any>;
-  search(){
-    this.searchdata=[];
-   this.url='http://localhost:8080/search/'+(<HTMLInputElement>document.getElementById("searchProject")).value;
-   console.log(this.url);
-   this.http.get(this.url).subscribe(data => {
-     // Populating usersArray with names from API
-     JSON.parse(JSON.stringify(data)).forEach(element => {
-       this.searchdata.push(element);
-     });
-   });
- }
- projectName:string;
- projectData:Project=new Project();
- data:Project;
- editDetails(){
-   this.projectData=new Project();
-  this.projectName=(<HTMLInputElement>document.getElementById("projectButton")).value;
-   this.url='http://localhost:8080/project/'+this.projectName;
-   console.log(this.url);
-  this.service.editProject(this.url).subscribe(proj =>this.projectData=proj);
-   }
+  searchdata: Array<any>;
+  searchEditProject() {
+    this.searchdata = [];
+    this.url = 'http://localhost:8080/search/' + (<HTMLInputElement>document.getElementById("searchProject")).value;
+    console.log(this.url);
+    this.http.get(this.url).subscribe(data => {
+      // Populating usersArray with names from API
+      JSON.parse(JSON.stringify(data)).forEach(element => {
+        this.searchdata.push(element);
+      });
+    });
+  }
 
-   updateProject(){
+
+  searchDeleteProject() {
+    this.searchdata = [];
+    this.url = 'http://localhost:8080/search/' + (<HTMLInputElement>document.getElementById("searchDeleteProject")).value;
+    console.log(this.url);
+    this.http.get(this.url).subscribe(data => {
+      JSON.parse(JSON.stringify(data)).forEach(element => {
+        this.searchdata.push(element);
+      });
+    });
+  }
+
+
+  projectName: string;
+  projectData: Project = new Project();
+  data: Project;
+  editDetails() {
+    this.projectData = new Project();
+    this.projectName = (<HTMLInputElement>document.getElementById("projectButton")).value;
+    this.url = 'http://localhost:8080/project/' + this.projectName;
+    console.log(this.url);
+    this.service.editProject(this.url).subscribe(proj => this.projectData = proj);
+  }
+
+  updateProject() {
     this.proj = new Project();
     this.proj.setClientName((<HTMLInputElement>document.getElementById("clientName1")).value);
     this.proj.setProjectName((<HTMLInputElement>document.getElementById("projectName1")).value);
@@ -274,14 +310,20 @@ export class ViewProjectsComponent implements OnInit {
     this.proj.setProjectDescription((<HTMLInputElement>document.getElementById("editProjectDescription")).value);
     console.log(this.proj);
     this.service.updateProject(this.proj).subscribe(proj => this.projects.push(proj));
-   }
+    location.reload();
+  }
 
-   delProject(){
-    this.projectData=new Project();
-    this.projectName=(<HTMLInputElement>document.getElementById("projectButton")).value;
-     this.url='http://localhost:8080/project/'+this.projectName;
-     console.log(this.url);
-    this.service.delProject(this.url).subscribe(proj =>console.log(proj));
-   }
- }
+  delProject() {
+    this.projectData = new Project();
+    this.projectName = (<HTMLInputElement>document.getElementById("projectButton")).value;
+    this.url = 'http://localhost:8080/project/' + this.projectName;
+    console.log(this.url);
+    this.service.delProject(this.url).subscribe(proj => console.log(proj));
+    location.reload();
+  }
+
+  clear() {
+    $(':input').val("");
+  }
+}
 

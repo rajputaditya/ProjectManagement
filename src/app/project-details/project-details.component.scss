@@ -39,10 +39,18 @@
     margin-bottom: 10px;
 }
 
+#pills-reports-tab{
+  
+  text-align: center;
+  min-width: 100px ;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 .well{
     background-color:#F9F9F9;
     border-radius: 10px;
-    width: 240px;
+    width: 340px;
   
 }
 
@@ -313,3 +321,39 @@ color: white;
   }
 
 
+//Employee 
+
+img{
+  width: 40%;
+  align-self: center;
+  margin-top: 15px;
+  border-radius: 50%;
+}
+
+.employeeColumn {
+  float: left;
+  width: 25%;
+  height: 50%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+
+#editEmpBtn{
+  float: right;
+  color: white;
+}
+
+#delEmpBtn{
+  float: right;
+  margin-left: 6px;
+}
+
+#delEmpBtn:hover{
+  background-color: red;
+  border-color: red;
+  color: white;
+}
+
+.jumbotron{
+  background-color: white;;
+}

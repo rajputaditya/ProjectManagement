@@ -2,14 +2,13 @@
     <div class="col-md-8">
         <h2>{{projectDetail.projectName}} <span class="badge badge-warning">{{projectDetail.priority}}</span> </h2>
         <h5>{{projectDetail.clientName}} <small>, {{projectDetail.city}}, {{projectDetail.country}}</small></h5>
-        <small>Description - {{projectDetail.projectDescription}}</small>
-        <h5>Manager - {{projectDetail.manager}}</h5>
+        <small><strong>Description</strong>- {{projectDetail.projectDescription}}</small>
     </div>
     <div class="col-md-4">
         <br><br>
         <h5>{{projectDetail.technologies}}</h5>
-        <small>Start Date - {{projectDetail.startDate}}</small><br>
-        <small>End Date - {{projectDetail.endDate}}</small>
+        <small><strong> Start Date</strong> - {{projectDetail.startDate}}</small><br>
+        <small><strong> End Date</strong> - {{projectDetail.endDate}}</small>
 
     </div>
 
@@ -19,61 +18,103 @@
         <div class="well">
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="pills-tasks-tab" data-toggle="pill" href="#pills-tasks" role="tab"
-                        aria-controls="pills-tasks" aria-selected="true">TASKS</a>
+                    <a class="nav-link active" id="pills-tasks-tab" data-toggle="pill" href="#pills-reports" role="tab"
+                        aria-controls="pills-reports" aria-selected="true">REPORT</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="pills-members-tab" data-toggle="pill" href="#pills-members" role="tab"
                         aria-controls="pills-members" aria-selected="false">MEMBERS</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-reports-tab" data-toggle="pill" href="#pills-tasks" role="tab"
+                        aria-controls="pills-tasks" aria-selected="false">TASKS</a>
+                </li>
             </ul>
         </div>
         <div class="tab-content" id="pills-tabContent">
-            <div class="tab-pane fade show active" id="pills-tasks" role="tabpanel" aria-labelledby="pills-home-tab">
+            <div class="tab-pane fade show" id="pills-tasks" role="tabpanel" aria-labelledby="pills-home-tab">
                 <p
                     style="font-size: 36px;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
                     Tasks
-                    <button class="btn" data-toggle="modal" data-target="#newtaskModal">
+                    <button class="btn btn-sm" data-toggle="modal" data-target="#newtaskModal">
                         <i class="fas fa-plus-circle" title="Add a new task" id="addTaskIcon"></i></button></p>
                 <div class="row">
 
                     <div class="container-fluid">
                         <div id="maindiv">
 
-                            <div class="column" *ngFor="let user of userArray; let i = index">
-                                <div class="card">
+                            <div class="column" *ngFor="let task of taskArray; let i = index">
+                                <div class="card" *ngIf="task.status=='Complete'">
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-10">
-                                                <h4 id="namee">{{user.name}} </h4>
+                                                <h4 id="namee">{{task.projectName}} </h4>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="custom-controls-stacked d-block my-3" title="Submit">
                                                     <label class="custom-control material-checkbox">
-                                                        <input type="checkbox" [disabled]="buttons[i]"
-                                                            class="material-control-input" (click)="buttons[i]=true"
-                                                            title="Submit task">
+                                                        <input type="checkbox" checked="checked" disabled
+                                                            class="material-control-input" (change)="buttons[i]=true"
+                                                            (click)="statusChange(task)" title="Submit task">
                                                         <span class="material-control-indicator"></span>
 
                                                     </label>
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- <p id="userIddd">{{user.id}}</p> -->
-                                        <p class="title">{{user.username}}</p>
-                                        <p>Description : {{user.website}}</p>
-                                        <p>{{user.email}}</p>
-                                        <p>{{user.phone}}
-                                        </p>
+                                        <p id="proDetTaskOwner"><strong>Task Owner - </strong>{{task.taskOwner}}</p>
+                                        <p class="title"><span class="badge badge-warning">{{task.taskName}}</span></p>
+                                        <p>{{task.taskDetails}}</p>
+                                        <small class="form-text text-muted ">Start - {{task.startDate}}
+                                        </small>
+                                        <small class="form-text text-muted ">End - {{task.endDate}}
+                                        </small>
 
                                         <small class="form-text text-muted mb-4 ">
                                             <i>**Click checkbox to submit task</i>
                                             <button class="btn btn-dark btn-sm pull-right" id="taskDeleteBtn"
-                                                data-toggle="modal"
-                                                data-target="#deleteConfirmationModal">Delete</button>
+                                                data-toggle="modal" data-target="#deleteConfirmationModal"
+                                                disabled>Delete</button>
+                                            <button class="btn btn-warning btn-sm pull-right" disabled id="taskEditbtn"
+                                                style="margin-right: 10px;" data-toggle="modal"
+                                                data-target="#editModal">Edit</button>
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="card" *ngIf="task.status=='';">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-10">
+                                                <h4 id="namee">{{task.projectName}} </h4>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="custom-controls-stacked d-block my-3" title="Submit">
+                                                    <label class="custom-control material-checkbox">
+                                                        <input type="checkbox" [disabled]="buttons[i]"
+                                                            class="material-control-input" (change)="buttons[i]=true"
+                                                            (click)="statusChange(task)" title="Submit task">
+                                                        <span class="material-control-indicator"></span>
+
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p id="proDetTaskOwner"><strong>Task Owner - </strong>{{task.taskOwner}}</p>
+                                        <p class="title"><span class="badge badge-warning">{{task.taskName}}</span></p>
+                                        <p>{{task.taskDetails}}</p>
+                                        <small class="form-text text-muted ">Start - {{task.startDate}}
+                                        </small>
+                                        <small class="form-text text-muted ">End - {{task.endDate}}
+                                        </small>
+
+                                        <small class="form-text text-muted mb-4 ">
+                                            <i>**Click checkbox to submit task</i>
+                                            <button class="btn btn-dark btn-sm pull-right" id="taskDeleteBtn"
+                                                data-toggle="modal" data-target="#deleteConfirmationModal"
+                                                [disabled]="buttons[i]" (click)=setDetail(task)>Delete</button>
                                             <button class="btn btn-warning btn-sm pull-right" [disabled]="buttons[i]"
                                                 id="taskEditbtn" style="margin-right: 10px;" data-toggle="modal"
-                                                data-target="#editModal" (click)=sendId(user.name)>Edit</button>
+                                                data-target="#editModal" (click)=updateTaskObj(task)>Edit</button>
                                         </small>
 
                                     </div>
@@ -82,6 +123,7 @@
                         </div>
                     </div>
                 </div>
+
 
                 <!-- Edit task modal -->
                 <div class="modal fade" id="editModal" tabindex="-1" role="dialog">
@@ -100,29 +142,36 @@
 
 
 
-                                <div class="modal-body">
-                                    <form class="text-center border  p-5" [formGroup]="editTaskForm">
-                                        <div class="row mb-4">
-                                            <div class="col">
-                                                <input type="text" class="form-control" placeholder="Project title"
-                                                    disabled>
-                                                <small class="form-text text-muted ">
-                                                    Project Title
-                                                </small>
+                                    <div class="modal-body">
+                                        <form class="text-center border  p-5" [formGroup]="editTaskForm">
+                                            <div class="row mb-4">
+                                                <div class="col">
+                                                    <input type="text" class="form-control" placeholder="Project title"
+                                                        disabled [value]=taskDetails.getProjectTitle()>
+                                                    <small class="form-text text-muted ">
+                                                        Project Title
+                                                    </small>
+                                                </div>
+                                                <div class="col">
+                                                    <input type="text" class="form-control" placeholder="Task title"
+                                                        disabled [value]=taskDetails.getTaskTitle() id="editTaskTitle">
+                                                    <small class="form-text text-muted ">
+                                                        Task Title
+                                                    </small>
+                                                </div>
                                             </div>
-                                            <div class="col">
-                                                <input type="text" class="form-control" placeholder="Task title"
-                                                    disabled>
-                                                <small class="form-text text-muted ">
-                                                    Task Title
-                                                </small>
-                                            </div>
+
+
+                                        <!-- <input type="text" id="editTaskOwner" class="form-control"
+                                            placeholder="Task Owner" [value]=taskDetails.getTaskOwner()
+                                            formControlName="editTaskOwnerValidator"
+                                            [class.is-invalid]="editGetTaskOwner.invalid && editGetTaskOwner.touched"> -->
+                                             <div>
+                                        <select class="browser-default custom-select" id="editTaskOwner" >
+                                            <option [value]="taskDetails.getTaskOwner()" selected>{{taskDetails.getTaskOwner()}}</option>
+                                            <option *ngFor="let employee of employeeDetailsOfProject" value="{{employee}}">{{employee}}</option>
+                                        </select>
                                         </div>
-
-
-                                        <input type="text" id="editTaskOwner" class="form-control"
-                                            placeholder="Task Owner" formControlName="editTaskOwnerValidator"
-                                            [class.is-invalid]="editGetTaskOwner.invalid && editGetTaskOwner.touched">
                                         <small class="form-text text-muted mb-1">
                                             Task Owners
                                         </small>
@@ -140,7 +189,8 @@
                                         </div>
 
                                         <textarea class="form-control" style="margin-top: 10%;" rows="3"
-                                            placeholder="Task Details" formControlName="editTaskDescriptionValidator"
+                                            placeholder="Task Details" [value]=taskDetails.getTaskDescription()
+                                            formControlName="editTaskDescriptionValidator" id="editTaskDescription"
                                             [class.is-invalid]="editGetTaskDescription.invalid && editGetTaskDescription.touched"></textarea>
                                         <small class="form-text text-muted mb-1 ">
                                             Task Description
@@ -161,14 +211,16 @@
 
                                             <div class="col-md-6" style="margin-top: 10%;">
                                                 <input type="date" class="form-control" id="editProjectStartdate"
-                                                    placeholder="Start date" disabled>
+                                                    placeholder="Start date" [value]=taskDetails.getStartDate()
+                                                    disabled>
                                                 <small class="form-text text-muted ">
                                                     Start Date
                                                 </small>
                                             </div>
                                             <div class="col-md-6" style="margin-top: 10%;">
                                                 <input type="date" class="form-control" id="editProjectEndDate"
-                                                    (blur)=editDateValidator() formControlName="editEndDateValidator"
+                                                    (blur)=editDateValidator() [value]=taskDetails.getEnddate()
+                                                    formControlName="editEndDateValidator"
                                                     [class.is-invalid]="getEditEndDate.invalid && getEditEndDate.touched">
                                                 <small class="form-text text-muted ">
                                                     End Date
@@ -189,7 +241,7 @@
                                         </div>
 
                                         <button class="btn btn-warning btn-block" type="submit" data-dismiss="modal"
-                                            id="assignTaskBtn" [disabled]="editTaskForm.invalid" data-toggle="modal"
+                                            id="assignTaskBtn" (click)=updateTaskConfirm() data-toggle="modal"
                                             data-target="#successUpdateModal">Update
                                             Task</button>
                                     </form>
@@ -202,39 +254,30 @@
 
                 </div>
 
+                    <!-- New task modal -->
+                    <div class="modal fade" (blur)=clear(projectNameFromViewProject) id="newtaskModal" tabindex="-1" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
 
-                <!-- New task modal -->
-                <div class="modal fade" id="newtaskModal" tabindex="-1" role="dialog">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
+               
 
+                                <div class="modal-header" id="modalHeader">
+                                    <h4 class="modal-title">TASK DETAILS</h4>
+                                    <button type="button" class="close" data-dismiss="modal" (click)=clear(projectNameFromViewProject)>&times;</button>
+                                </div>
 
-                            <div class="modal-header" id="modalHeader">
-                                <h4 class="modal-title">TASK DETAILS</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            </div>
-
-                            <div class="modal-body">
-                                <form class="text-center border  p-5" [formGroup]="newTaskForm">
-                                    <div class="row mb-4">
+                                <div class="modal-body" >
+                                    <form class="text-center border  p-5" [formGroup]="newTaskForm">
+                                        <div class="row mb-4">
 
 
                                         <div class="col">
                                             <input type="text" id="projectTitle" class="form-control"
-                                                placeholder="Project name" formControlName="projectTitleValidator"
-                                                [class.is-invalid]="getProjectTitle.invalid && getProjectTitle.touched">
+                                                placeholder="Project name" value="{{projectNameFromViewProject}}"
+                                                disabled>
                                             <small class="form-text text-muted ">
                                                 Project Title
                                             </small>
-                                            <div
-                                                *ngIf="getProjectTitle.invalid && (getProjectTitle.touched || getProjectTitle.dirtty)">
-                                                <small *ngIf="getProjectTitle.errors?.required" class="text-danger">
-                                                    Project Title Is Required
-                                                </small>
-                                                <small *ngIf="getProjectTitle.errors?.minlength" class="text-danger">
-                                                    Project Title Must be Min length of 4 Characters
-                                                </small>
-                                            </div>
                                         </div>
 
 
@@ -259,27 +302,23 @@
 
 
 
-                                    <input type="text" id="taskOwner" class="form-control" placeholder="Task Owner"
+                                    <!-- <input type="text" id="taskOwner" class="form-control" placeholder="Task Owner"
                                         formControlName="taskOwnerValidator"
-                                        [class.is-invalid]="getTaskOwner.invalid && getTaskOwner.touched">
+                                        [class.is-invalid]="getTaskOwner.invalid && getTaskOwner.touched"> -->
+                                    <div>
+                                        <select class="browser-default custom-select" id="taskOwner">
+                                            <option selected>SELECT</option>
+                                            <option *ngFor="let employee of employeeDetailsOfProject" value="{{employee}}">{{employee}}</option>
+                                        </select>
+                                    </div>
                                     <small class="form-text text-muted mb-1">
                                         Task Owners
                                     </small>
-                                    <div *ngIf="getTaskOwner.invalid && (getTaskOwner.touched || getTaskOwner.dirtty)">
-                                        <small *ngIf="getTaskOwner.errors?.required" class="text-danger">
-                                            Task Owner Is Required
-                                        </small>
-                                        <small *ngIf="getTaskOwner.errors?.pattern" class="text-danger">
-                                            Cant Contain Number
-                                        </small>
-                                        <small *ngIf="getTaskOwner.errors?.minlength" class="text-danger">
-                                            Task Owner Must be Min length of 3 Characters
-                                        </small>
-                                    </div>
 
 
                                     <textarea class="form-control" style="margin-top: 10%;" rows="3"
-                                        placeholder="Task Details" formControlName="taskDescriptionValidator"
+                                        id="taskDescription" placeholder="Task Details"
+                                        formControlName="taskDescriptionValidator"
                                         [class.is-invalid]="getTaskDescription.invalid && getTaskDescription.touched"></textarea>
                                     <small class="form-text text-muted mb-1 ">
                                         Task Description
@@ -299,7 +338,7 @@
                                     <div class="form-row mb-4">
 
                                         <div class="col-md-6">
-                                            <input type="date" class="form-control" id="projectStartdate"
+                                            <input type="date" class="form-control" id="projectStartDate"
                                                 style="margin-top: 10%;" placeholder="Start date"
                                                 formControlName="startDateValidator"
                                                 [class.is-invalid]="getStartDate.invalid && getStartDate.touched">
@@ -338,7 +377,8 @@
                                     </div>
 
                                     <button class="btn btn-warning btn-block" [disabled]="newTaskForm.invalid"
-                                        type="submit" id="assignTaskBtn">Assign Task</button>
+                                        type="submit" data-dismiss="modal" (click)=addNewTask()
+                                        id="assignTaskBtn">Assign Task</button>
                                 </form>
 
                             </div>
@@ -368,7 +408,8 @@
                             <div class="modal-footer" id="deleteModalFooter">
                                 <button type="button" class="btn btn-info" data-dismiss="modal"
                                     id="deleteBtnInfo">Cancel</button>
-                                <button type="button" class="btn btn-danger" id="deleteBtnDanger">Delete</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal" id="deleteBtnDanger"
+                                    (click)=deleteTaskFunc()>Delete</button>
                             </div>
                         </div>
                     </div>
@@ -400,10 +441,196 @@
                     <p
                         style="font-size: 36px;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
                         Members
-                        <a class="btn" routerLink="/employees"><i class="fas fa-plus-circle" title="Add team members" id="addTaskIcon"></i></a></p>
+                        <a class="btn" routerLink="/availableEmployees" (click)=getDetails(projectDetails)><i
+                                class="fas fa-plus-circle" title="Add team members" id="addTaskIcon"></i></a></p>
 
+                    <div class="employeeColumn" *ngFor="let user of userArray">
+                        <div class="card">
+
+                            <img src="/assets/avatar.png" alt="Jane">
+                            <div class="container">
+                                <h4>{{user.fullName}} </h4>
+                                <p class="title">{{user.designation}}</p>
+                                <p>Expertise : {{user.technologies}}</p>
+                                <p>{{user.email}}</p>
+                                <p>{{user.phoneNumber}}
+                                    <button class="btn btn-sm btn-dark" id="delEmpBtn"
+                                        (click)=unAssignProject(user)>Delete</button>
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade show active" id="pills-reports" role="tabpanel"
+                aria-labelledby="pills-profile-tab">
+                <div>
+                   
+                    <div class="panel panel-default">
+                        <div class="panel-body" name="projGrowth">
+                            <h4>Project Growth Report</h4>
+                        </div>
+                    </div>
+                    
+                    <div class="jumbotron" style="background-color: white;">
+
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="jumbotron jumbotron-fluid" style="background-color: white;">
+                                    <div>
+                                        <canvas id="proj_line" height="10" width="30"></canvas>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-4">
+
+                                <br>
+                                <br>
+                                <br>
+                                <span style="font-size: 20px;"> Agile Project Submissions</span>
+                                <hr>
+                                <small>Submission 1</small>
+                                <div class="progress">
+                                    <div class="progress-bar bg-danger " style="width:100%"></div>
+                                </div>
+                                <small>Submission 2</small>
+                                <div class="progress">
+                                    <div class="progress-bar bg-success " style="width:100%"></div>
+                                </div>
+                                <small>Submission 3</small>
+                                <div class="progress">
+                                    <div class="progress-bar bg-info " style="width:60%"></div>
+                                </div>
+                                <small>Submission 4</small>
+                                <div class="progress">
+                                    <div class="progress-bar bg-warning " style="width:0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-bottom:50px">
+
+                        <div class="col-sm-6">
+                            <div>
+                                <canvas id="proj_pie" height="15" width="30"></canvas>
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-6">
+
+                            <div>
+                                <canvas id="proj_bar" height="10" width="20"></canvas>
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
+                <div >
+                    <hr>
+                   
+                    <div class="panel panel-default" style="margin-top: 50px;">
+                        <div class="panel-body">
+                            <h4>Employee Growth Rate</h4>
+                        </div>
+                    </div>
+
+                    <div class="jumbotron">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="jumbotron">
+                                    <div>
+                                        <canvas id="emp_line" height="10" width="30"></canvas>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-4">
+                                <br>
+                                <br>
+                                <br>
+                                <span style="font-style: italic;font-size: 20px;"> Top Campagin Performers</span>
+                                <hr>
+                                <span>Akhil</span>
+                                <div class="progress">
+                                    <div class="progress-bar bg-danger " style="width:50%"></div>
+                                </div>
+                                <span>Sahil</span>
+                                <div class="progress">
+                                    <div class="progress-bar bg-info " style="width:40%"></div>
+                                </div>
+                                <span>Shubham</span>
+                                <div class="progress">
+                                    <div class="progress-bar bg-success " style="width:60%"></div>
+                                </div>
+                                <span>Rajat</span>
+                                <div class="progress">
+                                    <div class="progress-bar bg-warning " style="width:50%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+
+                    <div class="row">
+
+                        <div class="col-sm-5">
+                            <div>
+                                <canvas id="emp_pie" height="15" width="30"></canvas>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-2">
+
+                            <span style="font-size: 20px;">Profiles in project</span><br>
+                            <small>JAVA Developers</small>
+                            <div class="progress">
+
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: 10%"
+                                    aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <small>Testers</small>
+                            <div class="progress">
+                                <div class="progress-bar bg-sucess " role="progressbar" style="width: 20%"
+                                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <small>UI integeratror</small>
+                            <div class="progress">
+                                <div class="progress-bar bg-info " role="progressbar" style="width: 30%"
+                                    aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <small>Managers</small>
+                            <div class="progress">
+                                <div class="progress-bar bg-success " role="progressbar" style="width: 45%"
+                                    aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <small>SAP</small>
+                            <div class="progress">
+                                <div class="progress-bar bg-warning" role="progressbar" style="width: 60%"
+                                    aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-5">
+
+                            <div style="   height: 250px; width: 500px;">
+                                <canvas id="emp_bar" height="10" width="20"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <link rel="stylesheet"
+                        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
                 </div>
             </div>
         </div>
-    </div>
-</div>
