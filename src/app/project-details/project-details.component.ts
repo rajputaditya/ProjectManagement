@@ -2,62 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { CommonService } from '../common.service';
-import { ProjectDetailsService } from './project-details.service';
-export class TaskClass {
-  projectName: string;
-  taskName: string;
-  taskOwner: string;
-  taskDetails;
-  endDate;
-  startDate;
-
-  setProjectTitle(projectTitle) {
-    this.projectName = projectTitle;
-  }
-  getProjectTitle() {
-    return this.projectName;
-  }
-
-
-  setTasktitle(taskTitle) {
-    this.taskName = taskTitle;
-  }
-  getTaskTitle() {
-    return this.taskName;
-  }
-
-
-  setTaskOwner(taskOwner) {
-    this.taskOwner = taskOwner;
-  }
-  getTaskOwner() {
-    return this.taskOwner;
-  }
-
-
-  setTaskDescription(taskDescription) {
-    this.taskDetails = taskDescription;
-  }
-  getTaskDescription() {
-    return this.taskDetails;
-  }
-
-
-  setStartDate(startDate) {
-    this.startDate = startDate;
-  }
-  getStartDate() {
-    return this.startDate;
-  }
-
-
-  setEndDate(endDate) {
-    this.endDate = endDate;
-  }
-  getEnddate() {
-    return this.endDate;
-  }
-}
 
 
 @Component({
@@ -80,10 +24,6 @@ export class ProjectDetailsComponent implements OnInit {
   editstartDate;
   endtemp;
   projectDetail;
-  projectNameFromViewProject: any;
-  taskArray: Array<any>=[];
-  url: string;
-  taskClass: TaskClass;
 
 
 
@@ -128,17 +68,6 @@ export class ProjectDetailsComponent implements OnInit {
     this.editstartDate = (<HTMLInputElement>document.getElementById("editProjectStartdate")).value;
     if (new Date(this.editendDate) <= new Date(this.editstartDate))
       this.endtemp = 1;
-  }
-
-  taskList() {
-    console.log("hjhreklwel"+this.comServ.setObj().projectName);
-    this.projectNameFromViewProject = this.comServ.setObj().projectName;
-    this.proDetService.getTaskByProjectName(this.projectNameFromViewProject).subscribe(data => {
-      JSON.parse(JSON.stringify(data)).forEach(element => {
-        this.taskArray.push(element);
-      });
-    })
-    console.log("task list Array " + this.taskArray);
   }
 
 
@@ -209,15 +138,17 @@ export class ProjectDetailsComponent implements OnInit {
 
 
   userArray: Array<any> = [];
-  constructor(private http: HttpClient, private comServ: CommonService, private proDetService: ProjectDetailsService) {
+  url: string ;
 
-    this.taskList();
-    this.url = 'http://localhost:8080/employee/' + comServ.setObj().projectName;
+  constructor(private http: HttpClient, private comServ: CommonService) {
+
+    this.url='http://localhost:8080/employee/'+comServ.setObj().projectName;
     this.http.get(this.url).subscribe(data => {
       JSON.parse(JSON.stringify(data)).forEach(element => {
         this.userArray.push(element);
       })
     })
+
   }
 
 
@@ -236,7 +167,7 @@ export class ProjectDetailsComponent implements OnInit {
     });
 
     this.newTaskForm = new FormGroup({
-      projectTitleValidator: new FormControl('', Validators.minLength(4)),
+      projectTitleValidator: new FormControl('', [Validators.required, Validators.minLength(4)]),
       taskTitleValidator: new FormControl('', [Validators.required, Validators.minLength(4)]),
      
       taskDescriptionValidator: new FormControl('', [Validators.required, Validators.minLength(20), Validators.maxLength(100)]),
@@ -247,18 +178,26 @@ export class ProjectDetailsComponent implements OnInit {
 
 
   }
-  
+  // sendname(event){
+  //   this.firstnamebind=document.getElementById("namee");
+  // }
 
-  projectNameForEmployees: string;
-  getDetails() {
-    this.projectNameForEmployees = this.comServ.setObj().projectName;
+  sendId(indx: string) {
+    console.log(this.userArray);
+    this.curId = indx;
+    console.log(this.curId);
+  }
+
+  projectNameForEmployees:string;
+  getDetails(){
+    this.projectNameForEmployees=this.comServ.setObj().projectName;
     console.log(this.projectNameForEmployees);
   }
 
-  unAssignProject(user) {
-    this.url = 'http://localhost:8080/employee/unassign/' + user.fullName;
+  unAssignProject(user){
+    this.url='http://localhost:8080/employee/unassign/'+user.fullName;
     console.log(this.url);
-    this.http.put(this.url, user).subscribe(data => console.log(data));
+    this.http.put(this.url,user).subscribe(data=>console.log(data));
     location.reload();
   }
 
