@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { MainService } from './main.service';
 import { Chart } from 'chart.js';
@@ -16,11 +17,12 @@ export class ReportsComponent implements OnInit {
   jsonArray: any = [];
   percentagesCompleted: number[] = [];
   employeeNames: any = [];
+  project_name = "AT&T";
 
   ngOnInit() {
 
     // BARCHART for employee last month progress
-    this._main.getLastMonthProgressOfEmployees(new Date().getMonth())
+    this._main.getLastMonthProgressOfEmployees(new Date().getMonth(), new Date().getFullYear(), this.project_name)
       .subscribe(res => {
         this.jsonArray = res;
 
@@ -70,7 +72,7 @@ export class ReportsComponent implements OnInit {
 
       });
 
-    this._main.getMonthlyProgressOfEmployees(new Date().getMonth() + 1).subscribe(res => {
+    this._main.getMonthlyProgressOfEmployees(new Date().getMonth() + 1, new Date().getFullYear(), this.project_name).subscribe(res => {
 
       let months: any = [];
       let month = new Date().getMonth();
@@ -78,28 +80,30 @@ export class ReportsComponent implements OnInit {
         months.push(month--);
       }
 
-      let datasets: any;
+      let datasets: any = [];
       let sets = new Map();
       let emps: any = res;
+      console.log(res);
       emps.forEach(element => {
         let emp: any = element;
-        if (!sets.has(emp.fullName)) {
-          sets.set(emp.fullName, [emp.project_part_progress]);
+        if (!sets.has(emp.emp_name)) {
+          sets.set(emp.emp_name, [emp.project_part_progress]);
         } else {
           let progresses = [];
-          let data = sets.get(emp.fullName);
-          if(data instanceof Array){
-            data.forEach(element => {
-              progresses.push(element);
-            });
-          } else progresses.push(data);
-          
+          let data = sets.get(emp.emp_name);
+          console.log("Data" + data);
+          data.forEach(element => {
+            progresses.push(element);
+          });
+          progresses.push(emp.project_part_progress);
           console.log(progresses);
-          sets.set(emp.fullName, progresses);
+          sets.set(emp.emp_name, progresses);
         }
       });
 
-      for(let key of sets.keys()) {
+      console.log(sets);
+      for (let key of sets.keys()) {
+        console.log("KEY:" + key);
         datasets.push({
           label: key,
           data: sets.get(key),
@@ -116,11 +120,11 @@ export class ReportsComponent implements OnInit {
             'rgba(255, 159, 64, 0.2)'
           ]
         });
-     }
+      }
 
       sets.forEach(element => {
-        let set: any= element;
-        
+        let set: any = element;
+
       });
 
       this.chart = new Chart('canvas', {
