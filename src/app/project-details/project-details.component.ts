@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { CommonService } from '../common.service';
 import { ProjectDetailsService } from './project-details.service';
 import { MainService } from '../reports/main.service';
-import {Chart} from 'chart.js'
+import { Chart } from 'chart.js'
 export class TaskClass {
   projectName: string;
   taskName: string;
@@ -83,11 +83,16 @@ export class ProjectDetailsComponent implements OnInit {
   endtemp;
   projectDetail;
   projectNameFromViewProject: any;
-  taskArray: Array<any>=[];
+  taskArray: Array<any> = [];
   url: string;
   taskClass: TaskClass;
 
-  chart_emp= [];
+  chart = [];
+  jsonArray: any = [];
+  percentagesCompleted: number[] = [];
+  employeeNames: any = [];
+  project_name = "AT&T";
+
 
 
 
@@ -135,7 +140,7 @@ export class ProjectDetailsComponent implements OnInit {
   }
 
   taskList() {
-    console.log("hjhreklwel"+this.comServ.setObj().projectName);
+    console.log("hjhreklwel" + this.comServ.setObj().projectName);
     this.projectNameFromViewProject = this.comServ.setObj().projectName;
     this.proDetService.getTaskByProjectName(this.projectNameFromViewProject).subscribe(data => {
       JSON.parse(JSON.stringify(data)).forEach(element => {
@@ -151,7 +156,7 @@ export class ProjectDetailsComponent implements OnInit {
     this.proDetService.deleteTaskWithTaskOwner(this.taskTitle);
 
   }
-  
+
   setDetail(taskDetail) {
     this.taskTitle = taskDetail.taskName;
 
@@ -170,7 +175,7 @@ export class ProjectDetailsComponent implements OnInit {
 
   }
 
-  taskTitle:string;
+  taskTitle: string;
   updateTaskConfirm() {
     this.taskTitle = this.taskDetails.getTaskTitle();
     this.taskDetails = new TaskClass();
@@ -229,7 +234,7 @@ export class ProjectDetailsComponent implements OnInit {
   curId: string;
   ngOnInit() {
 
-   
+
     this.projectDetail = this.comServ.setObj();
     console.log("view Project");
     console.log(this.projectDetail);
@@ -245,442 +250,43 @@ export class ProjectDetailsComponent implements OnInit {
     this.newTaskForm = new FormGroup({
       projectTitleValidator: new FormControl('', Validators.minLength(4)),
       taskTitleValidator: new FormControl('', [Validators.required, Validators.minLength(4)]),
-     
+
       taskDescriptionValidator: new FormControl('', [Validators.required, Validators.minLength(20), Validators.maxLength(100)]),
       startDateValidator: new FormControl('', [Validators.required]),
       endDateValidator: new FormControl('', [Validators.required]),
 
     });
 
-    // this._main.emp()
-    // .subscribe(res =>
-    //   {
-    //     console.log(res);
-       
-    //     let temp_max = res['list'].map(res => res.main.temp_max);
-    //     let temp_min = res['list'].map(res => res.main.temp_min);
-    //     let alldates = res['list'].map(res => res.dt)
+    //REPORT
 
-    //     let weatherDates = []
-    //     alldates.forEach((res) => {
-    //       let jsdate = new Date(res * 1000)
-    //       weatherDates.push(jsdate.toLocaleTimeString('en', { year: 'numeric', month: 'short', day: 'numeric' }))
-    //     })
-    //     console.log(weatherDates);
-    //     this.Chart = new Chart('canvas', {
-    //       type: 'bar',
-    //       data: {
-    //         labels: weatherDates,
-    //         datasets: [
-    //           {
-    //             data: temp_max,
-    //             borderColor: "red",
-    //             borderWidth:1,
-    //             lineTension:0.2,
-    //             fill: true,
-    //             backgroundColor: [
-    //               'rgba(255, 99, 132, 0.2)',
-    //               'rgba(54, 162, 235, 0.2)',
-    //               'rgba(255, 206, 86, 0.2)',
-    //               'rgba(75, 192, 192, 0.2)',
-    //               'rgba(153, 102, 255, 0.2)',
-    //               'rgba(255, 159, 64, 0.2)'
-    //           ],
-                
-    //           },
-    //           {
-    //             data: temp_min,
-    //             borderColor: "blue",
-    //             borderWidth:1,
-    //             lineTension:0.2,
-    //             fill: true,
-    //             backgroundColor: [
-    //               'rgba(255, 99, 132, 0.2)',
-    //               'rgba(54, 162, 235, 0.2)',
-    //               'rgba(255, 206, 86, 0.2)',
-    //               'rgba(75, 192, 192, 0.2)',
-    //               'rgba(153, 102, 255, 0.2)',
-    //               'rgba(255, 159, 64, 0.2)'
-    //           ],
+    // BARCHART for employee last month progress
+    this._main.getLastMonthProgressOfEmployees(new Date().getMonth(), new Date().getFullYear(), this.project_name)
+      .subscribe(res => {
+        this.jsonArray = res;
 
-    //           },
-    //         ]
-    //       },
-    //        options: {
-    //            legend: {
-    //              display: true
-    //            },
-    //           scales: {
-    //              xAxes: [{
-                  
-    //                display: true,
-                   
- 
-    //              }],
-    //              yAxes: [{
-    //                display: true
-    //              }],
-    //            } 
-    //          }
-    //     })
-    //     this.Chart = new Chart('barchart', {
-    //       type: 'line',
-    //       animationEnabled:true,
-    //       axisX:{
-    //         intervsl:10,
-    //       },
-    //       data: {
-    //         labels: weatherDates,
-    //         datasets: [
-    //           { 
-    //             data: temp_max,
-    //             backgroundColor: [
-    //               'rgba(255, 99, 132, 0.2)',
-    //               'rgba(54, 162, 235, 0.2)',
-    //               'rgba(255, 206, 86, 0.2)',
-    //               'rgba(75, 192, 192, 0.2)',
-    //               'rgba(153, 102, 255, 0.2)',
-    //               'rgba(255, 159, 64, 0.2)'
-    //           ],
-    //           borderColor: [
-    //               'rgba(255,99,132,1)',
-    //               'rgba(54, 162, 235, 1)',
-    //               'rgba(255, 206, 86, 1)',
-    //               'rgba(75, 192, 192, 1)',
-    //               'rgba(153, 102, 255, 1)',
-    //               'rgba(255, 159, 64, 1)'
-    //           ],
-                
-    //             fill: false
-    //           },
-    //           { 
-    //             data: temp_min,
-                
-    //             backgroundColor: [
-    //               'rgba(255, 99, 132, 0.2)',
-    //               'rgba(54, 162, 235, 0.2)',
-    //               'rgba(255, 206, 86, 0.2)',
-    //               'rgba(75, 192, 192, 0.2)',
-    //               'rgba(153, 102, 255, 0.2)',
-    //               'rgba(255, 159, 64, 0.2)'
-    //           ],
-    //           borderColor: [
-    //               'rgba(255,99,132,1)',
-    //               'rgba(54, 162, 235, 1)',
-    //               'rgba(255, 206, 86, 1)',
-    //               'rgba(75, 192, 192, 1)',
-    //               'rgba(153, 102, 255, 1)',
-    //               'rgba(255, 159, 64, 1)'
-    //           ],
-    //             fill: false
-    //           },
-    //         ]
-    //       },
-    //       options: {
-    //         legend: {
-    //           display: true
-    //         },
-    //        scales: {
-    //           xAxes: [{
-               
-    //             display: true
-    //           }],
-    //           yAxes: [{
-    //             display: true
-    //           }],
-    //         } 
-    //       } 
-    //     });
-    //     this.Chart = new Chart('piechart', {
-    //       type: 'pie',
-    //       animationEnabled:true,
-    //       axisX:{
-    //         intervsl:10,
-    //       },
-    //       data: {
-    //         labels: weatherDates,
-    //         datasets: [
-    //           { 
-    //             data: temp_max,
-    //             backgroundColor: [
-    //               'rgba(255, 99, 132, 0.2)',
-    //               'rgba(54, 162, 235, 0.2)',
-    //               'rgba(255, 206, 86, 0.2)',
-    //               'rgba(75, 192, 192, 0.2)',
-    //               'rgba(153, 102, 255, 0.2)',
-    //               'rgba(255, 159, 64, 0.2)'
-    //           ],
-    //           borderColor: [
-    //               'rgba(255,99,132,1)',
-    //               'rgba(54, 162, 235, 1)',
-    //               'rgba(255, 206, 86, 1)',
-    //               'rgba(75, 192, 192, 1)',
-    //               'rgba(153, 102, 255, 1)',
-    //               'rgba(255, 159, 64, 1)'
-    //           ],
-                
-    //             fill: true
-    //           },
-    //           { 
-    //             data: temp_min,
-                
-    //             backgroundColor: [
-    //               'rgba(255, 99, 132, 0.2)',
-    //               'rgba(54, 162, 235, 0.2)',
-    //               'rgba(255, 206, 86, 0.2)',
-    //               'rgba(75, 192, 192, 0.2)',
-    //               'rgba(153, 102, 255, 0.2)',
-    //               'rgba(255, 159, 64, 0.2)'
-    //           ],
-    //           borderColor: [
-    //               'rgba(255,99,132,1)',
-    //               'rgba(54, 162, 235, 1)',
-    //               'rgba(255, 206, 86, 1)',
-    //               'rgba(75, 192, 192, 1)',
-    //               'rgba(153, 102, 255, 1)',
-    //               'rgba(255, 159, 64, 1)'
-    //           ],
-    //             fill: true
-    //           },
-    //         ]
-    //       },
-    //       options: {
-    //         legend: {
-    //           display: true
-    //         },
-    //        scales: {
-    //           xAxes: [{
-               
-    //             display: true
-    //           }],
-    //           yAxes: [{
-    //             display: true
-    //           }],
-    //         } 
-    //       } 
-    //     });
-    //   })
+        // Gets all the employees for the last month
+        this.jsonArray.forEach(employee => this.percentagesCompleted.push(employee.project_part_progress));
+        this.jsonArray.forEach(employee => this.employeeNames.push(employee.emp_name));
 
-    this._main.emp()
-    .subscribe(res =>
-      {
-        console.log(res);
-        let temp_max = res['list'].map(res => res.main.temp_max);
-        let temp_min = res['list'].map(res => res.main.temp_min);
-        let deg = res['list'].map(res => res.wind.deg);
-        let speed = res['list'].map(res => res.wind.speed);
-        let alldates = res['list'].map(res => res.dt)
 
-        let weatherDates = []
-        alldates.forEach((res) => {
-          let jsdate = new Date(res * 1000)
-          weatherDates.push(jsdate.toLocaleTimeString('en', { year: 'numeric', month: 'short', day: 'numeric' }))
-        })
-        console.log(weatherDates);
-        this.chart_emp = new Chart('emp_line', {
-          type: 'line',
-          data: {
-            labels: weatherDates,
-            datasets: [
-              {
-                data: temp_max,
-                borderColor: "red",
-                borderWidth:1,
-                lineTension:0.2,
-                fill: true,
-                backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)'
-              ],
-                
-              },
-              {
-                data: temp_min,
-                borderColor: "blue",
-                borderWidth:1,
-                lineTension:0.2,
-                fill: true,
-                backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)'
-              ],
-
-              },
-            ]
-          },
-           options: {
-               legend: {
-                 display: true
-               },
-              scales: {
-                 xAxes: [{
-                  
-                   display: true,
-                   
- 
-                 }],
-                 yAxes: [{
-                   display: true
-                 }],
-               } 
-             }
-        });
-        this.chart_emp = new Chart('emp_bar', {
+        // Rendering data into Last month progress chart
+        this.chart = new Chart('emp_bar', {
           type: 'bar',
-          animationEnabled:true,
-          axisX:{
-            intervsl:10,
-          },
           data: {
-            labels: weatherDates,
-            datasets: [
-              { 
-                label: 'temp_max',
-                data: temp_max,
-                backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)'
-              ],
-              borderColor: [
-                  'rgba(255,99,132,1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)'
-              ],
-                
-                fill: true
-              },
-              { 
-                label: 'temp_min',
-                data: temp_min,
-                
-                backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)'
-              ],
-              borderColor: [
-                  'rgba(255,99,132,1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)'
-              ],
-                fill: true
-              },
-            ]
-          },
-          options: {
-            legend: {
-              display: true
-            },
-           scales: {
-              xAxes: [{
-               
-                display: true
-              }],
-              yAxes: [{
-                display: true
-              }],
-            } 
-          } 
-        });
-        this.chart_emp = new Chart('emp_pie', {
-          type: 'line',
-          animationEnabled:true,
-          axisX:{
-            intervsl:10,
-          },
-          data: {
-            labels: weatherDates,
-            datasets: [
-              { 
-                data: temp_max,
-                backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)'
-              ],
-              borderColor: [
-                  'rgba(255,99,132,1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)'
-              ],
-                
-                fill: true
-              },
-              { 
-                data: temp_min,
-                
-                backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)'
-              ],
-              borderColor: [
-                  'rgba(255,99,132,1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)'
-              ],
-                fill: true
-              },
-            ]
-          },
-          options: {
-            legend: {
-              display: true
-            },
-           scales: {
-              xAxes: [{
-               
-                display: true
-              }],
-              yAxes: [{
-                display: true
-              }],
-            } 
-          } 
-        });
-        this.chart_emp = new Chart('proj_line', {
-          type: 'line',
-          data: {
-            labels: weatherDates,
+            labels: this.employeeNames,
             datasets: [
               {
-                data: deg,
-                borderColor: "red",
-                borderWidth:1,
-                lineTension:0.2,
+                data: this.percentagesCompleted,
+                borderColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)'
+                ],
+                borderWidth: 1,
+                lineTension: 0.2,
                 fill: true,
                 backgroundColor: [
                   'rgba(255, 99, 132, 0.2)',
@@ -689,55 +295,135 @@ export class ProjectDetailsComponent implements OnInit {
                   'rgba(75, 192, 192, 0.2)',
                   'rgba(153, 102, 255, 0.2)',
                   'rgba(255, 159, 64, 0.2)'
-              ],
-                
-              },
-              {
-                data: speed,
-                borderColor: "blue",
-                borderWidth:1,
-                lineTension:0.2,
-                fill: true,
-                backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)'
-              ],
+                ]
+              }
+            ]
+          },
+          options: {
+            legend: {
+              display: false
+            },
+            scales: {
+              yAxes: [
+                {
+                  "ticks": { "beginAtZero": true }
+                }],
+            }
+          }
+        });
 
-              },
-            ]
-          },
-           options: {
-               legend: {
-                 display: true
-               },
-              scales: {
-                 xAxes: [{
-                  
-                   display: true,
-                   
- 
-                 }],
-                 yAxes: [{
-                   display: true
-                 }],
-               } 
-             }
+      });
+
+    this._main.getMonthlyProgressOfEmployees(new Date().getMonth() + 1, new Date().getFullYear(), this.project_name).subscribe(res => {
+
+      let months: any = [];
+      let month = new Date().getMonth();
+      for (let index = 1; index <= 6; index++) {
+        months.push(month--);
+      }
+
+      let datasets: any = [];
+      let sets = new Map();
+      let emps: any = res;
+      emps.forEach(element => {
+        let emp: any = element;
+        if (!sets.has(emp.emp_name)) {
+          sets.set(emp.emp_name, [emp.project_part_progress]);
+        } else {
+          let progresses = [];
+          let data = sets.get(emp.emp_name);
+          data.forEach(element => {
+            progresses.push(element);
+          });
+          progresses.push(emp.project_part_progress);
+          sets.set(emp.emp_name, progresses);
+        }
+      });
+
+      for (let key of sets.keys()) {
+        let colors = [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ];
+        let color = colors[Math.floor(Math.random() * 6)];
+        datasets.push({
+          label: key,
+          data: sets.get(key),
+          borderColor: color,
+          borderWidth: 1,
+          lineTension: 0.2,
+          fill: true,
+          backgroundColor: color
         });
-        this.chart_emp = new Chart('proj_bar', {
+      }
+
+      this.chart = new Chart('emp_line', {
+        type: 'line',
+        data: {
+          labels: months,
+          datasets: datasets,
+        },
+        options: {
+          legend: {
+            display: true
+          },
+          scales: {
+            xAxes: [
+              {
+                display: true,
+              }
+            ],
+            yAxes: [
+              {
+                "ticks": { "beginAtZero": true }
+              }],
+          }
+        }
+      });
+    });
+
+    //GROWTH
+
+    this._main.getMonthlyProgressOfProject(new Date().getMonth() + 1, new Date().getFullYear(), this.project_name)
+      .subscribe(res => {
+        let jsonArray: any = res;
+        let completed_tasks = [];
+        let total_assigned_tasks = [];
+        jsonArray.forEach(element => {
+          completed_tasks.push(element.completed_tasks);
+          total_assigned_tasks.push(element.total_assigned_tasks);
+        });
+
+        let months: any = [];
+        let month = new Date().getMonth();
+        for (let index = 1; index <= 6; index++) {
+          months.push(month--);
+        }
+
+        // Rendering data into Last month progress chart
+        this.chart = new Chart('proj_bar', {
           type: 'bar',
-          animationEnabled:true,
-          axisX:{
-            intervsl:10,
-          },
           data: {
-            labels: weatherDates,
+            labels: months,
             datasets: [
-              { 
-                data: deg,
+              {
+                label: 'Completed Tasks',
+                data: completed_tasks,
+                borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1,
+                lineTension: 0.2,
+                fill: true,
                 backgroundColor: [
                   'rgba(255, 99, 132, 0.2)',
                   'rgba(54, 162, 235, 0.2)',
@@ -745,131 +431,117 @@ export class ProjectDetailsComponent implements OnInit {
                   'rgba(75, 192, 192, 0.2)',
                   'rgba(153, 102, 255, 0.2)',
                   'rgba(255, 159, 64, 0.2)'
-              ],
-              borderColor: [
-                  'rgba(255,99,132,1)',
-                  'rgba(54, 162, 235, 1)',
+                ]
+              },
+              {
+                label: 'Total Tasks',
+                data: total_assigned_tasks,
+                borderColor: [
                   'rgba(255, 206, 86, 1)',
                   'rgba(75, 192, 192, 1)',
                   'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)'
-              ],
-                
-                fill: false
-              },
-              { 
-                data: speed,
-                
+                  'rgba(255, 159, 64, 1)',
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)'
+                ],
+                borderWidth: 1,
+                lineTension: 0.2,
+                fill: true,
                 backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
                   'rgba(255, 206, 86, 0.2)',
                   'rgba(75, 192, 192, 0.2)',
                   'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)'
-              ],
-              borderColor: [
-                  'rgba(255,99,132,1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)'
-              ],
-                fill: false
-              },
+                  'rgba(255, 159, 64, 0.2)',
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)'
+                ]
+              }
             ]
           },
           options: {
             legend: {
-              display: true
+              display: false
             },
-           scales: {
-              xAxes: [{
-               
-                display: true
-              }],
-              yAxes: [{
-                display: true
-              }],
-            } 
-          } 
+            scales: {
+              yAxes: [
+                {
+                  "ticks": { "beginAtZero": true }
+                }],
+            }
+          }
         });
-        this.chart_emp = new Chart('proj_pie', {
-          type: 'pie',
-          animationEnabled:true,
-          axisX:{
-            intervsl:10,
-          },
-          data: {
-            labels: weatherDates,
-            datasets: [
-              { 
-                data: deg,
-                backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)'
-              ],
-              borderColor: [
-                  'rgba(255,99,132,1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)'
-              ],
-                
-                fill: true
-              },
-              { 
-                data: speed,
-                
-                backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)'
-              ],
-              borderColor: [
-                  'rgba(255,99,132,1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)'
-              ],
-                fill: true
-              },
-            ]
-          },
-          options: {
-            legend: {
-              display: true
-            },
-           scales: {
-              xAxes: [{
-               
-                display: true
-              }],
-              yAxes: [{
-                display: true
-              }],
-            } 
-          } 
-        });
-        
 
+        // Rendering data into Last month progress chart
+        this.chart = new Chart('proj_line', {
+          type: 'line',
+          data: {
+            labels: months,
+            datasets: [
+              {
+                label: 'Completed Tasks',
+                data: completed_tasks,
+                borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1,
+                lineTension: 0.2,
+                fill: true,
+                backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)'
+                ]
+              },
+              {
+                label: 'Total Tasks',
+                data: total_assigned_tasks,
+                borderColor: [
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)',
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)'
+                ],
+                borderWidth: 1,
+                lineTension: 0.2,
+                fill: true,
+                backgroundColor: [
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)',
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)'
+                ]
+              }
+            ]
+          },
+          options: {
+            legend: {
+              display: false
+            },
+            scales: {
+              yAxes: [
+                {
+                  "ticks": { "beginAtZero": true }
+                }],
+            }
+          }
+        });
       })
 
 
   }
-  
+
 
   projectNameForEmployees: string;
   getDetails() {
@@ -884,18 +556,18 @@ export class ProjectDetailsComponent implements OnInit {
     location.reload();
   }
 
-  statusChange(task){
-    this.proDetService.statusChange(task).subscribe(data=>console.log(data));
+  statusChange(task) {
+    this.proDetService.statusChange(task).subscribe(data => console.log(data));
 
   }
 
-  employeeDetailsOfProject:Array<string>=this.comServ.getEmployeeDetails();
+  employeeDetailsOfProject: Array<string> = this.comServ.getEmployeeDetails();
 
-  
+
   clear(value) {
-      $(':input').val("");
-      $('#projectTitle').val(value);
-     
+    $(':input').val("");
+    $('#projectTitle').val(value);
+
   }
-  
+
 }
