@@ -87,7 +87,7 @@ export class ViewProjectsComponent implements OnInit {
   userArray: Array<any> = [];
   url: string = "http://localhost:8080/project";
 
-  
+
   constructor(private http: HttpClient, private service: ProjectService, private comServ: CommonService) {
     this.http.get(this.url).subscribe(data => {
       JSON.parse(JSON.stringify(data)).forEach(element => {
@@ -197,7 +197,7 @@ export class ViewProjectsComponent implements OnInit {
   beginDate;
   finishDate;
   totalDays;
-  totalProjectDays:number;
+  totalProjectDays: number;
 
   ngOnInit() {
 
@@ -245,15 +245,15 @@ export class ViewProjectsComponent implements OnInit {
     location.reload();
   }
 
-  projectEmployees:Array<string>=[];
+  projectEmployees: Array<string> = [];
   sendProjectDetail(projectDetail: any) {
     this.comServ.getObj(projectDetail);
-    this.url='http://localhost:8080/projectEmployees/'+projectDetail.projectName;
+    this.url = 'http://localhost:8080/projectEmployees/' + projectDetail.projectName;
     console.log(this.url);
-    this.http.get(this.url).subscribe(data=>{
-      JSON.parse(JSON.stringify(data)).forEach(element=>
+    this.http.get(this.url).subscribe(data => {
+      JSON.parse(JSON.stringify(data)).forEach(element =>
         this.projectEmployees.push(element));
-        console.log("spldpewfdwe"+this.projectEmployees);
+      console.log("spldpewfdwe" + this.projectEmployees);
     });
     this.comServ.sendEmployeeDetails(this.projectEmployees);
   }

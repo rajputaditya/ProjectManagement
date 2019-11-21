@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MainService } from './main.service';
 import {Chart} from 'chart.js';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-reports',
@@ -10,7 +12,23 @@ import {Chart} from 'chart.js';
 export class ReportsComponent implements OnInit {
 
   chart= [];
-  constructor(private _main:MainService) { }
+
+  url:string;
+  searchdata: Array<any>;
+  searchEditProject() {
+    this.searchdata = [];
+    this.url = 'http://localhost:8080/search/' + (<HTMLInputElement>document.getElementById("searchProject")).value;
+    console.log(this.url);
+    this.http.get(this.url).subscribe(data => {
+      // Populating usersArray with names from API
+      JSON.parse(JSON.stringify(data)).forEach(element => {
+        this.searchdata.push(element);
+      });
+    });
+  }
+
+  
+  constructor(private _main:MainService, private http:HttpClient) { }
 
   ngOnInit() {
     this._main.emp()
