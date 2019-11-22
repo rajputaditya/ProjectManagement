@@ -13,7 +13,6 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 const routes: Routes = [
   { path: '', component: ViewProjectsComponent },
   { path: 'viewProjects', component: ViewProjectsComponent },
-  { path: 'reports', component: ReportsComponent },
   { path: 'calendar', component: CalendarComponent },
   { path: 'employees', component: EmployeesComponent },
   { path: 'projectGrowth', component: GrowthComponent},
@@ -23,7 +22,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{
+    scrollPositionRestoration: 'enabled'
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
