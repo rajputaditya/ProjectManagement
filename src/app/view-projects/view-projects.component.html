@@ -84,7 +84,7 @@
             <div class="col-md-12">
               <input id="searchProject" class="form-control form-control-lg" type="text"
                 placeholder="Search Project by title" aria-label="Search" style="width: 100%; border-color: black;
-                border-radius: 50px;" (input)=searchEditProject() (blur)=clear()>
+                border-radius: 50px;" (input)=searchEditProject() >
 
             </div>
           </div>
@@ -130,10 +130,10 @@
 </div>
 
 <!-- Create Project Modal -->
-<div class="modal fade" (blur)=clear() id="createProject" tabindex="-1" role="dialog" aria-labelledby="createProjectLabel"
+<div class="modal fade" id="createProject" tabindex="-1" role="dialog" aria-labelledby="createProjectLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content"  >
+    <div class="modal-content" >
       <div class="modal-header" id="modalHeader">
         <h3>PROJECT DETAILS</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)=clear()>
@@ -232,7 +232,7 @@
                 formControlName="priorityLevelValidator"
                 [class.is-invalid]="getPriorityLevel.invalid && getPriorityLevel.touched"> -->
                 <select class="browser-default custom-select" id="projectPriorityLevel">
-                  <option selected>SELECT</option>
+                  <option selected value="SELECT">SELECT</option>
                   <option value="HIGH">HIGH</option>
                   <option value="MEDIUM">MEDIUM</option>
                   <option value="LOW">LOW</option>
