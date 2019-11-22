@@ -323,6 +323,8 @@ export class ViewProjectsComponent implements OnInit {
   }
 
   clear() {
+    this.editProjectForm.reset();
+    this.createProjectForm.reset();
     $(':input').val("");
   }
 }

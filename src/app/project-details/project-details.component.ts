@@ -565,6 +565,8 @@ export class ProjectDetailsComponent implements OnInit {
 
 
   clear(value) {
+    this.newTaskForm.reset();
+    this.editTaskForm.reset();
     $(':input').val("");
     $('#projectTitle').val(value);
 
