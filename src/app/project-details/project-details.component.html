@@ -142,35 +142,37 @@
 
 
 
-                                    <div class="modal-body">
-                                        <form class="text-center border  p-5" [formGroup]="editTaskForm">
-                                            <div class="row mb-4">
-                                                <div class="col">
-                                                    <input type="text" class="form-control" placeholder="Project title"
-                                                        disabled [value]=taskDetails.getProjectTitle()>
-                                                    <small class="form-text text-muted ">
-                                                        Project Title
-                                                    </small>
-                                                </div>
-                                                <div class="col">
-                                                    <input type="text" class="form-control" placeholder="Task title"
-                                                        disabled [value]=taskDetails.getTaskTitle() id="editTaskTitle">
-                                                    <small class="form-text text-muted ">
-                                                        Task Title
-                                                    </small>
-                                                </div>
+                                <div class="modal-body">
+                                    <form class="text-center border  p-5" [formGroup]="editTaskForm">
+                                        <div class="row mb-4">
+                                            <div class="col">
+                                                <input type="text" class="form-control" placeholder="Project title"
+                                                    disabled [value]=taskDetails.getProjectTitle()>
+                                                <small class="form-text text-muted ">
+                                                    Project Title
+                                                </small>
                                             </div>
+                                            <div class="col">
+                                                <input type="text" class="form-control" placeholder="Task title"
+                                                    disabled [value]=taskDetails.getTaskTitle() id="editTaskTitle">
+                                                <small class="form-text text-muted ">
+                                                    Task Title
+                                                </small>
+                                            </div>
+                                        </div>
 
 
                                         <!-- <input type="text" id="editTaskOwner" class="form-control"
                                             placeholder="Task Owner" [value]=taskDetails.getTaskOwner()
                                             formControlName="editTaskOwnerValidator"
                                             [class.is-invalid]="editGetTaskOwner.invalid && editGetTaskOwner.touched"> -->
-                                             <div>
-                                        <select class="browser-default custom-select" id="editTaskOwner" >
-                                            <option [value]="taskDetails.getTaskOwner()" selected>{{taskDetails.getTaskOwner()}}</option>
-                                            <option *ngFor="let employee of employeeDetailsOfProject" value="{{employee}}">{{employee}}</option>
-                                        </select>
+                                        <div>
+                                            <select class="browser-default custom-select" id="editTaskOwner">
+                                                <option [value]="taskDetails.getTaskOwner()" selected>
+                                                    {{taskDetails.getTaskOwner()}}</option>
+                                                <option *ngFor="let employee of employeeDetailsOfProject"
+                                                    value="{{employee}}">{{employee}}</option>
+                                            </select>
                                         </div>
                                         <small class="form-text text-muted mb-1">
                                             Task Owners
@@ -254,21 +256,23 @@
 
                 </div>
 
-                    <!-- New task modal -->
-                    <div class="modal fade" (blur)=clear(projectNameFromViewProject) id="newtaskModal" tabindex="-1" role="dialog">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
+                <!-- New task modal -->
+                <div class="modal fade" (blur)=clear(projectNameFromViewProject) id="newtaskModal" tabindex="-1"
+                    role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
 
-               
 
-                                <div class="modal-header" id="modalHeader">
-                                    <h4 class="modal-title">TASK DETAILS</h4>
-                                    <button type="button" class="close" data-dismiss="modal" (click)=clear(projectNameFromViewProject)>&times;</button>
-                                </div>
 
-                                <div class="modal-body" >
-                                    <form class="text-center border  p-5" [formGroup]="newTaskForm">
-                                        <div class="row mb-4">
+                            <div class="modal-header" id="modalHeader">
+                                <h4 class="modal-title">TASK DETAILS</h4>
+                                <button type="button" class="close" data-dismiss="modal"
+                                    (click)=clear(projectNameFromViewProject)>&times;</button>
+                            </div>
+
+                            <div class="modal-body">
+                                <form class="text-center border  p-5" [formGroup]="newTaskForm">
+                                    <div class="row mb-4">
 
 
                                         <div class="col">
@@ -308,7 +312,8 @@
                                     <div>
                                         <select class="browser-default custom-select" id="taskOwner">
                                             <option selected>SELECT</option>
-                                            <option *ngFor="let employee of employeeDetailsOfProject" value="{{employee}}">{{employee}}</option>
+                                            <option *ngFor="let employee of employeeDetailsOfProject"
+                                                value="{{employee}}">{{employee}}</option>
                                         </select>
                                     </div>
                                     <small class="form-text text-muted mb-1">
@@ -466,168 +471,72 @@
             <div class="tab-pane fade show active" id="pills-reports" role="tabpanel"
                 aria-labelledby="pills-profile-tab">
                 <div>
-                   
-                    <div class="panel panel-default">
-                        <div class="panel-body" name="projGrowth">
-                            <h4>Project Growth Report</h4>
-                        </div>
-                    </div>
-                    
-                    <div class="jumbotron" style="background-color: white;">
 
+                    <div class="jumbotron" style="background-color: white;">
                         <div class="row">
-                            <div class="col-sm-8">
+                            <div class="col-md-12">
+                                <h4 
+                                style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Project Growth Report</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-sm-6">
+
                                 <div class="jumbotron jumbotron-fluid" style="background-color: white;">
                                     <div>
-                                        <canvas id="proj_line" height="10" width="30"></canvas>
+                                        <small class="form-text text-muted" style="margin-bottom: 15px;">TASKS</small>
+                                        <canvas id="proj_line" height="15" width="30"></canvas>
+                                        <small class="form-text text-muted" style="margin-left: 50%;">MONTHS</small>
+
                                     </div>
                                 </div>
 
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-6" style="margin-top: 60px;">
+                                <div>
+                                    <small class="form-text text-muted" style="margin-bottom: 15px;">TASKS</small>
+                                    <canvas id="proj_bar" height="10" width="20"></canvas>
+                                    <small class="form-text text-muted" style="margin-left: 50%;">MONTHS</small>
 
-                                <br>
-                                <br>
-                                <br>
-                                <span style="font-size: 20px;"> Agile Project Submissions</span>
-                                <hr>
-                                <small>Submission 1</small>
-                                <div class="progress">
-                                    <div class="progress-bar bg-danger " style="width:100%"></div>
-                                </div>
-                                <small>Submission 2</small>
-                                <div class="progress">
-                                    <div class="progress-bar bg-success " style="width:100%"></div>
-                                </div>
-                                <small>Submission 3</small>
-                                <div class="progress">
-                                    <div class="progress-bar bg-info " style="width:60%"></div>
-                                </div>
-                                <small>Submission 4</small>
-                                <div class="progress">
-                                    <div class="progress-bar bg-warning " style="width:0%"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="row" style="margin-bottom:50px">
-
-                        <div class="col-sm-6">
-                            <div>
-                                <canvas id="proj_pie" height="15" width="30"></canvas>
-                            </div>
-
-                        </div>
-
-                        <div class="col-sm-6">
-
-                            <div>
-                                <canvas id="proj_bar" height="10" width="20"></canvas>
-                            </div>
-                        </div>
-                    </div>
-    
                 </div>
-                <div >
+                <div>
                     <hr>
-                   
-                    <div class="panel panel-default" style="margin-top: 50px;">
-                        <div class="panel-body">
-                            <h4>Employee Growth Rate</h4>
-                        </div>
-                    </div>
 
                     <div class="jumbotron">
                         <div class="row">
-                            <div class="col-sm-8">
+                            <div class="col-md-12">
+                                    <h4 
+                                    style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Employee Growth Report</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
                                 <div class="jumbotron">
                                     <div>
-                                        <canvas id="emp_line" height="10" width="30"></canvas>
+                                        <small class="form-text text-muted" style="margin-bottom: 15px;">WORK</small>
+                                        <canvas id="emp_bar" height="20" width="30"></canvas>
+                                        <small class="form-text text-muted" style="margin-left: 50%;">EMPLOYEES</small>
+
                                     </div>
                                 </div>
 
                             </div>
-                            <div class="col-sm-4">
-                                <br>
-                                <br>
-                                <br>
-                                <span style="font-style: italic;font-size: 20px;"> Top Campagin Performers</span>
-                                <hr>
-                                <span>Akhil</span>
-                                <div class="progress">
-                                    <div class="progress-bar bg-danger " style="width:50%"></div>
-                                </div>
-                                <span>Sahil</span>
-                                <div class="progress">
-                                    <div class="progress-bar bg-info " style="width:40%"></div>
-                                </div>
-                                <span>Shubham</span>
-                                <div class="progress">
-                                    <div class="progress-bar bg-success " style="width:60%"></div>
-                                </div>
-                                <span>Rajat</span>
-                                <div class="progress">
-                                    <div class="progress-bar bg-warning " style="width:50%"></div>
+                            <div class="col-sm-6">
+
+                                <div style="height: 250px; width: 500px;margin-top: 60px;">
+                                    <small class="form-text text-muted">WORK</small>
+                                    <canvas id="emp_line" height="50" width="80"></canvas>
+                                    <small class="form-text text-muted" style="margin-left: 50%;">MONTHS</small>
                                 </div>
                             </div>
                         </div>
 
                     </div>
-
-
-
-
-                    <div class="row">
-
-                        <div class="col-sm-5">
-                            <div>
-                                <canvas id="emp_pie" height="15" width="30"></canvas>
-                            </div>
-
-                        </div>
-                        <div class="col-sm-2">
-
-                            <span style="font-size: 20px;">Profiles in project</span><br>
-                            <small>JAVA Developers</small>
-                            <div class="progress">
-
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 10%"
-                                    aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <small>Testers</small>
-                            <div class="progress">
-                                <div class="progress-bar bg-sucess " role="progressbar" style="width: 20%"
-                                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <small>UI integeratror</small>
-                            <div class="progress">
-                                <div class="progress-bar bg-info " role="progressbar" style="width: 30%"
-                                    aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <small>Managers</small>
-                            <div class="progress">
-                                <div class="progress-bar bg-success " role="progressbar" style="width: 45%"
-                                    aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <small>SAP</small>
-                            <div class="progress">
-                                <div class="progress-bar bg-warning" role="progressbar" style="width: 60%"
-                                    aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-
-                        </div>
-
-                        <div class="col-sm-5">
-
-                            <div style="   height: 250px; width: 500px;">
-                                <canvas id="emp_bar" height="10" width="20"></canvas>
-                            </div>
-                        </div>
-                    </div>
-
-
-
 
                     <link rel="stylesheet"
                         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

@@ -45,7 +45,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    FullCalendarModule,
+    FullCalendarModule
   ],
   providers: [ServiceService, GetEventsService, MainService],
   bootstrap: [AppComponent]
