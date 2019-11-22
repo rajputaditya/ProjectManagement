@@ -205,7 +205,7 @@ export class ProjectDetailsComponent implements OnInit {
     this.taskClass.setStartDate((<HTMLInputElement>document.getElementById("projectStartDate")).value);
     this.taskClass.setEndDate((<HTMLInputElement>document.getElementById("projectEndDate")).value);
     this.proDetService.saveTask(this.taskClass);
-    location.reload();
+    window.location.reload();
   }
 
   // taskListByProjectName() {
@@ -236,8 +236,6 @@ export class ProjectDetailsComponent implements OnInit {
 
   curId: string;
   ngOnInit() {
-
-
     this.projectDetail = this.comServ.setObj();
     console.log("view Project");
     console.log(this.projectDetail);
@@ -567,6 +565,8 @@ export class ProjectDetailsComponent implements OnInit {
 
 
   clear(value) {
+    this.newTaskForm.reset();
+    this.editTaskForm.reset();
     $(':input').val("");
     $('#projectTitle').val(value);
   }
