@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-9">
+  <div class="col-sm-9">
 
     <div class="column" *ngFor="let users of userArray">
       <div class="card">
@@ -54,9 +54,9 @@
       </div>
     </div>
   </div>
-  <div class="col-md-3" style="position: absolute;z-index: 1;">
+  <div class="col-sm-3" style="position: absolute;z-index: 2;">
 
-    <div class="col">
+    <div >
       <button class="btn btn-light btn-lg" id="projectModBtn" data-toggle="modal"
         data-target="#createProject">Create</button>
       <button class="btn btn-light btn-lg" id="projectModBtn" style="margin-top: 10%;" data-toggle="modal"
@@ -81,7 +81,7 @@
           <!-- Search form -->
 
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-sm-12">
               <input id="searchProject" class="form-control form-control-lg" type="text"
                 placeholder="Search Project by title" aria-label="Search" style="width: 100%; border-color: black;
                 border-radius: 50px;" (input)=searchEditProject() >
@@ -110,7 +110,7 @@
           <!-- Delete form -->
 
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-sm-12">
               <input class="form-control form-control-lg" type="text" id="searchDeleteProject"
                 placeholder="Search Project by title" aria-label="Search" style="width: 100%; border-color: black;
                     border-radius: 50px;" (input)=searchDeleteProject() (blur)=clear()>
