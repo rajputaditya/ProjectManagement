@@ -10,7 +10,6 @@ import { ViewProjectsComponent } from './view-projects/view-projects.component';
 
 import { ReportsComponent } from './reports/reports.component';
 import { CalendarComponent } from './calendar/calendar.component';
-import { LogINComponent } from './log-in/log-in.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ServiceService } from './employees/service.service';
@@ -22,6 +21,7 @@ import { GrowthComponent } from './growth/growth.component';
 import { ProjectDetailsComponent } from './project-details/project-details.component';
 import { AvailableEmployeesComponent } from './available-employees/available-employees.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -32,12 +32,12 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     ViewProjectsComponent,
     ReportsComponent,
     CalendarComponent,
-    LogINComponent,
     EmployeesComponent,
     GrowthComponent,
     ProjectDetailsComponent,
     AvailableEmployeesComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
