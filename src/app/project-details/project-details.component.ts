@@ -5,6 +5,9 @@ import { CommonService } from '../common.service';
 import { ProjectDetailsService } from './project-details.service';
 import { MainService } from '../reports/main.service';
 import { Chart } from 'chart.js'
+
+declare var $: any;
+
 export class TaskClass {
   projectName: string;
   taskName: string;
