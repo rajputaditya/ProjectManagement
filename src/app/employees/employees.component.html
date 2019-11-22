@@ -164,7 +164,7 @@
 
           <!-- Add Employee Button -->
           <button type="button" class="btn btn-warning" [disabled]="addEmployeeForm.invalid" id="modalBtn"
-            (click)=addEmployee() data-dismiss="modal">ADD</button>
+            (click)=addEmployee() data-dismiss="modal" data-toggle="modal" data-target="#successModal">ADD</button>
 
         </form>
       </div>
@@ -310,8 +310,8 @@
 
 
 
-          <button type="button" class="btn btn-warning" id="modalBtn" (click)="editEmployees()" data-dismiss="modal"
-            data-toggle="modal" data-target="#updateModal">UPDATE</button>
+          <button type="button" class="btn btn-warning" id="modalBtn" (click)="editEmployees()" 
+          data-dismiss="modal" data-toggle="modal" data-target="#updateModal">UPDATE</button>
 
         </form>
 
@@ -334,7 +334,7 @@
         <p class="text-center">Employee has been added successfully.</p>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-success btn-block" id="successButton" data-dismiss="modal">OK</button>
+        <button class="btn btn-success btn-block" id="successButton" data-dismiss="modal" (click)=success()>OK</button>
       </div>
     </div>
   </div>
@@ -354,7 +354,7 @@
         <p class="text-center">Employee's details have been updated successfully.</p>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-success btn-block" id="successButton" data-dismiss="modal">OK</button>
+        <button class="btn btn-success btn-block" id="successButton" data-dismiss="modal" (click)=success()>OK</button>
       </div>
     </div>
   </div>

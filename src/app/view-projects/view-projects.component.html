@@ -113,7 +113,7 @@
             <div class="col-sm-12">
               <input class="form-control form-control-lg" type="text" id="searchDeleteProject"
                 placeholder="Search Project by title" aria-label="Search" style="width: 100%; border-color: black;
-                    border-radius: 50px;" (input)=searchDeleteProject() (blur)=clear()>
+                    border-radius: 50px;" (input)=searchDeleteProject()>
             </div>
           </div>
 
@@ -499,7 +499,7 @@
         <p class="text-center">Successfully created a new project.</p>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-success btn-block" id="successButton" data-dismiss="modal">OK</button>
+        <button class="btn btn-success btn-block" id="successButton" data-dismiss="modal" (click)=success()>OK</button>
       </div>
     </div>
   </div>
@@ -519,7 +519,7 @@
         <p class="text-center">Successfully updated a project.</p>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-success btn-block" id="successButton" data-dismiss="modal">OK</button>
+        <button class="btn btn-success btn-block" id="successButton" data-dismiss="modal" (click)=success()>OK</button>
       </div>
     </div>
   </div>

@@ -134,7 +134,11 @@ export class EmployeesComponent implements OnInit {
     this.service
       .addEmployee(this.emp)
       .subscribe(emp => this.employees.push(emp));
-      location.reload();
+     
+  }
+
+  success(){
+    location.reload();
 
   }
 
@@ -149,7 +153,7 @@ export class EmployeesComponent implements OnInit {
     this.service
       .editEmployee(this.emp)
       .subscribe(emp => this.employees.push(emp));
-      location.reload();
+
 
   }
 
