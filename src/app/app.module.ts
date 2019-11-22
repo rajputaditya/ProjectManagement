@@ -12,7 +12,6 @@ import { ViewProjectsComponent } from './view-projects/view-projects.component';
 
 import { ReportsComponent } from './reports/reports.component';
 import { CalendarComponent } from './calendar/calendar.component';
-import { LogINComponent } from './log-in/log-in.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { HttpClientModule,HttpClient } from '@angular/common/http';
 import { ServiceService } from './employees/service.service';
@@ -23,6 +22,8 @@ import { MainService } from './reports/main.service';
 import { GrowthComponent } from './growth/growth.component';
 import { ProjectDetailsComponent } from './project-details/project-details.component';
 import { AvailableEmployeesComponent } from './available-employees/available-employees.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { LoginComponent } from './login/login.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -36,11 +37,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     ViewProjectsComponent,
     ReportsComponent,
     CalendarComponent,
-    LogINComponent,
     EmployeesComponent,
     GrowthComponent,
     ProjectDetailsComponent,
-    AvailableEmployeesComponent
+    AvailableEmployeesComponent,
+    PageNotFoundComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
