@@ -5,8 +5,8 @@
         "p_11": "Good management is the art of making problems so interesting and their solutions so constructive that everyone wants to get to work and deal with them",
         "p_12": "Paul Hawken",
         "h5-18" : "Links",
-        "a_22" : "Home",
-        "a_25" : "Employees",
+        "a_22" : "Tasks",
+        "a_25" : " Reports",
         "h5-32" : "Links",
         "a_36" : "To-do",
         "a_39" : "Back To Top",
@@ -71,7 +71,6 @@
         "small_300": "Project Description Is Required",
         "small-303": "Project description must consist of atleast 20 characters.",
         "div_311": "End date cannot be same or less then start date",
-        "div_315": "Start date cannot be less than current date.",
         "h3-330" : "Project Details",
         "placeholder_343": "Cannot Edit this Field",
         "small_345": "Client Name",
@@ -117,7 +116,6 @@
         },
         "project-details":
         {
-          "small_5": "Description",
           "small_10": "Start Date",
           "small_11": "End Date",
           "a_22": "Report",
@@ -162,7 +160,6 @@
           "small_293": "Task Title",
           "small_298": "Task Title Is Required",
           "small_301": "Task tile must be of atleast 4 characters",
-          "option_314" : "SELECT",
           "small_320": "Task Owners",
           "placeholder_325": "Task Details",
           "small_329": "Task Desciption",
@@ -171,11 +168,6 @@
           "placeholder_347": "Start Date",
           "small_351": "Start Date",
           "small_356": "Start Date Is Required",
-          "div_365": "Start date cannot be less than current date",
-          "placeholder_369-1": "Task Details",
-          "small_373-1": "Task Description",
-          "small_378-1": "Task Description Is Required",
-          "small_381-1": "Task Description must be between 20 to 100 Characters",
           "small_368": "End Date",
           "small_373": "End Date Is Required",
           "div_380": "End date can never be equal or less then start date",
@@ -187,8 +179,6 @@
           "h4-431": "Awessome",
           "p_434": "Succeddfully Update Employees details",
           "p_448": "Members",
-          "h4-453": "Awesome",
-          "p_456": "Successfully created a new task",
           "button_463": "Delete",
           "h4-476":"Project Growth Report",
           "small_485": "TASKS",
@@ -268,7 +258,6 @@
           "button_357": "OK",
           "h4-373": "Are you Sure",
           "p_378": "Do you really want to delete these records? This process cannot be undone",
-          "button_381": "Cancel",
           "button_383": "Delete"
           },
           "calendar":
@@ -306,18 +295,6 @@
             "small_30": "Submission2",
             "small_34": "Submission 3",
             "small_38": "Submission 4"
-          },
-          "page-not-found": 
-          {
-            "h1-10":"oops!",
-            "div_15": " The page you are looking for doesn't exist!",
-            "a_19": "Take Me Home"
-          },
-          "app":
-          {
-            "a_3": "Projects",
-            "a_4":"Employee",
-            "a_5": "TO-Do"
           }
 
 
