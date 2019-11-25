@@ -8,15 +8,15 @@ import { Component, OnInit } from '@angular/core';
       <div class="col-md-12">
           <div>
               <h1 style='margin-top:80px;'>
-                  Oops!</h1>
+                  {{'page-not-found.h1-10'| translate}}</h1>
               <h2>
                   404 Not Found</h2>
               <div class="error-details">
-                  The page you are looking for doesn't exist!
+              {{'page-not-found.div_15'| translate}}
               </div>
               <div class="error-actions" style='margin-top:20px;'>
                   <a routerLink="/viewProjects" class="btn btn-warning btn-lg">
-                      Take Me Home </a>
+                  {{'page-not-found.a_19'| translate}} </a>
               </div>
           </div>
       </div>
