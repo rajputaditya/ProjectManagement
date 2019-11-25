@@ -22,7 +22,7 @@ import { MainService } from './reports/main.service';
 import { GrowthComponent } from './growth/growth.component';
 import { ProjectDetailsComponent } from './project-details/project-details.component';
 import { AvailableEmployeesComponent } from './available-employees/available-employees.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+//import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LoginComponent } from './login/login.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -41,7 +41,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     GrowthComponent,
     ProjectDetailsComponent,
     AvailableEmployeesComponent,
-    PageNotFoundComponent,
+    //PageNotFoundComponent,
     LoginComponent
   ],
   imports: [

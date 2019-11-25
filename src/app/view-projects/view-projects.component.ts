@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { ProjectService } from './project.service';
 import { CommonService } from '../common.service';
 
+declare var $: any;
+
 export class Project {
   clientName: string;
   projectName: string;
