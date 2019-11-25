@@ -308,9 +308,10 @@ export class ViewProjectsComponent implements OnInit {
   projectName: string;
   projectData: Project = new Project();
   data: Project;
-  editDetails() {
+
+  editDetails(value) {
     this.projectData = new Project();
-    this.projectName = (<HTMLInputElement>document.getElementById("projectButton")).value;
+    this.projectName = value
     this.url = 'http://localhost:8080/project/' + this.projectName;
     console.log(this.url);
     this.service.editProject(this.url).subscribe(proj => this.projectData = proj);

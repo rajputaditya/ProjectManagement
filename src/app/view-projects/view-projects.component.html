@@ -84,9 +84,9 @@
           </div>
         </div>
         <ul *ngFor="let search of searchdata">
-          <li><button (click)=editDetails() id="projectButton" value="{{search}}" class="btn btn-sm btn-dark"
+          <li><button (click)=editDetails(search) id="projectButton" value="{{search}}" class="btn btn-sm btn-dark"
               data-toggle="modal" data-target="#updateProject" data-dismiss="modal" style=" background-color: rgb(80, 79, 79);
-              border-color: rgb(80, 79, 79);">{{search}}</button></li>
+              border-color: rgb(80, 79, 79);" >{{search}}</button></li>
         </ul>
       </form>
     </div>
