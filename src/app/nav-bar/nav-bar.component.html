@@ -25,8 +25,12 @@
           <a href="#">{{'nav-bar.a_25'| translate}}</a>
         </div>
       </div>
-      <i class="fas fa-bell" style="color:#106466 ; font-size: 20px;"></i>
+      <a class="fas fa-bell" style="color:#106466 ; font-size: 20px;" (click)="getUpcoming()"></a>
     </form>
     
   </div>
 </nav>
+<div class="alert alert-warning" style="margin-top: 80px; z-index: 3; float: right;" id="upcomingAlert" hidden>
+  <h2>{{'calendar.h2-2'| translate}}</h2>
+  <span id="notification"></span>
+</div>
