@@ -10,9 +10,9 @@
         <p>{{user.email}}</p>
         <p>{{user.phoneNumber}}
           <button class="btn btn-sm btn-dark" id="delEmpBtn" data-toggle="modal" data-target="#deleteConfirmationModal"
-            (click)=setDetailsForModal(user)>Delete</button>
+            (click)=setDetailsForModal(user)>{{'employees-component.button_13'| translate}}</button>
           <button class="btn btn-sm btn-warning" id="editEmpBtn" data-toggle="modal" data-target="#editEmployee"
-            (click)=setDetailsForModal(user)>Edit</button>
+            (click)=setDetailsForModal(user)>{{'employees-component.button_15'| translate}}</button>
         </p>
 
       </div>
@@ -40,7 +40,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header" id="modalHeader">
-        <h5 class="modal-title">EMPLOYEE DETAILS</h5>
+        <h5 class="modal-title">{{'employees-component.h5-43'| translate}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -53,40 +53,40 @@
             <div class="col">
 
               <!-- First name -->
-              <input type="text" id="firstName" class="form-control" placeholder="First name"
+              <input type="text" id="firstName" class="form-control" placeholder="{{'employees-component.placeholder_56'| translate}}"
                 formControlName="firstNameValidator" [class.is-invalid]="getFirstName.invalid && getFirstName.touched">
               <small class="form-text text-muted ">
-                First Name
+                {{'employees-component.small_59'| translate}}
               </small>
               <div *ngIf="getFirstName.invalid && (getFirstName.touched || getFirstName.dirty)">
                 <small *ngIf="getFirstName.errors?.required" class="text-danger">
-                  First name is required
+                  {{'employees-component.small_63'| translate}}
                 </small>
                 <small *ngIf="getFirstName.errors?.minlength" class="text-danger">
-                  First name must consist atleast 4 characters
+                  {{'employees-component.small_66'| translate}}
                 </small>
                 <small *ngIf="getFirstName.errors?.pattern" class="text-danger">
-                  First name cannot contain numbers
+                  {{'employees-component.small_69'| translate}}
                 </small>
 
               </div>
             </div>
             <div class="col">
               <!-- Last name -->
-              <input type="text" id="lastName" class="form-control" placeholder="Last name"
+              <input type="text" id="lastName" class="form-control" placeholder="{{'employees-component.placeholder_76'| translate}}"
                 formControlName="lastNameValidator" [class.is-invalid]="getLastName.invalid && getLastName.touched">
               <small class="form-text text-muted ">
-                Last Name
+                {{'employees-component.small_79'| translate}}
               </small>
               <div *ngIf="getLastName.invalid && (getLastName.touched || getLastName.dirty)">
                 <small *ngIf="getLastName.errors?.required" class="text-danger">
-                  Last name is required
+                  {{'employees-component.small_83'| translate}}
                 </small>
                 <small *ngIf="getLastName.errors?.minlength" class="text-danger">
-                  Last name must consist atleast 4 characters
+                  {{'employees-component.small_86'| translate}}
                 </small>
                 <small *ngIf="getLastName.errors?.pattern" class="text-danger">
-                  Last name cannot contain numbers
+                  {{'employees-component.small_89'| translate}}
                 </small>
 
               </div>
@@ -94,69 +94,69 @@
           </div>
 
           <!-- E-mail -->
-          <input type="email" id="email" class="form-control " placeholder="E-mail" formControlName="emailValidator"
+          <input type="email" id="email" class="form-control " placeholder="{{'employees-component.placeholder_97'| translate}}" formControlName="emailValidator"
             [class.is-invalid]="getEmail.invalid && getEmail.touched">
           <small class="form-text text-muted mb-4">
-            E-mail
-          </small>
+            {{'employees-component.small_100'| translate}}
+           </small>
           <div *ngIf="getEmail.invalid && (getEmail.touched || getEmail.dirty)">
             <small *ngIf="getEmail.errors?.required" class="text-danger">
-              Email is required
+              {{'employees-component.small_104'| translate}}
             </small>
             <small *ngIf="getEmail.errors?.pattern" class="text-danger">
-              Email must be of required pattern (abc0-9@xyz.com)
+              {{'employees-component.small_107'| translate}}
             </small>
 
           </div>
 
           <!-- ROLE -->
-          <input type="text" id="designation" class="form-control " placeholder="Designation"
+          <input type="text" id="designation" class="form-control " placeholder="{{'employees-component.placeholder_113'| translate}}"
             formControlName="designationValidator"
             [class.is-invalid]="getDesignation.invalid && getDesignation.touched">
           <small class="form-text text-muted mb-4">
-            Designation
+            {{'employees-component.small_117'| translate}}
           </small>
           <div *ngIf="getDesignation.invalid && (getDesignation.touched || getDesignation.dirty)">
             <small *ngIf="getDesignation.errors?.required" class="text-danger">
-              Designation is required
+              {{'employees-component.small_121'| translate}}
             </small>
             <small *ngIf="getDesignation.errors?.pattern" class="text-danger">
-              Designation must should be of required pattern
+              {{'employees-component.small_124'| translate}}
             </small>
 
           </div>
 
           <!-- Phone number -->
-          <input type="tel" id="phoneNumber" class="form-control " placeholder="Phone number"
+          <input type="tel" id="phoneNumber" class="form-control " placeholder="{{'employees-component.placeholder_130'| translate}}"
             aria-describedby="PhoneHelpBlock" maxlength="10" formControlName="phoneNumberValidator"
             [class.is-invalid]="getPhoneNumber.invalid && getPhoneNumber.touched">
           <small class="form-text text-muted mb-4">
-            Phone Number
+            {{'employees-component.small_134'| translate}}
           </small>
           <div *ngIf="getPhoneNumber.invalid && (getPhoneNumber.touched || getPhoneNumber.dirty)">
             <small *ngIf="getPhoneNumber.errors?.required" class="text-danger">
-              Phone number is required
+              {{'employees-component.small_138'| translate}}
             </small>
             <small *ngIf="getPhoneNumber.errors?.minlength" class="text-danger">
-              Phone Number must be of atleast 10 characters
+              {{'employees-component.small_141'| translate}}
             </small>
             <small *ngIf="getPhoneNumber.errors?.pattern" class="text-danger">
-              Phone Number must consist only numbers
+              {{'employees-component.small_144'| translate}}
             </small>
 
           </div>
 
 
           <!-- Technologies -->
-          <input type="text" id="technologies" class="form-control " placeholder="Technologies"
+          <input type="text" id="technologies" class="form-control " placeholder="{{'employees-component.placeholder_151'| translate}}"
             aria-describedby="PhoneHelpBlock" formControlName="technologyValidator"
             [class.is-invalid]="getTechnology.invalid && getTechnology.touched">
           <small class="form-text text-muted mb-4">
-            Technologies Known
+            {{'employees-component.small_155'| translate}}
           </small>
           <div *ngIf="getTechnology.invalid && (getTechnology.touched || getTechnology.dirty)">
             <small *ngIf="getTechnology.errors?.required" class="text-danger">
-              Technology is required
+              {{'employees-component.small_159'| translate}}
             </small>
 
 
@@ -164,7 +164,7 @@
 
           <!-- Add Employee Button -->
           <button type="button" class="btn btn-warning" [disabled]="addEmployeeForm.invalid" id="modalBtn"
-            (click)=addEmployee() data-dismiss="modal">ADD</button>
+            (click)=addEmployee() data-dismiss="modal">{{'employees-component.button_167'| translate}}</button>
 
         </form>
       </div>
@@ -178,7 +178,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header" id="modalHeader">
-        <h5 class="modal-title">EMPLOYEE DETAILS</h5>
+        <h5 class="modal-title">{{'employees-component.h5-181'| translate}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -191,40 +191,40 @@
             <div class="col">
               <!-- First name -->
               <input type="text" id="editFirstName" [value]=empDetails.getFirstName() disabled="disabled"
-                class="form-control" placeholder="First name" formControlName="editFirstNameValidator"
+                class="form-control" placeholder="{{'employees-component.placeholder_194'| translate}}" formControlName="editFirstNameValidator"
                 [class.is-invalid]="getEditFirstName.invalid && getEditFirstName.touched">
               <small class="form-text text-muted ">
-                First Name
+                {{'employees-component.small_197'| translate}}
               </small>
               <div *ngIf="getEditFirstName.invalid && (getEditFirstName.touched || getEditFirstName.dirty)">
                 <small *ngIf="getEditFirstName.errors?.required" class="text-danger">
-                  First name is required
+                  {{'employees-component.small_201'| translate}}
                 </small>
                 <small *ngIf="getEditFirstName.errors?.minlength" class="text-danger">
-                  First name must be of atleast 3 characters
+                  {{'employees-component.small_204'| translate}}
                 </small>
                 <small *ngIf="getEditFirstName.errors?.pattern" class="text-danger">
-                  First name cannot contain numbers
+                  {{'employees-component.small_207'| translate}}
                 </small>
               </div>
             </div>
             <div class="col">
               <!-- Last name -->
               <input type="text" id="editLastName" [value]=empDetails.getLastName() disabled="disabled"
-                class="form-control" placeholder="Last name" formControlName="editLastNameValidator"
+                class="form-control" placeholder="{{'employees-component.placeholder_214'| translate}}" formControlName="editLastNameValidator"
                 [class.is-invalid]="getEditLastName.invalid && getEditLastName.touched">
               <small class="form-text text-muted ">
-                Last Name
+                {{'employees-component.small_217'| translate}}
               </small>
               <div *ngIf="getEditLastName.invalid && (getEditLastName.touched || getEditLastName.dirty)">
                 <small *ngIf="getEditLastName.errors?.required" class="text-danger">
-                  Last name is required
+                  {{'employees-component.small_221'| translate}}
                 </small>
                 <small *ngIf="getEditLastName.errors?.minlength" class="text-danger">
-                  Last name must consist atleast 4 characters
+                  {{'employees-component.small_224'| translate}}
                 </small>
                 <small *ngIf="getEditLastName.errors?.pattern" class="text-danger">
-                  Last name cannot contain numbers
+                  {{'employees-component.small_227'| translate}}
                 </small>
 
               </div>
@@ -233,18 +233,18 @@
           </div>
 
           <!-- E-mail -->
-          <input type="email" id="editEmail" [value]=empDetails.getEmail() class="form-control " placeholder="E-mail"
+          <input type="email" id="editEmail" [value]=empDetails.getEmail() class="form-control " placeholder="{{'employees-component.placeholder_236'| translate}}"
             required formControlName="editEmailValidator"
             [class.is-invalid]="getEditEmail.invalid && getEditEmail.touched">
           <small class="form-text text-muted mb-4">
-            E-mail
+            {{'employees-component.small_240'| translate}}
           </small>
           <div *ngIf="getEditEmail.invalid && (getEditEmail.touched || getEditEmail.dirty)">
             <small *ngIf="getEditEmail.errors?.required" class="text-danger">
-              Email is required
+              {{'employees-component.small_244'| translate}}
             </small>
             <small *ngIf="getEditEmail.errors?.pattern" class="text-danger">
-              Email must be of required pattern (abc0-9@xyz.com)
+              {{'employees-component.small_247'| translate}}
             </small>
 
           </div>
@@ -253,17 +253,17 @@
             <div class="col">
               <!-- ROLE -->
               <input type="text" id="editDesignation" [value]=empDetails.getDesignation() class="form-control "
-                placeholder="Designation" required formControlName="editDesignationValidator"
+                placeholder="{{'employees-component.placeholder_256'| translate}}" required formControlName="editDesignationValidator"
                 [class.is-invalid]="getEditDesignation.invalid && getEditDesignation.touched">
               <small class="form-text text-muted ">
-                Designation
+                {{'employees-component.small_259'| translate}}
               </small>
               <div *ngIf="getEditDesignation.invalid && (getEditDesignation.touched || getEditDesignation.dirty)">
                 <small *ngIf="getEditDesignation.errors?.required" class="text-danger">
-                  Designation is required
+                  {{'employees-component.small_263'| translate}}
                 </small>
                 <small *ngIf="getEditDesignation.errors?.pattern" class="text-danger">
-                  Designation cannot contain numbers or any special characters
+                  {{'employees-component.small_266'| translate}}
                 </small>
 
               </div>
@@ -271,21 +271,21 @@
             <div class="col">
               <!-- Phone number -->
               <input type="tel" id="editPhoneNumber" maxlength="10" [value]=empDetails.getPhoneNumber()
-                class="form-control " placeholder="Phone number" aria-describedby="PhoneHelpBlock" required
+                class="form-control " placeholder="{{'employees-component.placeholder_274'| translate}}" aria-describedby="PhoneHelpBlock" required
                 formControlName="editPhoneNumberValidator"
                 [class.is-invalid]="getEditPhoneNumber.invalid && getEditPhoneNumber.touched">
               <small class="form-text text-muted ">
-                Phone Number
+                {{'employees-component.small_278'| translate}}
               </small>
               <div *ngIf="getEditPhoneNumber.invalid && (getEditPhoneNumber.touched || getEditPhoneNumber.dirty)">
                 <small *ngIf="getEditPhoneNumber.errors?.required" class="text-danger">
-                  Phone number is required
+                  {{'employees-component.small_282'| translate}}
                 </small>
                 <small *ngIf="getEditPhoneNumber.errors?.minlength" class="text-danger">
-                  Phone Number must be of atleast 10 characters
+                  {{'employees-component.small_285'| translate}}
                 </small>
                 <small *ngIf="getEditPhoneNumber.errors?.pattern" class="text-danger">
-                  Phone Number must consist only numbers
+                  {{'employees-component.small_288'| translate}}
                 </small>
 
               </div>
@@ -294,15 +294,15 @@
 
           <!-- Technologies -->
           <input type="text" id="editTechnologies" [value]=empDetails.getTechnologies() class="form-control "
-            placeholder="Technologies" aria-describedby="PhoneHelpBlock" required
+            placeholder="{{'employees-component.placeholder_297'| translate}}" aria-describedby="PhoneHelpBlock" required
             formControlName="editTechnologyValidator"
             [class.is-invalid]="getEditTechnology.invalid && getEditTechnology.touched">
           <small class="form-text text-muted mb-4">
-            Technologies Known
+            {{'employees-component.small_301'| translate}}
           </small>
           <div *ngIf="getEditTechnology.invalid && (getEditTechnology.touched || getEditTechnology.dirty)">
             <small *ngIf="getEditTechnology.errors?.required" class="text-danger">
-              Technology is required
+              {{'employees-component.small_305'| translate}}
             </small>
 
 
@@ -311,7 +311,7 @@
 
 
           <button type="button" class="btn btn-warning" id="modalBtn" (click)="editEmployees()" data-dismiss="modal"
-            data-toggle="modal" data-target="#updateModal">UPDATE</button>
+            data-toggle="modal" data-target="#updateModal">{{'employees-component.button_314'| translate}}</button>
 
         </form>
 
@@ -328,13 +328,13 @@
         <div class="icon-box" id="successIcon">
           <i class="fa fa-check" aria-hidden="true"></i>
         </div>
-        <h4 class="modal-title">Awesome!</h4>
+        <h4 class="modal-title">{{'employees-component.h4-331'| translate}}!</h4>
       </div>
       <div class="modal-body">
-        <p class="text-center">Employee has been added successfully.</p>
+        <p class="text-center">{{'employees-component.p_334'| translate}}.</p>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-success btn-block" id="successButton" data-dismiss="modal">OK</button>
+        <button class="btn btn-success btn-block" id="successButton" data-dismiss="modal">{{'employees-component.button_337'| translate}}</button>
       </div>
     </div>
   </div>
@@ -348,13 +348,13 @@
         <div class="icon-box" id="successIcon">
           <i class="fa fa-check" aria-hidden="true"></i>
         </div>
-        <h4 class="modal-title">Awesome!</h4>
+        <h4 class="modal-title">{{'employees-component.h4-351'| translate}}!</h4>
       </div>
       <div class="modal-body">
-        <p class="text-center">Employee's details have been updated successfully.</p>
+        <p class="text-center">{{'employees-component.p_354'| translate}}.</p>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-success btn-block" id="successButton" data-dismiss="modal">OK</button>
+        <button class="btn btn-success btn-block" id="successButton" data-dismiss="modal">{{'employees-component.button_357'| translate}}</button>
       </div>
     </div>
   </div>
@@ -370,17 +370,17 @@
           <i class="fa fa-times" aria-hidden="true"></i>
         </div>
         <div class="modal-title">
-          <h4>Are you sure?</h4>
+          <h4>{{'employees-component.h4-373'| translate}}?</h4>
 
         </div>
       </div>
       <div class="modal-body">
-        <p>Do you really want to delete these records? This process cannot be undone.</p>
+        <p>{{'employees-component.p_378'| translate}}.</p>
       </div>
       <div class="modal-footer" id="deleteModalFooter">
         <button type="button" class="btn btn-info" data-dismiss="modal" id="deleteBtnInfo">Cancel</button>
         <button type="button" class="btn btn-danger" id="deleteBtnDanger" data-dismiss="modal"
-          (click)=delEmployee()>Delete</button>
+          (click)=delEmployee()>{{'employees-component.button_383'| translate}}</button>
       </div>
     </div>
   </div>

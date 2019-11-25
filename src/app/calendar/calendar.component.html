@@ -1,5 +1,5 @@
 <div class="alert alert-warning">
-  <h2>Upcoming Event</h2>
+  <h2>{{'calendar.h2-2'| translate}}</h2>
   <span id="notification"></span>
 </div>
 <hr>
@@ -19,12 +19,12 @@
 <div class="tips">
   <ul>
     <li>
-      <h4>Tips</h4>
+      <h4>{{'calendar.h4-22'| translate}}</h4>
     </li>
     <ol>
-      <li>Click any date to <strong>Add a new Event</strong>.</li>
-      <li>Click any event to <strong>Delete the Event</strong>.</li>
-      <li>Change view type <strong>(Month, Week, Day)</strong> to specify time in the day for Event.</li>
+      <li>{{'calendar.li_25'| translate}} <strong>{{'calendar.strong_25'| translate}}</strong>.</li>
+      <li>{{'calendar.li_26'| translate}}<strong>{{'calendar.strong_26'| translate}}</strong>.</li>
+      <li>{{'calendar.li_27'| translate}} <strong>(Month, Week, Day)</strong>{{'calendar.strong_27'| translate}}.</li>
     </ol>
   </ul>
 </div>
@@ -40,19 +40,19 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header" id="modalHeader">
-          <h4 class="modal-title">Event</h4>
+          <h4 class="modal-title">{{'calendar.h4-43'| translate}}</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
           <form class="text-center border p-5">
-            <h5>Event Time : {{ dispDate }}</h5><br>
-            <textarea type="text" rows="5" class="form-control" placeholder="Enter event details" #crTITLE></textarea>
+            <h5>{{'calendar.h5-48'| translate}} : {{ dispDate }}</h5><br>
+            <textarea type="text" rows="5" class="form-control" placeholder="{{'calendar.placeholder_49'| translate}}" #crTITLE></textarea>
             <small class="form-text text-muted mb-4">
-              Event details
+              {{'calendar.small_51'| translate}}
             </small>
             <button type="button" class="btn btn-primary form-control" id="modalBtn" (click)='addEvent(crTITLE.value)'
-              data-dismiss="modal">Add
-              Event</button>
+              data-dismiss="modal">{{'calendar.button_54'| translate}}
+              </button>
           </form>
         </div>
       </div>
@@ -64,25 +64,25 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header" id="modalHeader">
-          <h4 class="modal-title">EVENT</h4>
+          <h4 class="modal-title">{{'calendar.h4-67'| translate}}</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
           <form class="text-center border p-5">
 
 
-            <textarea type="text" rows="5" class="form-control mb-4" #crTITLE2 placeholder="Enter new event details"
+            <textarea type="text" rows="5" class="form-control mb-4" #crTITLE2 placeholder="{{'calendar.placeholder_74'| translate}}"
               [value]=crTitle></textarea>
 
             <div class="form-row">
               <div class="col">
                 <button type="button" class="btn btn-danger form-control " id="deleteBtn" data-toggle="modal"
-                  data-dismiss="modal" data-target="#delete">Delete Event</button>
+                  data-dismiss="modal" data-target="#delete">{{'calendar.button_80'| translate}}</button>
               </div>
               <div class="col">
                 <button type="button" class="btn btn-warning form-control" id="saveBtn" data-dismiss="modal"
-                  (click)='saveEvent(crTITLE2.value)'>Save
-                  Event</button>
+                  (click)='saveEvent(crTITLE2.value)'>{{'calendar.button_84'| translate}}
+                  </button>
               </div>
             </div>
           </form>
@@ -100,15 +100,15 @@
           <div class="icon-box" id="deleteIcon">
             <i class="fa fa-times" aria-hidden="true"></i>
           </div>
-          <h4 class="modal-title">Sure?</h4>
+          <h4 class="modal-title">{{'calendar.h4-103'| translate}}</h4>
         </div>
         <div class="modal-body">
-          <p>Do you really want to delete these records? This process cannot be undone.</p>
+          <p>{{'calendar.p_106'| translate}}.</p>
         </div>
         <div class="modal-footer" id="deleteModalFooter">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="deleteBtnInfo">Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="deleteBtnInfo">{{'calendar.button_110'| translate}}</button>
           <button type="button" class="btn btn-danger" data-dismiss="modal" (click)='deleteEvent()'
-            id="deleteBtnDanger">Delete</button>
+            id="deleteBtnDanger">{{'calendar.button_111'| translate}}</button>
         </div>
       </div>
     </div>
