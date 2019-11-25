@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ServiceService } from '../employees/service.service';
 import { CommonService } from '../common.service';
+import { Location } from '@angular/common';
 export class Employee {
 
   firstName: string;
@@ -79,8 +80,12 @@ export class AvailableEmployeesComponent implements OnInit {
   }
 
 
-  constructor(private http: HttpClient, private service: ServiceService, private comServ: CommonService) {
+  constructor(private http: HttpClient, private service: ServiceService, private comServ: CommonService,private _location:Location) {
     this.set();
+  }
+
+  goBack(){
+   this._location.back();
   }
 
   ngOnInit() {

@@ -108,11 +108,18 @@ export class ViewProjectsComponent implements OnInit {
   }
 
   dateValidate() {
-    this.endDate = (<HTMLInputElement>document.getElementById("projectEndDate")).value;
     this.startDate = (<HTMLInputElement>document.getElementById("projectStartdate")).value;
-    if (new Date(this.endDate) <= new Date(this.startDate))
-      this.temp = 1;
+    if (new Date(this.startDate) < new Date())
+      this.temp = 2;
+    else {
+      this.temp=0;
+      this.endDate = (<HTMLInputElement>document.getElementById("projectEndDate")).value;
+      if (new Date(this.endDate) <= new Date(this.startDate))
+        this.temp = 1;
+    }
+
   }
+
 
   get getClientName() {
     return this.createProjectForm.get("clientNameValidator");
@@ -242,7 +249,11 @@ export class ViewProjectsComponent implements OnInit {
     // this.totalProjectDays = this.totalDays / (1000 * 3600 * 24);
     console.log(this.proj);
     this.service.addProject(this.proj).subscribe(proj => this.projects.push(proj));
+  }
+
+  success() {
     location.reload();
+
   }
 
   projectEmployees: Array<string> = [];
@@ -310,13 +321,16 @@ export class ViewProjectsComponent implements OnInit {
     this.proj.setProjectDescription((<HTMLInputElement>document.getElementById("editProjectDescription")).value);
     console.log(this.proj);
     this.service.updateProject(this.proj).subscribe(proj => this.projects.push(proj));
-    location.reload();
+  }
+
+  projectNameForDeleting:string;
+  setDetailForDeleting(){
+    this.projectNameForDeleting=(<HTMLInputElement>document.getElementById("projectButton")).value;
   }
 
   delProject() {
     this.projectData = new Project();
-    this.projectName = (<HTMLInputElement>document.getElementById("projectButton")).value;
-    this.url = 'http://localhost:8080/project/' + this.projectName;
+    this.url = 'http://localhost:8080/project/' + this.projectNameForDeleting;
     console.log(this.url);
     this.service.delProject(this.url).subscribe(proj => console.log(proj));
     location.reload();

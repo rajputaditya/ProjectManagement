@@ -91,7 +91,7 @@ export class ProjectDetailsComponent implements OnInit {
   jsonArray: any = [];
   percentagesCompleted: number[] = [];
   employeeNames: any = [];
-  project_name = "AT&T";
+  project_name;
 
 
 
@@ -125,10 +125,16 @@ export class ProjectDetailsComponent implements OnInit {
   }
 
   dateValidate() {
-    this.endDate = (<HTMLInputElement>document.getElementById("projectEndDate")).value;
-    this.startDate = (<HTMLInputElement>document.getElementById("projectStartdate")).value;
-    if (new Date(this.endDate) <= new Date(this.startDate))
-      this.temp = 1;
+    this.startDate = (<HTMLInputElement>document.getElementById("projectStartDate")).value;
+    if (new Date(this.startDate)< new Date())
+      this.temp = 2;
+    else{
+      this.temp=0;
+      this.endDate = (<HTMLInputElement>document.getElementById("projectEndDate")).value;
+      if (new Date(this.endDate) <= new Date(this.startDate))
+        this.temp = 1;
+    }
+   
   }
 
 
@@ -202,7 +208,6 @@ export class ProjectDetailsComponent implements OnInit {
     this.taskClass.setStartDate((<HTMLInputElement>document.getElementById("projectStartDate")).value);
     this.taskClass.setEndDate((<HTMLInputElement>document.getElementById("projectEndDate")).value);
     this.proDetService.saveTask(this.taskClass);
-    window.location.reload();
   }
 
   // taskListByProjectName() {
@@ -233,6 +238,7 @@ export class ProjectDetailsComponent implements OnInit {
 
   curId: string;
   ngOnInit() {
+    this.project_name=this.projectDetail.projectName;
     this.projectDetail = this.comServ.setObj();
     console.log("view Project");
     console.log(this.projectDetail);
@@ -258,7 +264,7 @@ export class ProjectDetailsComponent implements OnInit {
     //REPORT
 
     // BARCHART for employee last month progress
-    this._main.getLastMonthProgressOfEmployees(new Date().getMonth(), new Date().getFullYear(), this.project_name)
+    this._main.getLastMonthProgressOfEmployees(new Date().getMonth()+1, new Date().getFullYear(), this.project_name)
       .subscribe(res => {
         this.jsonArray = res;
 
@@ -312,10 +318,10 @@ export class ProjectDetailsComponent implements OnInit {
 
       });
 
-    this._main.getMonthlyProgressOfEmployees(new Date().getMonth() + 1, new Date().getFullYear(), this.project_name).subscribe(res => {
+    this._main.getMonthlyProgressOfEmployees(new Date().getMonth() + 2, new Date().getFullYear(), this.project_name).subscribe(res => {
 
       let months: any = [];
-      let month = new Date().getMonth();
+      let month = new Date().getMonth()+1;
       for (let index = 1; index <= 6; index++) {
         months.push(month--);
       }
@@ -386,7 +392,7 @@ export class ProjectDetailsComponent implements OnInit {
 
     //GROWTH
 
-    this._main.getMonthlyProgressOfProject(new Date().getMonth() + 1, new Date().getFullYear(), this.project_name)
+    this._main.getMonthlyProgressOfProject(new Date().getMonth() + 2, new Date().getFullYear(), this.project_name)
       .subscribe(res => {
         let jsonArray: any = res;
         let completed_tasks = [];
@@ -397,7 +403,7 @@ export class ProjectDetailsComponent implements OnInit {
         });
 
         let months: any = [];
-        let month = new Date().getMonth();
+        let month = new Date().getMonth()+1;
         for (let index = 1; index <= 6; index++) {
           months.push(month--);
         }
@@ -551,7 +557,6 @@ export class ProjectDetailsComponent implements OnInit {
     this.url = 'http://localhost:8080/employee/unassign/' + user.fullName;
     console.log(this.url);
     this.http.put(this.url, user).subscribe(data => console.log(data));
-    location.reload();
   }
 
   statusChange(task) {

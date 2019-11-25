@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,7 +13,7 @@ import { ViewProjectsComponent } from './view-projects/view-projects.component';
 import { ReportsComponent } from './reports/reports.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { EmployeesComponent } from './employees/employees.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ServiceService } from './employees/service.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -22,6 +24,10 @@ import { ProjectDetailsComponent } from './project-details/project-details.compo
 import { AvailableEmployeesComponent } from './available-employees/available-employees.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LoginComponent } from './login/login.component';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 
 @NgModule({
@@ -45,9 +51,17 @@ import { LoginComponent } from './login/login.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    FullCalendarModule
+    FullCalendarModule,
+
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+      }
+  })
   ],
-  providers: [ServiceService, GetEventsService, MainService],
+  providers: [ServiceService, GetEventsService, MainService, TranslateService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

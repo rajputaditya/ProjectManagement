@@ -141,4 +141,8 @@ export class CalendarComponent implements OnInit  {
     }
   }
 
+  clear() {
+    $(':input').val("");
+  }
+
 }
