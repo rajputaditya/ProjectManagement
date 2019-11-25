@@ -2,7 +2,7 @@
     <div class="col-md-8">
         <h2>{{projectDetail.projectName}} <span class="badge badge-warning">{{projectDetail.priority}}</span> </h2>
         <h5>{{projectDetail.clientName}} <small>, {{projectDetail.city}}, {{projectDetail.country}}</small></h5>
-        <small><strong>Description</strong>- {{projectDetail.projectDescription}}</small>
+        <small><strong>{{'project-details.small_5'| translate}}</strong>- {{projectDetail.projectDescription}}</small>
     </div>
     <div class="col-md-4">
         <br><br>
@@ -71,7 +71,7 @@
                                         </small>
 
                                         <small class="form-text text-muted mb-4 ">
-                                            <i>**Click checkbox to submit task</i>
+                                            <i>**{{'project-details.i_74'|translate}}</i>
                                             <button class="btn btn-dark btn-sm pull-right" id="taskDeleteBtn"
                                                 data-toggle="modal" data-target="#deleteConfirmationModal"
                                                 disabled>{{'project-details.button_77'|translate}}</button>
@@ -311,7 +311,7 @@
                                         [class.is-invalid]="getTaskOwner.invalid && getTaskOwner.touched"> -->
                                     <div>
                                         <select class="browser-default custom-select" id="taskOwner">
-                                            <option selected>SELECT</option>
+                                            <option selected>{{'project-details.option_314' | translate}}</option>
                                             <option *ngFor="let employee of employeeDetailsOfProject"
                                                 value="{{employee}}">{{employee}}</option>
                                         </select>
@@ -362,28 +362,28 @@
                                         </div>
                                         <div class="alert alert-danger" role="alert" *ngIf="temp==2"
                                             style="width: 100%;">
-                                            Start date cannot be less than current date.
+                                           {{'project-details.div_365'| translate}}
                                         </div>
                                     </div>
                                     <textarea class="form-control" style="margin-top: 10%;" rows="3"
-                                        id="taskDescription" placeholder="Task Details"
+                                        id="taskDescription" placeholder="{{'project-details.placeholder_369-1' | translate}}"
                                         formControlName="taskDescriptionValidator"
                                         [class.is-invalid]="getTaskDescription.invalid && getTaskDescription.touched"></textarea>
                                     <small class="form-text text-muted mb-1 ">
-                                        Task Description
+                                        {{'project-details.small_373-1' | translate}}
                                     </small>
                                     <div
                                         *ngIf="getTaskDescription.invalid && (getTaskDescription.touched || getTaskDescription.dirtty)">
                                         <small *ngIf="getTaskDescription.errors?.required" class="text-danger">
-                                            Task Description Is Required
+                                           {{'project-details.small_378-1'| translate}}
                                         </small>
                                         <small *ngIf="getTaskDescription.errors?.minlength" class="text-danger">
-                                            Task Desc Must be Between 20 and 100 Characters
+                                            {{'project-details.small_381-1' | translate}}
                                         </small>
                                     </div>
 
                                     <button class="btn btn-warning btn-block" [disabled]="newTaskForm.invalid"
-                                        type="submit" data-dismiss="modal" (click)=addNewTask()
+                                        type="submit" data-dismiss="modal" data-toggle="modal" data-target="#successCreateModal" (click)=addNewTask()
                                         id="assignTaskBtn">{{'project-details.button_386'|translate}}</button>
                                 </form>
 
@@ -415,7 +415,7 @@
                                 <button type="button" class="btn btn-info" data-dismiss="modal"
                                     id="deleteBtnInfo">{{'project-details.button_415'|translate}}</button>
                                 <button type="button" class="btn btn-danger" data-dismiss="modal" id="deleteBtnDanger"
-                                    (click)=deleteTaskFunc()>{{'project-details.button_417'|translate}}</button>
+                                    (click)=deleteTaskFunc() routerLink="/viewProjects">{{'project-details.button_417'|translate}}</button>
                             </div>
                         </div>
                     </div>
@@ -450,10 +450,10 @@
                                 <div class="icon-box" id="successIcon">
                                     <i class="fa fa-check" aria-hidden="true"></i>
                                 </div>
-                                <h4 class="modal-title">Awesome!</h4>
+                                <h4 class="modal-title">{{'project-details.h4-453'| translate}}!</h4>
                             </div>
                             <div class="modal-body">
-                                <p class="text-center">Successfully created a new task.</p>
+                                <p class="text-center">{{'project-details.p_456'| translate}}.</p>
                             </div>
                             <div class="modal-footer">
                                 <a class="btn btn-success btn-block" id="successButton" data-dismiss="modal"

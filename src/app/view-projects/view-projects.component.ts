@@ -323,10 +323,14 @@ export class ViewProjectsComponent implements OnInit {
     this.service.updateProject(this.proj).subscribe(proj => this.projects.push(proj));
   }
 
+  projectNameForDeleting:string;
+  setDetailForDeleting(){
+    this.projectNameForDeleting=(<HTMLInputElement>document.getElementById("projectButton")).value;
+  }
+
   delProject() {
     this.projectData = new Project();
-    this.projectName = (<HTMLInputElement>document.getElementById("projectButton")).value;
-    this.url = 'http://localhost:8080/project/' + this.projectName;
+    this.url = 'http://localhost:8080/project/' + this.projectNameForDeleting;
     console.log(this.url);
     this.service.delProject(this.url).subscribe(proj => console.log(proj));
     location.reload();

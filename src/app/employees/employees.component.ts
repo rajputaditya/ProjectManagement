@@ -206,7 +206,6 @@ export class EmployeesComponent implements OnInit {
 
   delEmployee(){
     this.service.delEmployee(this.empDetails).subscribe(data=>console.log(data));
-    location.reload();
   }
 
 }
