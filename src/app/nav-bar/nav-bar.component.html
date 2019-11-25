@@ -22,10 +22,10 @@
           aria-haspopup="true" aria-expanded="false">
           Language
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a (click)="translate.use('en')" class="dropdown-item" href="#">English</a>
-          <a (click)="translate.use('de')" class="dropdown-item" href="#">German</a>
-          <a (click)="translate.use('hindi')" class="dropdown-item" href="#">Hindi</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="langMenu">
+          <a class="btn btn-sm btn-warning" (click)="translate.use('en')" class="dropdown-item" >English</a>
+          <a  class="btn btn-sm btn-warning" (click)="translate.use('de')" class="dropdown-item" >German</a>
+          <a  class="btn btn-sm btn-warning" (click)="translate.use('hindi')" class="dropdown-item" >Hindi</a>
         </div>
       </li>
     </ul>
