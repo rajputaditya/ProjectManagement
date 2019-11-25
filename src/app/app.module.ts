@@ -24,6 +24,7 @@ import { ProjectDetailsComponent } from './project-details/project-details.compo
 import { AvailableEmployeesComponent } from './available-employees/available-employees.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LoginComponent } from './login/login.component';
+import { ManagerComponent } from './manager/manager.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -43,7 +44,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ProjectDetailsComponent,
     AvailableEmployeesComponent,
     PageNotFoundComponent,
-    LoginComponent
+    LoginComponent,
+    ManagerComponent
   ],
   imports: [
     BrowserModule,

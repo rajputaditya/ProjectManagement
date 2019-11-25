@@ -160,3 +160,36 @@ fieldset{
   display: flex;
   width: 600px;
 }
+
+//social icons
+.social-btn .btn {
+  color: #fff;
+      margin: 10px 0 0 30px;
+  font-size: 15px;
+      width: 55px;
+      height: 55px;
+      line-height: 38px;
+      border-radius: 50%;
+  font-weight: normal;
+      text-align: center;
+  border: none;
+  transition: all 0.4s;
+  }	
+.social-btn .btn:first-child {
+  margin-left: 0;
+}
+.social-btn .btn:hover {
+  opacity: 0.8;
+}
+.social-btn .btn-primary {
+  background: #507cc0;
+}
+.social-btn .btn-info {
+  background: #64ccf1;
+}
+.social-btn .btn-danger {
+  background: #df4930;
+}
+.social-btn .btn i {
+  font-size: 20px;
+}

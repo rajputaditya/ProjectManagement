@@ -4,10 +4,12 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-    <a class="navbar-brand" routerLink="/viewProjects" style="color: #106466;font-size: 35px;">{{'nav-bar.a_7'| translate}}</a>
+    <a class="navbar-brand" routerLink="/viewProjects"
+      style="color: #106466;font-size: 35px;">{{'nav-bar.a_7'| translate}}</a>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item active">
-        <a class="nav-link" routerLink="/viewProjects">{{'nav-bar.a_10'| translate}} <span class="sr-only">(current)</span></a>
+        <a class="nav-link" routerLink="/viewProjects">{{'nav-bar.a_10'| translate}} <span
+            class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/calendar">{{'nav-bar.a_13'| translate}}</a>
@@ -15,9 +17,20 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/employees">{{'nav-bar.a_16'| translate}}</a>
       </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Language
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a (click)="translate.use('en')" class="dropdown-item" href="#">English</a>
+          <a (click)="translate.use('de')" class="dropdown-item" href="#">German</a>
+          <a (click)="translate.use('hindi')" class="dropdown-item" href="#">Hindi</a>
+        </div>
+      </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
-        
+
       <div class="dropdown">
         <img src="/assets/avatar.png" alt="IMAGE" style="margin-right: 18px;">
 
@@ -27,6 +40,6 @@
       </div>
       <i class="fas fa-bell" style="color:#106466 ; font-size: 20px;"></i>
     </form>
-    
+
   </div>
 </nav>

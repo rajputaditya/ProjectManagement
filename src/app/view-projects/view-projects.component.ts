@@ -52,7 +52,9 @@ export class Project {
     this.city = city;
   }
 
-
+  setManager(manager){
+    this.manager=manager;
+  }
 
   setCountry(country) {
     this.country = country;
@@ -94,13 +96,18 @@ export class ViewProjectsComponent implements OnInit {
         this.userArray.push(element);
       });
     })
+    this.fetchManagers();
   }
 
-
-
-
-
-
+  urlForManagers:string="http://localhost:8080/managernames";
+  availableManagers:Array<any>=[];
+  fetchManagers(){
+    this.http.get(this.urlForManagers).subscribe(data => {
+      JSON.parse(JSON.stringify(data)).forEach(element => {
+        this.availableManagers.push(element);
+      });
+    })
+  }
 
 
   opnModal(uname: string) {
@@ -216,7 +223,7 @@ export class ViewProjectsComponent implements OnInit {
       startDateValidator: new FormControl('', Validators.required),
       endDateValidator: new FormControl('', Validators.required),
       cityValidator: new FormControl('', [Validators.required, Validators.minLength(3), Validators.pattern(this.namePattern)]),
-      countryValidator: new FormControl('', [Validators.required, Validators.minLength(4), Validators.pattern(this.namePattern)]),
+      countryValidator: new FormControl('', [Validators.required, Validators.minLength(2), Validators.pattern(this.namePattern)]),
       projectDescriptionValidator: new FormControl('', [Validators.required, Validators.minLength(20)])
     });
 
@@ -241,6 +248,7 @@ export class ViewProjectsComponent implements OnInit {
     this.proj.setEndDate((<HTMLInputElement>document.getElementById("projectEndDate")).value);
     this.proj.setCity((<HTMLInputElement>document.getElementById("projectCity")).value);
     this.proj.setCountry((<HTMLInputElement>document.getElementById("projectCountry")).value);
+    this.proj.setManager((<HTMLInputElement>document.getElementById("projectManager")).value);
     this.proj.setPriority((<HTMLInputElement>document.getElementById("projectPriorityLevel")).value);
     this.proj.setProjectDescription((<HTMLInputElement>document.getElementById("projectDescription")).value);
     // this.beginDate = new Date(((<HTMLInputElement>document.getElementById("projectStartdate")).value));
@@ -317,6 +325,7 @@ export class ViewProjectsComponent implements OnInit {
     this.proj.setEndDate((<HTMLInputElement>document.getElementById("projectEndDate1")).value);
     this.proj.setCity((<HTMLInputElement>document.getElementById("projectCity1")).value);
     this.proj.setCountry((<HTMLInputElement>document.getElementById("projectCountry1")).value);
+    this.proj.setManager((<HTMLInputElement>document.getElementById("editManager")).value);
     this.proj.setPriority((<HTMLInputElement>document.getElementById("projectPriorityLevel1")).value);
     this.proj.setProjectDescription((<HTMLInputElement>document.getElementById("editProjectDescription")).value);
     console.log(this.proj);

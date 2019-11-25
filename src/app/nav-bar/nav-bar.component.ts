@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-nav-bar',
@@ -23,8 +24,10 @@ set(){
     });
   });
 }
-constructor(private http: HttpClient) {
- 
+constructor(@Inject(TranslateService) public translate: TranslateService,private http: HttpClient) {
+  translate.addLangs(['en', 'de', 'fr'])
+  translate.setDefaultLang('en');
+  translate.use('en');
 }
   ngOnInit() {
   }

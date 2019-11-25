@@ -2,12 +2,13 @@
 <div id="mySidenav" class="sidenav " style="z-index: 3; position: absolute; margin-top: 80px;">
     <a routerLink="/viewProjects" id="projects">{{'app.a_3'| translate}}</a>
     <a routerLink="/employees" id="employees">{{'app.a_4'| translate}}</a>
-    <a routerLink="/calendar" id="reports">{{'app.a_5'| translate}}</a>
+    <a routerLink="/calendar" id="to-do">{{'app.a_5'| translate}}</a>
+    <a routerLink="/manager" id="manager">Manager</a>
   </div>
 
 <div class="container" style="position: absolute;left: 0;min-width: 100%;margin-top: 70px;">
     <router-outlet></router-outlet>
     <app-footer></app-footer>
 </div>
-<!-- 
- <app-login></app-login> -->
+
+ <!-- <app-login></app-login> -->

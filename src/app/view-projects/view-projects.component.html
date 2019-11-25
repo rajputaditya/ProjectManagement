@@ -15,29 +15,23 @@
             </div>
             <div class="more-info">
               <h4 id="sendClientName">{{users.clientName}}</h4>
-              <div class="info-head">
+              <div class="info-head" style="margin-top: 50px;">
                 <span>{{users.startDate}}</span>
                 <span>{{users.endDate}}</span>
               </div>
               <div class="info-head">
                 <span>{{users.technologies}}</span>
-                <span>{{users.city}} {{users.country}}</span>
+                <span>{{users.city}}, {{users.country}}</span>
               </div>
               <div class="stats">
                 <div>
-                  <div class="title">{{'view-projects.div_28'| translate}}</div>
                   <i class="fa fa-clock-o"></i>
-                  <div class="value" >{{totalProjectDaysDiff}}</div>
                 </div>
                 <div>
-                  <div class="title">{{'view-projects.div_33'| translate}}</div>
                   <i class="fa fa-group"></i>
-                  <div class="value">{{Pals}}</div>
                 </div>
                 <div>
-                  <div class="title">{{'view-projects.div_38'| translate}}</div>
                   <i class="fa fa-coffee"></i>
-                  <div class="value infinity">∞</div>
                 </div>
               </div>
             </div>
@@ -56,7 +50,7 @@
   </div>
   <div class="col-sm-3" style="position: absolute;z-index: 2;">
 
-    <div >
+    <div>
       <button class="btn btn-light btn-lg" id="projectModBtn" data-toggle="modal"
         data-target="#createProject">{{'view-projects.button_61'| translate}}</button>
       <button class="btn btn-light btn-lg" id="projectModBtn" style="margin-top: 10%;" data-toggle="modal"
@@ -84,7 +78,7 @@
             <div class="col-sm-12">
               <input id="searchProject" class="form-control form-control-lg" type="text"
                 placeholder="{{'view-projects.placeholder_86'| translate}}" aria-label="Search" style="width: 100%; border-color: black;
-                border-radius: 50px;" (input)=searchEditProject() >
+                border-radius: 50px;" (input)=searchEditProject()>
 
             </div>
           </div>
@@ -133,11 +127,11 @@
 <div class="modal fade" id="createProject" tabindex="-1" role="dialog" aria-labelledby="createProjectLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content" >
+    <div class="modal-content">
       <div class="modal-header" id="modalHeader">
         <h3>{{'view-projects.h3-138'| translate}}</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)=clear()>
-          <span aria-hidden="true" >&times;</span>
+          <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
@@ -147,8 +141,8 @@
           <div class="form-row mb-2">
             <div class="col">
               <!-- Client name -->
-              <input type="text" id="clientName" class="form-control" placeholder="{{'view-projects.placeholder_150'| translate}}"
-                formControlName="clientNameValidator"
+              <input type="text" id="clientName" class="form-control"
+                placeholder="{{'view-projects.placeholder_150'| translate}}" formControlName="clientNameValidator"
                 [class.is-invalid]="getClientName.invalid && getClientName.touched">
               <small class="form-text text-muted mb-4">
                 {{'view-projects.small_154'| translate}}
@@ -165,8 +159,8 @@
 
             <div class="col">
               <!-- Project name -->
-              <input type="text" id="projectName" class="form-control" placeholder="{{'view-projects.placeholder_168'| translate}}"
-                formControlName="projectNameValidator"
+              <input type="text" id="projectName" class="form-control"
+                placeholder="{{'view-projects.placeholder_168'| translate}}" formControlName="projectNameValidator"
                 [class.is-invalid]="getProjectName.invalid && getProjectName.touched">
               <small class="form-text text-muted mb-4">
                 {{'view-projects.small_172'| translate}}
@@ -183,8 +177,8 @@
             <div class="col">
 
               <!-- Technologies -->
-              <input type="text" id="projectTech" class="form-control mb-2" placeholder="{{'view-projects.placeholder_186'| translate}}"
-                formControlName="technologiesValidator"
+              <input type="text" id="projectTech" class="form-control mb-2"
+                placeholder="{{'view-projects.placeholder_186'| translate}}" formControlName="technologiesValidator"
                 [class.is-invalid]="getTechnologies.invalid && getTechnologies.touched">
               <small class="form-text text-muted mb-4">
                 {{'view-projects.small_190'| translate}}
@@ -200,9 +194,9 @@
           <div class="form-row mb-2">
             <div class="col">
               <!-- Start Date -->
-              <input type="date" id="projectStartdate" class="form-control" placeholder="{{'view-projects.placeholder_203'| translate}}"
-                formControlName="startDateValidator" [class.is-invalid]="getStartDate.invalid && getStartDate.touched"
-                (blur)=dateValidate()>
+              <input type="date" id="projectStartdate" class="form-control"
+                placeholder="{{'view-projects.placeholder_203'| translate}}" formControlName="startDateValidator"
+                [class.is-invalid]="getStartDate.invalid && getStartDate.touched" (blur)=dateValidate()>
               <small class="form-text text-muted mb-4">
                 {{'view-projects.small_206'| translate}}
               </small>
@@ -214,9 +208,9 @@
             </div>
             <div class="col">
               <!-- End Date -->
-              <input type="date" id="projectEndDate" class="form-control" placeholder="{{'view-projects.placeholder_216'| translate}}"
-                formControlName="endDateValidator" [class.is-invalid]="getEndDate.invalid && getEndDate.touched"
-                (blur)=dateValidate()>
+              <input type="date" id="projectEndDate" class="form-control"
+                placeholder="{{'view-projects.placeholder_216'| translate}}" formControlName="endDateValidator"
+                [class.is-invalid]="getEndDate.invalid && getEndDate.touched" (blur)=dateValidate()>
               <small class="form-text text-muted mb-4">
                 {{'view-projects.small_220'| translate}}
               </small>
@@ -232,24 +226,25 @@
               <!-- <input type="text" id="projectPriorityLevel" class="form-control" placeholder="HIGH, Medium, low"
                 formControlName="priorityLevelValidator"
                 [class.is-invalid]="getPriorityLevel.invalid && getPriorityLevel.touched"> -->
-                <select class="browser-default custom-select" id="projectPriorityLevel">
-                  <option selected value="SELECT">{{'view-projects.option_235'| translate}}</option>
-                  <option value="HIGH">{{'view-projects.option_236'| translate}}</option>
-                  <option value="MEDIUM">{{'view-projects.option_237'| translate}}</option>
-                  <option value="LOW">{{'view-projects.option_238'| translate}}</option>
-                </select>
+              <select class="browser-default custom-select" id="projectPriorityLevel">
+                <option selected value="SELECT">{{'view-projects.option_235'| translate}}</option>
+                <option value="HIGH">{{'view-projects.option_236'| translate}}</option>
+                <option value="MEDIUM">{{'view-projects.option_237'| translate}}</option>
+                <option value="LOW">{{'view-projects.option_238'| translate}}</option>
+              </select>
               <small class="form-text text-muted mb-4">
                 {{'view-projects.small-241'| translate}}
               </small>
-             
+
             </div>
           </div>
 
           <div class="form-row mb-2">
             <div class="col">
               <!-- City -->
-              <input type="text" id="projectCity" class="form-control" placeholder="{{'view-projects.placeholder_250'| translate}}"
-                formControlName="cityValidator" [class.is-invalid]="getCity.invalid && getCity.touched">
+              <input type="text" id="projectCity" class="form-control"
+                placeholder="{{'view-projects.placeholder_250'| translate}}" formControlName="cityValidator"
+                [class.is-invalid]="getCity.invalid && getCity.touched">
               <small class="form-text text-muted mb-4">
                 {{'view-projects.small_253'| translate}}
               </small>
@@ -267,8 +262,9 @@
             </div>
             <div class="col">
               <!-- Country -->
-              <input type="text" id="projectCountry" class="form-control" placeholder="{{'view-projects.placeholder_269'| translate}}"
-                formControlName="countryValidator" [class.is-invalid]="getCountry.invalid && getCountry.touched">
+              <input type="text" id="projectCountry" class="form-control"
+                placeholder="{{'view-projects.placeholder_269'| translate}}" formControlName="countryValidator"
+                [class.is-invalid]="getCountry.invalid && getCountry.touched">
               <small class="form-text text-muted mb-4">
                 {{'view-projects.small_272'| translate}}
               </small>
@@ -284,13 +280,25 @@
                 </small>
               </div>
             </div>
+
+            <!-- Manager -->
+            <div class="col">
+              <select class="browser-default custom-select" id="projectManager">
+                <option selected>SELECT</option>
+                <option *ngFor="let manager of availableManagers" value="{{manager}}">{{manager}}</option>
+              </select>
+              <small class="form-text text-muted mb-4">
+                Manager
+              </small>
+
+            </div>
           </div>
 
 
           <!-- Project Description -->
           <div class="col">
-            <textarea class="form-control mb-2" placeholder="{{'view-projects.placeholder_291'| translate}}" id="projectDescription"
-              formControlName="projectDescriptionValidator"
+            <textarea class="form-control mb-2" placeholder="{{'view-projects.placeholder_291'| translate}}"
+              id="projectDescription" formControlName="projectDescriptionValidator"
               [class.is-invalid]="getProjectDescription.invalid && getProjectDescription.touched"></textarea>
             <small class="form-text text-muted mb-4 ">
               {{'view-projects.small_295'| translate}}
@@ -410,12 +418,12 @@
               <!-- <input type="text" id="projectPriorityLevel1" [value]=projectData.priority class="form-control"
                 placeholder="HIGH, Medium, low" formControlName="editPriorityValidator"
                 [class.is-invalid]="editGetPriority.invalid && editGetPriority.touched"> -->
-                <select class="browser-default custom-select" id="projectPriorityLevel1"[value]="projectData.priority" >
-                  <option selected>{{'view-projects'.option_409| translate}}</option>
-                  <option value="HIGH">{{'view-projects.option_410'| translate}}</option>
-                  <option value="MEDIUM">{{'view-projects.option_411'| translate}}</option>
-                  <option value="LOW">{{'view-projects.option_412'| translate}}</option>
-                </select>
+              <select class="browser-default custom-select" id="projectPriorityLevel1" [value]="projectData.priority">
+                <option selected>{{'view-projects'.option_409| translate}}</option>
+                <option value="HIGH">{{'view-projects.option_410'| translate}}</option>
+                <option value="MEDIUM">{{'view-projects.option_411'| translate}}</option>
+                <option value="LOW">{{'view-projects.option_412'| translate}}</option>
+              </select>
               <small class="form-text text-muted mb-2">
                 {{'view-projects.small_415'| translate}}
               </small>
@@ -424,8 +432,9 @@
           <div class="form-row mb-2">
             <div class="col">
               <!-- City -->
-              <input type="text" id="projectCity1" [value]=projectData.city class="form-control" placeholder="{{'view-projects.placeholder_422'| translate}}"
-                formControlName="editCityValidator" [class.is-invalid]="editGetCity.invalid && editGetCity.touched">
+              <input type="text" id="projectCity1" [value]=projectData.city class="form-control"
+                placeholder="{{'view-projects.placeholder_422'| translate}}" formControlName="editCityValidator"
+                [class.is-invalid]="editGetCity.invalid && editGetCity.touched">
               <small class="form-text text-muted mb-2">
                 {{'view-projects.small_425'| translate}}
               </small>
@@ -455,6 +464,20 @@
                 </small>
               </div>
             </div>
+
+            <!-- Manager -->
+            <div class="col">
+              <select class="browser-default custom-select" id="editManager">
+                <option [value]="projectData.manager" selected>
+                  {{projectData.manager}}</option>
+                <option *ngFor="let manager of availableManagers" value="{{manager}}">{{manager}}</option>
+              </select>
+              <small class="form-text text-muted mb-4">
+                Manager
+              </small>
+
+            </div>
+
           </div>
 
 
@@ -504,7 +527,8 @@
         <p class="text-center">{{'view-projects.p_499'| translate}}.</p>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-success btn-block" id="successButton" data-dismiss="modal" (click)=success()>{{'view-projects.button_502'| translate}}</button>
+        <button class="btn btn-success btn-block" id="successButton" data-dismiss="modal"
+          (click)=success()>{{'view-projects.button_502'| translate}}</button>
       </div>
     </div>
   </div>
@@ -524,7 +548,8 @@
         <p class="text-center">{{'view-projects.p_519'| translate}}.</p>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-success btn-block" id="successButton" data-dismiss="modal" (click)=success()>{{'view-projects.button_522'| translate}}</button>
+        <button class="btn btn-success btn-block" id="successButton" data-dismiss="modal"
+          (click)=success()>{{'view-projects.button_522'| translate}}</button>
       </div>
     </div>
   </div>
@@ -548,8 +573,10 @@
         <p>{{'view-projects.p_543'| translate}}.</p>
       </div>
       <div class="modal-footer" id="deleteModalFooter">
-        <button type="button" class="btn btn-info" data-dismiss="modal" id="deleteBtnInfo">{{'view-projects.button_546'| translate}}</button>
-        <button type="button" class="btn btn-danger" (click)=delProject() data-dismiss="modal" id="deleteBtnDanger">{{'view-projects.button_547'| translate}}</button>
+        <button type="button" class="btn btn-info" data-dismiss="modal"
+          id="deleteBtnInfo">{{'view-projects.button_546'| translate}}</button>
+        <button type="button" class="btn btn-danger" (click)=delProject() data-dismiss="modal"
+          id="deleteBtnDanger">{{'view-projects.button_547'| translate}}</button>
       </div>
     </div>
   </div>
