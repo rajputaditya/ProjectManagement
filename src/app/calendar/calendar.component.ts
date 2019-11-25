@@ -38,7 +38,6 @@ export class CalendarComponent implements OnInit  {
         this.calendarEvents.forEach(obj => {
           this.idCount = obj.id;          
         });
-        console.log(this.calendarEvents)
         this.getReminder(this.calendarEvents);
       });
 
@@ -56,6 +55,13 @@ export class CalendarComponent implements OnInit  {
       minute: 'numeric',
       timezone: 'IST'
     });
+    if((moment(this.crDate, moment.ISO_8601).isBefore(moment(moment().toISOString(), moment.ISO_8601)))){
+      (<HTMLDivElement>document.getElementById("pastEventErr")).hidden = false;
+      (<HTMLInputElement>document.getElementById("modalBtn")).disabled = true;
+    } else {
+      (<HTMLDivElement>document.getElementById("pastEventErr")).hidden = true;
+      (<HTMLInputElement>document.getElementById("modalBtn")).disabled = false;
+    }
     document.getElementById('addEvent').click();
   }
 
@@ -111,13 +117,11 @@ export class CalendarComponent implements OnInit  {
     let check = crEvt.start;
     myEvents.forEach(event => {
       if(moment(event.start, moment.ISO_8601).isValid()){
-        console.log("YES")
       if((moment(event.start, moment.ISO_8601).isAfter(moment(crTM, moment.ISO_8601)))){
         if(moment(event.start, moment.ISO_8601).isBefore(moment(crEvt.start, moment.ISO_8601))){
           crEvt=event;
         }
       }
-      console.log(crTM + "||" + event.start);
     }});
     if(crEvt.start != check){
       document.getElementById('notification').innerHTML = 
