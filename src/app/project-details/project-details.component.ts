@@ -238,8 +238,8 @@ export class ProjectDetailsComponent implements OnInit {
 
   curId: string;
   ngOnInit() {
-    this.project_name=this.projectDetail.projectName;
     this.projectDetail = this.comServ.setObj();
+    this.project_name=this.projectDetail.projectName;
     console.log("view Project");
     console.log(this.projectDetail);
 
