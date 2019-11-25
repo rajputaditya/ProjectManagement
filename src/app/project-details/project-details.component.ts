@@ -91,7 +91,7 @@ export class ProjectDetailsComponent implements OnInit {
   jsonArray: any = [];
   percentagesCompleted: number[] = [];
   employeeNames: any = [];
-  project_name;
+  project_name = "AT&T";
 
 
 
@@ -238,9 +238,7 @@ export class ProjectDetailsComponent implements OnInit {
 
   curId: string;
   ngOnInit() {
-    
     this.projectDetail = this.comServ.setObj();
-    this.project_name=this.projectDetail.projectName;
     console.log("view Project");
     console.log(this.projectDetail);
 
@@ -265,7 +263,7 @@ export class ProjectDetailsComponent implements OnInit {
     //REPORT
 
     // BARCHART for employee last month progress
-    this._main.getLastMonthProgressOfEmployees(new Date().getMonth()+1, new Date().getFullYear(), this.project_name)
+    this._main.getLastMonthProgressOfEmployees(new Date().getMonth(), new Date().getFullYear(), this.project_name)
       .subscribe(res => {
         this.jsonArray = res;
 
@@ -319,10 +317,10 @@ export class ProjectDetailsComponent implements OnInit {
 
       });
 
-    this._main.getMonthlyProgressOfEmployees(new Date().getMonth() + 2, new Date().getFullYear(), this.project_name).subscribe(res => {
+    this._main.getMonthlyProgressOfEmployees(new Date().getMonth() + 1, new Date().getFullYear(), this.project_name).subscribe(res => {
 
       let months: any = [];
-      let month = new Date().getMonth()+1;
+      let month = new Date().getMonth();
       for (let index = 1; index <= 6; index++) {
         months.push(month--);
       }
@@ -393,7 +391,7 @@ export class ProjectDetailsComponent implements OnInit {
 
     //GROWTH
 
-    this._main.getMonthlyProgressOfProject(new Date().getMonth() + 2, new Date().getFullYear(), this.project_name)
+    this._main.getMonthlyProgressOfProject(new Date().getMonth() + 1, new Date().getFullYear(), this.project_name)
       .subscribe(res => {
         let jsonArray: any = res;
         let completed_tasks = [];
@@ -404,7 +402,7 @@ export class ProjectDetailsComponent implements OnInit {
         });
 
         let months: any = [];
-        let month = new Date().getMonth()+1;
+        let month = new Date().getMonth();
         for (let index = 1; index <= 6; index++) {
           months.push(month--);
         }

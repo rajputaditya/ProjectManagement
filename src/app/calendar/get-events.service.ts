@@ -6,17 +6,17 @@ import { HttpClient } from '@angular/common/http';
 })
 export class GetEventsService {
   deleteEvent(id) {
-    this._http.delete("http://localhost:8086/calendarRestApi/events/" + id).subscribe();
+    this._http.delete("http://localhost:8086/calendarRestApi/app/events/" + id).subscribe();
   }
 
   constructor(private _http: HttpClient) {
   }
 
   getEvents(){
-    return this._http.get("http://localhost:8086/calendarRestApi/events");
+    return this._http.get("http://localhost:8086/calendarRestApi/app/events");
   }
 
   saveEvent(event: any){
-    this._http.post("http://localhost:8086/calendarRestApi/events", event).subscribe();
+    this._http.post("http://localhost:8086/calendarRestApi/app/events", event).subscribe();
   }
 }

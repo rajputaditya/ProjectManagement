@@ -107,7 +107,7 @@
             <div class="col-sm-12">
               <input class="form-control form-control-lg" type="text" id="searchDeleteProject"
                 placeholder="{{'view-projects.placeholder_115'| translate}}" aria-label="Search" style="width: 100%; border-color: black;
-                    border-radius: 50px;" (input)=searchDeleteProject()>
+                    border-radius: 50px;" (input)=searchDeleteProject() (blur)=clear()>
             </div>
           </div>
 
@@ -116,7 +116,7 @@
         <ul *ngFor="let search of searchdata">
           <li><button id="projectButton" value="{{search}}" class="btn btn-sm btn-dark" data-toggle="modal"
               data-target="#deleteConfirmationModal" data-dismiss="modal" style=" background-color: rgb(80, 79, 79);
-            border-color: rgb(80, 79, 79);" (click)=setDetailForDeleting()>{{search}}</button></li>
+            border-color: rgb(80, 79, 79);">{{search}}</button></li>
         </ul>
       </form>
     </div>
@@ -320,7 +320,7 @@
             {{'view-projects.div_311'| translate}}
           </div>
           <div class="alert alert-danger" role="alert" *ngIf="temp==2" style="width: 100%;">
-            {{'view-projects.div_315' | translate}}
+            Start date cannot be less than current date.
           </div>
 
           <button type="button" [disabled]="createProjectForm.invalid" class="btn btn-sm" id="editProjectBtn"
