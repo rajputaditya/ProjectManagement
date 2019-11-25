@@ -24,8 +24,14 @@ export class ProjectDetailsService {
     this._http.post("http://localhost:8086/taskDetails/tasks",task).subscribe();
   }
 
-  editTaskWIthProjectName(task:any,taskOwner){
-    this._http.put("http://localhost:8086/taskDetails/tasks/" + taskOwner,task).subscribe();
+  editTaskWIthProjectName(task:any,taskTitle){
+    this._http.put("http://localhost:8086/taskDetails/tasks/" + taskTitle,task).subscribe();
     console.log(task);
+  }
+
+  statusChange(task:any){
+
+    return this._http.put("http://localhost:8086/taskDetails/tasks/status/"+task.taskName,task);
+
   }
 }

@@ -7,45 +7,57 @@
     <div class="container-fluid text-center text-md-left">
       <div class="row">
         <div class="col-md-6 mt-md-0 mt-3">
-          <h5 class="text-uppercase">MANAGE</h5>
-          <p>Good management is the art of making problems so interesting and their solutions so constructive that everyone wants to get to work and deal with them.</p>
-          <p>- Paul Hawken</p>
+          <h5 class="text-uppercase">{{'footer.h5-10'| translate}}</h5>
+          <p>{{'footer.p_11'| translate}}.</p>
+          <p>- {{'footer.p_12'| translate}}</p>
   
         </div>
   
         <hr class="clearfix w-100 d-md-none pb-3">
         <div class="col-md-3 mb-md-0 mb-3">
-          <h5 class="text-uppercase">Links</h5>
+          <h5 class="text-uppercase">{{'footer.h5-19'| translate}}</h5>
   
           <ul class="list-unstyled">
             <li>
-              <a routerLink="/tasks">Tasks</a>
+              <a routerLink="/tasks">{{'footer.a_22'| translate}}</a>
             </li>
             <li>
-              <a routerLink="/reports">Reports</a>
+              <a routerLink="/reports">{{'footer.a_25'| translate}}</a>
             </li>
           </ul>
   
         </div>
-        <div class="col-md-3 mb-md-0 mb-3">
+        <div class="col-md-2 mb-md-0 mb-3">
   
-          <h5 class="text-uppercase">Links</h5>
+          <h5 class="text-uppercase">{{'footer.a_32'| translate}}</h5>
   
           <ul class="list-unstyled">
             <li>
-              <a routerLink="/todo">To-Do</a>
+              <a routerLink="/todo">{{'footer.a_36'| translate}}</a>
             </li>
             <li>
-              <a routerLink="/">Back to top</a>
+              <a routerLink="/">{{'footer.a_39'| translate}}</a>
             </li>
           </ul>
   
         </div>
   
       </div>
+
+      <div class="dropup" id="lang">
+        <button class="btn btn-dark btn-sm dropdown-toggle" type="button" id="about-us" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Lang
+          <div class="dropdown-menu">
+            <a (click)="translate.use('en')" class="dropdown-item" href="#">English</a>
+            <a (click)="translate.use('de')" class="dropdown-item" href="#">German</a>
+            <a (click)="translate.use('hindi')" class="dropdown-item" href="#">Hindi</a>
+          </div>
+        </button>
+      </div>
   
     </div>
     <div class="footer-copyright text-center py-3">
-      <span>MANAGE © 2019 Copyright</span>
+      <span>{{'footer.span_61'| translate}}</span>
     </div>
   </footer>

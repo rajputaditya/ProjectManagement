@@ -8,22 +8,25 @@ import { GrowthComponent } from './growth/growth.component';
 import { ProjectDetailsComponent } from './project-details/project-details.component';
 import { AvailableEmployeesComponent } from './available-employees/available-employees.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ManagerComponent } from './manager/manager.component';
 
 
 const routes: Routes = [
   { path: '', component: ViewProjectsComponent },
   { path: 'viewProjects', component: ViewProjectsComponent },
-  { path: 'reports', component: ReportsComponent },
   { path: 'calendar', component: CalendarComponent },
   { path: 'employees', component: EmployeesComponent },
   { path: 'projectGrowth', component: GrowthComponent},
   { path: 'projectDetails', component:ProjectDetailsComponent},
   { path: 'availableEmployees', component:AvailableEmployeesComponent},
+  { path: 'manager', component:ManagerComponent},
   { path: '**', component:PageNotFoundComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{
+    scrollPositionRestoration: 'enabled'
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

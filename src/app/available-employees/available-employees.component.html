@@ -1,6 +1,13 @@
-
 <div class="row" style="margin-top: 40px;margin-left: 15px;margin-right: 15px;">
- 
+  <div class="container" *ngIf="userArray == undefined || userArray.length == 0">
+    <span style="float: right;margin-bottom: 8%;margin-top: 6%"><i class="fa fa-users" aria-hidden="true"
+        style="font-size: 200px; color: orange;"></i></span>
+    <h1 style="margin-top: 12%;margin-left: 5%;"><strong>OOPS!!</strong></h1>
+    <h4 class="form-text text-muted" style="margin-left: 5%;">Seems like no employee is available for the project...
+    </h4>
+    <button class="btn btn-md" style="margin-left: 4%;border-color: white;font-size: 26px;color: orange;" (click)=goBack()>Go Back</button>
+
+  </div>
   <div class="column" *ngFor="let user of userArray">
     <div class="card">
 
@@ -20,6 +27,8 @@
       </div>
 
     </div>
+    <button class="btn btn-lg " id="assignEmployees" routerLink="/viewProjects"><i class="fa fa-check"
+        aria-hidden="true"></i></button>
   </div>
-  <button class="btn btn-lg " id="assignEmployees" routerLink="/projectDetails"><i class="fa fa-check" aria-hidden="true"></i></button>
+
 </div>

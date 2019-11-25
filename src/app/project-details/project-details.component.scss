@@ -39,10 +39,18 @@
     margin-bottom: 10px;
 }
 
+#pills-reports-tab{
+  
+  text-align: center;
+  min-width: 100px ;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 .well{
     background-color:#F9F9F9;
     border-radius: 10px;
-    width: 240px;
+    width: 340px;
   
 }
 
@@ -344,4 +352,8 @@ img{
   background-color: red;
   border-color: red;
   color: white;
+}
+
+.jumbotron{
+  background-color: white;;
 }

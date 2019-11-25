@@ -1,0 +1,19 @@
+<div class="row" style="margin-top: 40px;margin-left: 40px;margin-right: 40px;">
+    <div class="column" *ngFor="let manager of managerDetails">
+        <div class="card">
+            <img src="/assets/avatar.png" alt="Jane">
+            <div class="container">
+                <h4>{{manager.fullName}} </h4>
+                <p class="title">MANAGER</p>
+                <small><strong>Project - </strong><span
+                        class="badge badge-warning">{{manager.projectAssigned}}</span></small>
+                <p>{{manager.email}}</p>
+                <p>{{manager.phoneNumber}}
+                </p>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
