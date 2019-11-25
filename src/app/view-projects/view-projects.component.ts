@@ -108,11 +108,18 @@ export class ViewProjectsComponent implements OnInit {
   }
 
   dateValidate() {
-    this.endDate = (<HTMLInputElement>document.getElementById("projectEndDate")).value;
     this.startDate = (<HTMLInputElement>document.getElementById("projectStartdate")).value;
-    if (new Date(this.endDate) <= new Date(this.startDate))
-      this.temp = 1;
+    if (new Date(this.startDate) < new Date())
+      this.temp = 2;
+    else {
+      this.temp=0;
+      this.endDate = (<HTMLInputElement>document.getElementById("projectEndDate")).value;
+      if (new Date(this.endDate) <= new Date(this.startDate))
+        this.temp = 1;
+    }
+
   }
+
 
   get getClientName() {
     return this.createProjectForm.get("clientNameValidator");

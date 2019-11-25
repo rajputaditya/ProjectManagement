@@ -201,7 +201,8 @@
             <div class="col">
               <!-- Start Date -->
               <input type="date" id="projectStartdate" class="form-control" placeholder="Start date"
-                formControlName="startDateValidator" [class.is-invalid]="getStartDate.invalid && getStartDate.touched">
+                formControlName="startDateValidator" [class.is-invalid]="getStartDate.invalid && getStartDate.touched"
+                (blur)=dateValidate()>
               <small class="form-text text-muted mb-4">
                 Start date
               </small>
@@ -310,6 +311,10 @@
           <div class="alert alert-danger" role="alert" *ngIf="temp==1" style="width: 100%;">
             End date cannot be same or less than Start date.
           </div>
+          <div class="alert alert-danger" role="alert" *ngIf="temp==2" style="width: 100%;">
+            Start date cannot be less than current date.
+          </div>
+
           <button type="button" [disabled]="createProjectForm.invalid" class="btn btn-sm" id="editProjectBtn"
             data-dismiss="modal" (click)=addProject() data-toggle="modal" data-target="#successModal">Create
             Project</button>

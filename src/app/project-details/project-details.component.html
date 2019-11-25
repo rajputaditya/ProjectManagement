@@ -257,7 +257,7 @@
                 </div>
 
                 <!-- New task modal -->
-                <div class="modal fade" (blur)=clear(projectNameFromViewProject) id="newtaskModal" tabindex="-1"
+                <div class="modal fade" id="newtaskModal" tabindex="-1"
                     role="dialog">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -320,33 +320,14 @@
                                         Task Owners
                                     </small>
 
-
-                                    <textarea class="form-control" style="margin-top: 10%;" rows="3"
-                                        id="taskDescription" placeholder="Task Details"
-                                        formControlName="taskDescriptionValidator"
-                                        [class.is-invalid]="getTaskDescription.invalid && getTaskDescription.touched"></textarea>
-                                    <small class="form-text text-muted mb-1 ">
-                                        Task Description
-                                    </small>
-                                    <div
-                                        *ngIf="getTaskDescription.invalid && (getTaskDescription.touched || getTaskDescription.dirtty)">
-                                        <small *ngIf="getTaskDescription.errors?.required" class="text-danger">
-                                            Task Description Is Required
-                                        </small>
-                                        <small *ngIf="getTaskDescription.errors?.minlength" class="text-danger">
-                                            Task Desc Must be Between 20 and 100 Characters
-                                        </small>
-                                    </div>
-
-
-
                                     <div class="form-row mb-4">
 
                                         <div class="col-md-6">
                                             <input type="date" class="form-control" id="projectStartDate"
                                                 style="margin-top: 10%;" placeholder="Start date"
                                                 formControlName="startDateValidator"
-                                                [class.is-invalid]="getStartDate.invalid && getStartDate.touched">
+                                                [class.is-invalid]="getStartDate.invalid && getStartDate.touched"
+                                                (blur)=dateValidate()>
                                             <small class="form-text text-muted ">
                                                 Start Date
                                             </small>
@@ -379,11 +360,31 @@
                                             style="width: 100%;">
                                             End date cannot be same or less than Start date.
                                         </div>
+                                        <div class="alert alert-danger" role="alert" *ngIf="temp==2"
+                                            style="width: 100%;">
+                                            Start date cannot be less than current date.
+                                        </div>
+                                    </div>
+                                    <textarea class="form-control" style="margin-top: 10%;" rows="3"
+                                        id="taskDescription" placeholder="Task Details"
+                                        formControlName="taskDescriptionValidator"
+                                        [class.is-invalid]="getTaskDescription.invalid && getTaskDescription.touched"></textarea>
+                                    <small class="form-text text-muted mb-1 ">
+                                        Task Description
+                                    </small>
+                                    <div
+                                        *ngIf="getTaskDescription.invalid && (getTaskDescription.touched || getTaskDescription.dirtty)">
+                                        <small *ngIf="getTaskDescription.errors?.required" class="text-danger">
+                                            Task Description Is Required
+                                        </small>
+                                        <small *ngIf="getTaskDescription.errors?.minlength" class="text-danger">
+                                            Task Desc Must be Between 20 and 100 Characters
+                                        </small>
                                     </div>
 
                                     <button class="btn btn-warning btn-block" [disabled]="newTaskForm.invalid"
                                         type="submit" data-dismiss="modal" (click)=addNewTask()
-                                        id="assignTaskBtn">Assign Task</button>
+                                        id="assignTaskBtn" data-toggle="modal" data-target="#successCreateModal">Assign Task</button>
                                 </form>
 
                             </div>
@@ -414,13 +415,13 @@
                                 <button type="button" class="btn btn-info" data-dismiss="modal"
                                     id="deleteBtnInfo">Cancel</button>
                                 <button type="button" class="btn btn-danger" data-dismiss="modal" id="deleteBtnDanger"
-                                    (click)=deleteTaskFunc()>Delete</button>
+                                    (click)=deleteTaskFunc() routerLink="/viewProjects">Delete</button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Successfully updated a project Modal -->
+                <!-- Successfully updated a task Modal -->
                 <div id="successUpdateModal" class="modal fade" tabindex="-1" role="dialog">
                     <div class="modal-dialog modal-confirm" id="successConfirmModal">
                         <div class="modal-content">
@@ -431,11 +432,32 @@
                                 <h4 class="modal-title">Awesome!</h4>
                             </div>
                             <div class="modal-body">
-                                <p class="text-center">Successfully updated employee's detils.</p>
+                                <p class="text-center">Successfully updated task's detils.</p>
                             </div>
                             <div class="modal-footer">
-                                <button class="btn btn-success btn-block" id="successButton"
-                                    data-dismiss="modal">OK</button>
+                                <a class="btn btn-success btn-block" id="successButton" data-dismiss="modal"
+                                    routerLink="/viewProjects">OK</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Successfully created a task Modal -->
+                 <div id="successCreateModal" class="modal fade" tabindex="-1" role="dialog">
+                    <div class="modal-dialog modal-confirm" id="successConfirmModal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="icon-box" id="successIcon">
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                </div>
+                                <h4 class="modal-title">Awesome!</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p class="text-center">Successfully created a new task.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <a class="btn btn-success btn-block" id="successButton" data-dismiss="modal"
+                                    routerLink="/viewProjects">OK</a>
                             </div>
                         </div>
                     </div>
@@ -460,7 +482,7 @@
                                 <p>{{user.email}}</p>
                                 <p>{{user.phoneNumber}}
                                     <button class="btn btn-sm btn-dark" id="delEmpBtn"
-                                        (click)=unAssignProject(user)>Delete</button>
+                                        (click)=unAssignProject(user) routerLink="/viewProjects">Delete</button>
                                 </p>
 
                             </div>
@@ -470,69 +492,69 @@
             </div>
             <div class="tab-pane fade show active" id="pills-reports" role="tabpanel"
                 aria-labelledby="pills-profile-tab">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h4 
-                                style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Project Growth Report</h4>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                            Project Growth Report</h4>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-sm-6">
+
+                        <div class="jumbotron jumbotron-fluid" style="background-color: white;">
+                            <div>
+                                <small class="form-text text-muted" style="margin-bottom: 15px;">TASKS</small>
+                                <canvas id="proj_line" height="15" width="30"></canvas>
+                                <small class="form-text text-muted" style="margin-left: 50%;">MONTHS</small>
+
                             </div>
                         </div>
-                        <div class="row">
 
-                            <div class="col-sm-6">
+                    </div>
+                    <div class="col-sm-6" style="margin-top: 60px;">
+                        <div>
+                            <small class="form-text text-muted" style="margin-bottom: 15px;">TASKS</small>
+                            <canvas id="proj_bar" height="10" width="20"></canvas>
+                            <small class="form-text text-muted" style="margin-left: 50%;">MONTHS</small>
 
-                                <div class="jumbotron jumbotron-fluid" style="background-color: white;">
-                                    <div>
-                                        <small class="form-text text-muted" style="margin-bottom: 15px;">TASKS</small>
-                                        <canvas id="proj_line" height="15" width="30"></canvas>
-                                        <small class="form-text text-muted" style="margin-left: 50%;">MONTHS</small>
-
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="col-sm-6" style="margin-top: 60px;">
-                                <div>
-                                    <small class="form-text text-muted" style="margin-bottom: 15px;">TASKS</small>
-                                    <canvas id="proj_bar" height="10" width="20"></canvas>
-                                    <small class="form-text text-muted" style="margin-left: 50%;">MONTHS</small>
-
-                                </div>
-                            </div>
                         </div>
-                    
+                    </div>
+                </div>
+
                 <div>
                     <hr>
 
-                  
-                        <div class="row">
-                            <div class="col-md-12">
-                                    <h4 
-                                    style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Employee Growth Report</h4>
-                            </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4 style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                                Employee Growth Report</h4>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="jumbotron">
-                                    <div>
-                                        <small class="form-text text-muted" style="margin-bottom: 15px;">WORK</small>
-                                        <canvas id="emp_bar" height="20" width="30"></canvas>
-                                        <small class="form-text text-muted" style="margin-left: 50%;">EMPLOYEES</small>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="jumbotron">
+                                <div>
+                                    <small class="form-text text-muted" style="margin-bottom: 15px;">WORK</small>
+                                    <canvas id="emp_bar" height="20" width="30"></canvas>
+                                    <small class="form-text text-muted" style="margin-left: 50%;">EMPLOYEES</small>
 
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="col-sm-6">
-
-                                <div style="height: 250px; width: 500px;margin-top: 80px;">
-                                    <small class="form-text text-muted">WORK</small>
-                                    <canvas id="emp_line" height="50" width="80"></canvas>
-                                    <small class="form-text text-muted" style="margin-left: 50%;">MONTHS</small>
                                 </div>
                             </div>
-                        </div>
 
-                  
+                        </div>
+                        <div class="col-sm-6">
+
+                            <div style="height: 250px; width: 500px;margin-top: 80px;">
+                                <small class="form-text text-muted">WORK</small>
+                                <canvas id="emp_line" height="50" width="80"></canvas>
+                                <small class="form-text text-muted" style="margin-left: 50%;">MONTHS</small>
+                            </div>
+                        </div>
+                    </div>
+
+
 
                     <link rel="stylesheet"
                         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

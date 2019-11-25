@@ -125,10 +125,16 @@ export class ProjectDetailsComponent implements OnInit {
   }
 
   dateValidate() {
-    this.endDate = (<HTMLInputElement>document.getElementById("projectEndDate")).value;
-    this.startDate = (<HTMLInputElement>document.getElementById("projectStartdate")).value;
-    if (new Date(this.endDate) <= new Date(this.startDate))
-      this.temp = 1;
+    this.startDate = (<HTMLInputElement>document.getElementById("projectStartDate")).value;
+    if (new Date(this.startDate)< new Date())
+      this.temp = 2;
+    else{
+      this.temp=0;
+      this.endDate = (<HTMLInputElement>document.getElementById("projectEndDate")).value;
+      if (new Date(this.endDate) <= new Date(this.startDate))
+        this.temp = 1;
+    }
+   
   }
 
 
@@ -202,7 +208,6 @@ export class ProjectDetailsComponent implements OnInit {
     this.taskClass.setStartDate((<HTMLInputElement>document.getElementById("projectStartDate")).value);
     this.taskClass.setEndDate((<HTMLInputElement>document.getElementById("projectEndDate")).value);
     this.proDetService.saveTask(this.taskClass);
-    window.location.reload();
   }
 
   // taskListByProjectName() {
@@ -551,7 +556,6 @@ export class ProjectDetailsComponent implements OnInit {
     this.url = 'http://localhost:8080/employee/unassign/' + user.fullName;
     console.log(this.url);
     this.http.put(this.url, user).subscribe(data => console.log(data));
-    location.reload();
   }
 
   statusChange(task) {
