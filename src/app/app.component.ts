@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CommonService } from './common.service';
 
 
 @Component({
@@ -7,5 +8,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  _isAuthenticate: boolean;
   title = 'ProjectManagement';
+
+  constructor(private comServ:CommonService){
+  
+  }
+
+  getAuthenticated(_isAuthenticate){
+    this._isAuthenticate=_isAuthenticate;
+  }
 }

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 
 @Injectable({
@@ -8,7 +9,8 @@ export class CommonService {
 
   constructor() { }
   arr:any;
-  employeeDetails:Array<string>=[];
+  _isAuthenticate: Boolean = false;
+  employeeDetails: Array<string>=[];
   getObj(arr:any){
     this.arr=arr;
   }
@@ -23,4 +25,13 @@ export class CommonService {
   getEmployeeDetails(){
     return this.employeeDetails;
   }
+
+  setIsValid(_isAuthenticate){
+    this._isAuthenticate=_isAuthenticate;
+  }
+
+  getIsValid(){
+    return this._isAuthenticate;
+  }
+  
 }

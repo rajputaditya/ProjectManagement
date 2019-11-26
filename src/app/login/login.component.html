@@ -10,16 +10,16 @@
 
                     <fieldset class="clearfix">
 
-                        <p><span class="fa fa-user"></span><input type="text" Placeholder="Username"
+                        <p><span class="fa fa-user"></span><input type="text" id="userNAME" Placeholder="Username"
                                 required></p>
-                        <p><span class="fa fa-lock"></span><input type="password" Placeholder="Password"
+                        <p><span class="fa fa-lock"></span><input type="password" id="userPASSWORD" Placeholder="Password"
                                 required>
                         </p>
                         <a href="#" style="color: white;">Forgot password?</a>
 
                         <div>
                             <button type="submit" class="btn btn-lg btn-outline-light"
-                                style="float: right;">LogIN</button>
+                                style="float: right;" (click)=authentication()>LogIN</button>
                         </div>
 
                     </fieldset>

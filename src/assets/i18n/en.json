@@ -295,6 +295,13 @@
             "small_30": "Submission2",
             "small_34": "Submission 3",
             "small_38": "Submission 4"
+          },
+          "app":
+          {
+            "a_3": "Project",
+            "a_4": "Employees",
+            "a_5": "TO-DO",
+            "a_6": "Manager"
           }
 
 
