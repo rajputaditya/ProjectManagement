@@ -334,9 +334,8 @@ export class ViewProjectsComponent implements OnInit {
     this.service.updateProject(this.proj).subscribe(proj => this.projects.push(proj));
   }
 
-  setDetailsForDelete(value){
-
-    this.projectName = value;
+  setForDelete(value){
+    this.projectName =value;
   }
   delProject() {
     this.projectData = new Project();

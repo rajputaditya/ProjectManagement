@@ -131,7 +131,7 @@
             aria-describedby="PhoneHelpBlock" maxlength="10" formControlName="phoneNumberValidator"
             [class.is-invalid]="getPhoneNumber.invalid && getPhoneNumber.touched">
           <small class="form-text text-muted mb-4">
-            {{'employees-component.small_134'| translate}}
+            {{'employees-component.small_133'| translate}}
           </small>
           <div *ngIf="getPhoneNumber.invalid && (getPhoneNumber.touched || getPhoneNumber.dirty)">
             <small *ngIf="getPhoneNumber.errors?.required" class="text-danger">
@@ -164,7 +164,7 @@
 
           <!-- Add Employee Button -->
           <button type="button" class="btn btn-warning" [disabled]="addEmployeeForm.invalid" id="modalBtn"
-            (click)=addEmployee() data-dismiss="modal">{{'employees-component.button_167'| translate}}</button>
+            (click)=addEmployee() data-toggle="modal" data-target="#successModal" data-dismiss="modal">{{'employees-component.button_167'| translate}}</button>
 
         </form>
       </div>
@@ -334,7 +334,7 @@
         <p class="text-center">{{'employees-component.p_334'| translate}}.</p>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-success btn-block" id="successButton" data-dismiss="modal">{{'employees-component.button_337'| translate}}</button>
+        <button class="btn btn-success btn-block" id="successButton" (click)=success() data-dismiss="modal">{{'employees-component.button_337'| translate}}</button>
       </div>
     </div>
   </div>
@@ -354,7 +354,7 @@
         <p class="text-center">{{'employees-component.p_354'| translate}}.</p>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-success btn-block" id="successButton" data-dismiss="modal">{{'employees-component.button_357'| translate}}</button>
+        <button class="btn btn-success btn-block" id="successButton" (click)=success() data-dismiss="modal">{{'employees-component.button_357'| translate}}</button>
       </div>
     </div>
   </div>

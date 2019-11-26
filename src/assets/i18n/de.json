@@ -285,5 +285,12 @@
         "small_30": "Submission2",
         "small_34": "Vorlage 3",
         "small_38": "Abgabe 4"
+    },
+    "app":
+    {
+      "a_3": "Projekt",
+      "a_4": "Mitarbeiterin",
+      "a_5": "MACHEN",
+      "a_6": "Managerin"
     }
 }

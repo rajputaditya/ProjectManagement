@@ -385,7 +385,7 @@
                                     </div>
 
                                     <button class="btn btn-warning btn-block" [disabled]="newTaskForm.invalid"
-                                        type="submit" data-dismiss="modal" (click)=addNewTask()
+                                        type="submit" data-dismiss="modal" data-target="#successCreateModal" data-toggle="modal" (click)=addNewTask()
                                         id="assignTaskBtn">{{'project-details.button_386'|translate}}</button>
                                 </form>
 
@@ -417,7 +417,7 @@
                                 <button type="button" class="btn btn-info" data-dismiss="modal"
                                     id="deleteBtnInfo">{{'project-details.button_415'|translate}}</button>
                                 <button type="button" class="btn btn-danger" data-dismiss="modal" id="deleteBtnDanger"
-                                    (click)=deleteTaskFunc()>{{'project-details.button_417'|translate}}</button>
+                                    (click)=deleteTaskFunc() routerLink="/viewProjects" >{{'project-details.button_417'|translate}}</button>
                             </div>
                         </div>
                     </div>
