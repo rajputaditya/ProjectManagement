@@ -46,6 +46,9 @@
             <small class="form-text text-muted mb-4">
               {{'calendar.small_51'| translate}}
             </small>
+            <div class="alert alert-warning" id="pastEventErr">
+              Can't add Events in Past
+            </div>
             <button type="button" class="btn btn-primary form-control" id="modalBtn" (click)='addEvent(crTITLE.value)'
               data-dismiss="modal">{{'calendar.button_54'| translate}}
               </button>

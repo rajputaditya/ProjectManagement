@@ -317,6 +317,7 @@ export class ViewProjectsComponent implements OnInit {
     this.service.editProject(this.url).subscribe(proj => this.projectData = proj);
   }
 
+
   updateProject() {
     this.proj = new Project();
     this.proj.setClientName((<HTMLInputElement>document.getElementById("clientName1")).value);
@@ -333,9 +334,9 @@ export class ViewProjectsComponent implements OnInit {
     this.service.updateProject(this.proj).subscribe(proj => this.projects.push(proj));
   }
 
-  delProject() {
+  delProject(value) {
     this.projectData = new Project();
-    this.projectName = (<HTMLInputElement>document.getElementById("projectButton")).value;
+    this.projectName = value;
     this.url = 'http://localhost:8080/project/' + this.projectName;
     console.log(this.url);
     this.service.delProject(this.url).subscribe(proj => console.log(proj));
