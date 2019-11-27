@@ -71,7 +71,7 @@ export class AvailableEmployeesComponent implements OnInit {
   phoneNumberpattern: string = "/^[6-9]\d{9}$/";
 
   set() {
-    this.url = "http://localhost:8086/restApiavailableEmployee";
+    this.url = "http://localhost:8086/restApi/availableEmployee";
     this.http.get(this.url).subscribe(data => {
       JSON.parse(JSON.stringify(data)).forEach(element => {
         this.userArray.push(element);
@@ -103,7 +103,7 @@ export class AvailableEmployeesComponent implements OnInit {
 
 
   assignProject(user){
-    this.url="http://localhost:8086/restApiavailableEmployee/"+this.comServ.setObj().projectName;
+    this.url="http://localhost:8086/restApi/availableEmployee/"+this.comServ.setObj().projectName;
     this.http.put(this.url,user).subscribe(data=>console.log(data));
   }
 }
