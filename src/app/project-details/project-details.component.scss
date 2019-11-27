@@ -12,7 +12,7 @@
 #pills-tasks-tab    {
     margin-left: 1rem;
     text-align: center;
-    min-width: 100px ;
+    width: 100%; 
     margin-top: 10px;
     margin-bottom: 10px;
    
@@ -34,7 +34,7 @@
 #pills-members-tab{
   
     text-align: center;
-    min-width: 100px ;
+    width: 100%; 
     margin-top: 10px;
     margin-bottom: 10px;
 }
@@ -42,7 +42,7 @@
 #pills-reports-tab{
   
   text-align: center;
-  min-width: 100px ;
+  width: 110%; 
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -50,7 +50,7 @@
 .well{
     background-color:#F9F9F9;
     border-radius: 10px;
-    width: 340px;
+    width: 27%;
   
 }
 

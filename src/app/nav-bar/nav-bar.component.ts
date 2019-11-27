@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { formatDate } from '@fullcalendar/core';
 import * as moment from 'moment'
 import { GetEventsService } from '../calendar/get-events.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -29,7 +30,7 @@ export class NavBarComponent implements OnInit {
     });
   }
 
-constructor(@Inject(TranslateService) public translate: TranslateService,private http: HttpClient, private getService: GetEventsService) {
+constructor(@Inject(TranslateService) public translate: TranslateService,private http: HttpClient, private getService: GetEventsService, private cookieService: CookieService) {
   translate.addLangs(['en', 'de', 'fr'])
   translate.setDefaultLang('en');
   translate.use('en');
@@ -85,6 +86,11 @@ constructor(@Inject(TranslateService) public translate: TranslateService,private
 
   ngOnInit() {
     this.getEvents();
+  }
+
+  logout(){
+    this.cookieService.delete('_isAuthenticated');
+    location.reload();
   }
 
 }
