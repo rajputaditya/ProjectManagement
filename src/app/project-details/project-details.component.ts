@@ -227,7 +227,7 @@ export class ProjectDetailsComponent implements OnInit {
 
 
     this.taskList();
-    this.url = 'http://localhost:8080/employee/' + comServ.setObj().projectName;
+    this.url = 'http://localhost:8086/restApiemployee/' + comServ.setObj().projectName;
     this.http.get(this.url).subscribe(data => {
       JSON.parse(JSON.stringify(data)).forEach(element => {
         this.userArray.push(element);
@@ -554,7 +554,7 @@ export class ProjectDetailsComponent implements OnInit {
   }
 
   unAssignProject(user) {
-    this.url = 'http://localhost:8080/employee/unassign/' + user.fullName;
+    this.url = 'http://localhost:8086/restApiemployee/unassign/' + user.fullName;
     console.log(this.url);
     this.http.put(this.url, user).subscribe(data => console.log(data));
   }

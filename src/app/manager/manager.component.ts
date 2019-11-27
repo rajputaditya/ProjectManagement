@@ -12,7 +12,7 @@ export class ManagerComponent implements OnInit {
   url: string;
 
   set() {
-    this.url = "http://localhost:8080/manager";
+    this.url = "http://localhost:8086/restApimanager";
     this.http.get(this.url).subscribe(data => {
       JSON.parse(JSON.stringify(data)).forEach(element => {
         this.managerDetails.push(element);

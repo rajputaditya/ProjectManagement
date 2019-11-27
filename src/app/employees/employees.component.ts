@@ -158,7 +158,7 @@ export class EmployeesComponent implements OnInit {
   }
 
   set() {
-    this.url = "http://localhost:8080/employee";
+    this.url = "http://localhost:8086/restApiemployee";
     this.http.get(this.url).subscribe(data => {
       JSON.parse(JSON.stringify(data)).forEach(element => {
         this.userArray.push(element);

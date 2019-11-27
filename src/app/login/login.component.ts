@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
 
   userName: string;
   userPass: string;
-  url: string = "http://localhost:8080/login";
+  url: string = "http://localhost:8086/restApilogin";
   invalid;
   logInForm: FormGroup;
 

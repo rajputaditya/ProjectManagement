@@ -20,7 +20,7 @@ export class NavBarComponent implements OnInit {
 
   set() {
     this.usersArray = [];
-    this.url = 'http://localhost:8080/search/' + (<HTMLInputElement>document.getElementById("searchBox")).value;
+    this.url = 'http://localhost:8086/restApisearch/' + (<HTMLInputElement>document.getElementById("searchBox")).value;
     console.log(this.url);
     this.http.get(this.url).subscribe(data => {
       // Populating usersArray with names from API

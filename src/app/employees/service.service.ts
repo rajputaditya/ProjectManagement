@@ -10,21 +10,21 @@ export class ServiceService {
   constructor(private http : HttpClient) { }
   url:string;
   addEmployee (emp: Employee): Observable<Employee> {
-    this.url='http://localhost:8080/employee';
+    this.url='http://localhost:8086/restApiemployee';
     console.log(emp);
     return this.http.post<Employee>(this.url, emp);
       
   }
 
   editEmployee (emp: Employee): Observable<Employee> {
-    this.url='http://localhost:8080/employee/'+emp.getFirstName()+' '+emp.getLastName();
+    this.url='http://localhost:8086/restApiemployee/'+emp.getFirstName()+' '+emp.getLastName();
     console.log(emp);
     console.log(this.url);
     return this.http.put<Employee>(this.url, emp);
       
   }
   delEmployee(emp : Employee):Observable<Employee>{
-    this.url='http://localhost:8080/employee/'+emp.getFirstName()+' '+emp.getLastName();
+    this.url='http://localhost:8086/restApiemployee/'+emp.getFirstName()+' '+emp.getLastName();
     return this.http.delete<Employee>(this.url);
   }
 
