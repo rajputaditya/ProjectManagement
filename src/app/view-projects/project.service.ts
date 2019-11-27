@@ -10,7 +10,7 @@ export class ProjectService {
   constructor(private http : HttpClient) { }
   url:string;
   addProject(proj:Project){
-    this.url='http://localhost:8080/project';
+    this.url='http://localhost:8086/restApi/project';
     return this.http.post<Project>(this.url, proj);
   }
 
@@ -19,7 +19,7 @@ export class ProjectService {
   }
 
   updateProject(proj:Project){
-    this.url='http://localhost:8080/project/'+proj.projectName;
+    this.url='http://localhost:8086/restApi/project/'+proj.projectName;
     console.log(this.url);
     return this.http.put<Project>(this.url,proj)
   }

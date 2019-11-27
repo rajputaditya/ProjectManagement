@@ -2,7 +2,8 @@
     <div class="col-md-8">
         <h2>{{projectDetail.projectName}} <span class="badge badge-warning">{{projectDetail.priority}}</span> </h2>
         <h5>{{projectDetail.clientName}} <small>, {{projectDetail.city}}, {{projectDetail.country}}</small></h5>
-        <small><strong>{{'project-details.small_5'| translate}}</strong>- {{projectDetail.projectDescription}}</small><br>
+        <small><strong>{{'project-details.small_5'| translate}}</strong>-
+            {{projectDetail.projectDescription}}</small><br>
         <small><strong>MANAGER</strong>- {{projectDetail.manager}}</small>
 
     </div>
@@ -64,12 +65,15 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <p id="proDetTaskOwner"><strong>{{'project-details.'| translate}} - </strong>{{task.taskOwner}}</p>
+                                        <p id="proDetTaskOwner"><strong>{{'project-details.'| translate}} -
+                                            </strong>{{task.taskOwner}}</p>
                                         <p class="title"><span class="badge badge-warning">{{task.taskName}}</span></p>
                                         <p>{{task.taskDetails}}</p>
-                                        <small class="form-text text-muted ">{{'project-details.small_68'|translate}} - {{task.startDate}}
+                                        <small class="form-text text-muted ">{{'project-details.small_68'|translate}} -
+                                            {{task.startDate}}
                                         </small>
-                                        <small class="form-text text-muted ">{{'project-details.small_70'|translate}} - {{task.endDate}}
+                                        <small class="form-text text-muted ">{{'project-details.small_70'|translate}} -
+                                            {{task.endDate}}
                                         </small>
 
                                         <small class="form-text text-muted mb-4 ">
@@ -101,22 +105,27 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <p id="proDetTaskOwner"><strong>{{'project-details.p_102'|translate}}- </strong>{{task.taskOwner}}</p>
+                                        <p id="proDetTaskOwner"><strong>{{'project-details.p_102'|translate}}-
+                                            </strong>{{task.taskOwner}}</p>
                                         <p class="title"><span class="badge badge-warning">{{task.taskName}}</span></p>
                                         <p>{{task.taskDetails}}</p>
-                                        <small class="form-text text-muted ">{{'project-details.small_105'|translate}} - {{task.startDate}}
+                                        <small class="form-text text-muted ">{{'project-details.small_105'|translate}} -
+                                            {{task.startDate}}
                                         </small>
-                                        <small class="form-text text-muted ">{{'project-details.small_107'| translate}} - {{task.endDate}}
+                                        <small class="form-text text-muted ">{{'project-details.small_107'| translate}}
+                                            - {{task.endDate}}
                                         </small>
 
                                         <small class="form-text text-muted mb-4 ">
                                             <i>**{{'project-details.i_111'| translate}}</i>
                                             <button class="btn btn-dark btn-sm pull-right" id="taskDeleteBtn"
                                                 data-toggle="modal" data-target="#deleteConfirmationModal"
-                                                [disabled]="buttons[i]" (click)=setDetail(task)>{{'project-details.button_114'| translate}}</button>
+                                                [disabled]="buttons[i]"
+                                                (click)=setDetail(task)>{{'project-details.button_114'| translate}}</button>
                                             <button class="btn btn-warning btn-sm pull-right" [disabled]="buttons[i]"
                                                 id="taskEditbtn" style="margin-right: 10px;" data-toggle="modal"
-                                                data-target="#editModal" (click)=updateTaskObj(task)>{{'project-details.button_117'| translate}}</button>
+                                                data-target="#editModal"
+                                                (click)=updateTaskObj(task)>{{'project-details.button_117'| translate}}</button>
                                         </small>
 
                                     </div>
@@ -148,14 +157,16 @@
                                     <form class="text-center border  p-5" [formGroup]="editTaskForm">
                                         <div class="row mb-4">
                                             <div class="col">
-                                                <input type="text" class="form-control" placeholder="{{'project-details.placeholder_149'| translate}}"
+                                                <input type="text" class="form-control"
+                                                    placeholder="{{'project-details.placeholder_149'| translate}}"
                                                     disabled [value]=taskDetails.getProjectTitle()>
                                                 <small class="form-text text-muted ">
                                                     {{'project-details.small_152'| translate}}
                                                 </small>
                                             </div>
                                             <div class="col">
-                                                <input type="text" class="form-control" placeholder="{{'project-details.placeholder_156'| translate}}"
+                                                <input type="text" class="form-control"
+                                                    placeholder="{{'project-details.placeholder_156'| translate}}"
                                                     disabled [value]=taskDetails.getTaskTitle() id="editTaskTitle">
                                                 <small class="form-text text-muted ">
                                                     {{'project-details.small_159'| translate}}
@@ -193,7 +204,8 @@
                                         </div>
 
                                         <textarea class="form-control" style="margin-top: 10%;" rows="3"
-                                            placeholder="{{'project-details.placeholder_194'| translate}}" [value]=taskDetails.getTaskDescription()
+                                            placeholder="{{'project-details.placeholder_194'| translate}}"
+                                            [value]=taskDetails.getTaskDescription()
                                             formControlName="editTaskDescriptionValidator" id="editTaskDescription"
                                             [class.is-invalid]="editGetTaskDescription.invalid && editGetTaskDescription.touched"></textarea>
                                         <small class="form-text text-muted mb-1 ">
@@ -215,8 +227,8 @@
 
                                             <div class="col-md-6" style="margin-top: 10%;">
                                                 <input type="date" class="form-control" id="editProjectStartdate"
-                                                    placeholder="{{'project-details.placeholder_216'| translate}}" [value]=taskDetails.getStartDate()
-                                                    disabled>
+                                                    placeholder="{{'project-details.placeholder_216'| translate}}"
+                                                    [value]=taskDetails.getStartDate() disabled>
                                                 <small class="form-text text-muted ">
                                                     {{'project-details.small_219'| translate}}
                                                 </small>
@@ -247,7 +259,7 @@
                                         <button class="btn btn-warning btn-block" type="submit" data-dismiss="modal"
                                             id="assignTaskBtn" (click)=updateTaskConfirm() data-toggle="modal"
                                             data-target="#successUpdateModal">{{'project-details.button_248'| translate}}
-                                            </button>
+                                        </button>
                                     </form>
 
                                 </div>
@@ -259,8 +271,7 @@
                 </div>
 
                 <!-- New task modal -->
-                <div class="modal fade" id="newtaskModal" tabindex="-1"
-                    role="dialog">
+                <div class="modal fade" id="newtaskModal" tabindex="-1" role="dialog">
                     <div class="modal-dialog">
                         <div class="modal-content">
 
@@ -279,8 +290,8 @@
 
                                         <div class="col">
                                             <input type="text" id="projectTitle" class="form-control"
-                                                placeholder="{{'project-details.placeholder_280'| translate}}" value="{{projectNameFromViewProject}}"
-                                                disabled>
+                                                placeholder="{{'project-details.placeholder_280'| translate}}"
+                                                value="{{projectNameFromViewProject}}" disabled>
                                             <small class="form-text text-muted ">
                                                 {{'project-details.small_283'| translate}}
                                             </small>
@@ -289,7 +300,8 @@
 
                                         <div class="col">
                                             <input type="text" id="taskTitle" class="form-control"
-                                                placeholder="{{'project-details.placeholder_290'| translate}}" formControlName="taskTitleValidator"
+                                                placeholder="{{'project-details.placeholder_289'| translate}}"
+                                                formControlName="taskTitleValidator"
                                                 [class.is-invalid]="getTaskTitle.invalid && getTaskTitle.touched">
                                             <small class="form-text text-muted ">
                                                 {{'project-details.small_293'|translate}}
@@ -326,7 +338,8 @@
 
                                         <div class="col-md-6">
                                             <input type="date" class="form-control" id="projectStartDate"
-                                                style="margin-top: 10%;" placeholder="{{'project-details.placeholder_347'|translate}}"
+                                                style="margin-top: 10%;"
+                                                placeholder="{{'project-details.placeholder_347'|translate}}"
                                                 formControlName="startDateValidator"
                                                 [class.is-invalid]="getStartDate.invalid && getStartDate.touched"
                                                 (blur)=dateValidate()>
@@ -360,7 +373,7 @@
                                         </div>
                                         <div class="alert alert-danger" role="alert" *ngIf="temp==1"
                                             style="width: 100%;">
-                                            {{'project-details.small_380'|translate}}
+                                            {{'project-details.div_380'|translate}}
                                         </div>
                                         <div class="alert alert-danger" role="alert" *ngIf="temp==2"
                                             style="width: 100%;">
@@ -385,7 +398,8 @@
                                     </div>
 
                                     <button class="btn btn-warning btn-block" [disabled]="newTaskForm.invalid"
-                                        type="submit" data-dismiss="modal" data-target="#successCreateModal" data-toggle="modal" (click)=addNewTask()
+                                        type="submit" data-dismiss="modal" data-target="#successCreateModal"
+                                        data-toggle="modal" (click)=addNewTask()
                                         id="assignTaskBtn">{{'project-details.button_386'|translate}}</button>
                                 </form>
 
@@ -417,7 +431,8 @@
                                 <button type="button" class="btn btn-info" data-dismiss="modal"
                                     id="deleteBtnInfo">{{'project-details.button_415'|translate}}</button>
                                 <button type="button" class="btn btn-danger" data-dismiss="modal" id="deleteBtnDanger"
-                                    (click)=deleteTaskFunc() routerLink="/viewProjects" >{{'project-details.button_417'|translate}}</button>
+                                    (click)=deleteTaskFunc()
+                                    routerLink="/viewProjects">{{'project-details.button_417'|translate}}</button>
                             </div>
                         </div>
                     </div>
@@ -444,8 +459,8 @@
                     </div>
                 </div>
 
-                 <!-- Successfully created a task Modal -->
-                 <div id="successCreateModal" class="modal fade" tabindex="-1" role="dialog">
+                <!-- Successfully created a task Modal -->
+                <div id="successCreateModal" class="modal fade" tabindex="-1" role="dialog">
                     <div class="modal-dialog modal-confirm" id="successConfirmModal">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -472,21 +487,24 @@
                         {{'project-details.p_448'|translate}}
                         <a class="btn" routerLink="/availableEmployees" (click)=getDetails(projectDetails)><i
                                 class="fas fa-plus-circle" title="Add team members" id="addTaskIcon"></i></a></p>
+                    <div class="row">
+                        <div class="maindiv">
+                            <div class="employeecolumnDiv" *ngFor="let user of userArray">
+                                <div class="card">
 
-                    <div class="employeeColumn" *ngFor="let user of userArray">
-                        <div class="card">
+                                    <img src="/assets/avatar.png" alt="Jane">
+                                    <div class="container">
+                                        <h4>{{user.fullName}} </h4>
+                                        <p class="title">{{user.designation}}</p>
+                                        <p>Expertise : {{user.technologies}}</p>
+                                        <p>{{user.email}}</p>
+                                        <p>{{user.phoneNumber}}
+                                            <button class="btn btn-sm btn-dark" id="delEmpBtn"
+                                                (click)=unAssignProject(user)>{{'project-details.button_463'|translate}}</button>
+                                        </p>
 
-                            <img src="/assets/avatar.png" alt="Jane">
-                            <div class="container">
-                                <h4>{{user.fullName}} </h4>
-                                <p class="title">{{user.designation}}</p>
-                                <p>Expertise : {{user.technologies}}</p>
-                                <p>{{user.email}}</p>
-                                <p>{{user.phoneNumber}}
-                                    <button class="btn btn-sm btn-dark" id="delEmpBtn"
-                                        (click)=unAssignProject(user)>{{'project-details.button_463'|translate}}</button>
-                                </p>
-
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -506,9 +524,11 @@
 
                         <div class="jumbotron jumbotron-fluid" style="background-color: white;">
                             <div>
-                                <small class="form-text text-muted" style="margin-bottom: 15px;">{{'project-details.small_485'|translate}}</small>
+                                <small class="form-text text-muted"
+                                    style="margin-bottom: 15px;">{{'project-details.small_485'|translate}}</small>
                                 <canvas id="proj_line" height="15" width="30"></canvas>
-                                <small class="form-text text-muted" style="margin-left: 50%;">{{'project-details.small_487'|translate}}</small>
+                                <small class="form-text text-muted"
+                                    style="margin-left: 50%;">{{'project-details.small_487'|translate}}</small>
 
                             </div>
                         </div>
@@ -516,9 +536,11 @@
                     </div>
                     <div class="col-sm-6" style="margin-top: 60px;">
                         <div>
-                            <small class="form-text text-muted" style="margin-bottom: 15px;">{{'project-details.small_495'|translate}}</small>
+                            <small class="form-text text-muted"
+                                style="margin-bottom: 15px;">{{'project-details.small_495'|translate}}</small>
                             <canvas id="proj_bar" height="10" width="20"></canvas>
-                            <small class="form-text text-muted" style="margin-left: 50%;">{{'project-details.small_497'|translate}}</small>
+                            <small class="form-text text-muted"
+                                style="margin-left: 50%;">{{'project-details.small_497'|translate}}</small>
 
                         </div>
                     </div>
@@ -538,9 +560,11 @@
                         <div class="col-sm-6">
                             <div class="jumbotron">
                                 <div>
-                                    <small class="form-text text-muted" style="margin-bottom: 15px;">{{'project-details.small_517'|translate}}</small>
+                                    <small class="form-text text-muted"
+                                        style="margin-bottom: 15px;">{{'project-details.small_517'|translate}}</small>
                                     <canvas id="emp_bar" height="20" width="30"></canvas>
-                                    <small class="form-text text-muted" style="margin-left: 50%;">{{'project-details.small_519'|translate}}</small>
+                                    <small class="form-text text-muted"
+                                        style="margin-left: 50%;">{{'project-details.small_519'|translate}}</small>
 
                                 </div>
                             </div>
@@ -548,11 +572,13 @@
                         </div>
                         <div class="col-sm-6">
 
-                            <div style="height: 250px; width: 500px;margin-top: 80px;">
+                            <div class="jumbotron">
                                 <small class="form-text text-muted">{{'project-details.small_528'|translate}}</small>
                                 <canvas id="emp_line" height="50" width="80"></canvas>
-                                <small class="form-text text-muted" style="margin-left: 50%;">{{'project-details.small_530'|translate}}</small>
+                                <small class="form-text text-muted"
+                                    style="margin-left: 50%;">{{'project-details.small_530'|translate}}</small>
                             </div>
+
                         </div>
                     </div>
 

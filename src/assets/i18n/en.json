@@ -6,9 +6,12 @@
         "p_12": "Paul Hawken",
         "h5-18" : "Links",
         "a_22" : "Tasks",
+        "a_22-1": "Home", 
         "a_25" : " Reports",
+        "a_25-1": "Employee",
         "h5-32" : "Links",
         "a_36" : "To-do",
+       
         "a_39" : "Back To Top",
         "span_61": "MANAGE © 2019 Copyright"
 
@@ -55,7 +58,7 @@
         "option_236": "HIGH",
         "option_237": "MEDIUM",
         "option_238": "LOW",
-        "small_241": "Priority Level",
+        "small-241": "Priority Level",
         "placeholder_250" : "City",
         "small_253": " City",
         "small_257": " City Is Required",
@@ -112,10 +115,12 @@
         "button_522": "OK",
         "h4-538": "Are You Sure",
         "p_543": "Do you really want to delete these records? This process cannot be undone",
-        "button_546": "Cancel"
+        "button_546": "Cancel",
+        "button_547": "Delete"
         },
         "project-details":
         {
+          "small_5": "Manager",
           "small_10": "Start Date",
           "small_11": "End Date",
           "a_22": "Report",
@@ -177,7 +182,7 @@
           "button_415": "Cancel",
           "button_417": "Delete",
           "h4-431": "Awessome",
-          "p_434": "Succeddfully Update Employees details",
+          "p_434": "Successfully Updated Task details",
           "p_448": "Members",
           "button_463": "Delete",
           "h4-476":"Project Growth Report",
@@ -189,7 +194,8 @@
           "small_517": "WORK",
           "small_519": "EMPLOYEES",
           "small_528": "WORK",
-          "small_530": "MONTHS"
+          "small_530": "MONTHS",
+          "button_546": "Delete"
         },
         "employees-component":
         {

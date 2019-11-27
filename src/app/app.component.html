@@ -1,13 +1,13 @@
-<app-login *ngIf="!_isAuthenticate" (_isAuthenticateEmitter)="getAuthenticated($event)"></app-login>
-<app-nav-bar *ngIf="_isAuthenticate"></app-nav-bar>
-<div id="mySidenav" class="sidenav " style="z-index: 3; position: absolute; margin-top: 80px;" *ngIf="_isAuthenticate">
+<app-login *ngIf="!_isAuthenticated" (_isAuthenticatedEmitter)="getAuthenticated()"></app-login>
+<app-nav-bar *ngIf="_isAuthenticated"></app-nav-bar>
+<div id="mySidenav" class="sidenav " style="z-index: 3; position: absolute; margin-top: 80px;" *ngIf="_isAuthenticated">
     <a routerLink="/viewProjects" id="projects">{{'app.a_3'| translate}}</a>
     <a routerLink="/employees" id="employees">{{'app.a_4'| translate}}</a>
     <a routerLink="/calendar" id="to-do">{{'app.a_5'| translate}}</a>
     <a routerLink="/manager" id="manager">{{'app.a_6'| translate}}</a>
   </div>
 
-<div *ngIf="_isAuthenticate" class="container" style="position: absolute;left: 0;min-width: 100%;margin-top: 70px;">
+<div *ngIf="_isAuthenticated" class="container" style="position: absolute;left: 0;min-width: 100%;margin-top: 70px;">
     <router-outlet></router-outlet>
     <app-footer></app-footer>
 </div>

@@ -87,7 +87,7 @@ export class ViewProjectsComponent implements OnInit {
   usname: string;
 
   userArray: Array<any> = [];
-  url: string = "http://localhost:8080/project";
+  url: string = "http://localhost:8086/restApi/project";
 
 
   constructor(private http: HttpClient, private service: ProjectService, private comServ: CommonService) {
@@ -99,7 +99,7 @@ export class ViewProjectsComponent implements OnInit {
     this.fetchManagers();
   }
 
-  urlForManagers:string="http://localhost:8080/managernames";
+  urlForManagers:string="http://localhost:8086/restApi/managernames";
   availableManagers:Array<any>=[];
   fetchManagers(){
     this.http.get(this.urlForManagers).subscribe(data => {
@@ -267,7 +267,7 @@ export class ViewProjectsComponent implements OnInit {
   projectEmployees: Array<string> = [];
   sendProjectDetail(projectDetail: any) {
     this.comServ.getObj(projectDetail);
-    this.url = 'http://localhost:8080/projectEmployees/' + projectDetail.projectName;
+    this.url = 'http://localhost:8086/restApi/projectEmployees/' + projectDetail.projectName;
     console.log(this.url);
     this.http.get(this.url).subscribe(data => {
       JSON.parse(JSON.stringify(data)).forEach(element =>
@@ -282,7 +282,7 @@ export class ViewProjectsComponent implements OnInit {
   searchdata: Array<any>;
   searchEditProject() {
     this.searchdata = [];
-    this.url = 'http://localhost:8080/search/' + (<HTMLInputElement>document.getElementById("searchProject")).value;
+    this.url = 'http://localhost:8086/restApi/search/' + (<HTMLInputElement>document.getElementById("searchProject")).value;
     console.log(this.url);
     this.http.get(this.url).subscribe(data => {
       // Populating usersArray with names from API
@@ -295,7 +295,7 @@ export class ViewProjectsComponent implements OnInit {
 
   searchDeleteProject() {
     this.searchdata = [];
-    this.url = 'http://localhost:8080/search/' + (<HTMLInputElement>document.getElementById("searchDeleteProject")).value;
+    this.url = 'http://localhost:8086/restApi/search/' + (<HTMLInputElement>document.getElementById("searchDeleteProject")).value;
     console.log(this.url);
     this.http.get(this.url).subscribe(data => {
       JSON.parse(JSON.stringify(data)).forEach(element => {
@@ -312,7 +312,7 @@ export class ViewProjectsComponent implements OnInit {
   editDetails(value) {
     this.projectData = new Project();
     this.projectName = value
-    this.url = 'http://localhost:8080/project/' + this.projectName;
+    this.url = 'http://localhost:8086/restApi/project/' + this.projectName;
     console.log(this.url);
     this.service.editProject(this.url).subscribe(proj => this.projectData = proj);
   }
@@ -339,7 +339,7 @@ export class ViewProjectsComponent implements OnInit {
   }
   delProject() {
     this.projectData = new Project();
-    this.url = 'http://localhost:8080/project/' + this.projectName;
+    this.url = 'http://localhost:8086/restApi/project/' + this.projectName;
     console.log(this.url);
     this.service.delProject(this.url).subscribe(proj => console.log(proj));
     location.reload();
