@@ -15,6 +15,7 @@
     width: 100%; 
     margin-top: 10px;
     margin-bottom: 10px;
+ 
    
    
 }
@@ -37,6 +38,8 @@
     width: 100%; 
     margin-top: 10px;
     margin-bottom: 10px;
+    margin-left: 16px;
+   
 }
 
 #pills-reports-tab{
@@ -45,12 +48,13 @@
   width: 110%; 
   margin-top: 10px;
   margin-bottom: 10px;
+  margin-left: 16px;
 }
 
 .well{
-    background-color:#F9F9F9;
+    background-color:#fff;
     border-radius: 10px;
-    width: 27%;
+    width: 30%;
   
 }
 
@@ -330,10 +334,8 @@ img{
   border-radius: 50%;
 }
 
-.employeeColumn {
+.employeecolumnDiv {
   float: left;
-  width: 25%;
-  height: 50%;
   margin-bottom: 16px;
   padding: 0 8px;
 }
@@ -355,5 +357,5 @@ img{
 }
 
 .jumbotron{
-  background-color: white;;
+  background-color: white;
 }
