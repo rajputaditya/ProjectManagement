@@ -11,7 +11,7 @@ export class ProjectService {
   url:string;
   addProject(proj:Project){
     this.url='http://localhost:8086/restApi/project';
-    return this.http.post<Project>(this.url, proj);
+    return this.http.post<any>(this.url, proj);
   }
 
   editProject(url:string):Observable<Project>{
